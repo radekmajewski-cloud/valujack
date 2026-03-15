@@ -1,1 +1,6 @@
-.vercel
+.DS_Store
+Earlier versions index/
+ValuJack_v*.html
+api_chart*.js
+bash
+test.txt
