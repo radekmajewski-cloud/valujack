@@ -1,0 +1,203 @@
+Total scored: 199 | Eligible: 139
+
+TICKER     COMPANY                          STRATEGY  SCORE STARS
+----------------------------------------------------------------------
+EVO        Evolution                        KING       90.4 ★★★★★
+CIX        Compx International Inc          KING       88.5 ★★★★★
+MPE        M P Evans Group PLC              KING       87.8 ★★★★★
+GTT        Gaztransport et technigaz SA     KING       86.8 ★★★★★
+AEP        AEP Plantations PLC              KING       86.7 ★★★★★
+VAN        Van de Velde NV                  KING       86.6 ★★★★★
+TSTL       Tristel PLC                      KING       85.0 ★★★★★
+BSM        Black Stone Minerals LP          KING       84.9 ★★★★☆
+BETS B     Betsson                          KING       84.4 ★★★★☆
+STNG       Scorpio Tankers Inc              KING       84.0 ★★★★☆
+TRI        Trigano SA                       KING       82.9 ★★★★☆
+EOG        EOG Resources Inc                KING       82.2 ★★★★☆
+NRP        Natural Resources Partners LP    KING       82.0 ★★★★☆
+CALM       Cal-Maine Foods Inc              KING       80.3 ★★★★☆
+GAMA       Gamma Communications PLC         KING       80.1 ★★★★☆
+ARLP       Alliance Resource Partners LP    KING       80.0 ★★★★☆
+PSI        Pason Systems Inc                KING       79.9 ★★★★☆
+JHD        James Halstead PLC               KING       79.3 ★★★★☆
+EQS        Equasens                         KING       77.6 ★★★★☆
+TFW        Thorpe PLC                       KING       76.9 ★★★★☆
+FPE        Fuchs SE                         KING       76.3 ★★★★☆
+LPG        Dorian LPG Ltd                   QUEEN      76.1 ★★★★☆
+CTSH       Cognizant Technology Solutions   KING       75.9 ★★★★☆
+CMRE       Costamare Inc                    QUEEN      75.8 ★★★★☆
+HLAG       Hapag-Lloyd AG                   KING       75.7 ★★★★☆
+HSP        Hargreaves Services PLC          KING       75.4 ★★★★☆
+MONY       Mony Group PLC                   KING       75.3 ★★★★☆
+WAWI       Wallenius Wilhelmsen             QUEEN      75.2 ★★★★☆
+EBF        Ennis Inc                        KING       74.8 ★★★★☆
+DAC        Danaos Corp                      QUEEN      74.8 ★★★★☆
+ZIM        ZIM Integrated Shipping Service  QUEEN      74.6 ★★★★☆
+AOS        A.O. Smith Corp                  KING       74.3 ★★★★☆
+MATX       Matson Inc                       QUEEN      74.2 ★★★★☆
+HEE        Hellenic Exchanges - Athens Sto  QUEEN      74.1 ★★★★☆
+ESEA       Euroseas Ltd                     QUEEN      74.0 ★★★★☆
+CTRA       Coterra Energy Inc               KING       73.3 ★★★★☆
+WEYS       Weyco Group Inc                  KING       73.1 ★★★★☆
+NICL       Nichols PLC                      KING       73.0 ★★★★☆
+MRK        Merck KGaA                       KING       72.9 ★★★★☆
+SD         SandRidge Energy Inc             QUEEN      72.8 ★★★★☆
+DMLP       Dorchester Minerals LP           KING       72.6 ★★★★☆
+TLK        Toll Brothers Inc                QUEEN      72.6 ★★★★☆
+WWIB       Wilh. Wilhelmsen B               KING       72.4 ★★★★☆
+9TG        Gaztransport et technigaz SA     QUEEN      72.4 ★★★★☆
+ZM         Zoom Communications Inc          QUEEN      72.3 ★★★★☆
+ESP        Espey Manufacturing & Electroni  QUEEN      72.0 ★★★★☆
+SA2D       SandRidge Energy Inc             QUEEN      71.7 ★★★★☆
+N4Q1       Hemisphere Energy Corp           JACK       71.6 ★★★★☆
+MPCC       MPC Container Ships              JACK       71.6 ★★★★☆
+MPTI       M-Tron Industries Inc            QUEEN      71.5 ★★★★☆
+ABF        Associated British Foods PLC     KING       71.3 ★★★★☆
+BOY        Bodycote PLC                     KING       71.3 ★★★★☆
+DUOL       Duolingo Inc                     QUEEN      70.8 ★★★★☆
+6QK        MS International PLC             QUEEN      70.6 ★★★★☆
+LPE        Laurent-Perrier                  KING       70.5 ★★★★☆
+TRMD A     TORM                             QUEEN      70.4 ★★★★☆
+GSL        Global Ship Lease Inc            QUEEN      69.6 ★★★☆☆
+TEN        Tenaris SA                       KING       69.3 ★★★☆☆
+NVDA       NVIDIA Corp                      JOKER      68.6 ★★★☆☆
+GILD       Gilead Sciences Inc              QUEEN      68.5 ★★★☆☆
+S0QA       Scorpio Tankers Inc              QUEEN      68.4 ★★★☆☆
+WCP        Whitecap Resources Inc           KING       68.2 ★★★☆☆
+HEN        Henkel AG & Co KGaA              KING       67.9 ★★★☆☆
+ITRN       Ituran Location & Control Ltd    KING       67.9 ★★★☆☆
+LGCY       Legacy Education Inc             ACE        67.9 ★★★☆☆
+FO3        Moury Construct SA               ACE        67.9 ★★★☆☆
+NEDAP      Nedap NV                         KING       67.7 ★★★☆☆
+WES        Western Midstream Partners LP    QUEEN      67.6 ★★★☆☆
+TDW        Tidewater Inc                    JOKER      67.6 ★★★☆☆
+MOUR       Moury Construct SA               JACK       67.5 ★★★☆☆
+1NVDA      NVIDIA Corp                      JOKER      67.5 ★★★☆☆
+NVEC       NVE Corp                         KING       67.2 ★★★☆☆
+RE0        Hafnia Ltd                       QUEEN      67.2 ★★★☆☆
+HAFN       Hafnia Ltd                       QUEEN      67.0 ★★★☆☆
+MEDI       Medistim                         KING       66.8 ★★★☆☆
+68M        Matson Inc                       ACE        66.8 ★★★☆☆
+MGY        Magnolia Oil & Gas Corp          QUEEN      66.7 ★★★☆☆
+IDCC       InterDigital Inc                 QUEEN      66.4 ★★★☆☆
+MEKKO      Marimekko                        KING       65.9 ★★★☆☆
+DBO        D-Box Technologies Inc           JOKER      65.9 ★★★☆☆
+ODC        Oil-Dri Corp of America          ACE        65.8 ★★★☆☆
+UTHR       United Therapeutics Corp         QUEEN      65.8 ★★★☆☆
+BIOA B     BioArctic                        JOKER      65.6 ★★★☆☆
+5F1        First Resources Ltd              JACK       65.5 ★★★☆☆
+SSD        Simpson Manufacturing Co Inc     QUEEN      65.5 ★★★☆☆
+ORK        Orkla                            KING       65.4 ★★★☆☆
+UZU        Uzin Utz SE                      KING       65.4 ★★★☆☆
+EPI B      Epiroc B                         QUEEN      65.3 ★★★☆☆
+INCY       Incyte Corp                      JOKER      65.3 ★★★☆☆
+PZA        Pizza Pizza Royalty Corp         KING       65.1 ★★★☆☆
+HWX        Headwater Exploration Inc        JACK       65.1 ★★★☆☆
+SNA        Snap-on Inc                      KING       64.8 ★★★☆☆
+TCL.A      Transcontinental Inc             KING       64.7 ★★★☆☆
+ALK B      ALK-Abello                       QUEEN      64.7 ★★★☆☆
+STRA       Strategic Education Inc          KING       64.1 ★★★☆☆
+HAFNI      Hafnia Limited                   QUEEN      63.9 ★★★☆☆
+VICR       Vicor Corp                       JOKER      63.9 ★★★☆☆
+HILS       Hill & Smith PLC                 KING       63.7 ★★★☆☆
+B7C0       dAmico International Shipping S  JACK       63.7 ★★★☆☆
+UI         Ubiquiti Inc                     JOKER      63.4 ★★★☆☆
+G6O        GeoPark Ltd                      QUEEN      62.7 ★★★☆☆
+EXEL       Exelixis Inc                     JOKER      62.5 ★★★☆☆
+ALSN       Allison Transmission Holdings I  QUEEN      62.0 ★★★☆☆
+HD8        Harju Elekter Group              ACE        61.9 ★★★☆☆
+SOC        Subsea 7 SA                      JOKER      61.8 ★★★☆☆
+ETX        Etablissements Maurel & Prom     JACK       61.1 ★★★☆☆
+MAU        Etablissements Maurel & Prom     JACK       61.0 ★★★☆☆
+TIMA       ZEAL Network SE                  QUEEN      60.2 ★★★☆☆
+OSPN       OneSpan Inc                      QUEEN      59.4 ★★★☆☆
+LMAT       LeMaitre Vascular Inc            JOKER      59.3 ★★★☆☆
+JNJ        Johnson & Johnson                QUEEN      59.1 ★★★☆☆
+IEX        IDEX Corp                        QUEEN      58.7 ★★★☆☆
+UCB        UCB SA                           JOKER      58.7 ★★★☆☆
+AGYS       Agilysys Inc                     QUEEN      58.6 ★★★☆☆
+VH2        Friedrich Vorwerk Group SE       JOKER      58.3 ★★★☆☆
+AMD        Advanced Micro Devices Inc       JOKER      58.2 ★★★☆☆
+MU         Micron Technology Inc            JOKER      58.0 ★★★☆☆
+COLM       Columbia Sportswear Co           KING       57.8 ★★★☆☆
+IESC       IES Holdings Inc                 JOKER      57.7 ★★★☆☆
+COCO       The Vita Coco Co Inc             JOKER      57.7 ★★★☆☆
+DOV        Dover Corp                       QUEEN      57.5 ★★★☆☆
+PFE        Pfizer Inc                       QUEEN      57.4 ★★★☆☆
+41L        Laboratorios Farmaceuticos Rovi  ACE        57.3 ★★★☆☆
+GOOG       Alphabet Inc                     JOKER      57.0 ★★★☆☆
+ROVI       Laboratorios Farmaceuticos Rovi  ACE        56.9 ★★★☆☆
+ITW        Illinois Tool Works Inc          QUEEN      56.8 ★★★☆☆
+MWA        Mueller Water Products Inc       QUEEN      56.6 ★★★☆☆
+JEN        Jensen-Group NV                  JACK       56.5 ★★★☆☆
+GMED       Globus Medical Inc               JOKER      56.5 ★★★☆☆
+DELL       Dell Technologies Inc            JOKER      56.1 ★★★☆☆
+PLEJD      Plejd                            JOKER      55.8 ★★★☆☆
+XD1        Jensen-Group NV                  JACK       55.7 ★★★☆☆
+CEK        CeoTronics AG                    JOKER      55.6 ★★★☆☆
+ELG        Elmos Semiconductor SE           JACK       55.4 ★★★☆☆
+LECO       Lincoln Electric Holdings Inc    QUEEN      55.2 ★★★☆☆
+UNP        Union Pacific Corp               QUEEN      55.2 ★★★☆☆
+NB3        Neurocrine Biosciences Inc       JOKER      55.1 ★★★☆☆
+4M7A       Magellan Aerospace Corp          JOKER      55.0 ★★★☆☆
+ZAP        Zaptec                           JOKER      55.0 ★★★☆☆
+GOOGL      Alphabet Inc                     JOKER      54.9 ★★☆☆☆
+NBIX       Neurocrine Biosciences Inc       JOKER      54.7 ★★☆☆☆
+CRDO       Credo Technology Group Holding   JOKER      54.6 ★★☆☆☆
+LGND       Ligand Pharmaceuticals Inc       JOKER      54.5 ★★☆☆☆
+KO         Coca-Cola Co                     QUEEN      54.1 ★★☆☆☆
+BBD        Bombardier Inc                   JOKER      54.0 ★★☆☆☆
+KRP        Kimbell Royalty Partners LP      KING       53.9 ★★☆☆☆
+SUBC       Subsea7                          JOKER      53.7 ★★☆☆☆
+UNC        UCB SA                           QUEEN      53.7 ★★☆☆☆
+CNR        Canadian National Railway Co     QUEEN      53.2 ★★☆☆☆
+BBD.B      Bombardier Inc                   JOKER      52.4 ★★☆☆☆
+MRVL       Marvell Technology Inc           JOKER      52.4 ★★☆☆☆
+ORNBV      Orion B                          KING       52.2 ★★☆☆☆ VETO:extreme_overvaluation
+CRUS       Cirrus Logic Inc                 ACE        52.2 ★★☆☆☆ VETO:extreme_overvaluation
+RVRC       Revolutionrace                   ACE        52.2 ★★☆☆☆ VETO:extreme_overvaluation
+SPA        Spadel SA                        ACE        52.2 ★★☆☆☆ VETO:extreme_overvaluation
+YX5        Spadel SA                        ACE        52.2 ★★☆☆☆ VETO:extreme_overvaluation
+TREL B     Trelleborg                       KING       51.9 ★★☆☆☆ VETO:extreme_overvaluation
+AMGN       Amgen Inc                        QUEEN      51.9 ★★☆☆☆
+WWD        Woodward Inc                     JOKER      51.9 ★★☆☆☆
+DOCN       DigitalOcean Holdings Inc        JOKER      51.8 ★★☆☆☆
+NHC        National Healthcare Corp         ACE        51.7 ★★☆☆☆ VETO:extreme_overvaluation
+BITTI      Bittium                          JOKER      51.5 ★★☆☆☆
+CLA B      Cloetta                          JOKER      51.5 ★★☆☆☆
+TASK       TaskUs Inc                       QUEEN      51.5 ★★☆☆☆
+PEN        Penumbra Inc                     JOKER      51.4 ★★☆☆☆
+XOM        Exxon Mobil Corp                 KING       51.3 ★★☆☆☆
+RL         Ralph Lauren Corp                QUEEN      51.3 ★★☆☆☆
+NDSN       Nordson Corp                     QUEEN      50.9 ★★☆☆☆
+PSON       Pearson PLC                      KING       50.7 ★★☆☆☆
+HTG        Hunting PLC                      JOKER      50.7 ★★☆☆☆
+ALFA       Alfa Laval                       QUEEN      49.5 ★★☆☆☆ VETO:extreme_overvaluation
+CSCO       Cisco Systems Inc                QUEEN      49.5 ★★☆☆☆ VETO:extreme_overvaluation
+HUBB       Hubbell Inc                      QUEEN      49.5 ★★☆☆☆ VETO:extreme_overvaluation
+4RW        Rai Way SpA                      QUEEN      49.5 ★★☆☆☆ VETO:extreme_overvaluation
+ELMD       Electromed Inc                   JOKER      49.5 ★★☆☆☆
+ISSC       Innovative Solutions & Support   ACE        49.4 ★★☆☆☆ VETO:extreme_overvaluation
+WLDN       Willdan Group Inc                JOKER      49.3 ★★☆☆☆
+CCL.B      CCL Industries Inc               QUEEN      49.0 ★★☆☆☆
+DCI        Donaldson Co Inc                 QUEEN      48.9 ★★☆☆☆
+BIRK       Birkenstock Holding PLC          QUEEN      48.7 ★★☆☆☆
+GIL        Gildan Activewear Inc            QUEEN      48.3 ★★☆☆☆
+MBB        MBB SE                           JOKER      48.3 ★★☆☆☆
+KEX        Kirby Corp                       JOKER      48.1 ★★☆☆☆
+FMM B      FM Mattsson                      ACE        48.0 ★★☆☆☆ VETO:extreme_overvaluation
+STRT       Strattec Security Corp           JOKER      47.0 ★★☆☆☆
+DAKT       Daktronics Inc                   JOKER      46.7 ★★☆☆☆
+CRS        Carpenter Technology Corp        JOKER      46.4 ★★☆☆☆
+PTC        PTC Inc                          QUEEN      46.3 ★★☆☆☆
+EVER       EverQuote Inc                    QUEEN      45.3 ★★☆☆☆
+RDVT       Red Violet Inc                   QUEEN      45.3 ★★☆☆☆ VETO:extreme_overvaluation
+MAL        Magellan Aerospace Corp          JOKER      45.1 ★★☆☆☆
+PLNT       Planet Fitness Inc               QUEEN      44.0 ★★☆☆☆
+NTH        Naturhouse Health SA             ACE        43.7 ★★☆☆☆ VETO:extreme_overvaluation
+2NH        Naturhouse Health SA             ACE        43.3 ★★☆☆☆ VETO:extreme_overvaluation
+7PV        Birkenstock Holding PLC          QUEEN      42.7 ★★☆☆☆
+EBAY       eBay Inc                         QUEEN      39.5 ★☆☆☆☆ VETO:extreme_overvaluation
+PAY        Paymentus Holdings Inc           QUEEN      38.6 ★☆☆☆☆ VETO:extreme_overvaluation
+HQY        HealthEquity Inc                 QUEEN      38.4 ★☆☆☆☆
+PRTH       Priority Technology Holdings In  JOKER      36.0 ★☆☆☆☆ VETO:dead_momentum

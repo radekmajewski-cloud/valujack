@@ -1,0 +1,98 @@
+Info - Ticker;Company;Info - Country;Info - Industry;Info - Sector;ROE - Current;FCF margin - Current;Debt-Equity - Current;P/E - Current;Market Cap - Current USD;Info - Report;Dividend - Point;MA - MA 50d;MA - MA 200d;Div. Yield - Current;Dividend - Stable 10y;Dividend - Stable 5y;Dividend g. - Growth 5y;Revenue g. - Growth 5y;Performance - Perform. 1y;Stock price - Current;Info - Price Currency;Info - Report Currency;Earnings/share - Current;ROIC - Average 5y;Earnings g. - Growth 5y;Fair value
+AOS;A.O. Smith Corp;USA;Industrial Machinery;Industrials;29,4%;14,3%;0,7;17,3;9423,2;Q4-2025;9;73,62;69,96;2,1%;10;5;7,1%;5,8%;-0,7%;66,40;USD;USD;3,85;24,4%;12,5%;80,18
+AEP;AEP Plantations PLC;UK;Farming;Food and Beverage;15,3%;18,0%;0,1;9,7;803,1;Q2-2025;9;15,03;12,43;2,4%;10;5;154,2%;10,2%;124,9%;16,15;GBP;USD;2,24;22,8%;22,7%;26,39
+ARLP;Alliance Resource Partners LP;USA;Fuel - Coal;Energy;16,9%;17,3%;0,5;11,4;3523,0;Q4-2025;11;25,38;24,94;9,5%;10;5;45,4%;10,6%;8,9%;27,44;USD;USD;2,40;17,7%;34,2%;41,12
+ABF;Associated British Foods PLC;UK;Food Processing;Food and Beverage;9,3%;5,1%;0,7;13,2;17008,7;Q4-2025;7;19,15;20,86;3,4%;10;5;12,9%;6,9%;0,7%;18,65;GBP;GBP;1,42;7,0%;19,7%;23,26
+BETS B;Betsson;Sweden;Gambling & Casinos;Consumer Durables;19,8%;13,7%;0,5;7,0;1403,8;Q4-2025;11;102,60;146,27;7,3%;10;5;12,7%;13,7%;-38,3%;98,35;SEK;EUR;1,29;22,9%;12,3%;282,14
+BSM;Black Stone Minerals LP;USA;Oil & Gas -Exploration;Energy;26,6%;45,2%;0,2;12,1;3266,0;Q4-2025;10;14,74;13,51;8,7%;10;5;14,7%;7,3%;2,7%;15,43;USD;USD;1,28;27,2%;21,2%;23,02
+BOY;Bodycote PLC;UK;Industrial Machinery;Industrials;8,6%;8,9%;0,6;20,7;1432,5;Q4-2025;7;7,50;6,61;3,6%;10;5;3,6%;4,0%;7,0%;6,43;GBP;GBP;0,31;7,1%;174,2%;11,88
+CALM;Cal-Maine Foods Inc;USA;Farming;Food and Beverage;42,8%;27,8%;0,2;3,7;4249,2;Q2-2026;10;82,67;93,66;9,9%;7;5;202,9%;25,6%;5,7%;87,77;USD;USD;23,74;51,4%;258,7%;438,12
+CTSH;Cognizant Technology Solutions;USA;IT Services;Technology;14,9%;12,3%;0,4;13,4;29792,4;Q4-2025;10;73,90;74,28;2,0%;8;5;7,1%;4,9%;-22,8%;61,05;USD;USD;4,57;17,0%;12,1%;81,94
+COLM;Columbia Sportswear Co;USA;Clothing & Footwear;Consumer Durables;10,4%;6,4%;0,7;17,0;3008,4;Q4-2025;9;58,09;56,18;2,2%;10;5;35,8%;6,3%;-29,8%;55,02;USD;USD;3,24;17,0%;14,7%;44,93
+CIX;Compx International Inc;USA;Security;Industrials;14,1%;12,1%;0,1;14,7;287,2;Q4-2025;10;23,74;24,00;5,2%;10;5;24,6%;6,7%;4,0%;23,27;USD;USD;1,58;20,7%;13,7%;32,81
+CTRA;Coterra Energy Inc;USA;Oil & Gas -Exploration;Energy;11,6%;21,4%;0,6;14,4;24633,6;Q4-2025;9;29,04;25,91;2,7%;10;5;17,1%;39,1%;17,2%;32,37;USD;USD;2,25;10,3%;35,1%;37,88
+DMLP;Dorchester Minerals LP;USA;Oil & Gas -Exploration;Energy;18,8%;86,7%;0,0;23,5;1298,1;Q4-2025;7;24,97;25,06;10,2%;10;5;14,8%;26,6%;-8,3%;27,24;USD;USD;1,16;58,4%;13,7%;28,67
+EBF;Ennis Inc;USA;Industrial Components;Industrials;14,0%;10,9%;0,2;12,7;545,1;Q3-2026;9;20,03;18,45;4,7%;10;5;2,1%;1,7%;-0,3%;21,14;USD;USD;1,66;15,6%;12,3%;26,22
+EOG;EOG Resources Inc;USA;Oil & Gas -Exploration;Energy;16,7%;15,3%;0,7;14,7;73038,9;Q4-2025;10;116,71;114,68;2,9%;10;5;22,8%;18,0%;8,5%;134,51;USD;USD;9,17;18,8%;61,0%;177,40
+EQS;Equasens;France;Medical Supplies;Health Care;15,7%;16,6%;0,7;14,8;588,6;Q4-2024;10;38,31;43,39;3,5%;10;5;8,0%;6,5%;0,1%;35,60;EUR;EUR;2,41;20,6%;6,0%;44,54
+EVO;Evolution;Sweden;Gambling & Casinos;Consumer Durables;26,1%;53,7%;0,4;10,2;12059,2;Q4-2025;11;570,91;694,14;5,1%;10;5;32,7%;29,8%;-25,9%;589,80;SEK;EUR;5,33;28,5%;28,1%;1 173,61
+XOM;Exxon Mobil Corp;USA;Oil & Gas -Exploration;Energy;11,1%;7,3%;0,7;23,5;676886,9;Q4-2025;8;142,01;120,15;2,5%;10;5;2,8%;12,3%;40,5%;157,23;USD;USD;6,70;11,8%;26,8%;136,15
+FPE;Fuchs SE;Germany;Chemicals;Materials;15,6%;8,3%;0,4;12,9;2078,5;Q3-2025;9;30,06;31,31;4,0%;10;5;3,9%;8,4%;-22,5%;28,80;EUR;EUR;2,24;15,4%;7,2%;44,49
+GAMA;Gamma Communications PLC;UK;Telecom Services;Telecom;18,7%;10,6%;0,8;12,6;1057,3;Q2-2025;9;8,93;;2,2%;10;5;12,3%;9,3%;;8,81;GBP;GBP;0,70;20,7%;0,6%;13,52
+GTT;Gaztransport et technigaz SA;France;Oil & Gas - Services;Energy;70,3%;52,7%;0,8;17,8;8114,4;Q4-2025;9;182,31;168,18;3,9%;10;5;13,0%;15,2%;39,1%;199,10;EUR;EUR;11,16;205,2%;15,8%;275,30
+HLAG;Hapag-Lloyd AG;Germany;Marine & Sea;Industrials;8,7%;9,7%;0,6;16,7;28368,8;Q3-2025;9;125,32;123,46;5,6%;7;5;49,4%;8,7%;2,7%;146,70;EUR;EUR;8,77;46,0%;10,7%;179,96
+HSP;Hargreaves Services PLC;UK;Industrial Components;Industrials;10,8%;13,7%;0,7;11,4;312,7;Q2-2026;9;7,27;;4,9%;10;5;38,7%;9,5%;;7,49;GBP;GBP;0,66;10,9%;5,3%;9,02
+HEN;Henkel AG & Co KGaA;Germany;Personal Products;Food and Beverage;10,4%;9,8%;0,6;13,1;30302,2;Q2-2025;9;70,61;65,86;3,1%;10;5;2,0%;1,9%;-3,7%;65,75;EUR;EUR;5,00;7,7%;9,0%;85,39
+HILS;Hill & Smith PLC;UK;Construction & Infrastructure;Industrials;17,4%;11,9%;0,6;20,4;2148,6;Q4-2025;9;22,98;21,11;2,4%;10;5;40,6%;5,6%;11,1%;21,00;GBP;GBP;1,03;11,8%;27,7%;21,12
+ITRN;Ituran Location & Control Ltd;USA;Semiconductors;Technology;26,6%;18,6%;0,7;17,3;1002,4;Q4-2025;9;46,37;40,34;4,0%;10;5;52,8%;7,9%;32,8%;50,44;USD;USD;2,92;28,4%;30,6%;46,00
+JHD;James Halstead PLC;UK;Construction Supplies;Industrials;22,3%;12,2%;0,3;12,4;632,8;Q4-2025;9;1,34;;7,3%;10;5;7,6%;1,9%;;1,21;GBP;GBP;0,10;37,4%;3,3%;1,80
+KRP;Kimbell Royalty Partners LP;USA;Oil & Gas -Exploration;Energy;13,2%;7,1%;0,7;23,8;1338,4;Q4-2025;6;13,50;13,48;10,9%;7;5;13,0%;28,2%;5,4%;14,74;USD;USD;0,62;6,2%;16,3%;15,89
+LPE;Laurent-Perrier;France;Brewers;Food and Beverage;7,1%;7,6%;0,8;11,4;566,6;Q2-2026;9;90,14;92,41;2,4%;10;5;15,3%;8,7%;-12,4%;87,60;EUR;EUR;7,68;6,5%;12,5%;110,88
+MPE;M P Evans Group PLC;UK;Farming;Food and Beverage;19,4%;33,6%;0,2;9,9;985,4;Q2-2025;9;13,83;12,82;3,5%;10;5;25,5%;16,1%;;14,90;GBP;USD;2,03;16,5%;40,2%;30,31
+MEKKO;Marimekko;Finland;Clothing & Footwear;Consumer Durables;32,8%;16,7%;0,8;17,3;465,9;Q4-2025;8;11,99;12,60;4,0%;9;5;18,5%;8,9%;-20,5%;10,42;EUR;EUR;0,60;50,2%;12,1%;9,72
+MEDI;Medistim;Norway;Medical Equipment;Health Care;34,0%;22,2%;0,4;23,8;379,6;Q4-2025;9;223,14;234,05;3,9%;10;5;21,7%;14,0%;11,0%;207,00;NOK;NOK;8,69;44,9%;17,9%;164,67
+MRK;Merck KGaA;Germany;Pharmaceuticals;Health Care;10,2%;9,1%;0,8;15,9;51590,5;Q3-2025;10;123,50;115,70;2,0%;10;5;11,1%;3,9%;-19,5%;107,85;EUR;EUR;6,80;8,1%;8,3%;161,06
+MONY;Mony Group PLC;UK;Online Services;Technology;35,8%;22,0%;0,7;10,8;1106,3;Q4-2025;8;1,72;1,93;7,6%;10;5;1,4%;5,3%;-17,9%;1,66;GBP;GBP;0,15;26,7%;3,5%;2,27
+NRP;Natural Resources Partners LP;USA;Fuel - Coal;Energy;21,6%;82,0%;0,2;11,5;1532,9;Q4-2025;10;117,68;105,96;2,6%;10;5;17,3%;9,4%;7,6%;116,77;USD;USD;10,18;26,5%;25,4%;138,42
+NEDAP;Nedap NV;Netherlands;IT Services;Technology;27,5%;12,3%;0,5;21,8;590,0;Q4-2025;7;87,22;88,05;3,9%;10;5;7,3%;8,1%;26,5%;81,20;EUR;EUR;3,72;23,9%;11,8%;79,24
+NICL;Nichols PLC;UK;Beverages;Food and Beverage;20,1%;12,5%;0,5;20,4;449,1;Q2-2025;6;9,92;;3,3%;10;5;2,7%;8,0%;;9,76;GBP;GBP;0,48;41,0%;29,5%;11,80
+NVEC;NVE Corp;USA;Semiconductors;Technology;24,3%;47,7%;0,0;23,7;335,8;Q3-2026;7;67,55;67,82;5,8%;10;5;0,0%;4,0%;6,2%;69,43;USD;USD;2,93;40,1%;3,9%;73,67
+ORNBV;Orion B;Finland;Pharmaceuticals;Health Care;38,9%;11,5%;0,6;19,8;10913,9;Q4-2025;7;69,32;65,93;2,6%;10;5;3,7%;11,9%;26,5%;70,30;EUR;EUR;3,55;31,0%;17,9%;51,33
+ORK;Orkla;Norway;Food Processing;Food and Beverage;13,3%;17,4%;0,7;17,4;11877,0;Q4-2025;8;119,76;111,15;5,1%;10;5;16,9%;8,7%;9,1%;118,60;NOK;NOK;6,83;8,6%;9,4%;114,87
+PSI;Pason Systems Inc;Canada;Oil & Gas - Services;Energy;11,0%;14,4%;0,3;18,8;742,0;Q4-2025;8;12,46;12,15;4,1%;10;5;1,6%;21,8%;-0,2%;12,77;CAD;CAD;0,68;28,6%;53,4%;19,33
+PSON;Pearson PLC;UK;Broadcasting & Publishing;Consumer Durables;9,2%;14,6%;0,8;19,2;8108,7;Q4-2025;7;9,59;10,33;2,5%;10;5;4,6%;1,0%;-21,5%;9,88;GBP;GBP;0,51;6,2%;4,6%;9,37
+PZA;Pizza Pizza Royalty Corp;Canada;Restaurants & Cafés;Consumer Durables;10,3%;78,2%;0,2;16,9;391,6;Q3-2025;7;15,87;15,40;5,8%;10;5;6,7%;5,0%;19,7%;15,92;CAD;CAD;0,94;8,3%;4,3%;16,12
+STNG;Scorpio Tankers Inc;USA;Oil & Gas -Transportation;Energy;10,8%;44,4%;0,2;9,2;3185,2;Q4-2025;10;66,01;55,10;2,4%;10;5;32,3%;0,5%;72,9%;68,42;USD;USD;7,40;12,0%;33,9%;105,36
+SNA;Snap-on Inc;USA;Measuring & Analysis;Industrials;17,1%;19,5%;0,4;18,9;19255,6;Q4-2025;9;372,40;341,99;2,4%;10;5;14,7%;5,5%;11,4%;369,59;USD;USD;19,52;17,6%;11,1%;315,85
+STRA;Strategic Education Inc;USA;Education;Industrials;7,7%;12,1%;0,2;14,2;1803,1;Q4-2025;6;81,35;81,14;3,0%;8;5;0,0%;4,3%;-0,8%;79,26;USD;USD;5,57;4,8%;7,9%;103,60
+TEN;Tenaris SA;Italy;Oil & Gas - Services;Energy;11,6%;16,5%;0,2;15,0;27051,8;Q4-2025;10;19,74;16,91;3,1%;10;5;64,8%;18,4%;32,5%;23,29;EUR;USD;1,83;16,4%;40,1%;22,25
+TFW;Thorpe PLC;UK;Electrical Components;Industrials;13,4%;14,2%;0,3;12,4;395,6;Q4-2025;8;;;2,6%;10;5;4,2%;9,1%;;2,68;GBP;GBP;0,22;18,0%;13,6%;3,43
+TCL.A;Transcontinental Inc;Canada;Packaging;Materials;8,8%;9,7%;0,7;11,8;1451,0;Q1-2026;8;23,20;21,11;3,8%;10;5;0,0%;0,8%;25,9%;23,44;CAD;CAD;1,98;5,0%;5,7%;36,26
+TREL B;Trelleborg;Sweden;Chemicals;Materials;9,9%;7,0%;0,5;22,4;8168,2;Q4-2025;8;381,13;372,29;2,3%;9;5;9,9%;0,9%;-13,4%;353,10;SEK;SEK;15,76;9,6%;9,5%;264,74
+TRI;Trigano SA;France;Auto & Equipment;Consumer Durables;11,5%;14,2%;0,6;12,0;3151,0;Q4-2025;8;167,37;155,90;2,4%;10;5;11,8%;10,9%;18,1%;148,50;EUR;EUR;12,41;21,4%;11,4%;226,03
+TSTL;Tristel PLC;UK;Medical Equipment;Health Care;23,4%;18,2%;0,4;23,5;232,7;Q2-2026;8;3,86;3,84;3,7%;10;5;17,1%;9,8%;20,8%;3,87;GBP;GBP;0,16;20,6%;20,9%;4,97
+UZU;Uzin Utz SE;Germany;Chemicals;Materials;11,0%;5,6%;0,6;12,0;409,9;Q2-2025;5;75,73;70,32;2,6%;10;5;7,9%;4,8%;28,7%;74,00;EUR;EUR;6,16;10,2%;1,4%;88,30
+VAN;Van de Velde NV;Belgium;Clothing & Footwear;Consumer Durables;19,7%;19,1%;0,2;11,9;418,3;Q4-2024;9;30,64;31,29;8,0%;10;5;18,4%;1,1%;-1,1%;30,15;EUR;EUR;2,54;26,7%;9,8%;43,92
+WEYS;Weyco Group Inc;USA;Clothing & Footwear;Consumer Durables;9,6%;12,9%;0,3;13,8;320,0;Q4-2025;7;31,61;31,03;3,2%;10;5;2,2%;7,2%;14,5%;33,78;USD;USD;2,44;12,9%;36,9%;43,25
+WCP;Whitecap Resources Inc;Canada;Oil & Gas -Exploration;Energy;8,9%;10,3%;0,8;14,5;10531,0;Q4-2025;10;12,73;11,02;5,1%;10;5;27,8%;44,7%;65,9%;14,33;CAD;CAD;0,99;14,4%;17,3%;15,13
+WWIB;Wilh. Wilhelmsen B;Norway;Marine & Sea;Industrials;19,9%;31,0%;0,3;4,1;2718,9;Q4-2025;10;618,90;509,95;3,3%;10;5;29,6%;8,9%;73,5%;642,00;NOK;USD;15,52;12,7%;43,8%;684,20
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;

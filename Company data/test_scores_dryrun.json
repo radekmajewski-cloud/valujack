@@ -1,0 +1,6138 @@
+{
+  "generated": "2026-03-21T08:01:14.038248",
+  "total_scored": 235,
+  "eligible_for_rotation": 172,
+  "companies": [
+    {
+      "ticker": "EVO",
+      "company": "Evolution",
+      "strategy": "KING",
+      "final_score": 90.4,
+      "data_score": 90.4,
+      "ai_score": 50.0,
+      "stars": 5,
+      "veto": null,
+      "all_scores": {
+        "KING": 90.4,
+        "JACK": 33.8,
+        "QUEEN": 69.3,
+        "ACE": 48.6,
+        "JOKER": 32.0
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 91.6,
+        "business_quality": 100.0,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 80.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "CIX",
+      "company": "Compx International Inc",
+      "strategy": "KING",
+      "final_score": 88.5,
+      "data_score": 88.5,
+      "ai_score": 50.0,
+      "stars": 5,
+      "veto": null,
+      "all_scores": {
+        "KING": 88.5,
+        "JACK": 33.8,
+        "QUEEN": 66.9,
+        "ACE": 50.4,
+        "JOKER": 28.1
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 91.2,
+        "business_quality": 79.4,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 95.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "MPE",
+      "company": "M P Evans Group PLC",
+      "strategy": "KING",
+      "final_score": 87.8,
+      "data_score": 87.8,
+      "ai_score": 50.0,
+      "stars": 5,
+      "veto": null,
+      "all_scores": {
+        "KING": 87.8,
+        "JACK": 33.8,
+        "QUEEN": 68.1,
+        "ACE": 49.2,
+        "JOKER": 30.1
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 84.5,
+        "business_quality": 89.5,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 90.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "GTT",
+      "company": "Gaztransport et technigaz SA",
+      "strategy": "KING",
+      "final_score": 86.8,
+      "data_score": 86.8,
+      "ai_score": 50.0,
+      "stars": 5,
+      "veto": null,
+      "all_scores": {
+        "KING": 86.8,
+        "JACK": 33.8,
+        "QUEEN": 67.3,
+        "ACE": 46.2,
+        "JOKER": 32.0
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 86.5,
+        "business_quality": 100.0,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 60.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "AEP",
+      "company": "AEP Plantations PLC",
+      "strategy": "KING",
+      "final_score": 86.7,
+      "data_score": 86.7,
+      "ai_score": 50.0,
+      "stars": 5,
+      "veto": null,
+      "all_scores": {
+        "KING": 86.7,
+        "JACK": 33.8,
+        "QUEEN": 68.7,
+        "ACE": 50.4,
+        "JOKER": 30.0
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 79.0,
+        "business_quality": 88.8,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 95.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "VAN",
+      "company": "Van de Velde NV",
+      "strategy": "KING",
+      "final_score": 86.6,
+      "data_score": 86.6,
+      "ai_score": 50.0,
+      "stars": 5,
+      "veto": null,
+      "all_scores": {
+        "KING": 86.6,
+        "JACK": 33.8,
+        "QUEEN": 66.7,
+        "ACE": 49.5,
+        "JOKER": 29.2
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 80.0,
+        "business_quality": 90.6,
+        "growth": 98.0,
+        "earnings_stability": 100.0,
+        "financial_health": 90.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "TSTL",
+      "company": "Tristel PLC",
+      "strategy": "KING",
+      "final_score": 85.0,
+      "data_score": 85.0,
+      "ai_score": 50.0,
+      "stars": 5,
+      "veto": null,
+      "all_scores": {
+        "KING": 85.0,
+        "JACK": 33.8,
+        "QUEEN": 65.5,
+        "ACE": 47.3,
+        "JOKER": 29.3
+      },
+      "components": {
+        "fair_value": 91.4,
+        "dividend_health": 85.5,
+        "business_quality": 89.1,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 80.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "MLI",
+      "company": "Mueller Industries Inc",
+      "strategy": "ACE",
+      "final_score": 85.0,
+      "data_score": 85.0,
+      "ai_score": 50.0,
+      "stars": 5,
+      "veto": null,
+      "all_scores": {
+        "KING": 49.7,
+        "JACK": 33.8,
+        "QUEEN": 69.1,
+        "ACE": 85.0,
+        "JOKER": 24.8
+      },
+      "components": {
+        "fair_value": 82.7,
+        "piotroski": 77.8,
+        "business_quality": 89.8,
+        "growth": 100.0,
+        "momentum": 87.2,
+        "earnings_stability": 100.0,
+        "financial_health": 94.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "BSM",
+      "company": "Black Stone Minerals LP",
+      "strategy": "KING",
+      "final_score": 84.9,
+      "data_score": 84.9,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 84.9,
+        "JACK": 33.8,
+        "QUEEN": 70.3,
+        "ACE": 49.8,
+        "JOKER": 32.0
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 68.0,
+        "business_quality": 100.0,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 90.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "BETS B",
+      "company": "Betsson",
+      "strategy": "KING",
+      "final_score": 84.4,
+      "data_score": 84.4,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 84.4,
+        "JACK": 33.8,
+        "QUEEN": 65.4,
+        "ACE": 48.0,
+        "JOKER": 28.2
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 82.8,
+        "business_quality": 81.9,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 75.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "STNG",
+      "company": "Scorpio Tankers Inc",
+      "strategy": "KING",
+      "final_score": 84.0,
+      "data_score": 84.0,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 84.0,
+        "JACK": 33.8,
+        "QUEEN": 65.3,
+        "ACE": 48.5,
+        "JOKER": 27.7
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 79.0,
+        "business_quality": 76.0,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 90.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "TRI",
+      "company": "Trigano SA",
+      "strategy": "KING",
+      "final_score": 82.9,
+      "data_score": 82.9,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 82.9,
+        "JACK": 33.8,
+        "QUEEN": 64.6,
+        "ACE": 47.4,
+        "JOKER": 28.2
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 79.0,
+        "business_quality": 82.7,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 70.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "EOG",
+      "company": "EOG Resources Inc",
+      "strategy": "KING",
+      "final_score": 82.2,
+      "data_score": 82.2,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 82.2,
+        "JACK": 33.8,
+        "QUEEN": 63.6,
+        "ACE": 46.2,
+        "JOKER": 28.4
+      },
+      "components": {
+        "fair_value": 97.5,
+        "dividend_health": 81.5,
+        "business_quality": 80.9,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 65.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "NRP",
+      "company": "Natural Resources Partners LP",
+      "strategy": "KING",
+      "final_score": 82.0,
+      "data_score": 82.0,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 82.0,
+        "JACK": 33.8,
+        "QUEEN": 64.7,
+        "ACE": 45.5,
+        "JOKER": 29.5
+      },
+      "components": {
+        "fair_value": 71.9,
+        "dividend_health": 80.0,
+        "business_quality": 100.0,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 90.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "DNR",
+      "company": "Industrie De Nora SpA",
+      "strategy": "ACE",
+      "final_score": 82.0,
+      "data_score": 82.0,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 47.3,
+        "JACK": 33.8,
+        "QUEEN": 66.5,
+        "ACE": 82.0,
+        "JOKER": 22.9
+      },
+      "components": {
+        "fair_value": 100.0,
+        "piotroski": 77.8,
+        "business_quality": 60.0,
+        "growth": 100.0,
+        "momentum": 80.1,
+        "earnings_stability": 90.0,
+        "financial_health": 91.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "AKK",
+      "company": "Azkoyen SA",
+      "strategy": "ACE",
+      "final_score": 80.9,
+      "data_score": 80.9,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 45.7,
+        "JACK": 33.8,
+        "QUEEN": 65.4,
+        "ACE": 80.9,
+        "JOKER": 22.4
+      },
+      "components": {
+        "fair_value": 100.0,
+        "piotroski": 88.9,
+        "business_quality": 62.5,
+        "growth": 100.0,
+        "momentum": 82.3,
+        "earnings_stability": 100.0,
+        "financial_health": 69.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "AZK",
+      "company": "Azkoyen SA",
+      "strategy": "ACE",
+      "final_score": 80.8,
+      "data_score": 80.8,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 47.4,
+        "JACK": 33.8,
+        "QUEEN": 66.6,
+        "ACE": 80.8,
+        "JOKER": 22.4
+      },
+      "components": {
+        "fair_value": 100.0,
+        "piotroski": 88.9,
+        "business_quality": 62.5,
+        "growth": 100.0,
+        "momentum": 81.8,
+        "earnings_stability": 100.0,
+        "financial_health": 69.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "IM4",
+      "company": "IMC SA",
+      "strategy": "ACE",
+      "final_score": 80.7,
+      "data_score": 80.7,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 44.4,
+        "JACK": 33.8,
+        "QUEEN": 61.7,
+        "ACE": 80.7,
+        "JOKER": 22.2
+      },
+      "components": {
+        "fair_value": 100.0,
+        "piotroski": 88.9,
+        "business_quality": 79.6,
+        "growth": 100.0,
+        "momentum": 87.8,
+        "earnings_stability": 80.0,
+        "financial_health": 79.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "CALM",
+      "company": "Cal-Maine Foods Inc",
+      "strategy": "KING",
+      "final_score": 80.3,
+      "data_score": 80.3,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 80.3,
+        "JACK": 33.8,
+        "QUEEN": 70.3,
+        "ACE": 49.8,
+        "JOKER": 32.0
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 63.5,
+        "business_quality": 100.0,
+        "growth": 100.0,
+        "earnings_stability": 70.0,
+        "financial_health": 90.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "8JM",
+      "company": "Vetoquinol SA",
+      "strategy": "ACE",
+      "final_score": 80.2,
+      "data_score": 80.2,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 41.4,
+        "JACK": 33.8,
+        "QUEEN": 60.6,
+        "ACE": 80.2,
+        "JOKER": 20.0
+      },
+      "components": {
+        "fair_value": 64.9,
+        "piotroski": 88.9,
+        "business_quality": 67.1,
+        "growth": 100.0,
+        "momentum": 80.3,
+        "earnings_stability": 100.0,
+        "financial_health": 91.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "GAMA",
+      "company": "Gamma Communications PLC",
+      "strategy": "KING",
+      "final_score": 80.1,
+      "data_score": 80.1,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 80.1,
+        "JACK": 33.8,
+        "QUEEN": 60.7,
+        "ACE": 36.8,
+        "JOKER": 24.9
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 78.0,
+        "business_quality": 77.0,
+        "growth": 93.0,
+        "earnings_stability": 100.0,
+        "financial_health": 60.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "ARLP",
+      "company": "Alliance Resource Partners LP",
+      "strategy": "KING",
+      "final_score": 80.0,
+      "data_score": 80.0,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 80.0,
+        "JACK": 33.8,
+        "QUEEN": 65.1,
+        "ACE": 47.6,
+        "JOKER": 28.6
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 68.0,
+        "business_quality": 80.8,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 75.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "PSI",
+      "company": "Pason Systems Inc",
+      "strategy": "KING",
+      "final_score": 79.9,
+      "data_score": 79.9,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 79.9,
+        "JACK": 33.8,
+        "QUEEN": 66.6,
+        "ACE": 49.2,
+        "JOKER": 29.0
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 62.3,
+        "business_quality": 83.0,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 85.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "JHD",
+      "company": "James Halstead PLC",
+      "strategy": "KING",
+      "final_score": 79.3,
+      "data_score": 79.3,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 79.3,
+        "JACK": 33.8,
+        "QUEEN": 58.7,
+        "ACE": 42.5,
+        "JOKER": 25.9
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 75.6,
+        "business_quality": 79.5,
+        "growth": 33.0,
+        "earnings_stability": 100.0,
+        "financial_health": 85.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "MSAB B",
+      "company": "Micro Systemation",
+      "strategy": "ACE",
+      "final_score": 77.7,
+      "data_score": 77.7,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 47.7,
+        "JACK": 33.8,
+        "QUEEN": 67.7,
+        "ACE": 77.7,
+        "JOKER": 26.3
+      },
+      "components": {
+        "fair_value": 100.0,
+        "piotroski": 77.8,
+        "business_quality": 87.4,
+        "growth": 100.0,
+        "momentum": 81.2,
+        "earnings_stability": 100.0,
+        "financial_health": 48.3
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "EQS",
+      "company": "Equasens",
+      "strategy": "KING",
+      "final_score": 77.6,
+      "data_score": 77.6,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 77.6,
+        "JACK": 33.8,
+        "QUEEN": 57.7,
+        "ACE": 40.5,
+        "JOKER": 26.4
+      },
+      "components": {
+        "fair_value": 85.2,
+        "dividend_health": 78.5,
+        "business_quality": 86.6,
+        "growth": 65.0,
+        "earnings_stability": 100.0,
+        "financial_health": 65.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "TFW",
+      "company": "Thorpe PLC",
+      "strategy": "KING",
+      "final_score": 76.9,
+      "data_score": 76.9,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 76.9,
+        "JACK": 33.8,
+        "QUEEN": 63.4,
+        "ACE": 47.4,
+        "JOKER": 26.7
+      },
+      "components": {
+        "fair_value": 90.6,
+        "dividend_health": 62.6,
+        "business_quality": 76.7,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 85.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "FPE",
+      "company": "Fuchs SE",
+      "strategy": "KING",
+      "final_score": 76.3,
+      "data_score": 76.3,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 76.3,
+        "JACK": 33.8,
+        "QUEEN": 58.4,
+        "ACE": 45.1,
+        "JOKER": 23.2
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 68.7,
+        "business_quality": 59.5,
+        "growth": 84.0,
+        "earnings_stability": 100.0,
+        "financial_health": 80.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "LNR",
+      "company": "Linamar Corp",
+      "strategy": "ACE",
+      "final_score": 76.2,
+      "data_score": 76.2,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 43.8,
+        "JACK": 33.8,
+        "QUEEN": 62.5,
+        "ACE": 76.2,
+        "JOKER": 19.5
+      },
+      "components": {
+        "fair_value": 100.0,
+        "piotroski": 77.8,
+        "business_quality": 34.6,
+        "growth": 100.0,
+        "momentum": 93.4,
+        "earnings_stability": 100.0,
+        "financial_health": 54.7
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "LPG",
+      "company": "Dorian LPG Ltd",
+      "strategy": "QUEEN",
+      "final_score": 76.1,
+      "data_score": 76.1,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 50.6,
+        "JACK": 33.8,
+        "QUEEN": 76.1,
+        "ACE": 55.7,
+        "JOKER": 25.9
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 81.7,
+        "business_quality": 77.2,
+        "growth": 73.3,
+        "momentum": 89.9,
+        "earnings_stability": 94.0,
+        "financial_health": 70.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "CTSH",
+      "company": "Cognizant Technology Solutions",
+      "strategy": "KING",
+      "final_score": 75.9,
+      "data_score": 75.9,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 75.9,
+        "JACK": 33.8,
+        "QUEEN": 63.6,
+        "ACE": 48.1,
+        "JOKER": 26.2
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 65.3,
+        "business_quality": 70.7,
+        "growth": 100.0,
+        "earnings_stability": 80.0,
+        "financial_health": 80.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "SJ",
+      "company": "Stella-Jones Inc",
+      "strategy": "ACE",
+      "final_score": 75.9,
+      "data_score": 75.9,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 36.4,
+        "JACK": 33.8,
+        "QUEEN": 56.4,
+        "ACE": 75.9,
+        "JOKER": 17.5
+      },
+      "components": {
+        "fair_value": 67.6,
+        "piotroski": 77.8,
+        "business_quality": 49.9,
+        "growth": 100.0,
+        "momentum": 96.3,
+        "earnings_stability": 100.0,
+        "financial_health": 70.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "CMRE",
+      "company": "Costamare Inc",
+      "strategy": "QUEEN",
+      "final_score": 75.8,
+      "data_score": 75.8,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 51.5,
+        "JACK": 33.8,
+        "QUEEN": 75.8,
+        "ACE": 55.6,
+        "JOKER": 27.7
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 15.3,
+        "business_quality": 79.8,
+        "growth": 100.0,
+        "momentum": 90.9,
+        "earnings_stability": 100.0,
+        "financial_health": 60.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "HLAG",
+      "company": "Hapag-Lloyd AG",
+      "strategy": "KING",
+      "final_score": 75.7,
+      "data_score": 75.7,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 75.7,
+        "JACK": 33.8,
+        "QUEEN": 58.7,
+        "ACE": 44.4,
+        "JOKER": 25.0
+      },
+      "components": {
+        "fair_value": 80.4,
+        "dividend_health": 85.1,
+        "business_quality": 75.5,
+        "growth": 100.0,
+        "earnings_stability": 70.0,
+        "financial_health": 70.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "HSP",
+      "company": "Hargreaves Services PLC",
+      "strategy": "KING",
+      "final_score": 75.4,
+      "data_score": 75.4,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 75.4,
+        "JACK": 33.7,
+        "QUEEN": 51.8,
+        "ACE": 37.1,
+        "JOKER": 19.8
+      },
+      "components": {
+        "fair_value": 75.9,
+        "dividend_health": 91.5,
+        "business_quality": 54.6,
+        "growth": 95.0,
+        "earnings_stability": 100.0,
+        "financial_health": 65.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "MONY",
+      "company": "Mony Group PLC",
+      "strategy": "KING",
+      "final_score": 75.3,
+      "data_score": 75.3,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 75.3,
+        "JACK": 33.8,
+        "QUEEN": 61.3,
+        "ACE": 40.2,
+        "JOKER": 28.8
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 55.8,
+        "business_quality": 95.2,
+        "growth": 53.0,
+        "earnings_stability": 100.0,
+        "financial_health": 65.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "03P",
+      "company": "Thessaloniki Port Authority SA",
+      "strategy": "ACE",
+      "final_score": 75.3,
+      "data_score": 75.3,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 32.9,
+        "JACK": 33.8,
+        "QUEEN": 52.8,
+        "ACE": 75.3,
+        "JOKER": 17.9
+      },
+      "components": {
+        "fair_value": 30.9,
+        "piotroski": 88.9,
+        "business_quality": 93.2,
+        "growth": 86.0,
+        "momentum": 83.0,
+        "earnings_stability": 100.0,
+        "financial_health": 88.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "WAWI",
+      "company": "Wallenius Wilhelmsen",
+      "strategy": "QUEEN",
+      "final_score": 75.2,
+      "data_score": 75.2,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 48.7,
+        "JACK": 33.8,
+        "QUEEN": 75.2,
+        "ACE": 51.0,
+        "JOKER": 29.2
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 70.0,
+        "business_quality": 86.2,
+        "growth": 100.0,
+        "momentum": 91.3,
+        "earnings_stability": 80.0,
+        "financial_health": 30.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "EBF",
+      "company": "Ennis Inc",
+      "strategy": "KING",
+      "final_score": 74.8,
+      "data_score": 74.8,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 74.8,
+        "JACK": 33.8,
+        "QUEEN": 59.9,
+        "ACE": 46.6,
+        "JOKER": 23.6
+      },
+      "components": {
+        "fair_value": 83.1,
+        "dividend_health": 66.8,
+        "business_quality": 64.2,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 90.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "DAC",
+      "company": "Danaos Corp",
+      "strategy": "QUEEN",
+      "final_score": 74.8,
+      "data_score": 74.8,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 54.2,
+        "JACK": 69.4,
+        "QUEEN": 74.8,
+        "ACE": 70.8,
+        "JOKER": 36.9
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 30.0,
+        "business_quality": 80.0,
+        "growth": 100.0,
+        "momentum": 77.9,
+        "earnings_stability": 70.0,
+        "financial_health": 85.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "ZIM",
+      "company": "ZIM Integrated Shipping Services",
+      "strategy": "QUEEN",
+      "final_score": 74.6,
+      "data_score": 74.6,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 49.7,
+        "JACK": 33.8,
+        "QUEEN": 74.6,
+        "ACE": 45.8,
+        "JOKER": 31.7
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 100.0,
+        "business_quality": 93.2,
+        "growth": 100.0,
+        "momentum": 68.0,
+        "earnings_stability": 80.0,
+        "financial_health": 15.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "SQE",
+      "company": "Strategic Education Inc",
+      "strategy": "ACE",
+      "final_score": 74.4,
+      "data_score": 74.4,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 44.8,
+        "JACK": 33.8,
+        "QUEEN": 60.0,
+        "ACE": 74.4,
+        "JOKER": 16.7
+      },
+      "components": {
+        "fair_value": 100.0,
+        "piotroski": 77.8,
+        "business_quality": 33.2,
+        "growth": 79.0,
+        "momentum": 82.4,
+        "earnings_stability": 100.0,
+        "financial_health": 62.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "AOS",
+      "company": "A.O. Smith Corp",
+      "strategy": "KING",
+      "final_score": 74.3,
+      "data_score": 74.3,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 74.3,
+        "JACK": 33.8,
+        "QUEEN": 59.9,
+        "ACE": 43.2,
+        "JOKER": 26.4
+      },
+      "components": {
+        "fair_value": 76.6,
+        "dividend_health": 68.8,
+        "business_quality": 82.9,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 65.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "MATX",
+      "company": "Matson Inc",
+      "strategy": "QUEEN",
+      "final_score": 74.2,
+      "data_score": 74.2,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 50.2,
+        "JACK": 33.8,
+        "QUEEN": 74.2,
+        "ACE": 57.3,
+        "JOKER": 25.7
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 46.7,
+        "business_quality": 66.6,
+        "growth": 100.0,
+        "momentum": 87.1,
+        "earnings_stability": 100.0,
+        "financial_health": 65.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "HEE",
+      "company": "Hellenic Exchanges - Athens Stock",
+      "strategy": "QUEEN",
+      "final_score": 74.1,
+      "data_score": 74.1,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 48.9,
+        "JACK": 33.8,
+        "QUEEN": 74.1,
+        "ACE": 49.5,
+        "JOKER": 32.0
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 10.0,
+        "business_quality": 100.0,
+        "growth": 100.0,
+        "momentum": 86.0,
+        "earnings_stability": 100.0,
+        "financial_health": 0.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "ESEA",
+      "company": "Euroseas Ltd",
+      "strategy": "QUEEN",
+      "final_score": 74.0,
+      "data_score": 74.0,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 53.1,
+        "JACK": 73.3,
+        "QUEEN": 74.0,
+        "ACE": 69.9,
+        "JOKER": 37.5
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 30.0,
+        "business_quality": 80.0,
+        "growth": 100.0,
+        "momentum": 79.6,
+        "earnings_stability": 70.0,
+        "financial_health": 75.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "HJ1",
+      "company": "Core Laboratories Inc",
+      "strategy": "ACE",
+      "final_score": 73.9,
+      "data_score": 73.9,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 41.5,
+        "JACK": 33.8,
+        "QUEEN": 57.6,
+        "ACE": 73.9,
+        "JOKER": 18.8
+      },
+      "components": {
+        "fair_value": 100.0,
+        "piotroski": 77.8,
+        "business_quality": 32.8,
+        "growth": 100.0,
+        "momentum": 88.8,
+        "earnings_stability": 90.0,
+        "financial_health": 56.3
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "MYM",
+      "company": "Mayr-Melnhof Karton AG",
+      "strategy": "ACE",
+      "final_score": 73.5,
+      "data_score": 73.5,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 40.3,
+        "JACK": 33.8,
+        "QUEEN": 55.9,
+        "ACE": 73.5,
+        "JOKER": 17.1
+      },
+      "components": {
+        "fair_value": 100.0,
+        "piotroski": 100.0,
+        "business_quality": 31.9,
+        "growth": 70.0,
+        "momentum": 88.1,
+        "earnings_stability": 100.0,
+        "financial_health": 51.3
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "CTRA",
+      "company": "Coterra Energy Inc",
+      "strategy": "KING",
+      "final_score": 73.3,
+      "data_score": 73.3,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 73.3,
+        "JACK": 33.8,
+        "QUEEN": 54.9,
+        "ACE": 41.2,
+        "JOKER": 23.0
+      },
+      "components": {
+        "fair_value": 68.6,
+        "dividend_health": 80.5,
+        "business_quality": 65.1,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 70.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "WEYS",
+      "company": "Weyco Group Inc",
+      "strategy": "KING",
+      "final_score": 73.1,
+      "data_score": 73.1,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 73.1,
+        "JACK": 33.8,
+        "QUEEN": 59.9,
+        "ACE": 46.7,
+        "JOKER": 23.9
+      },
+      "components": {
+        "fair_value": 90.7,
+        "dividend_health": 59.6,
+        "business_quality": 59.3,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 85.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "NICL",
+      "company": "Nichols PLC",
+      "strategy": "KING",
+      "final_score": 73.0,
+      "data_score": 73.0,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 73.0,
+        "JACK": 33.8,
+        "QUEEN": 60.4,
+        "ACE": 44.5,
+        "JOKER": 26.4
+      },
+      "components": {
+        "fair_value": 76.9,
+        "dividend_health": 61.6,
+        "business_quality": 80.0,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 75.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "CTS",
+      "company": "CTS Corp",
+      "strategy": "ACE",
+      "final_score": 73.0,
+      "data_score": 73.0,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 34.5,
+        "JACK": 33.8,
+        "QUEEN": 51.4,
+        "ACE": 73.0,
+        "JOKER": 14.9
+      },
+      "components": {
+        "fair_value": 48.5,
+        "piotroski": 88.9,
+        "business_quality": 47.7,
+        "growth": 100.0,
+        "momentum": 84.6,
+        "earnings_stability": 90.0,
+        "financial_health": 82.7
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "MRK",
+      "company": "Merck KGaA",
+      "strategy": "KING",
+      "final_score": 72.9,
+      "data_score": 72.9,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 72.9,
+        "JACK": 33.8,
+        "QUEEN": 52.0,
+        "ACE": 42.7,
+        "JOKER": 19.7
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 77.0,
+        "business_quality": 38.9,
+        "growth": 83.0,
+        "earnings_stability": 100.0,
+        "financial_health": 60.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "SD",
+      "company": "SandRidge Energy Inc",
+      "strategy": "QUEEN",
+      "final_score": 72.8,
+      "data_score": 72.8,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 54.2,
+        "JACK": 65.9,
+        "QUEEN": 72.8,
+        "ACE": 67.8,
+        "JOKER": 37.2
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 30.0,
+        "business_quality": 80.0,
+        "growth": 100.0,
+        "momentum": 72.1,
+        "earnings_stability": 56.0,
+        "financial_health": 85.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "AZZ",
+      "company": "AZZ Inc",
+      "strategy": "ACE",
+      "final_score": 72.7,
+      "data_score": 72.7,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 36.3,
+        "JACK": 33.8,
+        "QUEEN": 55.8,
+        "ACE": 72.7,
+        "JOKER": 16.5
+      },
+      "components": {
+        "fair_value": 62.2,
+        "piotroski": 77.8,
+        "business_quality": 57.7,
+        "growth": 100.0,
+        "momentum": 92.1,
+        "earnings_stability": 100.0,
+        "financial_health": 57.7
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "DMLP",
+      "company": "Dorchester Minerals LP",
+      "strategy": "KING",
+      "final_score": 72.6,
+      "data_score": 72.6,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 72.6,
+        "JACK": 33.8,
+        "QUEEN": 59.3,
+        "ACE": 41.9,
+        "JOKER": 26.4
+      },
+      "components": {
+        "fair_value": 40.0,
+        "dividend_health": 68.0,
+        "business_quality": 100.0,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 100.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "TLK",
+      "company": "Toll Brothers Inc",
+      "strategy": "QUEEN",
+      "final_score": 72.6,
+      "data_score": 72.6,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 50.6,
+        "JACK": 33.8,
+        "QUEEN": 72.6,
+        "ACE": 56.5,
+        "JOKER": 26.1
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 33.3,
+        "business_quality": 66.3,
+        "growth": 100.0,
+        "momentum": 78.5,
+        "earnings_stability": 100.0,
+        "financial_health": 65.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "WWIB",
+      "company": "Wilh. Wilhelmsen B",
+      "strategy": "KING",
+      "final_score": 72.4,
+      "data_score": 72.4,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 72.4,
+        "JACK": 33.8,
+        "QUEEN": 53.9,
+        "ACE": 39.6,
+        "JOKER": 23.1
+      },
+      "components": {
+        "fair_value": 43.5,
+        "dividend_health": 83.5,
+        "business_quality": 78.1,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 85.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "9TG",
+      "company": "Gaztransport et technigaz SA",
+      "strategy": "QUEEN",
+      "final_score": 72.4,
+      "data_score": 72.4,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 51.4,
+        "JACK": 68.1,
+        "QUEEN": 72.4,
+        "ACE": 68.0,
+        "JOKER": 36.6
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 30.0,
+        "business_quality": 80.0,
+        "growth": 100.0,
+        "momentum": 79.0,
+        "earnings_stability": 70.0,
+        "financial_health": 60.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "ZM",
+      "company": "Zoom Communications Inc",
+      "strategy": "QUEEN",
+      "final_score": 72.3,
+      "data_score": 72.3,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 54.8,
+        "JACK": 33.8,
+        "QUEEN": 72.3,
+        "ACE": 49.8,
+        "JOKER": 65.5
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 30.0,
+        "business_quality": 100.0,
+        "growth": 100.0,
+        "momentum": 68.0,
+        "earnings_stability": 0.0,
+        "financial_health": 90.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "GML0",
+      "company": "Global Industrial Co",
+      "strategy": "ACE",
+      "final_score": 72.2,
+      "data_score": 72.2,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 42.6,
+        "JACK": 33.8,
+        "QUEEN": 59.4,
+        "ACE": 72.2,
+        "JOKER": 23.6
+      },
+      "components": {
+        "fair_value": 100.0,
+        "piotroski": 77.8,
+        "business_quality": 77.0,
+        "growth": 19.0,
+        "momentum": 81.9,
+        "earnings_stability": 100.0,
+        "financial_health": 65.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "ESP",
+      "company": "Espey Manufacturing & Electronics",
+      "strategy": "QUEEN",
+      "final_score": 72.0,
+      "data_score": 72.0,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 52.5,
+        "JACK": 70.1,
+        "QUEEN": 72.0,
+        "ACE": 67.2,
+        "JOKER": 37.4
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 30.0,
+        "business_quality": 80.0,
+        "growth": 100.0,
+        "momentum": 78.8,
+        "earnings_stability": 56.0,
+        "financial_health": 70.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "BORG",
+      "company": "Björn Borg",
+      "strategy": "ACE",
+      "final_score": 72.0,
+      "data_score": 72.0,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 42.8,
+        "JACK": 33.8,
+        "QUEEN": 63.6,
+        "ACE": 72.0,
+        "JOKER": 23.5
+      },
+      "components": {
+        "fair_value": 73.8,
+        "piotroski": 77.8,
+        "business_quality": 77.4,
+        "growth": 100.0,
+        "momentum": 86.4,
+        "earnings_stability": 100.0,
+        "financial_health": 40.7
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "CLB",
+      "company": "Core Laboratories Inc",
+      "strategy": "ACE",
+      "final_score": 71.8,
+      "data_score": 71.8,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 38.3,
+        "JACK": 33.8,
+        "QUEEN": 54.8,
+        "ACE": 71.8,
+        "JOKER": 17.6
+      },
+      "components": {
+        "fair_value": 85.5,
+        "piotroski": 77.8,
+        "business_quality": 32.8,
+        "growth": 100.0,
+        "momentum": 89.7,
+        "earnings_stability": 90.0,
+        "financial_health": 56.3
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "SA2D",
+      "company": "SandRidge Energy Inc",
+      "strategy": "QUEEN",
+      "final_score": 71.7,
+      "data_score": 71.7,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 54.2,
+        "JACK": 65.6,
+        "QUEEN": 71.7,
+        "ACE": 66.0,
+        "JOKER": 36.9
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 30.0,
+        "business_quality": 80.0,
+        "growth": 100.0,
+        "momentum": 61.0,
+        "earnings_stability": 56.0,
+        "financial_health": 85.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "N4Q1",
+      "company": "Hemisphere Energy Corp",
+      "strategy": "JACK",
+      "final_score": 71.6,
+      "data_score": 71.6,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 52.5,
+        "JACK": 71.6,
+        "QUEEN": 70.5,
+        "ACE": 64.7,
+        "JOKER": 36.9
+      },
+      "components": {
+        "fair_value": 100.0,
+        "business_quality": 100.0,
+        "growth": 100.0,
+        "momentum": 83.3,
+        "earnings_stability": 90.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "MPCC",
+      "company": "MPC Container Ships",
+      "strategy": "JACK",
+      "final_score": 71.6,
+      "data_score": 71.6,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 52.5,
+        "JACK": 71.6,
+        "QUEEN": 71.3,
+        "ACE": 66.0,
+        "JOKER": 37.0
+      },
+      "components": {
+        "fair_value": 100.0,
+        "business_quality": 95.4,
+        "growth": 100.0,
+        "momentum": 87.7,
+        "earnings_stability": 90.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "MPTI",
+      "company": "M-Tron Industries Inc",
+      "strategy": "QUEEN",
+      "final_score": 71.5,
+      "data_score": 71.5,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 52.2,
+        "JACK": 69.3,
+        "QUEEN": 71.5,
+        "ACE": 70.6,
+        "JOKER": 34.1
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 30.0,
+        "business_quality": 66.2,
+        "growth": 100.0,
+        "momentum": 69.3,
+        "earnings_stability": 70.0,
+        "financial_health": 95.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "ABF",
+      "company": "Associated British Foods PLC",
+      "strategy": "KING",
+      "final_score": 71.3,
+      "data_score": 71.3,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 71.3,
+        "JACK": 33.8,
+        "QUEEN": 50.6,
+        "ACE": 42.5,
+        "JOKER": 18.0
+      },
+      "components": {
+        "fair_value": 84.5,
+        "dividend_health": 84.0,
+        "business_quality": 29.2,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 65.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "BOY",
+      "company": "Bodycote PLC",
+      "strategy": "KING",
+      "final_score": 71.3,
+      "data_score": 71.3,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 71.3,
+        "JACK": 33.8,
+        "QUEEN": 55.4,
+        "ACE": 45.4,
+        "JOKER": 20.5
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 65.8,
+        "business_quality": 35.5,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 70.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "DUOL",
+      "company": "Duolingo Inc",
+      "strategy": "QUEEN",
+      "final_score": 70.8,
+      "data_score": 70.8,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 53.1,
+        "JACK": 33.8,
+        "QUEEN": 70.8,
+        "ACE": 48.0,
+        "JOKER": 36.0
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 30.0,
+        "business_quality": 100.0,
+        "growth": 100.0,
+        "momentum": 68.0,
+        "earnings_stability": 0.0,
+        "financial_health": 75.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "6QK",
+      "company": "MS International PLC",
+      "strategy": "QUEEN",
+      "final_score": 70.6,
+      "data_score": 70.6,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 48.6,
+        "JACK": 33.8,
+        "QUEEN": 70.6,
+        "ACE": 55.1,
+        "JOKER": 26.7
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 7.7,
+        "business_quality": 69.5,
+        "growth": 100.0,
+        "momentum": 84.1,
+        "earnings_stability": 94.0,
+        "financial_health": 50.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "LPE",
+      "company": "Laurent-Perrier",
+      "strategy": "KING",
+      "final_score": 70.5,
+      "data_score": 70.5,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 70.5,
+        "JACK": 33.8,
+        "QUEEN": 51.2,
+        "ACE": 42.3,
+        "JOKER": 18.3
+      },
+      "components": {
+        "fair_value": 88.0,
+        "dividend_health": 79.0,
+        "business_quality": 31.7,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 60.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "TRMD A",
+      "company": "TORM",
+      "strategy": "QUEEN",
+      "final_score": 70.4,
+      "data_score": 70.4,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 51.5,
+        "JACK": 66.0,
+        "QUEEN": 70.4,
+        "ACE": 67.2,
+        "JOKER": 35.7
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 30.0,
+        "business_quality": 72.0,
+        "growth": 100.0,
+        "momentum": 78.4,
+        "earnings_stability": 56.0,
+        "financial_health": 75.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "7OK",
+      "company": "Okeanis Eco Tankers Corp",
+      "strategy": "ACE",
+      "final_score": 70.1,
+      "data_score": 70.1,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 39.8,
+        "JACK": 33.8,
+        "QUEEN": 52.7,
+        "ACE": 70.1,
+        "JOKER": 18.3
+      },
+      "components": {
+        "fair_value": 100.0,
+        "piotroski": 77.8,
+        "business_quality": 72.6,
+        "growth": 39.0,
+        "momentum": 59.8,
+        "earnings_stability": 90.0,
+        "financial_health": 67.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "ECO",
+      "company": "Okeanis Eco Tankers Corp",
+      "strategy": "ACE",
+      "final_score": 70.0,
+      "data_score": 70.0,
+      "ai_score": 50.0,
+      "stars": 4,
+      "veto": null,
+      "all_scores": {
+        "KING": 39.8,
+        "JACK": 33.8,
+        "QUEEN": 52.6,
+        "ACE": 70.0,
+        "JOKER": 18.3
+      },
+      "components": {
+        "fair_value": 100.0,
+        "piotroski": 77.8,
+        "business_quality": 72.6,
+        "growth": 39.0,
+        "momentum": 59.0,
+        "earnings_stability": 90.0,
+        "financial_health": 67.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "SOC",
+      "company": "Subsea 7 SA",
+      "strategy": "ACE",
+      "final_score": 69.7,
+      "data_score": 69.7,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 40.2,
+        "JACK": 33.8,
+        "QUEEN": 56.6,
+        "ACE": 69.7,
+        "JOKER": 17.4
+      },
+      "components": {
+        "fair_value": 100.0,
+        "piotroski": 88.9,
+        "business_quality": 22.7,
+        "growth": 100.0,
+        "momentum": 80.8,
+        "earnings_stability": 90.0,
+        "financial_health": 38.7
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "GSL",
+      "company": "Global Ship Lease Inc",
+      "strategy": "QUEEN",
+      "final_score": 69.6,
+      "data_score": 69.6,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 49.4,
+        "JACK": 69.1,
+        "QUEEN": 69.6,
+        "ACE": 68.6,
+        "JOKER": 33.7
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 30.0,
+        "business_quality": 65.0,
+        "growth": 100.0,
+        "momentum": 78.4,
+        "earnings_stability": 70.0,
+        "financial_health": 70.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "TEN",
+      "company": "Tenaris SA",
+      "strategy": "KING",
+      "final_score": 69.3,
+      "data_score": 69.3,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 69.3,
+        "JACK": 33.8,
+        "QUEEN": 51.6,
+        "ACE": 38.8,
+        "JOKER": 21.5
+      },
+      "components": {
+        "fair_value": 30.3,
+        "dividend_health": 82.5,
+        "business_quality": 75.6,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 90.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "NVDA",
+      "company": "NVIDIA Corp",
+      "strategy": "JOKER",
+      "final_score": 68.6,
+      "data_score": 68.6,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 40.8,
+        "JACK": 54.1,
+        "QUEEN": 59.8,
+        "ACE": 40.2,
+        "JOKER": 68.6
+      },
+      "components": {
+        "fair_value": 40.2,
+        "business_quality": 100.0,
+        "growth": 100.0,
+        "momentum": 78.5
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "GILD",
+      "company": "Gilead Sciences Inc",
+      "strategy": "QUEEN",
+      "final_score": 68.5,
+      "data_score": 68.5,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 37.7,
+        "JACK": 33.8,
+        "QUEEN": 68.5,
+        "ACE": 45.6,
+        "JOKER": 24.1
+      },
+      "components": {
+        "fair_value": 57.4,
+        "dividend_health": 100.0,
+        "business_quality": 80.5,
+        "growth": 100.0,
+        "momentum": 98.6,
+        "earnings_stability": 100.0,
+        "financial_health": 20.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "S0QA",
+      "company": "Scorpio Tankers Inc",
+      "strategy": "QUEEN",
+      "final_score": 68.4,
+      "data_score": 68.4,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 50.7,
+        "JACK": 63.3,
+        "QUEEN": 68.4,
+        "ACE": 67.4,
+        "JOKER": 32.7
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 30.0,
+        "business_quality": 60.0,
+        "growth": 100.0,
+        "momentum": 73.0,
+        "earnings_stability": 56.0,
+        "financial_health": 90.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "WCP",
+      "company": "Whitecap Resources Inc",
+      "strategy": "KING",
+      "final_score": 68.2,
+      "data_score": 68.2,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 68.2,
+        "JACK": 33.8,
+        "QUEEN": 47.6,
+        "ACE": 36.4,
+        "JOKER": 19.6
+      },
+      "components": {
+        "fair_value": 40.9,
+        "dividend_health": 91.6,
+        "business_quality": 59.7,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 60.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "HEN",
+      "company": "Henkel AG & Co KGaA",
+      "strategy": "KING",
+      "final_score": 67.9,
+      "data_score": 67.9,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 67.9,
+        "JACK": 33.8,
+        "QUEEN": 52.4,
+        "ACE": 43.6,
+        "JOKER": 19.3
+      },
+      "components": {
+        "fair_value": 94.0,
+        "dividend_health": 58.5,
+        "business_quality": 38.8,
+        "growth": 90.0,
+        "earnings_stability": 100.0,
+        "financial_health": 70.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "ITRN",
+      "company": "Ituran Location & Control Ltd",
+      "strategy": "KING",
+      "final_score": 67.9,
+      "data_score": 67.9,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 67.9,
+        "JACK": 33.8,
+        "QUEEN": 49.9,
+        "ACE": 34.8,
+        "JOKER": 23.1
+      },
+      "components": {
+        "fair_value": 20.3,
+        "dividend_health": 87.0,
+        "business_quality": 89.8,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 65.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "LGCY",
+      "company": "Legacy Education Inc",
+      "strategy": "ACE",
+      "final_score": 67.9,
+      "data_score": 67.9,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 47.5,
+        "JACK": 59.5,
+        "QUEEN": 67.0,
+        "ACE": 67.9,
+        "JOKER": 31.6
+      },
+      "components": {
+        "fair_value": 100.0,
+        "piotroski": 0.0,
+        "business_quality": 46.0,
+        "growth": 100.0,
+        "momentum": 85.0,
+        "earnings_stability": 100.0,
+        "financial_health": 42.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "FO3",
+      "company": "Moury Construct SA",
+      "strategy": "ACE",
+      "final_score": 67.9,
+      "data_score": 67.9,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 47.3,
+        "JACK": 67.2,
+        "QUEEN": 67.3,
+        "ACE": 67.9,
+        "JOKER": 31.4
+      },
+      "components": {
+        "fair_value": 100.0,
+        "piotroski": 0.0,
+        "business_quality": 46.0,
+        "growth": 100.0,
+        "momentum": 91.7,
+        "earnings_stability": 100.0,
+        "financial_health": 39.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "NEDAP",
+      "company": "Nedap NV",
+      "strategy": "KING",
+      "final_score": 67.7,
+      "data_score": 67.7,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 67.7,
+        "JACK": 33.8,
+        "QUEEN": 51.3,
+        "ACE": 37.8,
+        "JOKER": 21.7
+      },
+      "components": {
+        "fair_value": 32.5,
+        "dividend_health": 78.4,
+        "business_quality": 79.7,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 75.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "WES",
+      "company": "Western Midstream Partners LP",
+      "strategy": "QUEEN",
+      "final_score": 67.6,
+      "data_score": 67.6,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 38.0,
+        "JACK": 33.8,
+        "QUEEN": 67.6,
+        "ACE": 43.7,
+        "JOKER": 24.7
+      },
+      "components": {
+        "fair_value": 71.4,
+        "dividend_health": 100.0,
+        "business_quality": 77.5,
+        "growth": 100.0,
+        "momentum": 89.1,
+        "earnings_stability": 100.0,
+        "financial_health": 0.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "TDW",
+      "company": "Tidewater Inc",
+      "strategy": "JOKER",
+      "final_score": 67.6,
+      "data_score": 67.6,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 43.7,
+        "JACK": 56.5,
+        "QUEEN": 59.7,
+        "ACE": 43.8,
+        "JOKER": 67.6
+      },
+      "components": {
+        "fair_value": 100.0,
+        "business_quality": 53.8,
+        "growth": 100.0,
+        "momentum": 88.9
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "MOUR",
+      "company": "Moury Construct SA",
+      "strategy": "JACK",
+      "final_score": 67.5,
+      "data_score": 67.5,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 46.7,
+        "JACK": 67.5,
+        "QUEEN": 66.7,
+        "ACE": 67.5,
+        "JOKER": 31.8
+      },
+      "components": {
+        "fair_value": 97.5,
+        "business_quality": 75.2,
+        "growth": 100.0,
+        "momentum": 84.3,
+        "earnings_stability": 100.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "1NVDA",
+      "company": "NVIDIA Corp",
+      "strategy": "JOKER",
+      "final_score": 67.5,
+      "data_score": 67.5,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 39.8,
+        "JACK": 53.4,
+        "QUEEN": 58.9,
+        "ACE": 39.5,
+        "JOKER": 67.5
+      },
+      "components": {
+        "fair_value": 35.5,
+        "business_quality": 100.0,
+        "growth": 100.0,
+        "momentum": 74.3
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "NVEC",
+      "company": "NVE Corp",
+      "strategy": "KING",
+      "final_score": 67.2,
+      "data_score": 67.2,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 67.2,
+        "JACK": 33.8,
+        "QUEEN": 53.1,
+        "ACE": 36.2,
+        "JOKER": 24.6
+      },
+      "components": {
+        "fair_value": 42.3,
+        "dividend_health": 58.8,
+        "business_quality": 100.0,
+        "growth": 40.0,
+        "earnings_stability": 100.0,
+        "financial_health": 100.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "RE0",
+      "company": "Hafnia Ltd",
+      "strategy": "QUEEN",
+      "final_score": 67.2,
+      "data_score": 67.2,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 49.5,
+        "JACK": 55.8,
+        "QUEEN": 67.2,
+        "ACE": 66.5,
+        "JOKER": 32.6
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 30.0,
+        "business_quality": 65.8,
+        "growth": 88.3,
+        "momentum": 78.0,
+        "earnings_stability": 56.0,
+        "financial_health": 70.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "HAFN",
+      "company": "Hafnia Ltd",
+      "strategy": "QUEEN",
+      "final_score": 67.0,
+      "data_score": 67.0,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 49.5,
+        "JACK": 55.8,
+        "QUEEN": 67.0,
+        "ACE": 66.2,
+        "JOKER": 32.9
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 30.0,
+        "business_quality": 65.8,
+        "growth": 88.3,
+        "momentum": 76.1,
+        "earnings_stability": 56.0,
+        "financial_health": 70.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "MEDI",
+      "company": "Medistim",
+      "strategy": "KING",
+      "final_score": 66.8,
+      "data_score": 66.8,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 66.8,
+        "JACK": 33.8,
+        "QUEEN": 49.3,
+        "ACE": 34.2,
+        "JOKER": 22.7
+      },
+      "components": {
+        "fair_value": 4.3,
+        "dividend_health": 86.5,
+        "business_quality": 95.5,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 80.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "68M",
+      "company": "Matson Inc",
+      "strategy": "ACE",
+      "final_score": 66.8,
+      "data_score": 66.8,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 46.0,
+        "JACK": 65.5,
+        "QUEEN": 65.2,
+        "ACE": 66.8,
+        "JOKER": 30.4
+      },
+      "components": {
+        "fair_value": 100.0,
+        "piotroski": 0.0,
+        "business_quality": 44.2,
+        "growth": 100.0,
+        "momentum": 82.2,
+        "earnings_stability": 100.0,
+        "financial_health": 39.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "MGY",
+      "company": "Magnolia Oil & Gas Corp",
+      "strategy": "QUEEN",
+      "final_score": 66.7,
+      "data_score": 66.7,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 46.9,
+        "JACK": 64.0,
+        "QUEEN": 66.7,
+        "ACE": 63.2,
+        "JOKER": 34.6
+      },
+      "components": {
+        "fair_value": 72.2,
+        "dividend_health": 30.0,
+        "business_quality": 80.0,
+        "growth": 100.0,
+        "momentum": 76.4,
+        "earnings_stability": 56.0,
+        "financial_health": 75.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "IDCC",
+      "company": "InterDigital Inc",
+      "strategy": "QUEEN",
+      "final_score": 66.4,
+      "data_score": 66.4,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 35.3,
+        "JACK": 33.8,
+        "QUEEN": 66.4,
+        "ACE": 43.8,
+        "JOKER": 24.2
+      },
+      "components": {
+        "fair_value": 11.8,
+        "dividend_health": 78.3,
+        "business_quality": 100.0,
+        "growth": 100.0,
+        "momentum": 96.7,
+        "earnings_stability": 100.0,
+        "financial_health": 55.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "AENA",
+      "company": "Aena SME SA",
+      "strategy": "ACE",
+      "final_score": 66.1,
+      "data_score": 66.1,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 28.2,
+        "JACK": 33.8,
+        "QUEEN": 46.3,
+        "ACE": 66.1,
+        "JOKER": 15.4
+      },
+      "components": {
+        "fair_value": 41.5,
+        "piotroski": 88.9,
+        "business_quality": 69.6,
+        "growth": 100.0,
+        "momentum": 86.4,
+        "earnings_stability": 80.0,
+        "financial_health": 54.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "MEKKO",
+      "company": "Marimekko",
+      "strategy": "KING",
+      "final_score": 65.9,
+      "data_score": 65.9,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 65.9,
+        "JACK": 33.8,
+        "QUEEN": 49.4,
+        "ACE": 34.6,
+        "JOKER": 22.2
+      },
+      "components": {
+        "fair_value": 22.8,
+        "dividend_health": 85.5,
+        "business_quality": 86.7,
+        "growth": 100.0,
+        "earnings_stability": 90.0,
+        "financial_health": 60.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "DBO",
+      "company": "D-Box Technologies Inc",
+      "strategy": "JOKER",
+      "final_score": 65.9,
+      "data_score": 65.9,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 36.6,
+        "JACK": 53.0,
+        "QUEEN": 55.6,
+        "ACE": 37.8,
+        "JOKER": 65.9
+      },
+      "components": {
+        "fair_value": 33.6,
+        "business_quality": 90.3,
+        "growth": 96.0,
+        "momentum": 82.8
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "ODC",
+      "company": "Oil-Dri Corp of America",
+      "strategy": "ACE",
+      "final_score": 65.8,
+      "data_score": 65.8,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 42.9,
+        "JACK": 62.3,
+        "QUEEN": 62.1,
+        "ACE": 65.8,
+        "JOKER": 27.5
+      },
+      "components": {
+        "fair_value": 83.1,
+        "piotroski": 0.0,
+        "business_quality": 34.4,
+        "growth": 100.0,
+        "momentum": 86.7,
+        "earnings_stability": 100.0,
+        "financial_health": 48.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "UTHR",
+      "company": "United Therapeutics Corp",
+      "strategy": "QUEEN",
+      "final_score": 65.8,
+      "data_score": 65.8,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 45.3,
+        "JACK": 64.8,
+        "QUEEN": 65.8,
+        "ACE": 63.6,
+        "JOKER": 33.4
+      },
+      "components": {
+        "fair_value": 55.2,
+        "dividend_health": 30.0,
+        "business_quality": 80.0,
+        "growth": 100.0,
+        "momentum": 68.0,
+        "earnings_stability": 70.0,
+        "financial_health": 95.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "BIOA B",
+      "company": "BioArctic",
+      "strategy": "JOKER",
+      "final_score": 65.6,
+      "data_score": 65.6,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 31.9,
+        "JACK": 41.2,
+        "QUEEN": 49.5,
+        "ACE": 34.1,
+        "JOKER": 65.6
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 100.0,
+        "growth": 100.0,
+        "momentum": 81.5
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "5F1",
+      "company": "First Resources Ltd",
+      "strategy": "JACK",
+      "final_score": 65.5,
+      "data_score": 65.5,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 43.6,
+        "JACK": 65.5,
+        "QUEEN": 60.5,
+        "ACE": 62.6,
+        "JOKER": 29.0
+      },
+      "components": {
+        "fair_value": 100.0,
+        "business_quality": 65.9,
+        "growth": 100.0,
+        "momentum": 80.2,
+        "earnings_stability": 100.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "SSD",
+      "company": "Simpson Manufacturing Co Inc",
+      "strategy": "QUEEN",
+      "final_score": 65.5,
+      "data_score": 65.5,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 41.2,
+        "JACK": 33.8,
+        "QUEEN": 65.5,
+        "ACE": 49.7,
+        "JOKER": 22.9
+      },
+      "components": {
+        "fair_value": 45.0,
+        "dividend_health": 38.3,
+        "business_quality": 77.7,
+        "growth": 100.0,
+        "momentum": 76.8,
+        "earnings_stability": 100.0,
+        "financial_health": 75.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "ORK",
+      "company": "Orkla",
+      "strategy": "KING",
+      "final_score": 65.4,
+      "data_score": 65.4,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 65.4,
+        "JACK": 32.3,
+        "QUEEN": 42.6,
+        "ACE": 34.2,
+        "JOKER": 16.5
+      },
+      "components": {
+        "fair_value": 31.8,
+        "dividend_health": 91.6,
+        "business_quality": 53.6,
+        "growth": 94.0,
+        "earnings_stability": 100.0,
+        "financial_health": 65.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "UZU",
+      "company": "Uzin Utz SE",
+      "strategy": "KING",
+      "final_score": 65.4,
+      "data_score": 65.4,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 65.4,
+        "JACK": 27.7,
+        "QUEEN": 45.1,
+        "ACE": 33.3,
+        "JOKER": 16.1
+      },
+      "components": {
+        "fair_value": 73.6,
+        "dividend_health": 73.7,
+        "business_quality": 39.6,
+        "growth": 48.0,
+        "earnings_stability": 100.0,
+        "financial_health": 70.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "EPI B",
+      "company": "Epiroc B",
+      "strategy": "QUEEN",
+      "final_score": 65.3,
+      "data_score": 65.3,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 37.3,
+        "JACK": 33.8,
+        "QUEEN": 65.3,
+        "ACE": 46.1,
+        "JOKER": 21.8
+      },
+      "components": {
+        "fair_value": 34.1,
+        "dividend_health": 100.0,
+        "business_quality": 80.2,
+        "growth": 95.0,
+        "momentum": 84.6,
+        "earnings_stability": 100.0,
+        "financial_health": 55.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "INCY",
+      "company": "Incyte Corp",
+      "strategy": "JOKER",
+      "final_score": 65.3,
+      "data_score": 65.3,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 43.1,
+        "JACK": 55.4,
+        "QUEEN": 61.8,
+        "ACE": 41.7,
+        "JOKER": 65.3
+      },
+      "components": {
+        "fair_value": 50.1,
+        "business_quality": 100.0,
+        "growth": 93.8,
+        "momentum": 65.6
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "PZA",
+      "company": "Pizza Pizza Royalty Corp",
+      "strategy": "KING",
+      "final_score": 65.1,
+      "data_score": 65.1,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 65.1,
+        "JACK": 27.7,
+        "QUEEN": 44.4,
+        "ACE": 32.7,
+        "JOKER": 17.9
+      },
+      "components": {
+        "fair_value": 36.2,
+        "dividend_health": 78.9,
+        "business_quality": 64.9,
+        "growth": 50.0,
+        "earnings_stability": 100.0,
+        "financial_health": 90.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "HWX",
+      "company": "Headwater Exploration Inc",
+      "strategy": "JACK",
+      "final_score": 65.1,
+      "data_score": 65.1,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 46.7,
+        "JACK": 65.1,
+        "QUEEN": 64.5,
+        "ACE": 63.7,
+        "JOKER": 31.3
+      },
+      "components": {
+        "fair_value": 83.4,
+        "business_quality": 81.8,
+        "growth": 100.0,
+        "momentum": 74.5,
+        "earnings_stability": 100.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "SNA",
+      "company": "Snap-on Inc",
+      "strategy": "KING",
+      "final_score": 64.8,
+      "data_score": 64.8,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 64.8,
+        "JACK": 33.8,
+        "QUEEN": 48.0,
+        "ACE": 35.1,
+        "JOKER": 20.6
+      },
+      "components": {
+        "fair_value": 13.0,
+        "dividend_health": 79.0,
+        "business_quality": 84.0,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 80.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "TCL.A",
+      "company": "Transcontinental Inc",
+      "strategy": "KING",
+      "final_score": 64.7,
+      "data_score": 64.7,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 64.7,
+        "JACK": 33.8,
+        "QUEEN": 48.6,
+        "ACE": 40.2,
+        "JOKER": 17.7
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 56.0,
+        "business_quality": 30.5,
+        "growth": 57.0,
+        "earnings_stability": 100.0,
+        "financial_health": 65.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "ALK B",
+      "company": "ALK-Abello",
+      "strategy": "QUEEN",
+      "final_score": 64.7,
+      "data_score": 64.7,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 48.5,
+        "JACK": 57.3,
+        "QUEEN": 64.7,
+        "ACE": 47.2,
+        "JOKER": 63.2
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 30.0,
+        "business_quality": 73.7,
+        "growth": 100.0,
+        "momentum": 68.0,
+        "earnings_stability": 0.0,
+        "financial_health": 80.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "STRA",
+      "company": "Strategic Education Inc",
+      "strategy": "KING",
+      "final_score": 64.1,
+      "data_score": 64.1,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 64.1,
+        "JACK": 33.8,
+        "QUEEN": 52.6,
+        "ACE": 44.7,
+        "JOKER": 18.3
+      },
+      "components": {
+        "fair_value": 95.5,
+        "dividend_health": 49.0,
+        "business_quality": 33.8,
+        "growth": 79.0,
+        "earnings_stability": 80.0,
+        "financial_health": 90.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "HAFNI",
+      "company": "Hafnia Limited",
+      "strategy": "QUEEN",
+      "final_score": 63.9,
+      "data_score": 63.9,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 41.2,
+        "JACK": 33.8,
+        "QUEEN": 63.9,
+        "ACE": 48.3,
+        "JOKER": 22.7
+      },
+      "components": {
+        "fair_value": 51.6,
+        "dividend_health": 13.3,
+        "business_quality": 81.9,
+        "growth": 87.5,
+        "momentum": 86.7,
+        "earnings_stability": 80.0,
+        "financial_health": 70.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "ACA",
+      "company": "Arcosa Inc",
+      "strategy": "ACE",
+      "final_score": 63.9,
+      "data_score": 63.9,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 19.9,
+        "JACK": 32.3,
+        "QUEEN": 39.8,
+        "ACE": 63.9,
+        "JOKER": 9.2
+      },
+      "components": {
+        "fair_value": 1.4,
+        "piotroski": 100.0,
+        "business_quality": 29.7,
+        "growth": 100.0,
+        "momentum": 85.0,
+        "earnings_stability": 100.0,
+        "financial_health": 65.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "VICR",
+      "company": "Vicor Corp",
+      "strategy": "JOKER",
+      "final_score": 63.9,
+      "data_score": 63.9,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 32.4,
+        "JACK": 41.2,
+        "QUEEN": 49.5,
+        "ACE": 35.2,
+        "JOKER": 63.9
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 96.4,
+        "growth": 88.2,
+        "momentum": 95.9
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "HILS",
+      "company": "Hill & Smith PLC",
+      "strategy": "KING",
+      "final_score": 63.7,
+      "data_score": 63.7,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 63.7,
+        "JACK": 33.8,
+        "QUEEN": 46.4,
+        "ACE": 36.5,
+        "JOKER": 18.2
+      },
+      "components": {
+        "fair_value": 35.6,
+        "dividend_health": 79.0,
+        "business_quality": 54.4,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 70.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "B7C0",
+      "company": "dAmico International Shipping SA",
+      "strategy": "JACK",
+      "final_score": 63.7,
+      "data_score": 63.7,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 48.0,
+        "JACK": 63.7,
+        "QUEEN": 63.4,
+        "ACE": 62.7,
+        "JOKER": 31.5
+      },
+      "components": {
+        "fair_value": 100.0,
+        "business_quality": 59.0,
+        "growth": 100.0,
+        "momentum": 79.3,
+        "earnings_stability": 90.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "UI",
+      "company": "Ubiquiti Inc",
+      "strategy": "JOKER",
+      "final_score": 63.4,
+      "data_score": 63.4,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 28.9,
+        "JACK": 37.3,
+        "QUEEN": 46.9,
+        "ACE": 30.9,
+        "JOKER": 63.4
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 97.6,
+        "growth": 92.1,
+        "momentum": 85.2
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "KCR",
+      "company": "Konecranes",
+      "strategy": "ACE",
+      "final_score": 63.1,
+      "data_score": 63.1,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 26.1,
+        "JACK": 33.8,
+        "QUEEN": 47.2,
+        "ACE": 63.1,
+        "JOKER": 15.1
+      },
+      "components": {
+        "fair_value": 18.7,
+        "piotroski": 100.0,
+        "business_quality": 56.3,
+        "growth": 100.0,
+        "momentum": 91.0,
+        "earnings_stability": 100.0,
+        "financial_health": 34.7
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "ENS",
+      "company": "EnerSys",
+      "strategy": "ACE",
+      "final_score": 62.9,
+      "data_score": 62.9,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 22.5,
+        "JACK": 33.8,
+        "QUEEN": 43.6,
+        "ACE": 62.9,
+        "JOKER": 12.5
+      },
+      "components": {
+        "fair_value": 7.2,
+        "piotroski": 77.8,
+        "business_quality": 49.5,
+        "growth": 100.0,
+        "momentum": 83.4,
+        "earnings_stability": 90.0,
+        "financial_health": 67.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "G6O",
+      "company": "GeoPark Ltd",
+      "strategy": "QUEEN",
+      "final_score": 62.7,
+      "data_score": 62.7,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 41.8,
+        "JACK": 33.8,
+        "QUEEN": 62.7,
+        "ACE": 47.6,
+        "JOKER": 24.5
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 15.7,
+        "business_quality": 58.1,
+        "growth": 100.0,
+        "momentum": 87.5,
+        "earnings_stability": 86.0,
+        "financial_health": 0.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "CRBN",
+      "company": "Corbion NV",
+      "strategy": "ACE",
+      "final_score": 62.6,
+      "data_score": 62.6,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 31.0,
+        "JACK": 27.5,
+        "QUEEN": 45.5,
+        "ACE": 62.6,
+        "JOKER": 13.6
+      },
+      "components": {
+        "fair_value": 68.6,
+        "piotroski": 88.9,
+        "business_quality": 34.6,
+        "growth": 8.0,
+        "momentum": 83.5,
+        "earnings_stability": 100.0,
+        "financial_health": 57.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "EXEL",
+      "company": "Exelixis Inc",
+      "strategy": "JOKER",
+      "final_score": 62.5,
+      "data_score": 62.5,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 39.5,
+        "JACK": 52.1,
+        "QUEEN": 58.6,
+        "ACE": 39.2,
+        "JOKER": 62.5
+      },
+      "components": {
+        "fair_value": 34.0,
+        "business_quality": 100.0,
+        "growth": 94.7,
+        "momentum": 56.2
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "CSUA",
+      "company": "Corbion NV",
+      "strategy": "ACE",
+      "final_score": 62.4,
+      "data_score": 62.4,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 30.6,
+        "JACK": 27.3,
+        "QUEEN": 45.6,
+        "ACE": 62.4,
+        "JOKER": 13.5
+      },
+      "components": {
+        "fair_value": 66.9,
+        "piotroski": 88.9,
+        "business_quality": 34.6,
+        "growth": 8.0,
+        "momentum": 84.4,
+        "earnings_stability": 100.0,
+        "financial_health": 57.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "EXPD",
+      "company": "Expeditors International of",
+      "strategy": "ACE",
+      "final_score": 62.3,
+      "data_score": 62.3,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 27.7,
+        "JACK": 33.5,
+        "QUEEN": 47.6,
+        "ACE": 62.3,
+        "JOKER": 17.0
+      },
+      "components": {
+        "fair_value": 12.8,
+        "piotroski": 77.8,
+        "business_quality": 80.4,
+        "growth": 76.0,
+        "momentum": 87.6,
+        "earnings_stability": 100.0,
+        "financial_health": 48.3
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "ALSN",
+      "company": "Allison Transmission Holdings Inc",
+      "strategy": "QUEEN",
+      "final_score": 62.0,
+      "data_score": 62.0,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 33.9,
+        "JACK": 33.8,
+        "QUEEN": 62.0,
+        "ACE": 41.7,
+        "JOKER": 24.4
+      },
+      "components": {
+        "fair_value": 44.3,
+        "dividend_health": 36.0,
+        "business_quality": 87.5,
+        "growth": 100.0,
+        "momentum": 94.4,
+        "earnings_stability": 100.0,
+        "financial_health": 0.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "HD8",
+      "company": "Harju Elekter Group",
+      "strategy": "ACE",
+      "final_score": 61.9,
+      "data_score": 61.9,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 36.6,
+        "JACK": 49.6,
+        "QUEEN": 53.2,
+        "ACE": 61.9,
+        "JOKER": 20.0
+      },
+      "components": {
+        "fair_value": 100.0,
+        "piotroski": 0.0,
+        "business_quality": 11.4,
+        "growth": 100.0,
+        "momentum": 97.4,
+        "earnings_stability": 80.0,
+        "financial_health": 39.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "ETX",
+      "company": "Etablissements Maurel & Prom",
+      "strategy": "JACK",
+      "final_score": 61.1,
+      "data_score": 61.1,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 41.5,
+        "JACK": 61.1,
+        "QUEEN": 57.8,
+        "ACE": 57.5,
+        "JOKER": 30.2
+      },
+      "components": {
+        "fair_value": 75.6,
+        "business_quality": 70.7,
+        "growth": 95.5,
+        "momentum": 77.0,
+        "earnings_stability": 90.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "MAU",
+      "company": "Etablissements Maurel & Prom",
+      "strategy": "JACK",
+      "final_score": 61.0,
+      "data_score": 61.0,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 40.5,
+        "JACK": 61.0,
+        "QUEEN": 57.0,
+        "ACE": 56.8,
+        "JOKER": 30.2
+      },
+      "components": {
+        "fair_value": 71.2,
+        "business_quality": 70.7,
+        "growth": 95.5,
+        "momentum": 79.8,
+        "earnings_stability": 90.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "PFD",
+      "company": "Premier Foods PLC",
+      "strategy": "ACE",
+      "final_score": 60.6,
+      "data_score": 60.6,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 25.2,
+        "JACK": 25.7,
+        "QUEEN": 41.9,
+        "ACE": 60.6,
+        "JOKER": 10.5
+      },
+      "components": {
+        "fair_value": 34.5,
+        "piotroski": 100.0,
+        "business_quality": 35.6,
+        "growth": 39.0,
+        "momentum": 82.8,
+        "earnings_stability": 100.0,
+        "financial_health": 52.7
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "TIMA",
+      "company": "ZEAL Network SE",
+      "strategy": "QUEEN",
+      "final_score": 60.2,
+      "data_score": 60.2,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 33.0,
+        "JACK": 33.8,
+        "QUEEN": 60.2,
+        "ACE": 42.2,
+        "JOKER": 20.8
+      },
+      "components": {
+        "fair_value": 21.9,
+        "dividend_health": 43.3,
+        "business_quality": 80.2,
+        "growth": 100.0,
+        "momentum": 86.1,
+        "earnings_stability": 100.0,
+        "financial_health": 50.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "ESSITY B",
+      "company": "Essity B",
+      "strategy": "ACE",
+      "final_score": 59.9,
+      "data_score": 59.9,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 27.6,
+        "JACK": 28.6,
+        "QUEEN": 43.9,
+        "ACE": 59.9,
+        "JOKER": 12.6
+      },
+      "components": {
+        "fair_value": 41.2,
+        "piotroski": 88.9,
+        "business_quality": 46.6,
+        "growth": 48.0,
+        "momentum": 80.9,
+        "earnings_stability": 100.0,
+        "financial_health": 41.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "NXR",
+      "company": "Norcros PLC",
+      "strategy": "ACE",
+      "final_score": 59.8,
+      "data_score": 59.8,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 20.9,
+        "JACK": 24.7,
+        "QUEEN": 38.1,
+        "ACE": 59.8,
+        "JOKER": 10.0
+      },
+      "components": {
+        "fair_value": 19.6,
+        "piotroski": 100.0,
+        "business_quality": 34.9,
+        "growth": 38.0,
+        "momentum": 90.7,
+        "earnings_stability": 100.0,
+        "financial_health": 57.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "YUMC",
+      "company": "Yum China Holdings Inc",
+      "strategy": "ACE",
+      "final_score": 59.6,
+      "data_score": 59.6,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 24.1,
+        "JACK": 27.5,
+        "QUEEN": 42.5,
+        "ACE": 59.6,
+        "JOKER": 12.5
+      },
+      "components": {
+        "fair_value": 17.6,
+        "piotroski": 77.8,
+        "business_quality": 52.8,
+        "growth": 46.0,
+        "momentum": 95.0,
+        "earnings_stability": 100.0,
+        "financial_health": 53.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "OGUN B",
+      "company": "Ogunsen",
+      "strategy": "ACE",
+      "final_score": 59.5,
+      "data_score": 59.5,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 26.3,
+        "JACK": 30.3,
+        "QUEEN": 45.3,
+        "ACE": 59.5,
+        "JOKER": 16.3
+      },
+      "components": {
+        "fair_value": 10.1,
+        "piotroski": 77.8,
+        "business_quality": 77.2,
+        "growth": 51.0,
+        "momentum": 84.5,
+        "earnings_stability": 100.0,
+        "financial_health": 51.3
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "OSPN",
+      "company": "OneSpan Inc",
+      "strategy": "QUEEN",
+      "final_score": 59.4,
+      "data_score": 59.4,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 43.8,
+        "JACK": 33.8,
+        "QUEEN": 59.4,
+        "ACE": 45.5,
+        "JOKER": 36.0
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 30.0,
+        "business_quality": 54.6,
+        "growth": 100.0,
+        "momentum": 68.0,
+        "earnings_stability": 0.0,
+        "financial_health": 75.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "LMAT",
+      "company": "LeMaitre Vascular Inc",
+      "strategy": "JOKER",
+      "final_score": 59.3,
+      "data_score": 59.3,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 28.6,
+        "JACK": 41.2,
+        "QUEEN": 48.3,
+        "ACE": 31.9,
+        "JOKER": 59.3
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 90.4,
+        "growth": 89.5,
+        "momentum": 73.9
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "JNJ",
+      "company": "Johnson & Johnson",
+      "strategy": "QUEEN",
+      "final_score": 59.1,
+      "data_score": 59.1,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 28.0,
+        "JACK": 33.8,
+        "QUEEN": 59.1,
+        "ACE": 38.5,
+        "JOKER": 20.5
+      },
+      "components": {
+        "fair_value": 3.8,
+        "dividend_health": 100.0,
+        "business_quality": 86.8,
+        "growth": 100.0,
+        "momentum": 86.7,
+        "earnings_stability": 100.0,
+        "financial_health": 30.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "IEX",
+      "company": "IDEX Corp",
+      "strategy": "QUEEN",
+      "final_score": 58.7,
+      "data_score": 58.7,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 34.3,
+        "JACK": 29.5,
+        "QUEEN": 58.7,
+        "ACE": 41.6,
+        "JOKER": 17.5
+      },
+      "components": {
+        "fair_value": 35.6,
+        "dividend_health": 94.0,
+        "business_quality": 63.1,
+        "growth": 66.7,
+        "momentum": 79.0,
+        "earnings_stability": 100.0,
+        "financial_health": 65.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "UCB",
+      "company": "UCB SA",
+      "strategy": "JOKER",
+      "final_score": 58.7,
+      "data_score": 58.7,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 37.7,
+        "JACK": 48.8,
+        "QUEEN": 54.8,
+        "ACE": 39.6,
+        "JOKER": 58.7
+      },
+      "components": {
+        "fair_value": 64.4,
+        "business_quality": 62.1,
+        "growth": 79.7,
+        "momentum": 83.9
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "AGYS",
+      "company": "Agilysys Inc",
+      "strategy": "QUEEN",
+      "final_score": 58.6,
+      "data_score": 58.6,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 42.7,
+        "JACK": 33.8,
+        "QUEEN": 58.6,
+        "ACE": 42.0,
+        "JOKER": 36.0
+      },
+      "components": {
+        "fair_value": 60.6,
+        "dividend_health": 30.0,
+        "business_quality": 82.7,
+        "growth": 100.0,
+        "momentum": 68.0,
+        "earnings_stability": 0.0,
+        "financial_health": 75.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "KRX",
+      "company": "Kingspan Group PLC",
+      "strategy": "ACE",
+      "final_score": 58.4,
+      "data_score": 58.4,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 21.7,
+        "JACK": 33.4,
+        "QUEEN": 42.4,
+        "ACE": 58.4,
+        "JOKER": 12.6
+      },
+      "components": {
+        "fair_value": 2.8,
+        "piotroski": 77.8,
+        "business_quality": 54.8,
+        "growth": 100.0,
+        "momentum": 80.4,
+        "earnings_stability": 100.0,
+        "financial_health": 37.7
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "VH2",
+      "company": "Friedrich Vorwerk Group SE",
+      "strategy": "JOKER",
+      "final_score": 58.3,
+      "data_score": 58.3,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 26.1,
+        "JACK": 41.2,
+        "QUEEN": 43.6,
+        "ACE": 31.1,
+        "JOKER": 58.3
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 82.2,
+        "growth": 100.0,
+        "momentum": 58.4
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "AMD",
+      "company": "Advanced Micro Devices Inc",
+      "strategy": "JOKER",
+      "final_score": 58.2,
+      "data_score": 58.2,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 28.0,
+        "JACK": 31.4,
+        "QUEEN": 42.0,
+        "ACE": 30.0,
+        "JOKER": 58.2
+      },
+      "components": {
+        "fair_value": 7.7,
+        "business_quality": 81.1,
+        "growth": 88.3,
+        "momentum": 75.1
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "MU",
+      "company": "Micron Technology Inc",
+      "strategy": "JOKER",
+      "final_score": 58.0,
+      "data_score": 58.0,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 20.9,
+        "JACK": 38.0,
+        "QUEEN": 39.1,
+        "ACE": 31.1,
+        "JOKER": 58.0
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 41.6,
+        "growth": 100.0,
+        "momentum": 97.3
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "COLM",
+      "company": "Columbia Sportswear Co",
+      "strategy": "KING",
+      "final_score": 57.8,
+      "data_score": 57.8,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 57.8,
+        "JACK": 33.8,
+        "QUEEN": 41.9,
+        "ACE": 32.4,
+        "JOKER": 16.8
+      },
+      "components": {
+        "fair_value": 7.5,
+        "dividend_health": 78.0,
+        "business_quality": 61.2,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 65.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "IESC",
+      "company": "IES Holdings Inc",
+      "strategy": "JOKER",
+      "final_score": 57.7,
+      "data_score": 57.7,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 24.3,
+        "JACK": 41.2,
+        "QUEEN": 41.2,
+        "ACE": 31.8,
+        "JOKER": 57.7
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 68.0,
+        "growth": 95.3,
+        "momentum": 77.1
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "COCO",
+      "company": "The Vita Coco Co Inc",
+      "strategy": "JOKER",
+      "final_score": 57.7,
+      "data_score": 57.7,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 26.3,
+        "JACK": 41.2,
+        "QUEEN": 43.6,
+        "ACE": 33.5,
+        "JOKER": 57.7
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 70.2,
+        "growth": 91.3,
+        "momentum": 81.8
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "DOV",
+      "company": "Dover Corp",
+      "strategy": "QUEEN",
+      "final_score": 57.5,
+      "data_score": 57.5,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 31.7,
+        "JACK": 33.8,
+        "QUEEN": 57.5,
+        "ACE": 44.2,
+        "JOKER": 17.6
+      },
+      "components": {
+        "fair_value": 20.3,
+        "dividend_health": 69.0,
+        "business_quality": 64.7,
+        "growth": 92.5,
+        "momentum": 85.3,
+        "earnings_stability": 100.0,
+        "financial_health": 60.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "PFE",
+      "company": "Pfizer Inc",
+      "strategy": "QUEEN",
+      "final_score": 57.4,
+      "data_score": 57.4,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 34.3,
+        "JACK": 27.9,
+        "QUEEN": 57.4,
+        "ACE": 36.9,
+        "JOKER": 17.7
+      },
+      "components": {
+        "fair_value": 56.2,
+        "dividend_health": 57.3,
+        "business_quality": 57.8,
+        "growth": 69.2,
+        "momentum": 89.5,
+        "earnings_stability": 100.0,
+        "financial_health": 30.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "41L",
+      "company": "Laboratorios Farmaceuticos Rovi",
+      "strategy": "ACE",
+      "final_score": 57.3,
+      "data_score": 57.3,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 33.6,
+        "JACK": 54.9,
+        "QUEEN": 55.1,
+        "ACE": 57.3,
+        "JOKER": 27.3
+      },
+      "components": {
+        "fair_value": 24.7,
+        "piotroski": 0.0,
+        "business_quality": 46.0,
+        "growth": 100.0,
+        "momentum": 86.2,
+        "earnings_stability": 100.0,
+        "financial_health": 45.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "GOOG",
+      "company": "Alphabet Inc",
+      "strategy": "JOKER",
+      "final_score": 57.0,
+      "data_score": 57.0,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 34.9,
+        "JACK": 51.8,
+        "QUEEN": 54.1,
+        "ACE": 37.2,
+        "JOKER": 57.0
+      },
+      "components": {
+        "fair_value": 24.3,
+        "business_quality": 89.1,
+        "growth": 83.2,
+        "momentum": 61.5
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "ROVI",
+      "company": "Laboratorios Farmaceuticos Rovi",
+      "strategy": "ACE",
+      "final_score": 56.9,
+      "data_score": 56.9,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 33.3,
+        "JACK": 55.6,
+        "QUEEN": 54.8,
+        "ACE": 56.9,
+        "JOKER": 27.9
+      },
+      "components": {
+        "fair_value": 23.6,
+        "piotroski": 0.0,
+        "business_quality": 46.0,
+        "growth": 100.0,
+        "momentum": 84.6,
+        "earnings_stability": 100.0,
+        "financial_health": 45.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "ITW",
+      "company": "Illinois Tool Works Inc",
+      "strategy": "QUEEN",
+      "final_score": 56.8,
+      "data_score": 56.8,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 28.1,
+        "JACK": 33.8,
+        "QUEEN": 56.8,
+        "ACE": 36.6,
+        "JOKER": 21.3
+      },
+      "components": {
+        "fair_value": 17.7,
+        "dividend_health": 100.0,
+        "business_quality": 89.4,
+        "growth": 80.0,
+        "momentum": 79.7,
+        "earnings_stability": 100.0,
+        "financial_health": 0.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "MWA",
+      "company": "Mueller Water Products Inc",
+      "strategy": "QUEEN",
+      "final_score": 56.6,
+      "data_score": 56.6,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 33.6,
+        "JACK": 33.8,
+        "QUEEN": 56.6,
+        "ACE": 46.0,
+        "JOKER": 18.3
+      },
+      "components": {
+        "fair_value": 35.3,
+        "dividend_health": 9.0,
+        "business_quality": 58.2,
+        "growth": 100.0,
+        "momentum": 85.7,
+        "earnings_stability": 100.0,
+        "financial_health": 60.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "JEN",
+      "company": "Jensen-Group NV",
+      "strategy": "JACK",
+      "final_score": 56.5,
+      "data_score": 56.5,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 29.1,
+        "JACK": 56.5,
+        "QUEEN": 50.1,
+        "ACE": 55.6,
+        "JOKER": 22.8
+      },
+      "components": {
+        "fair_value": 35.0,
+        "business_quality": 55.7,
+        "growth": 100.0,
+        "momentum": 90.4,
+        "earnings_stability": 90.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "GMED",
+      "company": "Globus Medical Inc",
+      "strategy": "JOKER",
+      "final_score": 56.5,
+      "data_score": 56.5,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 25.2,
+        "JACK": 41.2,
+        "QUEEN": 43.1,
+        "ACE": 33.0,
+        "JOKER": 56.5
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 57.0,
+        "growth": 100.0,
+        "momentum": 73.5
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "DELL",
+      "company": "Dell Technologies Inc",
+      "strategy": "JOKER",
+      "final_score": 56.1,
+      "data_score": 56.1,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 30.5,
+        "JACK": 45.4,
+        "QUEEN": 45.0,
+        "ACE": 35.7,
+        "JOKER": 56.1
+      },
+      "components": {
+        "fair_value": 43.4,
+        "business_quality": 57.6,
+        "growth": 87.6,
+        "momentum": 70.1
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "PLEJD",
+      "company": "Plejd",
+      "strategy": "JOKER",
+      "final_score": 55.8,
+      "data_score": 55.8,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 26.1,
+        "JACK": 41.2,
+        "QUEEN": 45.2,
+        "ACE": 33.3,
+        "JOKER": 55.8
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 68.8,
+        "growth": 98.4,
+        "momentum": 60.4
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "XD1",
+      "company": "Jensen-Group NV",
+      "strategy": "JACK",
+      "final_score": 55.7,
+      "data_score": 55.7,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 28.5,
+        "JACK": 55.7,
+        "QUEEN": 49.6,
+        "ACE": 55.3,
+        "JOKER": 21.8
+      },
+      "components": {
+        "fair_value": 32.1,
+        "business_quality": 55.7,
+        "growth": 100.0,
+        "momentum": 88.6,
+        "earnings_stability": 90.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "CEK",
+      "company": "CeoTronics AG",
+      "strategy": "JOKER",
+      "final_score": 55.6,
+      "data_score": 55.6,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 34.3,
+        "JACK": 33.8,
+        "QUEEN": 50.3,
+        "ACE": 36.9,
+        "JOKER": 55.6
+      },
+      "components": {
+        "fair_value": 34.9,
+        "business_quality": 74.5,
+        "growth": 100.0,
+        "momentum": 33.4
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "ELG",
+      "company": "Elmos Semiconductor SE",
+      "strategy": "JACK",
+      "final_score": 55.4,
+      "data_score": 55.4,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 29.9,
+        "JACK": 55.4,
+        "QUEEN": 48.6,
+        "ACE": 54.4,
+        "JOKER": 23.1
+      },
+      "components": {
+        "fair_value": 23.3,
+        "business_quality": 67.4,
+        "growth": 100.0,
+        "momentum": 79.2,
+        "earnings_stability": 100.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "LECO",
+      "company": "Lincoln Electric Holdings Inc",
+      "strategy": "QUEEN",
+      "final_score": 55.2,
+      "data_score": 55.2,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 26.2,
+        "JACK": 33.8,
+        "QUEEN": 55.2,
+        "ACE": 37.6,
+        "JOKER": 19.9
+      },
+      "components": {
+        "fair_value": 3.2,
+        "dividend_health": 100.0,
+        "business_quality": 77.4,
+        "growth": 100.0,
+        "momentum": 82.6,
+        "earnings_stability": 100.0,
+        "financial_health": 20.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "UNP",
+      "company": "Union Pacific Corp",
+      "strategy": "QUEEN",
+      "final_score": 55.2,
+      "data_score": 55.2,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 27.8,
+        "JACK": 33.5,
+        "QUEEN": 55.2,
+        "ACE": 36.6,
+        "JOKER": 19.2
+      },
+      "components": {
+        "fair_value": 31.7,
+        "dividend_health": 100.0,
+        "business_quality": 74.9,
+        "growth": 72.5,
+        "momentum": 78.5,
+        "earnings_stability": 100.0,
+        "financial_health": 0.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "NB3",
+      "company": "Neurocrine Biosciences Inc",
+      "strategy": "JOKER",
+      "final_score": 55.1,
+      "data_score": 55.1,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 32.3,
+        "JACK": 29.3,
+        "QUEEN": 46.2,
+        "ACE": 30.0,
+        "JOKER": 55.1
+      },
+      "components": {
+        "fair_value": 34.7,
+        "business_quality": 86.8,
+        "growth": 91.0,
+        "momentum": 34.1
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "4M7A",
+      "company": "Magellan Aerospace Corp",
+      "strategy": "JOKER",
+      "final_score": 55.0,
+      "data_score": 55.0,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 33.7,
+        "JACK": 48.4,
+        "QUEEN": 45.1,
+        "ACE": 42.2,
+        "JOKER": 55.0
+      },
+      "components": {
+        "fair_value": 76.2,
+        "business_quality": 12.8,
+        "growth": 92.2,
+        "momentum": 84.7
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "ZAP",
+      "company": "Zaptec",
+      "strategy": "JOKER",
+      "final_score": 55.0,
+      "data_score": 55.0,
+      "ai_score": 50.0,
+      "stars": 3,
+      "veto": null,
+      "all_scores": {
+        "KING": 22.0,
+        "JACK": 41.2,
+        "QUEEN": 35.9,
+        "ACE": 30.4,
+        "JOKER": 55.0
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 48.1,
+        "growth": 100.0,
+        "momentum": 73.5
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "GOOGL",
+      "company": "Alphabet Inc",
+      "strategy": "JOKER",
+      "final_score": 54.9,
+      "data_score": 54.9,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 29.5,
+        "JACK": 41.2,
+        "QUEEN": 49.3,
+        "ACE": 33.5,
+        "JOKER": 54.9
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 89.1,
+        "growth": 83.2,
+        "momentum": 61.4
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "NBIX",
+      "company": "Neurocrine Biosciences Inc",
+      "strategy": "JOKER",
+      "final_score": 54.7,
+      "data_score": 54.7,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 27.7,
+        "JACK": 27.2,
+        "QUEEN": 42.1,
+        "ACE": 26.9,
+        "JOKER": 54.7
+      },
+      "components": {
+        "fair_value": 14.1,
+        "business_quality": 86.8,
+        "growth": 91.0,
+        "momentum": 42.1
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "CRDO",
+      "company": "Credo Technology Group Holding",
+      "strategy": "JOKER",
+      "final_score": 54.6,
+      "data_score": 54.6,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 25.3,
+        "JACK": 41.2,
+        "QUEEN": 43.3,
+        "ACE": 33.1,
+        "JOKER": 54.6
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 54.4,
+        "growth": 100.0,
+        "momentum": 65.2
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "LGND",
+      "company": "Ligand Pharmaceuticals Inc",
+      "strategy": "JOKER",
+      "final_score": 54.5,
+      "data_score": 54.5,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 20.7,
+        "JACK": 41.2,
+        "QUEEN": 38.7,
+        "ACE": 30.8,
+        "JOKER": 54.5
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 40.4,
+        "growth": 93.2,
+        "momentum": 90.5
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "KO",
+      "company": "Coca-Cola Co",
+      "strategy": "QUEEN",
+      "final_score": 54.1,
+      "data_score": 54.1,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 24.9,
+        "JACK": 33.8,
+        "QUEEN": 54.1,
+        "ACE": 36.9,
+        "JOKER": 18.2
+      },
+      "components": {
+        "fair_value": 15.9,
+        "dividend_health": 68.0,
+        "business_quality": 76.2,
+        "growth": 92.5,
+        "momentum": 92.2,
+        "earnings_stability": 100.0,
+        "financial_health": 0.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "BBD",
+      "company": "Bombardier Inc",
+      "strategy": "JOKER",
+      "final_score": 54.0,
+      "data_score": 54.0,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 17.2,
+        "JACK": 41.2,
+        "QUEEN": 33.0,
+        "ACE": 27.9,
+        "JOKER": 54.0
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 35.9,
+        "growth": 93.5,
+        "momentum": 91.5
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "KRP",
+      "company": "Kimbell Royalty Partners LP",
+      "strategy": "KING",
+      "final_score": 53.9,
+      "data_score": 53.9,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 53.9,
+        "JACK": 33.8,
+        "QUEEN": 43.1,
+        "ACE": 36.7,
+        "JOKER": 14.8
+      },
+      "components": {
+        "fair_value": 46.7,
+        "dividend_health": 63.5,
+        "business_quality": 30.0,
+        "growth": 100.0,
+        "earnings_stability": 70.0,
+        "financial_health": 65.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "UNC",
+      "company": "UCB SA",
+      "strategy": "QUEEN",
+      "final_score": 53.7,
+      "data_score": 53.7,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 36.4,
+        "JACK": 47.0,
+        "QUEEN": 53.7,
+        "ACE": 38.7,
+        "JOKER": 53.4
+      },
+      "components": {
+        "fair_value": 58.6,
+        "dividend_health": 30.0,
+        "business_quality": 68.6,
+        "growth": 100.0,
+        "momentum": 68.0,
+        "earnings_stability": 0.0,
+        "financial_health": 65.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "CNR",
+      "company": "Canadian National Railway Co",
+      "strategy": "QUEEN",
+      "final_score": 53.2,
+      "data_score": 53.2,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 24.5,
+        "JACK": 30.5,
+        "QUEEN": 53.2,
+        "ACE": 35.8,
+        "JOKER": 16.4
+      },
+      "components": {
+        "fair_value": 15.4,
+        "dividend_health": 100.0,
+        "business_quality": 69.0,
+        "growth": 71.7,
+        "momentum": 91.4,
+        "earnings_stability": 100.0,
+        "financial_health": 15.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "BBD.B",
+      "company": "Bombardier Inc",
+      "strategy": "JOKER",
+      "final_score": 52.4,
+      "data_score": 52.4,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 17.2,
+        "JACK": 41.2,
+        "QUEEN": 33.0,
+        "ACE": 27.9,
+        "JOKER": 52.4
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 35.9,
+        "growth": 93.5,
+        "momentum": 82.7
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "MRVL",
+      "company": "Marvell Technology Inc",
+      "strategy": "JOKER",
+      "final_score": 52.4,
+      "data_score": 52.4,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 22.7,
+        "JACK": 41.6,
+        "QUEEN": 39.8,
+        "ACE": 32.4,
+        "JOKER": 52.4
+      },
+      "components": {
+        "fair_value": 20.0,
+        "business_quality": 29.0,
+        "growth": 93.5,
+        "momentum": 79.7
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "ORNBV",
+      "company": "Orion B",
+      "strategy": "KING",
+      "final_score": 52.2,
+      "data_score": 52.2,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": "extreme_overvaluation",
+      "all_scores": {
+        "KING": 52.2,
+        "JACK": 33.8,
+        "QUEEN": 44.2,
+        "ACE": 32.4,
+        "JOKER": 19.3
+      },
+      "components": {
+        "fair_value": 0.0,
+        "dividend_health": 61.1,
+        "business_quality": 78.4,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 70.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "CRUS",
+      "company": "Cirrus Logic Inc",
+      "strategy": "ACE",
+      "final_score": 52.2,
+      "data_score": 52.2,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": "extreme_overvaluation",
+      "all_scores": {
+        "KING": 32.4,
+        "JACK": 41.2,
+        "QUEEN": 49.5,
+        "ACE": 52.2,
+        "JOKER": 27.8
+      },
+      "components": {
+        "fair_value": 0.0,
+        "piotroski": 0.0,
+        "business_quality": 46.0,
+        "growth": 100.0,
+        "momentum": 92.8,
+        "earnings_stability": 100.0,
+        "financial_health": 54.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "RVRC",
+      "company": "Revolutionrace",
+      "strategy": "ACE",
+      "final_score": 52.2,
+      "data_score": 52.2,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": "extreme_overvaluation",
+      "all_scores": {
+        "KING": 29.4,
+        "JACK": 41.2,
+        "QUEEN": 49.5,
+        "ACE": 52.2,
+        "JOKER": 26.2
+      },
+      "components": {
+        "fair_value": 0.0,
+        "piotroski": 0.0,
+        "business_quality": 46.0,
+        "growth": 100.0,
+        "momentum": 93.0,
+        "earnings_stability": 100.0,
+        "financial_health": 48.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "SPA",
+      "company": "Spadel SA",
+      "strategy": "ACE",
+      "final_score": 52.2,
+      "data_score": 52.2,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": "extreme_overvaluation",
+      "all_scores": {
+        "KING": 24.1,
+        "JACK": 41.2,
+        "QUEEN": 43.9,
+        "ACE": 52.2,
+        "JOKER": 20.6
+      },
+      "components": {
+        "fair_value": 0.0,
+        "piotroski": 0.0,
+        "business_quality": 36.0,
+        "growth": 98.0,
+        "momentum": 90.6,
+        "earnings_stability": 100.0,
+        "financial_health": 45.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "YX5",
+      "company": "Spadel SA",
+      "strategy": "ACE",
+      "final_score": 52.2,
+      "data_score": 52.2,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": "extreme_overvaluation",
+      "all_scores": {
+        "KING": 24.1,
+        "JACK": 40.2,
+        "QUEEN": 44.4,
+        "ACE": 52.2,
+        "JOKER": 19.6
+      },
+      "components": {
+        "fair_value": 0.0,
+        "piotroski": 0.0,
+        "business_quality": 36.0,
+        "growth": 98.0,
+        "momentum": 97.4,
+        "earnings_stability": 100.0,
+        "financial_health": 45.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "H4W",
+      "company": "Jardine Matheson Holdings Ltd",
+      "strategy": "ACE",
+      "final_score": 52.2,
+      "data_score": 52.2,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": "extreme_overvaluation",
+      "all_scores": {
+        "KING": 16.7,
+        "JACK": 33.8,
+        "QUEEN": 34.7,
+        "ACE": 52.2,
+        "JOKER": 7.3
+      },
+      "components": {
+        "fair_value": 0.0,
+        "piotroski": 77.8,
+        "business_quality": 16.4,
+        "growth": 100.0,
+        "momentum": 93.6,
+        "earnings_stability": 80.0,
+        "financial_health": 40.3
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "MBB",
+      "company": "MBB SE",
+      "strategy": "ACE",
+      "final_score": 52.2,
+      "data_score": 52.2,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": "extreme_overvaluation",
+      "all_scores": {
+        "KING": 20.6,
+        "JACK": 33.8,
+        "QUEEN": 38.4,
+        "ACE": 52.2,
+        "JOKER": 9.2
+      },
+      "components": {
+        "fair_value": 0.0,
+        "piotroski": 88.9,
+        "business_quality": 26.5,
+        "growth": 100.0,
+        "momentum": 84.0,
+        "earnings_stability": 90.0,
+        "financial_health": 79.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "ODL",
+      "company": "Odfjell Drilling",
+      "strategy": "ACE",
+      "final_score": 52.2,
+      "data_score": 52.2,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": "extreme_overvaluation",
+      "all_scores": {
+        "KING": 15.2,
+        "JACK": 21.8,
+        "QUEEN": 34.0,
+        "ACE": 52.2,
+        "JOKER": 7.8
+      },
+      "components": {
+        "fair_value": 0.0,
+        "piotroski": 77.8,
+        "business_quality": 36.2,
+        "growth": 36.0,
+        "momentum": 97.0,
+        "earnings_stability": 100.0,
+        "financial_health": 53.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "SUBC",
+      "company": "Subsea7",
+      "strategy": "ACE",
+      "final_score": 52.2,
+      "data_score": 52.2,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": "extreme_overvaluation",
+      "all_scores": {
+        "KING": 19.5,
+        "JACK": 33.8,
+        "QUEEN": 39.0,
+        "ACE": 52.2,
+        "JOKER": 8.5
+      },
+      "components": {
+        "fair_value": 0.0,
+        "piotroski": 88.9,
+        "business_quality": 21.8,
+        "growth": 100.0,
+        "momentum": 94.6,
+        "earnings_stability": 90.0,
+        "financial_health": 38.7
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "BKR",
+      "company": "Baker Hughes Co",
+      "strategy": "ACE",
+      "final_score": 52.1,
+      "data_score": 52.1,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 20.0,
+        "JACK": 33.8,
+        "QUEEN": 36.5,
+        "ACE": 52.1,
+        "JOKER": 10.5
+      },
+      "components": {
+        "fair_value": 6.1,
+        "piotroski": 77.8,
+        "business_quality": 31.7,
+        "growth": 100.0,
+        "momentum": 95.4,
+        "earnings_stability": 70.0,
+        "financial_health": 34.7
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "TREL B",
+      "company": "Trelleborg",
+      "strategy": "KING",
+      "final_score": 51.9,
+      "data_score": 51.9,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": "extreme_overvaluation",
+      "all_scores": {
+        "KING": 51.9,
+        "JACK": 26.6,
+        "QUEEN": 34.8,
+        "ACE": 30.9,
+        "JOKER": 11.3
+      },
+      "components": {
+        "fair_value": 0.0,
+        "dividend_health": 76.7,
+        "business_quality": 40.0,
+        "growth": 95.0,
+        "earnings_stability": 90.0,
+        "financial_health": 75.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "AMGN",
+      "company": "Amgen Inc",
+      "strategy": "QUEEN",
+      "final_score": 51.9,
+      "data_score": 51.9,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 22.1,
+        "JACK": 24.7,
+        "QUEEN": 51.9,
+        "ACE": 27.8,
+        "JOKER": 16.8
+      },
+      "components": {
+        "fair_value": 3.5,
+        "dividend_health": 100.0,
+        "business_quality": 80.8,
+        "growth": 63.3,
+        "momentum": 96.4,
+        "earnings_stability": 100.0,
+        "financial_health": 0.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "WWD",
+      "company": "Woodward Inc",
+      "strategy": "JOKER",
+      "final_score": 51.9,
+      "data_score": 51.9,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 20.5,
+        "JACK": 41.2,
+        "QUEEN": 37.3,
+        "ACE": 29.7,
+        "JOKER": 51.9
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 48.8,
+        "growth": 91.9,
+        "momentum": 69.8
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "DOCN",
+      "company": "DigitalOcean Holdings Inc",
+      "strategy": "JOKER",
+      "final_score": 51.8,
+      "data_score": 51.8,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 15.3,
+        "JACK": 41.2,
+        "QUEEN": 33.2,
+        "ACE": 27.8,
+        "JOKER": 51.8
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 24.5,
+        "growth": 91.1,
+        "momentum": 95.1
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "NHC",
+      "company": "National Healthcare Corp",
+      "strategy": "ACE",
+      "final_score": 51.7,
+      "data_score": 51.7,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": "extreme_overvaluation",
+      "all_scores": {
+        "KING": 21.9,
+        "JACK": 41.2,
+        "QUEEN": 41.9,
+        "ACE": 51.7,
+        "JOKER": 18.6
+      },
+      "components": {
+        "fair_value": 0.0,
+        "piotroski": 0.0,
+        "business_quality": 24.8,
+        "growth": 100.0,
+        "momentum": 77.2,
+        "earnings_stability": 100.0,
+        "financial_health": 48.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "BITTI",
+      "company": "Bittium",
+      "strategy": "JOKER",
+      "final_score": 51.5,
+      "data_score": 51.5,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 17.1,
+        "JACK": 40.6,
+        "QUEEN": 34.1,
+        "ACE": 30.6,
+        "JOKER": 51.5
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 18.8,
+        "growth": 94.8,
+        "momentum": 92.2
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "CLA B",
+      "company": "Cloetta",
+      "strategy": "JOKER",
+      "final_score": 51.5,
+      "data_score": 51.5,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 18.4,
+        "JACK": 41.2,
+        "QUEEN": 33.8,
+        "ACE": 29.1,
+        "JOKER": 51.5
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 36.3,
+        "growth": 90.1,
+        "momentum": 83.4
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "TASK",
+      "company": "TaskUs Inc",
+      "strategy": "QUEEN",
+      "final_score": 51.5,
+      "data_score": 51.5,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 38.9,
+        "JACK": 33.8,
+        "QUEEN": 51.5,
+        "ACE": 43.9,
+        "JOKER": 36.0
+      },
+      "components": {
+        "fair_value": 100.0,
+        "dividend_health": 30.0,
+        "business_quality": 28.8,
+        "growth": 100.0,
+        "momentum": 68.0,
+        "earnings_stability": 0.0,
+        "financial_health": 60.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "PEN",
+      "company": "Penumbra Inc",
+      "strategy": "JOKER",
+      "final_score": 51.4,
+      "data_score": 51.4,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 21.1,
+        "JACK": 40.7,
+        "QUEEN": 37.0,
+        "ACE": 31.9,
+        "JOKER": 51.4
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 35.6,
+        "growth": 91.2,
+        "momentum": 81.2
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "XOM",
+      "company": "Exxon Mobil Corp",
+      "strategy": "KING",
+      "final_score": 51.3,
+      "data_score": 51.3,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 51.3,
+        "JACK": 33.8,
+        "QUEEN": 40.3,
+        "ACE": 32.7,
+        "JOKER": 15.0
+      },
+      "components": {
+        "fair_value": 14.5,
+        "dividend_health": 57.9,
+        "business_quality": 47.1,
+        "growth": 100.0,
+        "earnings_stability": 100.0,
+        "financial_health": 65.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "RL",
+      "company": "Ralph Lauren Corp",
+      "strategy": "QUEEN",
+      "final_score": 51.3,
+      "data_score": 51.3,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 23.4,
+        "JACK": 33.8,
+        "QUEEN": 51.3,
+        "ACE": 34.4,
+        "JOKER": 18.7
+      },
+      "components": {
+        "fair_value": 1.6,
+        "dividend_health": 100.0,
+        "business_quality": 72.4,
+        "growth": 100.0,
+        "momentum": 84.4,
+        "earnings_stability": 80.0,
+        "financial_health": 15.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "NDSN",
+      "company": "Nordson Corp",
+      "strategy": "QUEEN",
+      "final_score": 50.9,
+      "data_score": 50.9,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 24.5,
+        "JACK": 24.1,
+        "QUEEN": 50.9,
+        "ACE": 34.1,
+        "JOKER": 15.6
+      },
+      "components": {
+        "fair_value": 0.8,
+        "dividend_health": 100.0,
+        "business_quality": 74.1,
+        "growth": 31.7,
+        "momentum": 85.7,
+        "earnings_stability": 100.0,
+        "financial_health": 55.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "PSON",
+      "company": "Pearson PLC",
+      "strategy": "KING",
+      "final_score": 50.7,
+      "data_score": 50.7,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 50.7,
+        "JACK": 23.9,
+        "QUEEN": 34.3,
+        "ACE": 27.4,
+        "JOKER": 12.8
+      },
+      "components": {
+        "fair_value": 24.6,
+        "dividend_health": 63.3,
+        "business_quality": 42.0,
+        "growth": 46.0,
+        "earnings_stability": 100.0,
+        "financial_health": 60.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "HTG",
+      "company": "Hunting PLC",
+      "strategy": "JOKER",
+      "final_score": 50.7,
+      "data_score": 50.7,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 18.0,
+        "JACK": 36.0,
+        "QUEEN": 31.1,
+        "ACE": 31.2,
+        "JOKER": 50.7
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 17.3,
+        "growth": 94.0,
+        "momentum": 90.6
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "ALFA",
+      "company": "Alfa Laval",
+      "strategy": "QUEEN",
+      "final_score": 49.5,
+      "data_score": 49.5,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": "extreme_overvaluation",
+      "all_scores": {
+        "KING": 22.1,
+        "JACK": 33.8,
+        "QUEEN": 49.5,
+        "ACE": 39.2,
+        "JOKER": 13.7
+      },
+      "components": {
+        "fair_value": 0.0,
+        "dividend_health": 100.0,
+        "business_quality": 50.4,
+        "growth": 100.0,
+        "momentum": 94.5,
+        "earnings_stability": 100.0,
+        "financial_health": 40.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "CSCO",
+      "company": "Cisco Systems Inc",
+      "strategy": "QUEEN",
+      "final_score": 49.5,
+      "data_score": 49.5,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": "extreme_overvaluation",
+      "all_scores": {
+        "KING": 23.8,
+        "JACK": 25.8,
+        "QUEEN": 49.5,
+        "ACE": 29.4,
+        "JOKER": 19.1
+      },
+      "components": {
+        "fair_value": 0.0,
+        "dividend_health": 54.7,
+        "business_quality": 92.9,
+        "growth": 29.2,
+        "momentum": 92.1,
+        "earnings_stability": 100.0,
+        "financial_health": 20.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "HUBB",
+      "company": "Hubbell Inc",
+      "strategy": "QUEEN",
+      "final_score": 49.5,
+      "data_score": 49.5,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": "extreme_overvaluation",
+      "all_scores": {
+        "KING": 25.5,
+        "JACK": 33.8,
+        "QUEEN": 49.5,
+        "ACE": 39.0,
+        "JOKER": 16.7
+      },
+      "components": {
+        "fair_value": 0.0,
+        "dividend_health": 100.0,
+        "business_quality": 66.5,
+        "growth": 100.0,
+        "momentum": 84.5,
+        "earnings_stability": 100.0,
+        "financial_health": 45.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "4RW",
+      "company": "Rai Way SpA",
+      "strategy": "QUEEN",
+      "final_score": 49.5,
+      "data_score": 49.5,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": "extreme_overvaluation",
+      "all_scores": {
+        "KING": 26.9,
+        "JACK": 31.1,
+        "QUEEN": 49.5,
+        "ACE": 33.1,
+        "JOKER": 21.4
+      },
+      "components": {
+        "fair_value": 0.0,
+        "dividend_health": 11.0,
+        "business_quality": 100.0,
+        "growth": 55.0,
+        "momentum": 87.2,
+        "earnings_stability": 100.0,
+        "financial_health": 20.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "ELMD",
+      "company": "Electromed Inc",
+      "strategy": "JOKER",
+      "final_score": 49.5,
+      "data_score": 49.5,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 30.5,
+        "JACK": 33.8,
+        "QUEEN": 47.8,
+        "ACE": 36.1,
+        "JOKER": 49.5
+      },
+      "components": {
+        "fair_value": 10.7,
+        "business_quality": 74.5,
+        "growth": 90.6,
+        "momentum": 27.3
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "ISSC",
+      "company": "Innovative Solutions & Support",
+      "strategy": "ACE",
+      "final_score": 49.4,
+      "data_score": 49.4,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": "extreme_overvaluation",
+      "all_scores": {
+        "KING": 27.1,
+        "JACK": 41.2,
+        "QUEEN": 47.1,
+        "ACE": 49.4,
+        "JOKER": 26.0
+      },
+      "components": {
+        "fair_value": 0.0,
+        "piotroski": 0.0,
+        "business_quality": 46.0,
+        "growth": 100.0,
+        "momentum": 50.0,
+        "earnings_stability": 100.0,
+        "financial_health": 42.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "WLDN",
+      "company": "Willdan Group Inc",
+      "strategy": "JOKER",
+      "final_score": 49.3,
+      "data_score": 49.3,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 17.4,
+        "JACK": 39.0,
+        "QUEEN": 32.2,
+        "ACE": 28.8,
+        "JOKER": 49.3
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 30.4,
+        "growth": 97.5,
+        "momentum": 63.8
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "CCL.B",
+      "company": "CCL Industries Inc",
+      "strategy": "QUEEN",
+      "final_score": 49.0,
+      "data_score": 49.0,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 26.3,
+        "JACK": 29.1,
+        "QUEEN": 49.0,
+        "ACE": 40.8,
+        "JOKER": 13.7
+      },
+      "components": {
+        "fair_value": 9.3,
+        "dividend_health": 42.7,
+        "business_quality": 49.8,
+        "growth": 76.7,
+        "momentum": 88.3,
+        "earnings_stability": 100.0,
+        "financial_health": 60.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "DCI",
+      "company": "Donaldson Co Inc",
+      "strategy": "QUEEN",
+      "final_score": 48.9,
+      "data_score": 48.9,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 27.9,
+        "JACK": 30.1,
+        "QUEEN": 48.9,
+        "ACE": 38.8,
+        "JOKER": 17.1
+      },
+      "components": {
+        "fair_value": 5.8,
+        "dividend_health": 39.0,
+        "business_quality": 69.0,
+        "growth": 61.7,
+        "momentum": 68.6,
+        "earnings_stability": 100.0,
+        "financial_health": 55.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "BIRK",
+      "company": "Birkenstock Holding PLC",
+      "strategy": "QUEEN",
+      "final_score": 48.7,
+      "data_score": 48.7,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 32.7,
+        "JACK": 33.8,
+        "QUEEN": 48.7,
+        "ACE": 38.6,
+        "JOKER": 36.0
+      },
+      "components": {
+        "fair_value": 64.1,
+        "dividend_health": 30.0,
+        "business_quality": 46.5,
+        "growth": 100.0,
+        "momentum": 68.0,
+        "earnings_stability": 0.0,
+        "financial_health": 60.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "GIL",
+      "company": "Gildan Activewear Inc",
+      "strategy": "QUEEN",
+      "final_score": 48.3,
+      "data_score": 48.3,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 26.5,
+        "JACK": 33.8,
+        "QUEEN": 48.3,
+        "ACE": 34.9,
+        "JOKER": 19.8
+      },
+      "components": {
+        "fair_value": 18.2,
+        "dividend_health": 30.0,
+        "business_quality": 69.2,
+        "growth": 100.0,
+        "momentum": 67.9,
+        "earnings_stability": 86.0,
+        "financial_health": 5.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "KEX",
+      "company": "Kirby Corp",
+      "strategy": "JOKER",
+      "final_score": 48.1,
+      "data_score": 48.1,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 17.8,
+        "JACK": 40.2,
+        "QUEEN": 33.0,
+        "ACE": 29.1,
+        "JOKER": 48.1
+      },
+      "components": {
+        "fair_value": 3.4,
+        "business_quality": 28.1,
+        "growth": 88.8,
+        "momentum": 73.1
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "FMM B",
+      "company": "FM Mattsson",
+      "strategy": "ACE",
+      "final_score": 48.0,
+      "data_score": 48.0,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": "extreme_overvaluation",
+      "all_scores": {
+        "KING": 23.0,
+        "JACK": 41.1,
+        "QUEEN": 41.1,
+        "ACE": 48.0,
+        "JOKER": 21.1
+      },
+      "components": {
+        "fair_value": 0.0,
+        "piotroski": 0.0,
+        "business_quality": 34.6,
+        "growth": 100.0,
+        "momentum": 51.2,
+        "earnings_stability": 100.0,
+        "financial_health": 39.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "STRT",
+      "company": "Strattec Security Corp",
+      "strategy": "JOKER",
+      "final_score": 47.0,
+      "data_score": 47.0,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 16.1,
+        "JACK": 21.4,
+        "QUEEN": 26.5,
+        "ACE": 23.3,
+        "JOKER": 47.0
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 38.1,
+        "growth": 81.0,
+        "momentum": 71.8
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "DAKT",
+      "company": "Daktronics Inc",
+      "strategy": "JOKER",
+      "final_score": 46.7,
+      "data_score": 46.7,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 16.3,
+        "JACK": 38.3,
+        "QUEEN": 30.1,
+        "ACE": 28.3,
+        "JOKER": 46.7
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 27.3,
+        "growth": 86.6,
+        "momentum": 71.2
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "CRS",
+      "company": "Carpenter Technology Corp",
+      "strategy": "JOKER",
+      "final_score": 46.4,
+      "data_score": 46.4,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 18.9,
+        "JACK": 41.2,
+        "QUEEN": 35.8,
+        "ACE": 29.2,
+        "JOKER": 46.4
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 39.2,
+        "growth": 74.2,
+        "momentum": 79.8
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "PTC",
+      "company": "PTC Inc",
+      "strategy": "QUEEN",
+      "final_score": 46.3,
+      "data_score": 46.3,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 28.8,
+        "JACK": 33.8,
+        "QUEEN": 46.3,
+        "ACE": 33.1,
+        "JOKER": 36.0
+      },
+      "components": {
+        "fair_value": 19.4,
+        "dividend_health": 30.0,
+        "business_quality": 74.2,
+        "growth": 90.8,
+        "momentum": 68.0,
+        "earnings_stability": 0.0,
+        "financial_health": 65.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "EVER",
+      "company": "EverQuote Inc",
+      "strategy": "QUEEN",
+      "final_score": 45.3,
+      "data_score": 45.3,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 28.7,
+        "JACK": 33.8,
+        "QUEEN": 45.3,
+        "ACE": 35.7,
+        "JOKER": 36.0
+      },
+      "components": {
+        "fair_value": 23.7,
+        "dividend_health": 30.0,
+        "business_quality": 56.9,
+        "growth": 100.0,
+        "momentum": 68.0,
+        "earnings_stability": 0.0,
+        "financial_health": 80.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "RDVT",
+      "company": "Red Violet Inc",
+      "strategy": "QUEEN",
+      "final_score": 45.3,
+      "data_score": 45.3,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": "extreme_overvaluation",
+      "all_scores": {
+        "KING": 27.9,
+        "JACK": 33.8,
+        "QUEEN": 45.3,
+        "ACE": 34.2,
+        "JOKER": 36.0
+      },
+      "components": {
+        "fair_value": 0.0,
+        "dividend_health": 30.0,
+        "business_quality": 70.1,
+        "growth": 100.0,
+        "momentum": 68.0,
+        "earnings_stability": 0.0,
+        "financial_health": 95.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "MAL",
+      "company": "Magellan Aerospace Corp",
+      "strategy": "JOKER",
+      "final_score": 45.1,
+      "data_score": 45.1,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 16.7,
+        "JACK": 37.1,
+        "QUEEN": 29.9,
+        "ACE": 30.8,
+        "JOKER": 45.1
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 12.8,
+        "growth": 92.2,
+        "momentum": 66.8
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "PLNT",
+      "company": "Planet Fitness Inc",
+      "strategy": "QUEEN",
+      "final_score": 44.0,
+      "data_score": 44.0,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 27.2,
+        "JACK": 33.8,
+        "QUEEN": 44.0,
+        "ACE": 33.1,
+        "JOKER": 36.0
+      },
+      "components": {
+        "fair_value": 34.8,
+        "dividend_health": 30.0,
+        "business_quality": 54.8,
+        "growth": 100.0,
+        "momentum": 68.0,
+        "earnings_stability": 0.0,
+        "financial_health": 50.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "NTH",
+      "company": "Naturhouse Health SA",
+      "strategy": "ACE",
+      "final_score": 43.7,
+      "data_score": 43.7,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": "extreme_overvaluation",
+      "all_scores": {
+        "KING": 23.4,
+        "JACK": 37.3,
+        "QUEEN": 42.3,
+        "ACE": 43.7,
+        "JOKER": 24.8
+      },
+      "components": {
+        "fair_value": 0.0,
+        "piotroski": 0.0,
+        "business_quality": 46.0,
+        "growth": 0.0,
+        "momentum": 99.2,
+        "earnings_stability": 100.0,
+        "financial_health": 39.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "2NH",
+      "company": "Naturhouse Health SA",
+      "strategy": "ACE",
+      "final_score": 43.3,
+      "data_score": 43.3,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": "extreme_overvaluation",
+      "all_scores": {
+        "KING": 23.4,
+        "JACK": 36.5,
+        "QUEEN": 42.1,
+        "ACE": 43.3,
+        "JOKER": 24.1
+      },
+      "components": {
+        "fair_value": 0.0,
+        "piotroski": 0.0,
+        "business_quality": 46.0,
+        "growth": 0.0,
+        "momentum": 95.8,
+        "earnings_stability": 100.0,
+        "financial_health": 39.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "7PV",
+      "company": "Birkenstock Holding PLC",
+      "strategy": "QUEEN",
+      "final_score": 42.7,
+      "data_score": 42.7,
+      "ai_score": 50.0,
+      "stars": 2,
+      "veto": null,
+      "all_scores": {
+        "KING": 26.0,
+        "JACK": 33.8,
+        "QUEEN": 42.7,
+        "ACE": 34.1,
+        "JOKER": 36.0
+      },
+      "components": {
+        "fair_value": 34.0,
+        "dividend_health": 30.0,
+        "business_quality": 46.5,
+        "growth": 100.0,
+        "momentum": 68.0,
+        "earnings_stability": 0.0,
+        "financial_health": 60.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "EBAY",
+      "company": "eBay Inc",
+      "strategy": "QUEEN",
+      "final_score": 39.5,
+      "data_score": 39.5,
+      "ai_score": 50.0,
+      "stars": 1,
+      "veto": "extreme_overvaluation",
+      "all_scores": {
+        "KING": 16.8,
+        "JACK": 23.5,
+        "QUEEN": 39.5,
+        "ACE": 25.5,
+        "JOKER": 14.1
+      },
+      "components": {
+        "fair_value": 0.0,
+        "dividend_health": 38.7,
+        "business_quality": 68.0,
+        "growth": 33.3,
+        "momentum": 86.2,
+        "earnings_stability": 86.0,
+        "financial_health": 0.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "PAY",
+      "company": "Paymentus Holdings Inc",
+      "strategy": "QUEEN",
+      "final_score": 38.6,
+      "data_score": 38.6,
+      "ai_score": 50.0,
+      "stars": 1,
+      "veto": "extreme_overvaluation",
+      "all_scores": {
+        "KING": 23.9,
+        "JACK": 33.8,
+        "QUEEN": 38.6,
+        "ACE": 33.4,
+        "JOKER": 36.0
+      },
+      "components": {
+        "fair_value": 0.0,
+        "dividend_health": 30.0,
+        "business_quality": 45.3,
+        "growth": 100.0,
+        "momentum": 68.0,
+        "earnings_stability": 0.0,
+        "financial_health": 90.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "HQY",
+      "company": "HealthEquity Inc",
+      "strategy": "QUEEN",
+      "final_score": 38.4,
+      "data_score": 38.4,
+      "ai_score": 50.0,
+      "stars": 1,
+      "veto": null,
+      "all_scores": {
+        "KING": 21.9,
+        "JACK": 33.8,
+        "QUEEN": 38.4,
+        "ACE": 30.2,
+        "JOKER": 36.0
+      },
+      "components": {
+        "fair_value": 3.8,
+        "dividend_health": 30.0,
+        "business_quality": 49.4,
+        "growth": 100.0,
+        "momentum": 68.0,
+        "earnings_stability": 0.0,
+        "financial_health": 70.0
+      },
+      "ai_reasoning": "No API key"
+    },
+    {
+      "ticker": "PRTH",
+      "company": "Priority Technology Holdings Inc",
+      "strategy": "JOKER",
+      "final_score": 36.0,
+      "data_score": 36.0,
+      "ai_score": 50.0,
+      "stars": 1,
+      "veto": "dead_momentum",
+      "all_scores": {
+        "KING": 14.2,
+        "JACK": 27.0,
+        "QUEEN": 28.2,
+        "ACE": 27.2,
+        "JOKER": 36.0
+      },
+      "components": {
+        "fair_value": 0.0,
+        "business_quality": 18.0,
+        "growth": 93.3,
+        "momentum": 22.2
+      },
+      "ai_reasoning": "No API key"
+    }
+  ]
+}

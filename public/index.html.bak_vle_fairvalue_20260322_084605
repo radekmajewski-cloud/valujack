@@ -60,42 +60,1580 @@ const CARD_TYPES = {
 const SILVER = 'linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#E0DDDA 45%,#A9A9A9 65%,#D0CDCA 80%,#8A8A8A 100%)';
 const GOLD = 'linear-gradient(135deg,#BFA882 0%,#DDBF88 22%,#A88A60 42%,#CAB07A 62%,#8C7858 80%,#C0AA75 100%)';
 const cards = [
-    { id: 1, type: 'JACK', isPro: false, fairValue: 150.98, yahooTicker: 'ESEA', stars: 5, sector: 'Industrials', sectorIcon: '🚢', irLink: 'https://www.euroseas.gr/investors/', company: 'Euroseas Ltd', ticker: 'ESEA', epsGrowth: '+102%', revGrowth: '—', tag: 'Container shipping. Deep value.', tagBold: 'Trades at 44% of fair value.', tagFull: "Euroseas operates a fleet of container vessels serving inter-regional trade lanes.", pick: 'Cheap containers. Strong cash.', pickBold: 'Compelling entry point.', pickFull: "A high-quality small-cap container shipper trading at a fraction of its intrinsic value.", ind1l: 'EARNINGS GROWTH', ind1v: '+102%', ind2l: 'UNDERVALUED BY', ind2v: '56%', rsRating: '+151%', metrics: [{ l: 'P/E', v: '3.4' }, { l: 'ROIC', v: '32.5%' }, { l: 'FCF Yield', v: '28.1%' }, { l: 'D/E', v: '0.5' }], scores: [{ l: 'Dividend', v: 4, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'Moderate' }, { l: 'Momentum', v: 8, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '151%' }, { l: 'Profit', v: 7, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '32.5%' }, { l: 'Low Debt', v: 8, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Low' }, { l: 'Fair Price', v: 9, max: 10, color: '#D4884A', raw: 'JACK Signal', rawV: 'STRONGLY UNDERVALUED' }], bullets: ["Small fleet operator with modern, fuel-efficient container vessels.", "Trading at P/E 3.4 — one of the cheapest quality shippers in the market.", "Strong ROIC of 32.5% — capital returns far above cost of capital.", "Stock up 151% in the past year, yet still deeply below fair value."], },
-    { id: 2, type: 'JACK', isPro: false, fairValue: 87.6, yahooTicker: 'ESP', stars: 5, sector: 'Industrials', sectorIcon: '🔧', irLink: 'https://www.espey.com/investors', company: 'Espey Manufacturing', ticker: 'ESP', epsGrowth: '+116%', revGrowth: '—', tag: 'Defence electronics. Undervalued.', tagBold: 'Critical US military supplier.', tagFull: "Espey builds power electronics for US military applications.", pick: 'Defence niche. Consistent growth.', pickBold: 'Strong earnings momentum.', pickFull: "A small-cap US defence contractor with a niche monopoly in military-grade power electronics.", ind1l: 'EARNINGS GROWTH', ind1v: '+116%', ind2l: 'UNDERVALUED BY', ind2v: '36%', rsRating: '+110%', metrics: [{ l: 'P/E', v: '15.5' }, { l: 'ROIC', v: '52.7%' }, { l: 'FCF Yield', v: '28.5%' }, { l: 'D/E', v: '0.6' }], scores: [{ l: 'Dividend', v: 3, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'Low' }, { l: 'Momentum', v: 8, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '110%' }, { l: 'Profit', v: 9, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '52.7%' }, { l: 'Low Debt', v: 7, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Low' }, { l: 'Fair Price', v: 8, max: 10, color: '#D4884A', raw: 'JACK Signal', rawV: 'STRONGLY UNDERVALUED' }], bullets: ["US military-grade power electronics — transformers, converters, radar power supplies.", "ROIC of 52.7% — exceptional capital efficiency for an industrial manufacturer.", "EPS grew 116% over 5 years; consistent defence contract backlog provides visibility.", "Stock up 110% in one year but still trading at 64% of fair value."], },
-    { id: 3, type: 'JACK', isPro: false, fairValue: 3.16, yahooTicker: 'N4Q1.DE', stars: 5, sector: 'Energy', sectorIcon: '🛢️', irLink: 'https://www.hemisphereenergyinc.com/investors', company: 'Hemisphere Energy', ticker: 'N4Q1', epsGrowth: '+134%', revGrowth: '—', tag: 'Canadian oil. Exceptional FCF.', tagBold: 'FCF yield of 46% at current price.', tagFull: "Hemisphere Energy is a profitable Canadian heavy oil producer with exceptional free cash flow generation.", pick: 'Heavy oil. Priced for disaster.', pickBold: 'FCF machine at current price.', pickFull: "A highly profitable small-cap Canadian heavy oil producer generating extraordinary free cash flow from low-cost polymer flood operations.", ind1l: 'EARNINGS GROWTH', ind1v: '+134%', ind2l: 'UNDERVALUED BY', ind2v: '47%', rsRating: '+48%', metrics: [{ l: 'P/E', v: '8.5' }, { l: 'ROIC', v: '30.7%' }, { l: 'FCF Yield', v: '46.5%' }, { l: 'D/E', v: '0.6' }], scores: [{ l: 'Dividend', v: 3, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'Moderate' }, { l: 'Momentum', v: 7, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '48%' }, { l: 'Profit', v: 7, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '30.7%' }, { l: 'Low Debt', v: 7, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Low' }, { l: 'Fair Price', v: 9, max: 10, color: '#D4884A', raw: 'JACK Signal', rawV: 'STRONGLY UNDERVALUED' }], bullets: ["Canadian heavy oil producer using cost-effective polymer flood technology.", "FCF yield of 46.5% — extraordinary cash generation relative to market cap.", "EPS grew 134% over 5 years; operations are low-cost and self-funding.", "Trading at 53% of fair value with minimal debt."], },
-    { id: 4, type: 'KING', isPro: false, fairValue: 23.02, yahooTicker: 'BSM', stars: 4, sector: 'Energy', sectorIcon: '⚡', irLink: 'https://ir.blackstoneminerals.com/', company: 'Black Stone Minerals', ticker: 'BSM', epsGrowth: '+21%', revGrowth: '+7%', tag: 'Royalty income. No drilling risk.', tagBold: 'Dividend yield of 7.8%.', tagFull: "Black Stone Minerals collects royalties from oil and gas production without drilling risk.", pick: 'Mineral royalties. Pure income.', pickBold: 'No drilling risk. Just cash.', pickFull: "One of the largest mineral rights holders in the United States — earning royalties on oil and gas production across 20 states.", ind1l: 'DIVIDEND %', ind1v: '7.8%', ind2l: 'UNDERVALUED BY', ind2v: '33%', metrics: [{ l: 'P/E', v: '12.1' }, { l: 'ROIC', v: '27.2%' }, { l: 'FCF Yield', v: '45.2%' }, { l: 'Div. Yield', v: '7.8%' }], scores: [{ l: 'Dividend', v: 8, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: '7.8%' }, { l: 'Momentum', v: 5, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '2.7%' }, { l: 'Profit', v: 6, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '27.2%' }, { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Very Low' }, { l: 'Fair Price', v: 7, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'UNDERVALUED' }], bullets: ["Mineral rights across 20 US states — royalties with zero drilling risk.", "7.8% dividend yield backed by consistent distribution history.", "FCF yield of 45.2% — substantial cash generation supporting the distribution.", "Trading at 33% below fair value with very low debt."], },
-    { id: 5, type: 'QUEEN', isPro: true, fairValue: 1173.61, yahooTicker: 'EVO.ST', stars: 4, sector: 'Consumer Durables', sectorIcon: '🎮', irLink: 'https://www.evolution.com/investors/', company: 'Evolution AB', ticker: 'EVO', epsGrowth: '+28%', revGrowth: '+30%', tag: 'Live casino monopoly. Deep value.', tagBold: 'Dominant market position.', tagFull: "Evolution is the undisputed world leader in live casino technology — powering the live dealer games for virtually every major online casino globally.", pick: 'Casino tech leader. Cheap.', pickBold: 'Quality at a discount.', pickFull: "The dominant global supplier of live casino technology — asset-light, extraordinarily cash generative, with a decade of consistent growth.", ind1l: 'CASH FLOW %', ind1v: '9.6%', ind2l: 'UNDERVALUED BY', ind2v: '50%', metrics: [{ l: 'P/E', v: '10.2' }, { l: 'ROIC', v: '28.5%' }, { l: 'FCF Yield', v: '9.6%' }, { l: 'D/E', v: '0.4' }], scores: [{ l: 'Dividend', v: 5, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'Suspended 2026' }, { l: 'Momentum', v: 3, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '-26%' }, { l: 'Profit', v: 8, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '28.5%' }, { l: 'Low Debt', v: 8, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Low' }, { l: 'Fair Price', v: 8, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'STRONGLY UNDERVALUED' }], bullets: ["Powers live dealer casino games for virtually every major online gambling operator globally.", "Asset-light model — near-zero marginal cost per additional casino client.", "FCF yield of 9.6% despite no dividend this year — all cash retained on balance sheet.", "Trading at 50% of fair value; P/E of 10 for a dominant market leader is historically cheap."], },
-    { id: 6, type: 'KING', isPro: false, fairValue: 43.92, yahooTicker: 'VDE.BR', stars: 4, sector: 'Consumer Durables', sectorIcon: '👗', irLink: 'https://www.vandeveldegroup.com/en/investors', company: 'Van de Velde', ticker: 'VAN', epsGrowth: '+10%', revGrowth: '+1%', tag: 'Belgian luxury lingerie. 8% yield.', tagBold: 'Consistent 20-year dividend payer.', tagFull: "Van de Velde is a premium Belgian lingerie manufacturer — conservatively managed, debt-light, consistent dividend for over two decades.", pick: 'Premium lingerie. Reliable income.', pickBold: 'Steady dividend. Low risk.', pickFull: "A premium Belgian lingerie brand with niche market leadership and a 20-year dividend track record.", ind1l: 'DIVIDEND %', ind1v: '8.0%', ind2l: 'UNDERVALUED BY', ind2v: '31%', metrics: [{ l: 'P/E', v: '11.9' }, { l: 'ROIC', v: '26.7%' }, { l: 'FCF Yield', v: '19.1%' }, { l: 'Div. Yield', v: '8.0%' }], scores: [{ l: 'Dividend', v: 8, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: '8.0%' }, { l: 'Momentum', v: 5, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '-1.1%' }, { l: 'Profit', v: 7, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '26.7%' }, { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Very Low' }, { l: 'Fair Price', v: 7, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'UNDERVALUED' }], bullets: ["Premium Belgian lingerie brand with over 20 years of consistent dividend payments.", "8.0% dividend yield with low payout ratio — well covered by earnings.", "ROIC of 26.7% — strong returns on conservative capital base.", "Trading at 31% below fair value with essentially zero net debt."], },
-    { id: 7, type: 'KING', isPro: false, fairValue: 30.31, yahooTicker: 'MPE.L', stars: 4, sector: 'Food and Beverage', sectorIcon: '🌴', irLink: 'https://www.mpevans.co.uk/investors/', company: 'M P Evans Group', ticker: 'MPE', epsGrowth: '+40%', revGrowth: '—', tag: 'Palm oil estates. Deeply cheap.', tagBold: '51% below fair value.', tagFull: "M P Evans is a UK-listed palm oil plantation group in Indonesia — vertically integrated and sustainable certified.", pick: 'Palm oil producer. Undervalued.', pickBold: 'Strong earnings visibility.', pickFull: "A UK-listed palm oil plantation operator in Indonesia with certified sustainable production and consistent EPS growth.", ind1l: 'DIVIDEND %', ind1v: '—', ind2l: 'UNDERVALUED BY', ind2v: '51%', metrics: [{ l: 'P/E', v: '9.9' }, { l: 'ROIC', v: '16.5%' }, { l: 'EPS Growth 5y', v: '40.2%' }, { l: 'D/E', v: '0.2' }], scores: [{ l: 'Dividend', v: 5, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'Moderate' }, { l: 'Momentum', v: 5, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: 'Flat' }, { l: 'Profit', v: 6, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '16.5%' }, { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Very Low' }, { l: 'Fair Price', v: 9, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'STRONGLY UNDERVALUED' }], bullets: ["Indonesian palm oil plantation — vertically integrated from estates to mills.", "RSPO-certified sustainable production — increasingly important for institutional buyers.", "EPS grew 40% over 5 years with strong earnings visibility from planted estates.", "Trading at P/E 9.9 — significant discount for a consistently profitable producer."], },
-    { id: 8, type: 'JACK', isPro: false, fairValue: 87.84, yahooTicker: 'MPCC.OL', stars: 4, sector: 'Industrials', sectorIcon: '🚢', irLink: 'https://www.mpccontainerships.com/investor-relations/', company: 'MPC Container Ships', ticker: 'MPCC', epsGrowth: '+39%', revGrowth: '—', tag: 'Container shipping. 74% below FV.', tagBold: 'P/E of 4.3 with strong FCF.', tagFull: "MPC Container Ships trades at a massive discount to fair value with extraordinary cash flow generation.", pick: 'Feeder containers. Deep value.', pickBold: 'Massive discount to NAV.', pickFull: "A Nordic-listed container shipping company in the feeder segment — extraordinary free cash flow, trading at a fraction of net asset value.", ind1l: 'EARNINGS GROWTH', ind1v: '+39%', ind2l: 'UNDERVALUED BY', ind2v: '74%', rsRating: '+36%', metrics: [{ l: 'P/E', v: '4.3' }, { l: 'ROIC', v: '37.2%' }, { l: 'FCF Yield', v: '42.2%' }, { l: 'D/E', v: '0.6' }], scores: [{ l: 'Dividend', v: 4, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'Variable' }, { l: 'Momentum', v: 7, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '36%' }, { l: 'Profit', v: 8, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '37.2%' }, { l: 'Low Debt', v: 7, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Moderate' }, { l: 'Fair Price', v: 9, max: 10, color: '#D4884A', raw: 'JACK Signal', rawV: 'STRONGLY UNDERVALUED' }], bullets: ["Nordic container shipping company in the feeder segment.", "FCF yield of 42.2% — extraordinary cash generation relative to market cap.", "ROIC of 37.2% demonstrates strong capital efficiency.", "Stock up 36% in the past year yet still trading at 26% of fair value."], },
-    { id: 9, type: 'KING', isPro: false, fairValue: 41.12, yahooTicker: 'ARLP', stars: 4, sector: 'Energy', sectorIcon: '⛏️', irLink: 'https://ir.arlp.com/', company: 'Alliance Resource Partners', ticker: 'ARLP', epsGrowth: '+34%', revGrowth: '+11%', tag: 'Coal royalties. 9.5% yield.', tagBold: 'Consistent distribution history.', tagFull: "Alliance Resource Partners is a US coal producer and mineral royalty owner with one of the highest dividend yields.", pick: 'Coal MLP. High income.', pickBold: '9.5% yield, low debt.', pickFull: "A US coal and mineral royalty partnership with exceptional distribution history, diversifying into oil and gas mineral rights.", ind1l: 'DIVIDEND %', ind1v: '9.5%', ind2l: 'UNDERVALUED BY', ind2v: '33%', metrics: [{ l: 'P/E', v: '11.4' }, { l: 'ROIC', v: '17.7%' }, { l: 'FCF Yield', v: '17.3%' }, { l: 'Div. Yield', v: '9.5%' }], scores: [{ l: 'Dividend', v: 9, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: '9.5%' }, { l: 'Momentum', v: 5, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '8.9%' }, { l: 'Profit', v: 6, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '17.7%' }, { l: 'Low Debt', v: 8, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Low' }, { l: 'Fair Price', v: 7, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'UNDERVALUED' }], bullets: ["US coal producer and mineral royalty owner with 9.5% distribution yield.", "Diversifying into oil and gas mineral rights for long-term resilience.", "Conservative debt levels — financial discipline defines management.", "Trading at 33% below fair value with consistent earnings."], },
-    { id: 10, type: 'KING', isPro: false, fairValue: 32.81, yahooTicker: 'CIX', stars: 3, sector: 'Industrials', sectorIcon: '🔒', irLink: 'https://www.compx.com/investor-relations/', company: 'CompX International', ticker: 'CIX', epsGrowth: '+14%', revGrowth: '+7%', tag: 'Security products. Reliable income.', tagBold: '5.2% yield. Zero debt.', tagFull: "CompX manufactures security products and marine components — zero net debt, consistent dividends, loyal industrial customers.", pick: 'Security products. Zero debt.', pickBold: 'Reliable small-cap compounder.', pickFull: "A US manufacturer of security products and marine propulsion components — essentially no debt, consistent dividend, steady earnings.", ind1l: 'DIVIDEND %', ind1v: '5.2%', ind2l: 'UNDERVALUED BY', ind2v: '29%', metrics: [{ l: 'P/E', v: '14.7' }, { l: 'ROIC', v: '20.7%' }, { l: 'FCF Yield', v: '12.1%' }, { l: 'Div. Yield', v: '5.2%' }], scores: [{ l: 'Dividend', v: 6, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: '5.2%' }, { l: 'Momentum', v: 5, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '4.0%' }, { l: 'Profit', v: 6, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '20.7%' }, { l: 'Low Debt', v: 10, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' }, { l: 'Fair Price', v: 7, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'UNDERVALUED' }], bullets: ["US manufacturer of security products and marine components.", "5.2% dividend yield backed by zero net debt and consistent earnings.", "ROIC of 20.7% on a conservative capital base.", "Trading at 29% below fair value — quiet compounder."], },
-    { id: 11, type: 'KING', isPro: false, fairValue: 26.39, yahooTicker: 'AEP.L', stars: 4, sector: 'Food and Beverage', sectorIcon: '🌿', irLink: 'https://www.aepplantations.co.uk/investors', company: 'AEP Plantations', ticker: 'AEP', epsGrowth: '+23%', revGrowth: '—', tag: 'UK palm oil. Up 125% in one year.', tagBold: 'Trading at 39% of fair value.', tagFull: "AEP Plantations is a UK-listed palm oil group — up 125% in one year but still significantly below fair value.", pick: 'Palm oil. Momentum building.', pickBold: 'Strong recent earnings growth.', pickFull: "A UK-listed palm oil plantation company with sustainable SE Asian operations — strong EPS growth and still trading at a significant discount.", ind1l: 'DIVIDEND %', ind1v: '—', ind2l: 'UNDERVALUED BY', ind2v: '39%', metrics: [{ l: 'P/E', v: '9.7' }, { l: 'ROIC', v: '22.8%' }, { l: 'EPS Growth 5y', v: '22.7%' }, { l: 'D/E', v: '0.1' }], scores: [{ l: 'Dividend', v: 4, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'Moderate' }, { l: 'Momentum', v: 9, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '125%' }, { l: 'Profit', v: 6, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '22.8%' }, { l: 'Low Debt', v: 10, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Minimal' }, { l: 'Fair Price', v: 8, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'STRONGLY UNDERVALUED' }], bullets: ["UK-listed palm oil plantation group in Southeast Asia — sustainable certified.", "Stock up 125% in the past year, reflecting recovering yields.", "ROIC of 22.8% with minimal debt.", "Still trading at 39% of fair value."], },
-    { id: 12, type: 'KING', isPro: false, fairValue: 282.14, yahooTicker: 'BETS-B.ST', stars: 4, sector: 'Consumer Durables', sectorIcon: '🎰', irLink: 'https://www.betsson.com/en/investor-relations', company: 'Betsson AB', ticker: 'BETS B', epsGrowth: '+12%', revGrowth: '+14%', tag: 'Online gaming. 65% below FV.', tagBold: '7.3% dividend yield.', tagFull: "Betsson is one of Europe largest online gaming companies — consistent dividend, deep discount after regulatory concerns.", pick: 'Gaming operator. Undervalued.', pickBold: 'Regulated markets. Income.', pickFull: "One of Europe largest online gaming operators across regulated European and Latin American markets — consistent earnings despite sector headwinds.", ind1l: 'DIVIDEND %', ind1v: '7.3%', ind2l: 'UNDERVALUED BY', ind2v: '65%', metrics: [{ l: 'P/E', v: '7.0' }, { l: 'ROIC', v: '22.9%' }, { l: 'FCF Yield', v: '13.7%' }, { l: 'Div. Yield', v: '7.3%' }], scores: [{ l: 'Dividend', v: 7, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: '7.3%' }, { l: 'Momentum', v: 2, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '-38%' }, { l: 'Profit', v: 7, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '22.9%' }, { l: 'Low Debt', v: 8, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Low' }, { l: 'Fair Price', v: 9, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'STRONGLY UNDERVALUED' }], bullets: ["Major European online gaming operator in regulated markets.", "7.3% dividend yield — consistent payout despite sector headwinds.", "P/E of 7.0 for a company with 22.9% ROIC — extreme market pessimism.", "Stock down 38% — trading at 35% of fair value."], },
-    { id: 13, type: 'JACK', isPro: false, fairValue: 388.82, yahooTicker: 'DAC', stars: 4, sector: 'Industrials', sectorIcon: '🚢', irLink: 'https://www.danaos.com/investors/', company: 'Danaos Corp', ticker: 'DAC', epsGrowth: '+33%', revGrowth: '—', tag: 'Container ships. 72% below FV.', tagBold: 'P/E of 4.1. No debt concerns.', tagFull: "Danaos operates one of the largest independent container fleets on long-term fixed-rate charters.", pick: 'Large containers. Very cheap.', pickBold: 'Long charters. Low risk.', pickFull: "One of the largest independent container ship owners — long-term fixed-rate charters provide exceptional earnings visibility.", ind1l: 'EARNINGS GROWTH', ind1v: '+33%', ind2l: 'UNDERVALUED BY', ind2v: '72%', rsRating: '+39%', metrics: [{ l: 'P/E', v: '4.1' }, { l: 'ROIC', v: '20.7%' }, { l: 'FCF Yield', v: '33.4%' }, { l: 'D/E', v: '0.3' }], scores: [{ l: 'Dividend', v: 3, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'Low' }, { l: 'Momentum', v: 7, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '39%' }, { l: 'Profit', v: 7, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '20.7%' }, { l: 'Low Debt', v: 8, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Low' }, { l: 'Fair Price', v: 9, max: 10, color: '#D4884A', raw: 'JACK Signal', rawV: 'STRONGLY UNDERVALUED' }], bullets: ["Major independent container ship owner with vessels chartered to top global shipping lines.", "Long-term fixed-rate charters provide exceptional earnings visibility.", "FCF yield of 33.4% — extraordinary cash generation.", "Trading at 28% of fair value — P/E 4.1."], },
-    { id: 14, type: 'JACK', isPro: false, fairValue: 284.74, yahooTicker: '9TG.DE', stars: 4, sector: 'Energy', sectorIcon: '⚡', irLink: 'https://www.gtt.fr/en/investors', company: 'Gaztransport et Technigaz', ticker: '9TG', epsGrowth: '+16%', revGrowth: '—', tag: 'LNG tech monopoly. 30% below FV.', tagBold: 'ROIC of 205%. Zero competitors.', tagFull: "GTT holds patents for membrane containment systems used in virtually every LNG carrier — a genuine technological monopoly.", pick: 'LNG patents. Monopoly returns.', pickBold: 'Every new LNG ship pays GTT.', pickFull: "The global monopoly on LNG carrier containment technology — extraordinary ROIC, no real competitors, rising LNG demand.", ind1l: 'EARNINGS GROWTH', ind1v: '+16%', ind2l: 'UNDERVALUED BY', ind2v: '30%', rsRating: '+40%', metrics: [{ l: 'P/E', v: '17.8' }, { l: 'ROIC', v: '205.2%' }, { l: 'FCF Yield', v: '52.7%' }, { l: 'D/E', v: '0.8' }], scores: [{ l: 'Dividend', v: 4, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'Moderate' }, { l: 'Momentum', v: 7, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '40%' }, { l: 'Profit', v: 10, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '205%' }, { l: 'Low Debt', v: 6, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Moderate' }, { l: 'Fair Price', v: 7, max: 10, color: '#D4884A', raw: 'JACK Signal', rawV: 'UNDERVALUED' }], bullets: ["Holds patents on membrane LNG containment technology — in virtually every LNG carrier built.", "ROIC of 205% — one of the highest returns on capital of any public company.", "FCF yield of 52.7% from a pure intellectual property model.", "LNG demand driving a strong order book — new licences compound the royalty stream."], },
-    { id: 15, type: 'JACK', isPro: false, fairValue: 32.47, yahooTicker: 'SD', stars: 4, sector: 'Energy', sectorIcon: '🛢️', irLink: 'https://www.sandridgeenergy.com/investors', company: 'SandRidge Energy', ticker: 'SD', epsGrowth: '+18%', revGrowth: '—', tag: 'US oil & gas. 49% below FV.', tagBold: 'ROIC of 43%. Very low debt.', tagFull: "SandRidge is a lean, restructured US oil and gas company with exceptional capital returns and conservative balance sheet.", pick: 'Lean US oil. Deep value.', pickBold: 'Rebuilt. Highly profitable.', pickFull: "A restructured US oil and gas company — high ROIC of 43%, minimal debt, trading at significant discount.", ind1l: 'EARNINGS GROWTH', ind1v: '+18%', ind2l: 'UNDERVALUED BY', ind2v: '49%', rsRating: '+44%', metrics: [{ l: 'P/E', v: '8.6' }, { l: 'ROIC', v: '43.1%' }, { l: 'D/E', v: '0.3' }, { l: '1y Perf', v: '44.3%' }], scores: [{ l: 'Dividend', v: 2, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'None' }, { l: 'Momentum', v: 8, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '44.3%' }, { l: 'Profit', v: 8, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '43.1%' }, { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Very Low' }, { l: 'Fair Price', v: 8, max: 10, color: '#D4884A', raw: 'JACK Signal', rawV: 'STRONGLY UNDERVALUED' }], bullets: ["Restructured US oil and gas company with financial discipline and low costs.", "ROIC of 43.1% — exceptional capital efficiency.", "Stock up 44% yet still trading at 51% of fair value.", "Very low debt gives flexibility through commodity price cycles."], },
-    { id: 16, type: 'KING', isPro: false, fairValue: 105.36, yahooTicker: 'STNG', stars: 4, sector: 'Energy', sectorIcon: '🛢️', irLink: 'https://www.scorpiotankers.com/investors/', company: 'Scorpio Tankers', ticker: 'STNG', epsGrowth: '+34%', revGrowth: '—', tag: 'Product tankers. 35% below FV.', tagBold: 'FCF yield of 44.4%.', tagFull: "Scorpio Tankers is the world largest owner of product tankers — modern fleet, cash generative, trading below NAV.", pick: 'Product tankers. High FCF.', pickBold: 'Fleet generating strong cash.', pickFull: "The world largest owner of modern product tankers — extraordinary free cash flow and modern fleet trading below intrinsic value.", ind1l: 'DIVIDEND %', ind1v: '—', ind2l: 'UNDERVALUED BY', ind2v: '35%', rsRating: '+73%', metrics: [{ l: 'P/E', v: '9.2' }, { l: 'ROIC', v: '12.0%' }, { l: 'FCF Yield', v: '44.4%' }, { l: 'D/E', v: '0.2' }], scores: [{ l: 'Dividend', v: 5, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'Variable' }, { l: 'Momentum', v: 8, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '73%' }, { l: 'Profit', v: 5, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '12.0%' }, { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Very Low' }, { l: 'Fair Price', v: 7, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'UNDERVALUED' }], bullets: ["World largest owner of product tankers — transporting refined petroleum globally.", "Modern fleet with low operating costs.", "FCF yield of 44.4% — significant cash generation.", "Stock up 73% yet still 35% below fair value."], },
-    { id: 17, type: 'JACK', isPro: false, fairValue: 30.61, yahooTicker: 'SA2D.DE', stars: 4, sector: 'Energy', sectorIcon: '🛢️', irLink: 'https://www.sandridgeenergy.com/investors', company: 'SandRidge Energy', ticker: 'SA2D', epsGrowth: '+18%', revGrowth: '—', tag: 'US oil & gas. European listing.', tagBold: 'Same deep value as USD ticker.', tagFull: "SandRidge Energy German-listed shares — same restructured US oil company, often with additional pricing inefficiency.", pick: 'Lean US oil. Deep value.', pickBold: 'Rebuilt. Highly profitable.', pickFull: "The German-listed version of SandRidge Energy — ROIC of 43%, minimal debt, trading significantly below fair value.", ind1l: 'EARNINGS GROWTH', ind1v: '+18%', ind2l: 'UNDERVALUED BY', ind2v: '51%', rsRating: '+44%', metrics: [{ l: 'P/E', v: '9.1' }, { l: 'ROIC', v: '43.1%' }, { l: 'D/E', v: '0.3' }, { l: '1y Perf', v: '44.2%' }], scores: [{ l: 'Dividend', v: 2, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'None' }, { l: 'Momentum', v: 8, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '44.2%' }, { l: 'Profit', v: 8, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '43.1%' }, { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Very Low' }, { l: 'Fair Price', v: 8, max: 10, color: '#D4884A', raw: 'JACK Signal', rawV: 'STRONGLY UNDERVALUED' }], bullets: ["German-listed shares of SandRidge Energy — same business, additional pricing inefficiency.", "ROIC of 43.1% with minimal leverage.", "EPS grew 17.6% annualised over five years.", "Trading at 49% of fair value."], },
-    { id: 18, type: 'JACK', isPro: false, fairValue: 97.57, yahooTicker: 'MPTI', stars: 3, sector: 'Technology', sectorIcon: '📡', irLink: 'https://www.mtronindustries.com/investors', company: 'M-Tron Industries', ticker: 'MPTI', epsGrowth: '+43%', revGrowth: '—', tag: 'Frequency control devices. Defence.', tagBold: 'ROIC of 25%. Growing backlog.', tagFull: "M-Tron makes frequency control products for military and aerospace — niche manufacturer with growing defence demand.", pick: 'Military frequency tech. Growing.', pickBold: 'Defence backlog expanding.', pickFull: "A US manufacturer of frequency control products for military, aerospace, and industrial applications — consistent growth, strong ROIC.", ind1l: 'EARNINGS GROWTH', ind1v: '+43%', ind2l: 'UNDERVALUED BY', ind2v: '31%', rsRating: '+76%', metrics: [{ l: 'P/E', v: '26.5' }, { l: 'ROIC', v: '25.0%' }, { l: 'FCF Yield', v: '13.5%' }, { l: 'D/E', v: '0.1' }], scores: [{ l: 'Dividend', v: 2, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'None' }, { l: 'Momentum', v: 8, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '76%' }, { l: 'Profit', v: 7, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '25.0%' }, { l: 'Low Debt', v: 10, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Minimal' }, { l: 'Fair Price', v: 7, max: 10, color: '#D4884A', raw: 'JACK Signal', rawV: 'UNDERVALUED' }], bullets: ["Precision frequency control products for US military and aerospace.", "ROIC of 25% with minimal debt — growing defence market.", "EPS grew 42.6% annualised over five years.", "Stock up 76% in one year, still 31% below fair value."], },
-    { id: 19, type: 'JOKER', isPro: true, fairValue: 190.0, yahooTicker: 'NVDA', stars: 4, sector: 'Technology', sectorIcon: '💻', irLink: 'https://investor.nvidia.com/', company: 'NVIDIA Corp', ticker: 'NVDA', epsGrowth: '+95%', revGrowth: '+65%', tag: 'AI infrastructure. Market leader.', tagBold: 'Blackwell demand off the charts.', tagFull: "NVIDIA is the dominant AI chip supplier — Blackwell GPUs sold out globally, Rubin extends leadership into the next cycle.", pick: 'AI chips. Dominant platform.', pickBold: 'Compounding at scale.', pickFull: "The world dominant AI infrastructure company — Blackwell demand exceeds supply, cloud hyperscalers locked in, Rubin secures next-generation leadership.", ind1l: 'EARNINGS GROWTH', ind1v: '+95%', ind2l: 'UNDERVALUED BY', ind2v: '5%', metrics: [{ l: 'P/E', v: '35.9' }, { l: 'ROIC', v: '85.4%' }, { l: 'EPS Growth 5y', v: '94.9%' }, { l: 'Signal', v: 'FAIRLY VALUED' }], scores: [{ l: 'Dividend', v: 1, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'Minimal' }, { l: 'Momentum', v: 9, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '51%' }, { l: 'Profit', v: 10, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '85.4%' }, { l: 'Low Debt', v: 8, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Low' }, { l: 'Fair Price', v: 6, max: 10, color: '#D4884A', raw: 'JOKER Signal', rawV: 'FAIRLY VALUED' }], bullets: ["Dominant AI chip supplier — Blackwell GPUs sold out globally.", "ROIC of 85.4% — extraordinary capital efficiency at massive scale.", "Revenue up 73% year over year; EPS grew 95% annualised over five years.", "Next earnings May 20 — well clear of reporting window."], },
-    { id: 20, type: 'JOKER', isPro: true, fairValue: 123.15, yahooTicker: 'TDW', stars: 4, sector: 'Energy', sectorIcon: '🚢', irLink: 'https://www.tdw.com/investor-relations/', company: 'Tidewater Inc', ticker: 'TDW', epsGrowth: '+28%', revGrowth: '—', tag: 'Offshore vessels. 39% below FV.', tagBold: 'Benefiting from offshore capex boom.', tagFull: "Tidewater operates the world largest offshore support fleet — offshore capex accelerating as energy security drives new field development.", pick: 'Offshore vessels. Capex boom.', pickBold: 'Structural tailwind from energy.', pickFull: "The world largest offshore support vessel company — strong tailwind from rising offshore energy investment and energy security drives.", ind1l: 'EARNINGS GROWTH', ind1v: '+28%', ind2l: 'UNDERVALUED BY', ind2v: '39%', metrics: [{ l: 'P/E', v: '11.3' }, { l: 'ROIC', v: '4.6%' }, { l: 'FCF Yield', v: '26.1%' }, { l: 'D/E', v: '0.8' }], scores: [{ l: 'Dividend', v: 1, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'None' }, { l: 'Momentum', v: 8, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '82%' }, { l: 'Profit', v: 4, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '4.6%' }, { l: 'Low Debt', v: 6, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Moderate' }, { l: 'Fair Price', v: 7, max: 10, color: '#D4884A', raw: 'JOKER Signal', rawV: 'UNDERVALUED' }], bullets: ["World largest offshore support vessel fleet serving oil and gas operators globally.", "Structural tailwind: rising energy security spending driving offshore capex.", "Stock up 82% in one year; EPS grew 28% annualised over five years.", "FCF yield of 26.1% — significant cash generation."], },
-    { id: 21, type: 'JOKER', isPro: true, fairValue: 122.33, yahooTicker: 'ZM', stars: 3, sector: 'Technology', sectorIcon: '💻', irLink: 'https://investors.zoom.us/', company: 'Zoom Video Communications', ticker: 'ZM', epsGrowth: '+22%', revGrowth: '+4%', tag: 'Video collaboration platform.', tagBold: 'ROIC of 96%. Undervalued.', tagFull: "Zoom evolved from a pandemic video call tool into an AI-powered collaboration platform — extraordinary capital returns despite negative narrative.", pick: 'Video platform. AI pivot.', pickBold: 'Exceptional cash generation.', pickFull: "Zoom is a profitable, AI-augmented enterprise collaboration platform — extraordinary ROIC and free cash flow at a modest valuation.", ind1l: 'EARNINGS GROWTH', ind1v: '+22%', ind2l: 'UNDERVALUED BY', ind2v: '38%', metrics: [{ l: 'ROIC', v: '95.9%' }, { l: 'FCF Yield', v: '8.2%' }, { l: 'EPS Growth 5y', v: '21.7%' }, { l: 'Signal', v: 'UNDERVALUED' }], scores: [{ l: 'Dividend', v: 1, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'None' }, { l: 'Momentum', v: 5, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '1%' }, { l: 'Profit', v: 10, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '95.9%' }, { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Net Cash' }, { l: 'Fair Price', v: 7, max: 10, color: '#D4884A', raw: 'JOKER Signal', rawV: 'UNDERVALUED' }], bullets: ["Enterprise video and AI collaboration platform used by millions of businesses globally.", "ROIC of 95.9% — one of the highest capital returns in enterprise software.", "Net cash balance sheet — no financial risk, strong buyback capacity.", "Unloved by the market despite strong fundamentals."], },
-    { id: 22, type: 'JOKER', isPro: true, fairValue: 40.85, yahooTicker: 'EXEL', stars: 3, sector: 'Health Care', sectorIcon: '🧬', irLink: 'https://ir.exelixis.com/', company: 'Exelixis Inc', ticker: 'EXEL', epsGrowth: '+52%', revGrowth: '+18%', tag: 'Oncology biotech. Growing pipeline.', tagBold: 'ROIC of 29.5%. Active buybacks.', tagFull: "Exelixis commercial oncology company with CABOMETYX approved across multiple cancer types — growing revenue, high ROIC, aggressive buybacks.", pick: 'Cancer drugs. Cash machine.', pickBold: 'Pipeline expanding fast.', pickFull: "Commercial oncology company built around CABOMETYX — strong revenue, exceptional ROIC, substantial buyback programme.", ind1l: 'EARNINGS GROWTH', ind1v: '+52%', ind2l: 'UNDERVALUED BY', ind2v: '1%', metrics: [{ l: 'ROIC', v: '29.5%' }, { l: 'EPS Growth 5y', v: '51.6%' }, { l: '1y Perf', v: '12.1%' }, { l: 'Signal', v: 'FAIRLY VALUED' }], scores: [{ l: 'Dividend', v: 1, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'None' }, { l: 'Momentum', v: 6, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '12.1%' }, { l: 'Profit', v: 7, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '29.5%' }, { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Net Cash' }, { l: 'Fair Price', v: 6, max: 10, color: '#D4884A', raw: 'JOKER Signal', rawV: 'FAIRLY VALUED' }], bullets: ["CABOMETYX approved across kidney, liver, and thyroid cancers.", "ROIC of 29.5% — strong capital efficiency from royalty and product revenue.", "EPS grew 51.6% annualised over five years.", ".16 billion in buybacks since 2023 — disciplined capital return."], },
-    { id: 23, type: 'JOKER', isPro: true, fairValue: 29.46, yahooTicker: 'CRDO', stars: 3, sector: 'Technology', sectorIcon: '💻', irLink: 'https://investors.credosemi.com/', company: 'Credo Technology Group', ticker: 'CRDO', epsGrowth: '+64%', revGrowth: '—', tag: 'AI connectivity chips. Explosive.', tagBold: 'Revenue up 200% year over year.', tagFull: "Credo Active Electrical Cables are becoming the standard for AI data centre interconnects — replacing optical cables with 50% lower power.", pick: 'AI interconnects. Hypergrowth.', pickBold: 'Replacing optical cables in AI.', pickFull: "Fabless semiconductor company — AECs becoming the standard for AI data centre inter-rack connectivity, revenue up 200% year over year.", ind1l: 'EARNINGS GROWTH', ind1v: '+64%', ind2l: 'UNDERVALUED BY', ind2v: '71%', metrics: [{ l: 'P/E', v: '52.4' }, { l: 'EPS Growth 5y', v: '64.0%' }, { l: '1y Perf', v: '116%' }, { l: 'Signal', v: 'FAIRLY VALUED' }], scores: [{ l: 'Dividend', v: 1, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'None' }, { l: 'Momentum', v: 9, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '116%' }, { l: 'Profit', v: 3, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '4.8%' }, { l: 'Low Debt', v: 10, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Net Cash' }, { l: 'Fair Price', v: 5, max: 10, color: '#D4884A', raw: 'JOKER Signal', rawV: 'FAIRLY VALUED' }], bullets: ["Active Electrical Cables becoming standard for AI data centre rack connections.", "Revenue up 200% year over year — hyperscalers adopting at accelerating pace.", "50% lower power and 1000x higher reliability versus optical.", "Next earnings ~June — well clear of reporting window."], },
-    { id: 24, type: 'JOKER', isPro: true, fairValue: 11.69, yahooTicker: 'CEK.DE', stars: 3, sector: 'Technology', sectorIcon: '📡', irLink: 'https://www.ceotronics.de/en/investor-relations/', company: 'CeoTronics AG', ticker: 'CEK', epsGrowth: '+25%', revGrowth: '—', tag: 'Defence comms. Near fair value.', tagBold: 'FCF yield 35%. Low debt.', tagFull: "CeoTronics makes communication systems for police, military, and emergency services — niche German small-cap.", pick: 'Police comms niche. Profitable.', pickBold: 'Steady earnings. Low profile.', pickFull: "German manufacturer of professional communication systems for police, military, and emergency responders — niche market with high switching costs.", ind1l: 'EARNINGS GROWTH', ind1v: '+25%', ind2l: 'UNDERVALUED BY', ind2v: '0%', metrics: [{ l: 'P/E', v: '11.8' }, { l: 'ROIC', v: '11.5%' }, { l: 'FCF Yield', v: '35.2%' }, { l: 'D/E', v: '0.5' }], scores: [{ l: 'Dividend', v: 3, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'Low' }, { l: 'Momentum', v: 5, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '8.3%' }, { l: 'Profit', v: 4, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '11.5%' }, { l: 'Low Debt', v: 8, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Low' }, { l: 'Fair Price', v: 6, max: 10, color: '#D4884A', raw: 'JOKER Signal', rawV: 'FAIRLY VALUED' }], bullets: ["German manufacturer of communication systems for police, military, emergency services.", "FCF yield of 35.2% — extraordinary cash generation for a modest market cap.", "Niche market with high switching costs — government and security agency customers.", "EPS grew 25.3% annualised over five years."], },
-    { id: 25, type: 'JOKER', isPro: true, fairValue: 62.14, yahooTicker: 'GMED', stars: 3, sector: 'Health Care', sectorIcon: '🏥', irLink: 'https://ir.globusmedical.com/', company: 'Globus Medical', ticker: 'GMED', epsGrowth: '+31%', revGrowth: '—', tag: 'Spine implants. Growing fast.', tagBold: 'EPS up 31% over 5 years.', tagFull: "Globus Medical merged with NuVasive to create a major musculoskeletal device business — ageing population driving spinal surgery volumes.", pick: 'Spine surgery devices. Growth.', pickBold: 'Ageing population tailwind.', pickFull: "A leading spine surgery implant company with expanded scale — strong secular demand from ageing populations and growing robotics portfolio.", ind1l: 'EARNINGS GROWTH', ind1v: '+31%', ind2l: 'UNDERVALUED BY', ind2v: '-28%', metrics: [{ l: 'P/E', v: '21.8' }, { l: 'ROIC', v: '8.5%' }, { l: 'FCF Yield', v: '19.7%' }, { l: 'D/E', v: '0.2' }], scores: [{ l: 'Dividend', v: 1, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'None' }, { l: 'Momentum', v: 6, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '20%' }, { l: 'Profit', v: 3, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '8.5%' }, { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Low' }, { l: 'Fair Price', v: 5, max: 10, color: '#D4884A', raw: 'JOKER Signal', rawV: 'OVERVALUED' }], bullets: ["Leading spine surgery implant company — one of the largest musculoskeletal device firms globally.", "Secular demand from ageing populations driving consistent spinal procedure volume growth.", "Growing robotics and enabling technology portfolio.", "EPS grew 30.8% annualised over five years."], },
-    { id: 26, type: 'JOKER', isPro: true, fairValue: 76.63, yahooTicker: 'AGYS', stars: 3, sector: 'Technology', sectorIcon: '💻', irLink: 'https://ir.agilysys.com/', company: 'Agilysys Inc', ticker: 'AGYS', epsGrowth: '+25%', revGrowth: '+18%', tag: 'Hospitality SaaS. Sticky revenue.', tagBold: 'ROIC of 27.5%.', tagFull: "Agilysys provides property management and POS software for hotels, casinos, and resorts — high switching costs, recurring revenue.", pick: 'Hotel software. SaaS model.', pickBold: 'High switching costs.', pickFull: "The leading hospitality technology provider — subscription-based revenue, high switching costs, growing installed base of premium clients.", ind1l: 'EARNINGS GROWTH', ind1v: '+25%', ind2l: 'UNDERVALUED BY', ind2v: '12%', metrics: [{ l: 'P/E', v: '62.0' }, { l: 'ROIC', v: '27.5%' }, { l: 'FCF Yield', v: '19.1%' }, { l: 'D/E', v: '0.5' }], scores: [{ l: 'Dividend', v: 1, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'None' }, { l: 'Momentum', v: 4, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '-10%' }, { l: 'Profit', v: 7, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '27.5%' }, { l: 'Low Debt', v: 8, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Low' }, { l: 'Fair Price', v: 6, max: 10, color: '#D4884A', raw: 'JOKER Signal', rawV: 'FAIRLY VALUED' }], bullets: ["Exclusive hospitality technology — property management and POS for hotels, casinos, resorts.", "High switching costs: once installed, replacement is disruptive and rare.", "ROIC of 27.5% from a subscription-first business model.", "EPS grew 25.2% annualised over five years."], },
-    { id: 27, type: 'JOKER', isPro: true, fairValue: 100.67, yahooTicker: 'INCY', stars: 3, sector: 'Health Care', sectorIcon: '🧬', irLink: 'https://investor.incyte.com/', company: 'Incyte Corp', ticker: 'INCY', epsGrowth: '+47%', revGrowth: '+12%', tag: 'Oncology biotech. Strong pipeline.', tagBold: 'ROIC of 38%. Growing earnings.', tagFull: "Incyte commercial oncology with Jakafi as flagship — consistent earnings growth, expanding into dermatology and new indications.", pick: 'Cancer biotech. Pipeline depth.', pickBold: 'Profitable with strong ROIC.', pickFull: "Commercial oncology company with Jakafi for myelofibrosis and GVHD — consistent double-digit earnings growth, rich pipeline.", ind1l: 'EARNINGS GROWTH', ind1v: '+47%', ind2l: 'UNDERVALUED BY', ind2v: '8%', metrics: [{ l: 'ROIC', v: '38.0%' }, { l: 'EPS Growth 5y', v: '46.9%' }, { l: '1y Perf', v: '37.0%' }, { l: 'Signal', v: 'FAIRLY VALUED' }], scores: [{ l: 'Dividend', v: 1, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'None' }, { l: 'Momentum', v: 7, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '37%' }, { l: 'Profit', v: 8, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '38.0%' }, { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Net Cash' }, { l: 'Fair Price', v: 6, max: 10, color: '#D4884A', raw: 'JOKER Signal', rawV: 'FAIRLY VALUED' }], bullets: ["Jakafi approved for myelofibrosis and GVHD — commercial oncology leader.", "ROIC of 38% — strong capital returns from a profitable biotech.", "EPS grew 46.9% annualised over five years.", "Expanding into dermatology and new oncology indications."], },
-    { id: 28, type: 'JOKER', isPro: true, fairValue: 336.21, yahooTicker: 'CAMB.BR', stars: 3, sector: 'Materials', sectorIcon: '♻️', irLink: 'https://www.campine.be/en/investors', company: 'Campine NV', ticker: 'CAMB', epsGrowth: '+76%', revGrowth: '—', tag: 'Lead recycling. Circular economy.', tagBold: 'EPS grew 76% over 5 years.', tagFull: "Campine is a Belgian lead recycler — circular economy business processing industrial waste into high-value materials with EV battery recycling tailwind.", pick: 'Lead recycler. Circular economy.', pickBold: 'EV battery recycling tailwind.', pickFull: "Belgian specialist in lead recycling and antimony compounds — strong secular tailwind from EV battery recycling demand.", ind1l: 'EARNINGS GROWTH', ind1v: '+76%', ind2l: 'UNDERVALUED BY', ind2v: '45%', metrics: [{ l: 'ROIC', v: '24.7%' }, { l: 'EPS Growth 5y', v: '76.2%' }, { l: '1y Perf', v: '12.5%' }, { l: 'Signal', v: 'UNDERVALUED' }], scores: [{ l: 'Dividend', v: 3, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'Moderate' }, { l: 'Momentum', v: 5, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '12.5%' }, { l: 'Profit', v: 7, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '24.7%' }, { l: 'Low Debt', v: 7, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Low' }, { l: 'Fair Price', v: 7, max: 10, color: '#D4884A', raw: 'JOKER Signal', rawV: 'UNDERVALUED' }], bullets: ["Belgian lead recycler — circular economy model processing used batteries.", "EV battery recycling demand growing rapidly across Europe.", "ROIC of 24.7% from specialty materials operations.", "EPS grew 76.2% annualised over five years."], },
-    { id: 29, type: 'ACE', isPro: true, fairValue: 136.87, yahooTicker: 'MLI', stars: 4, sector: 'Industrials', sectorIcon: '🏭', irLink: 'https://www.muellerindustries.com/investor-relations/', company: 'Mueller Industries', ticker: 'MLI', epsGrowth: '+41%', revGrowth: '—', tag: 'Copper products. 19% below FV.', tagBold: 'ROIC of 43%. Strong fundamentals.', tagFull: "Mueller Industries is a leading copper and brass products manufacturer for plumbing, HVAC, and industrial — consistently high ROIC, low debt.", pick: 'Copper products. Quality compounder.', pickBold: 'Strong financials. Low debt.', pickFull: "Leading US manufacturer of copper tubing and brass fittings — consistent high ROIC of 43%, improving Piotroski metrics, trading below fair value.", ind1l: 'EARNINGS GROWTH', ind1v: '+41%', ind2l: 'UNDERVALUED BY', ind2v: '19%', metrics: [{ l: 'P/E', v: '15.8' }, { l: 'ROIC', v: '43.1%' }, { l: 'EPS Growth 5y', v: '41.1%' }, { l: 'D/E', v: '0.2' }], scores: [{ l: 'Earnings Stability', v: 8, max: 10, color: '#4CAF82', raw: 'Earnings', rawV: 'Stable 5y' }, { l: 'Momentum', v: 7, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '39%' }, { l: 'Profit', v: 8, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '43.1%' }, { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Very Low' }, { l: 'Fair Price', v: 6, max: 10, color: '#D4884A', raw: 'ACE Signal', rawV: 'UNDERVALUED' }], bullets: ["Leading US copper tubing and brass fittings manufacturer for plumbing, HVAC, industrial.", "ROIC of 43.1% — exceptional capital efficiency.", "EPS grew 41.1% annualised over five years.", "Trading at 19% below fair value with minimal debt."], },
-    { id: 30, type: 'ACE', isPro: true, fairValue: 103.6, yahooTicker: 'STRA', stars: 3, sector: 'Industrials', sectorIcon: '📚', irLink: 'https://ir.strategiceducation.com/', company: 'Strategic Education', ticker: 'SQE', epsGrowth: '+8%', revGrowth: '+3%', tag: 'Online education. 32% below FV.', tagBold: 'Improving fundamentals across board.', tagFull: "Strategic Education operates Strayer and Capella University — improving metrics, low debt, trading below fair value.", pick: 'Online university. Improving.', pickBold: 'Adult education compounder.', pickFull: "Operates Strayer and Capella University serving working adults — consistent improvement across Piotroski metrics, low debt, valuation discount.", ind1l: 'EARNINGS GROWTH', ind1v: '+8%', ind2l: 'UNDERVALUED BY', ind2v: '32%', metrics: [{ l: 'P/E', v: '14.8' }, { l: 'ROIC', v: '4.8%' }, { l: 'EPS Growth 5y', v: '7.9%' }, { l: 'D/E', v: '0.2' }], scores: [{ l: 'Earnings Stability', v: 7, max: 10, color: '#4CAF82', raw: 'Earnings', rawV: 'Stable' }, { l: 'Momentum', v: 4, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '-3.4%' }, { l: 'Profit', v: 3, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '4.8%' }, { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Very Low' }, { l: 'Fair Price', v: 7, max: 10, color: '#D4884A', raw: 'ACE Signal', rawV: 'UNDERVALUED' }], bullets: ["Operates Strayer and Capella University — accredited online programs for working adults.", "Improving Piotroski metrics across profitability, leverage, and efficiency.", "Growing demand for flexible online degrees from working adult population.", "Trading at 32% below fair value."], },
-    { id: 31, type: 'QUEEN', isPro: true, fairValue: 10.35, yahooTicker: 'EXAE.AT', stars: 3, sector: 'Financials', sectorIcon: '🏛️', irLink: 'https://www.helex.gr/en/investor-relations', company: 'Hellenic Exchanges', ticker: 'HEE', epsGrowth: '+56%', revGrowth: '—', tag: 'Athens Stock Exchange operator.', tagBold: 'ROIC of 34.7%. Monopoly.', tagFull: "Hellenic Exchanges operates the Athens Stock Exchange — a regulated monopoly benefiting from Greek economic recovery.", pick: 'Stock exchange monopoly. Greece.', pickBold: 'Regulated infrastructure. Income.', pickFull: "The Athens Stock Exchange operator — regulated monopoly, high ROIC, consistent dividends, asset-light model.", ind1l: 'CASH FLOW %', ind1v: '—', ind2l: 'UNDERVALUED BY', ind2v: '34%', metrics: [{ l: 'ROIC', v: '34.7%' }, { l: 'EPS Growth 5y', v: '55.6%' }, { l: '1y Perf', v: '28.1%' }, { l: 'Signal', v: 'UNDERVALUED' }], scores: [{ l: 'Dividend', v: 6, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'Moderate' }, { l: 'Momentum', v: 6, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '28.1%' }, { l: 'Profit', v: 7, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '34.7%' }, { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Net Cash' }, { l: 'Fair Price', v: 7, max: 10, color: '#D4884A', raw: 'QUEEN Signal', rawV: 'UNDERVALUED' }], bullets: ["Operates the Athens Stock Exchange — regulated capital market monopoly.", "ROIC of 34.7% from asset-light, fee-based model.", "Greece economic recovery driving rising market activity.", "EPS grew 55.6% annualised over five years."], },
-    { id: 32, type: 'QUEEN', isPro: true, fairValue: 45.99, yahooTicker: 'CMRE', stars: 3, sector: 'Industrials', sectorIcon: '🚢', irLink: 'https://www.costamare.com/investor-relations/', company: 'Costamare Inc', ticker: 'CMRE', epsGrowth: '+81%', revGrowth: '—', tag: 'Container ships. 64% below FV.', tagBold: 'EPS grew 80% over 5 years.', tagFull: "Costamare is a major container ship owner on long-term fixed-rate charters to top shipping lines — extraordinary discount to intrinsic value.", pick: 'Container ships. Long charters.', pickBold: 'Massive discount to fair value.', pickFull: "Major independent container ship owner — long-term fixed-rate contracts, exceptional earnings visibility, trading at 64% below fair value.", ind1l: 'CASH FLOW %', ind1v: '—', ind2l: 'UNDERVALUED BY', ind2v: '64%', metrics: [{ l: 'P/E', v: '5.4' }, { l: 'ROIC', v: '11.9%' }, { l: 'EPS Growth 5y', v: '80.5%' }, { l: 'D/E', v: '0.8' }], scores: [{ l: 'Dividend', v: 6, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'Moderate' }, { l: 'Momentum', v: 9, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '118%' }, { l: 'Profit', v: 5, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '11.9%' }, { l: 'Low Debt', v: 6, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Moderate' }, { l: 'Fair Price', v: 9, max: 10, color: '#D4884A', raw: 'QUEEN Signal', rawV: 'STRONGLY UNDERVALUED' }], bullets: ["Major container ship owner with long-term fixed-rate charters to global shipping lines.", "EPS grew 80.5% annualised over five years.", "Stock up 118% in one year yet still at 36% of fair value.", "Long-term charters provide exceptional earnings visibility."], },
-    { id: 33, type: 'QUEEN', isPro: true, fairValue: 306.64, yahooTicker: 'WAWI.OL', stars: 3, sector: 'Industrials', sectorIcon: '🚢', irLink: 'https://www.walleniuswilhelmsen.com/investors/', company: 'Wallenius Wilhelmsen', ticker: 'WAWI', epsGrowth: '+41%', revGrowth: '+12%', tag: 'Car carrier leader. 61% below FV.', tagBold: 'P/E of 4.9. Strong cash flow.', tagFull: "Wallenius Wilhelmsen is the world leading vehicle logistics company — transporting cars, trucks, machinery globally at P/E below 5.", pick: 'World car shipping leader.', pickBold: 'Deep discount to fair value.', pickFull: "World leading vehicle logistics company — largest RoRo fleet globally, trading at P/E 4.9 despite strong earnings.", ind1l: 'CASH FLOW %', ind1v: '34.6%', ind2l: 'UNDERVALUED BY', ind2v: '61%', metrics: [{ l: 'P/E', v: '4.9' }, { l: 'ROIC', v: '14.7%' }, { l: 'FCF Yield', v: '34.6%' }, { l: 'D/E', v: '1.4' }], scores: [{ l: 'Dividend', v: 5, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'Moderate' }, { l: 'Momentum', v: 6, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '32%' }, { l: 'Profit', v: 5, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '14.7%' }, { l: 'Low Debt', v: 4, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Moderate-High' }, { l: 'Fair Price', v: 9, max: 10, color: '#D4884A', raw: 'QUEEN Signal', rawV: 'STRONGLY UNDERVALUED' }], bullets: ["World leading vehicle logistics company — cars, trucks, machinery by sea.", "Largest RoRo fleet globally; scale advantages difficult to replicate.", "EPS grew 41% annualised over five years.", "Trading at 39% of fair value — P/E 4.9 for the global market leader."], },
-    { id: 34, type: 'QUEEN', isPro: true, fairValue: 44.72, yahooTicker: 'LPG', stars: 3, sector: 'Energy', sectorIcon: '⚡', irLink: 'https://ir.dorianlpg.com/', company: 'Dorian LPG', ticker: 'LPG', epsGrowth: '+9%', revGrowth: '+5%', tag: 'LPG tankers. 31% below FV.', tagBold: 'FCF yield 33.5%. Low debt.', tagFull: "Dorian LPG operates VLGCs transporting liquefied petroleum gas — LPG trade projected to grow 6% in 2026.", pick: 'LPG shipping. Gas trade growth.', pickBold: 'FCF machine. Rising exports.', pickFull: "Leading VLGC operator — LPG trade growth of 6% projected for 2026, driven by rising US and Middle East exports.", ind1l: 'CASH FLOW %', ind1v: '33.5%', ind2l: 'UNDERVALUED BY', ind2v: '31%', metrics: [{ l: 'P/E', v: '10.9' }, { l: 'ROIC', v: '10.9%' }, { l: 'FCF Yield', v: '33.5%' }, { l: 'D/E', v: '0.6' }], scores: [{ l: 'Dividend', v: 5, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'Variable' }, { l: 'Momentum', v: 7, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '43%' }, { l: 'Profit', v: 4, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '10.9%' }, { l: 'Low Debt', v: 7, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Moderate' }, { l: 'Fair Price', v: 7, max: 10, color: '#D4884A', raw: 'QUEEN Signal', rawV: 'UNDERVALUED' }], bullets: ["Operates VLGCs transporting LPG across global trade routes.", "LPG trade projected to grow 6% in 2026 — rising US and Middle East exports.", "FCF yield of 33.5% — strong cash generation.", "Trading at 31% below fair value."], },
-    { id: 35, type: 'JOKER', isPro: true, fairValue: 500.0, yahooTicker: 'BIOA-B.ST', stars: 4, sector: 'Health Care', sectorIcon: '🧬', irLink: 'https://www.bioarctic.se/en/investors/', company: 'BioArctic AB', ticker: 'BIOA B', epsGrowth: '+76%', revGrowth: '—', tag: 'Alzheimer drug royalties. Growth.', tagBold: 'Leqembi royalty stream growing.', tagFull: "BioArctic co-developed Leqembi with Eisai — the first approved disease-modifying Alzheimer treatment, earning growing royalties.", pick: 'Alzheimer royalties. Leqembi.', pickBold: 'First approved Alzheimer drug.', pickFull: "BioArctic earns royalties on Leqembi — the first approved disease-modifying Alzheimer treatment. Revenue grows with global reimbursement expansion.", ind1l: 'EARNINGS GROWTH', ind1v: '+76%', ind2l: 'UNDERVALUED BY', ind2v: '36%', metrics: [{ l: 'ROIC', v: '36.7%' }, { l: 'EPS Growth 5y', v: '75.9%' }, { l: '1y Perf', v: '51%' }, { l: 'Signal', v: 'UNDERVALUED' }], scores: [{ l: 'Dividend', v: 1, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'None' }, { l: 'Momentum', v: 8, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '51%' }, { l: 'Profit', v: 8, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '36.7%' }, { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Net Cash' }, { l: 'Fair Price', v: 7, max: 10, color: '#D4884A', raw: 'JOKER Signal', rawV: 'UNDERVALUED' }], bullets: ["Co-developer of Leqembi — the first approved disease-modifying Alzheimer treatment.", "Earns royalties as reimbursement expands across US, EU, and Japan.", "ROIC of 36.7% from asset-light royalty model.", "EPS grew 75.9% annualised over five years."], },
-    { id: 36, type: 'QUEEN', isPro: true, fairValue: 23.72, yahooTicker: '6QK.DE', stars: 3, sector: 'Industrials', sectorIcon: '🔫', irLink: 'https://www.msiplc.com/investor-relations/', company: 'MS International PLC', ticker: '6QK', epsGrowth: '+65%', revGrowth: '—', tag: 'Defence. 34% below fair value.', tagBold: 'ROIC 25.5%. EPS up 65% in 5y.', tagFull: "MS International makes naval gun systems and petrol station forecourt equipment — niche dual-market defence operator.", pick: 'Naval guns. Defence niche.', pickBold: 'Dual market. Strong growth.', pickFull: "UK defence company — naval gun systems sold to navies globally, plus petrol station equipment. Niche positions, strong EPS growth.", ind1l: 'CASH FLOW %', ind1v: '—', ind2l: 'UNDERVALUED BY', ind2v: '34%', metrics: [{ l: 'P/E', v: '15.5' }, { l: 'ROIC', v: '25.5%' }, { l: 'EPS Growth 5y', v: '65.2%' }, { l: 'D/E', v: '1.0' }], scores: [{ l: 'Dividend', v: 4, max: 10, color: '#4CAF82', raw: 'Div. Yield', rawV: 'Low' }, { l: 'Momentum', v: 6, max: 10, color: '#5B8FD4', raw: '1y Perf', rawV: '30%' }, { l: 'Profit', v: 6, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '25.5%' }, { l: 'Low Debt', v: 5, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Moderate' }, { l: 'Fair Price', v: 7, max: 10, color: '#D4884A', raw: 'QUEEN Signal', rawV: 'UNDERVALUED' }], bullets: ["UK defence manufacturer of naval gun systems sold to navies across Europe and Asia.", "Dual-market: naval weapons and petrol station forecourt equipment.", "EPS grew 65.2% annualised over five years.", "Trading at 34% below fair value."], }
+    // ── KINGS (FREE) ─────────────────────────────────────────────────────────
+    {
+        id: 1, type: 'KING', isPro: false, fairValue: 3.05, yahooTicker: 'CRCT',
+        stars: 3,
+        sectorIcon: '✂️',
+        irLink: 'https://investor.cricut.com',
+        company: 'Cricut', ticker: 'CRCT',
+        tag: 'DIY cutting machine platform', tagBold: 'DIY platform.',
+        tagFull: "Cricut sells cutting machines to crafters and small creators — the machines go out cheap, but the blades, materials and design subscriptions that follow create a durable stream of recurring income. Three revenue layers stacked on one loyal customer base.",
+        pick: 'Yield doubled vs its own history.', pickBold: 'Deep value.',
+        pickFull: "▲▲ STRONGLY UNDERVALUED — The dividend has more than doubled relative to its own history, and the shares trade well below their normal valuation. The market punished a slowdown in machine sales and forgot about the consumables and subscriptions quietly compounding underneath.",
+        ind1l: 'DIV YIELD', ind1v: '4.6%',
+        ind2l: 'P/E', ind2v: '11.6',
+        metrics: [{ l: 'Div. Yield', v: '4.6%' }, { l: 'P/E', v: '11.6' }, { l: 'Yld Ratio', v: '2.71' }, { l: 'P/E Ratio', v: '0.57' }],
+        scores: [
+            { l: 'Dividend', v: 6, max: 10, color: '#4CAF82', raw: 'Yld vs 5Y Avg', rawV: '2.71x' },
+            { l: 'Profit', v: 7, max: 10, color: '#5B8FD4', raw: 'P/E vs 5Y Avg', rawV: '0.57x' },
+            { l: 'Low Debt', v: 7, max: 10, color: '#9B6ED4', raw: 'Signal Score', rawV: '8/10' },
+            { l: 'Fair Price', v: 9, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'STRONGLY UV' },
+        ],
+        bullets: [
+            "Dividend yield doubled vs its own 5-year average.",
+            "Shares trade at 0.57× their normal P/E.",
+            "Recurring blade and subscription revenue ignored by market.",
+            "Zero net debt, strong free cash flow."
+        ],
+    },
+    {
+        id: 2, type: 'KING', isPro: false, fairValue: 22.0, yahooTicker: 'FOUR.L',
+        stars: 3,
+        sectorIcon: '🖨️',
+        irLink: 'https://investors.4imprint.com/investors/',
+        company: '4imprint Group', ticker: 'FOUR',
+        tag: 'Promotional products, USA', tagBold: 'Promotional products.',
+        tagFull: "4imprint is the largest direct seller of branded promotional merchandise in the United States — pens, bags, apparel and thousands of other customised items shipped straight to businesses. Fifteen years of uninterrupted revenue growth, zero debt, and a dividend that rises every year.",
+        pick: 'Fifteen years. Fairly priced.', pickBold: 'Consistent compounder.',
+        pickFull: "▲ UNDERVALUED — Fifteen straight years of growth with no debt and a dividend that keeps climbing. A business this consistent rarely trades at a sensible price — right now it does.",
+        ind1l: 'DIV YIELD', ind1v: '4.7%',
+        ind2l: 'P/E', ind2v: '12.7',
+        metrics: [{ l: 'Div. Yield', v: '4.7%' }, { l: 'P/E', v: '12.7' }, { l: 'Yld Ratio', v: '1.88' }, { l: 'P/E Ratio', v: '0.56' }],
+        scores: [
+            { l: 'Dividend', v: 8, max: 10, color: '#4CAF82', raw: 'Rev. CAGR 15Y', rawV: '+12%' },
+            { l: 'Profit', v: 7, max: 10, color: '#5B8FD4', raw: 'P/E vs 5Y Avg', rawV: '0.56x' },
+            { l: 'Low Debt', v: 10, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 8, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'STRONGLY UV' },
+        ],
+        bullets: [
+            "15 straight years of revenue growth — no exceptions.",
+            "Zero debt on the balance sheet.",
+            "Dividend rises every year, currently at 4.7%.",
+            "Largest direct-seller of branded promo merchandise in the US.",
+            "Shares at 0.56× their normal P/E — rarely this cheap."
+        ],
+    },
+    {
+        id: 3, type: 'KING', isPro: false, fairValue: 199.0, yahooTicker: 'IPAR',
+        stars: 3,
+        sectorIcon: '🌸',
+        irLink: 'https://www.interparfumsinc.com/investor-presentations',
+        company: 'Interparfums', ticker: 'ITP',
+        tag: 'Licensed luxury fragrance', tagBold: 'Luxury fragrance.',
+        tagFull: "Interparfums creates and sells luxury fragrances under some of the world's most recognised fashion names — Coach, Montblanc, Kate Spade and others. The company owns the licence agreements and keeps the profits; someone else handles the factories. Elegantly capital-light.",
+        pick: 'Record year. Reasonable price.', pickBold: 'Record revenue.',
+        pickFull: "▲ UNDERVALUED — Record sales and earnings, a healthy dividend, and cash generation that would make most manufacturers envious — all from a business that owns no factories. Priced fairly for a company performing this well.",
+        ind1l: 'DIV YIELD', ind1v: '4.2%',
+        ind2l: 'P/E', ind2v: '14.7',
+        metrics: [{ l: 'Div. Yield', v: '4.2%' }, { l: 'P/E', v: '14.7' }, { l: 'Yld Ratio', v: '2.0' }, { l: 'P/E Ratio', v: '0.45' }],
+        scores: [
+            { l: 'Dividend', v: 7, max: 10, color: '#4CAF82', raw: 'Rev. Growth YoY', rawV: '+12%' },
+            { l: 'Profit', v: 6, max: 10, color: '#5B8FD4', raw: 'P/E vs 5Y Avg', rawV: '0.45x' },
+            { l: 'Low Debt', v: 10, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 8, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'STRONGLY UV' },
+        ],
+        bullets: [
+            "Record sales and earnings in the most recent year.",
+            "4.2% dividend yield — double its own 5-year average.",
+            "Owns no factories — pure licence income, capital-light.",
+            "P/E at 0.45× its own historical average."
+        ],
+    },
+    {
+        id: 4, type: 'KING', isPro: false, fairValue: 64.0, yahooTicker: 'MO',
+        stars: 3,
+        sectorIcon: '💰',
+        irLink: 'https://investor.altria.com',
+        company: 'Altria Group', ticker: 'MO',
+        tag: 'US tobacco & nicotine leader', tagBold: 'Tobacco leader.',
+        tagFull: "Altria owns Marlboro — America's most dominant cigarette brand — and is steadily building positions in smokeless nicotine, e-vapour and cannabis. The company has raised its dividend every single year for over half a century, one of the longest unbroken streaks of any listed company on earth.",
+        pick: 'Half a century of dividend raises.', pickBold: 'Paid to wait.',
+        pickFull: "▲▲ STRONGLY UNDERVALUED — More than fifty consecutive years of dividend increases, and the yield today sits among the highest available from any investment-grade business. While the world debates the future of nicotine, the cash keeps flowing and the dividend keeps rising.",
+        ind1l: 'DIV YIELD', ind1v: '6.0%',
+        ind2l: 'P/E', ind2v: '16.8',
+        metrics: [{ l: 'Div. Yield', v: '6.0%' }, { l: 'P/E', v: '16.8' }, { l: 'Signal Score', v: '7/10' }, { l: 'KING Signal', v: 'STR. UV' }],
+        scores: [
+            { l: 'Dividend', v: 6, max: 10, color: '#4CAF82', raw: 'Div. Growth 5Y', rawV: '+5%/yr' },
+            { l: 'Profit', v: 8, max: 10, color: '#5B8FD4', raw: 'FCF Margin', rawV: '>40%' },
+            { l: 'Low Debt', v: 6, max: 10, color: '#9B6ED4', raw: 'Debt/EBITDA', rawV: '2.1' },
+            { l: 'Fair Price', v: 9, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'STRONGLY UV' },
+        ],
+        bullets: [
+            "50+ consecutive years of annual dividend increases.",
+            "6.0% yield — one of the highest from any investment-grade business.",
+            "Free cash flow margin above 40%.",
+            "Marlboro dominates the US market — pricing power intact."
+        ],
+    },
+    {
+        id: 5, type: 'KING', isPro: false, fairValue: 282.0, yahooTicker: 'BETS-B.ST',
+        stars: 4,
+        sectorIcon: '🎰',
+        irLink: 'https://www.betssonab.com/investors',
+        company: 'Betsson', ticker: 'BETS B',
+        tag: 'Nordic gaming operator', tagBold: 'Nordic gaming.',
+        tagFull: "Betsson is one of Europe's most profitable online gambling companies — running casino, sportsbook and poker operations across the Nordics, Baltics and Latin America. Two decades in, it has navigated every regulatory shift the continent has thrown at it and come out stronger each time.",
+        pick: 'Revenue record high. Stock oversold.', pickBold: 'Nordic gaming.',
+        pickFull: "▲▲ STRONGLY UNDERVALUED — Revenue is at an all-time high and the shares are meaningfully down. The market is pricing in a regulatory collapse that simply has not arrived. The dividend sits well above its historical average; the valuation well below. The gap between the headlines and the numbers is the opportunity.",
+        ind1l: 'DIV YIELD', ind1v: '7.6%',
+        ind2l: 'P/E', ind2v: '6.7',
+        metrics: [{ l: 'Div. Yield', v: '7.6%' }, { l: 'P/E', v: '6.7' }, { l: 'Yld Ratio', v: '1.23' }, { l: 'P/E Ratio', v: '0.81' }],
+        scores: [
+            { l: 'Dividend', v: 6, max: 10, color: '#4CAF82', raw: 'Rev. Growth YoY', rawV: '+8%' },
+            { l: 'Profit', v: 7, max: 10, color: '#5B8FD4', raw: 'FCF Margin', rawV: '14%' },
+            { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt/EBITDA', rawV: '-0.5' },
+            { l: 'Fair Price', v: 9, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'STRONGLY UV' },
+        ],
+        bullets: [
+            "Revenue at an all-time high while the stock is down sharply.",
+            "7.6% dividend yield — well above its own historical average.",
+            "Net debt is negative — the company holds net cash.",
+            "P/E of 6.7 prices in a collapse that has not arrived."
+        ],
+    },
+    {
+        id: 6, type: 'KING', isPro: false, fairValue: 1.59, yahooTicker: 'MEGP.L',
+        stars: 3,
+        sectorIcon: '📸',
+        irLink: 'https://www.me-group.com/financial-information/',
+        company: 'ME Group International', ticker: 'MEGP',
+        tag: 'Photo booths & laundry', tagBold: 'Photo booths.',
+        tagFull: "ME Group runs over 55,000 instant photo booths and 25,000 laundry machines across Europe and Asia. Every unit earns money around the clock with almost no staff required — customers walk in, pay by coin or card, and leave. Low costs, loyal footfall, and cash that compounds quietly in the background.",
+        pick: 'Record profits. Dividend raised again.', pickBold: 'Cash machine.',
+        pickFull: "▲▲ STRONGLY UNDERVALUED — Record profits just reported, dividend raised again. Tens of thousands of machines earning around the clock, and the shares are trading below their own historical average. A quiet compounder that the market consistently underestimates.",
+        ind1l: 'DIV YIELD', ind1v: '5.8%',
+        ind2l: 'P/E', ind2v: '9.0',
+        metrics: [{ l: 'Div. Yield', v: '5.8%' }, { l: 'P/E', v: '9.0' }, { l: 'Yld Ratio', v: '1.53' }, { l: 'P/E Ratio', v: '0.83' }],
+        scores: [
+            { l: 'Dividend', v: 6, max: 10, color: '#4CAF82', raw: 'Div. Growth H1', rawV: '+11.6%' },
+            { l: 'Profit', v: 7, max: 10, color: '#5B8FD4', raw: 'FCF Margin', rawV: '12%' },
+            { l: 'Low Debt', v: 8, max: 10, color: '#9B6ED4', raw: 'Equity Ratio', rawV: '61%' },
+            { l: 'Fair Price', v: 8, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'STRONGLY UV' },
+        ],
+        bullets: [
+            "55,000+ machines earn cash 24/7 with almost no staff.",
+            "Record profits; dividend raised again.",
+            "5.8% yield — growing, not shrinking.",
+            "Shares trade below their own historical average."
+        ],
+    },
+    {
+        id: 7, type: 'KING', isPro: false, fairValue: 24.0, yahooTicker: 'VALU',
+        stars: 3,
+        sectorIcon: '📊',
+        irLink: 'https://www.valueline.com/about/investor-relations',
+        company: 'Value Line', ticker: 'VALU',
+        tag: 'Investment research & publishing', tagBold: 'Research publisher.',
+        tagFull: "Value Line has published independent stock research in the United States for over ninety years, covering more than 1,700 companies. Subscribers — mostly institutions and serious private investors — renew year after year. Almost no capital is needed to run it, and the majority of every dollar earned becomes free cash.",
+        pick: 'Exceptional FCF. Fair price.', pickBold: 'Capital-light.',
+        pickFull: "▲ UNDERVALUED — Among the most cash-generative businesses of its size anywhere — the vast majority of revenue falls straight to the bottom line. A solid dividend, a fair price, and a franchise that has survived every market cycle since the Great Depression.",
+        ind1l: 'DIV YIELD', ind1v: '3.5%',
+        ind2l: 'P/E', ind2v: '16.3',
+        metrics: [{ l: 'Div. Yield', v: '3.5%' }, { l: 'P/E', v: '16.3' }, { l: 'Yld Ratio', v: '1.30' }, { l: 'P/E Ratio', v: '0.79' }],
+        scores: [
+            { l: 'Dividend', v: 5, max: 10, color: '#4CAF82', raw: 'FCF Margin', rawV: '60%+' },
+            { l: 'Profit', v: 9, max: 10, color: '#5B8FD4', raw: 'P/E vs 5Y Avg', rawV: '0.79x' },
+            { l: 'Low Debt', v: 10, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 7, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'STRONGLY UV' },
+        ],
+        bullets: [
+            "FCF margin above 60% — exceptional capital efficiency.",
+            "Zero debt on the balance sheet.",
+            "90-year franchise — survived every market cycle.",
+            "P/E at 0.79× its own 5-year average."
+        ],
+    },
+    {
+        id: 8, type: 'KING', isPro: false, fairValue: 275.0, yahooTicker: 'GTT.PA',
+        stars: 5,
+        sectorIcon: '🚢',
+        irLink: 'https://www.gtt.fr/en/investors',
+        company: 'GTT', ticker: 'GTT',
+        tag: 'LNG tank membrane technology', tagBold: 'LNG royalties.',
+        tagFull: "Every liquefied natural gas tanker on the ocean carries GTT's membrane technology inside — it is the global standard, not an option. GTT collects a licence fee on every ship built worldwide and does not own a single factory. Pure intellectual property, near-monopoly reach, and a royalty stream that follows the global energy trade.",
+        pick: 'LNG royalty machine.', pickBold: 'Structural growth.',
+        pickFull: "▲ UNDERVALUED — A royalty business sitting at the centre of the global liquefied natural gas trade — every new tanker that gets built puts money in GTT's pocket. Strong dividend, exceptional cash conversion, and shares priced below their historical norm.",
+        ind1l: 'DIV YIELD', ind1v: '4.1%',
+        ind2l: 'P/E', ind2v: '17.3',
+        metrics: [{ l: 'Div. Yield', v: '4.1%' }, { l: 'P/E', v: '17.3' }, { l: 'Yld Ratio', v: '1.14' }, { l: 'P/E Ratio', v: '0.79' }],
+        scores: [
+            { l: 'Dividend', v: 7, max: 10, color: '#4CAF82', raw: 'Order Backlog', rawV: 'Record' },
+            { l: 'Profit', v: 9, max: 10, color: '#5B8FD4', raw: 'FCF Margin', rawV: '>50%' },
+            { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 8, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'STRONGLY UV' },
+        ],
+        bullets: [
+            "Every LNG tanker built worldwide uses GTT's membrane.",
+            "Pure royalty model — no factories, no capex.",
+            "FCF margin above 50%; order backlog at a record.",
+            "Zero net debt."
+        ],
+    },
+    {
+        id: 9, type: 'KING', isPro: false, fairValue: 75.0, yahooTicker: 'FLW.VI',
+        stars: 3,
+        sectorIcon: '✈️',
+        irLink: 'https://www.viennaairport.com/en/company/investor_relations',
+        company: 'Flughafen Wien', ticker: 'OEWA',
+        tag: 'Vienna Airport operator', tagBold: 'Airport monopoly.',
+        tagFull: "Flughafen Wien operates Vienna International Airport, the main gateway between Western and Central Europe, under a long-term government concession with regulated, predictable returns. It also holds meaningful stakes in Malta Airport and Kosice Airport, adding geographic diversification to an already stable core.",
+        pick: 'Airport monopoly. Passenger growth resumed.', pickBold: 'Moat intact.',
+        pickFull: "▲ UNDERVALUED — A regulated airport monopoly with a solid dividend and passenger volumes back above pre-pandemic levels and still climbing. The shares trade below their historical valuation despite the business performing exactly as it should.",
+        ind1l: 'DIV YIELD', ind1v: '4.7%',
+        ind2l: 'P/E', ind2v: '12.0',
+        metrics: [{ l: 'Div. Yield', v: '4.7%' }, { l: 'P/E', v: '12.0' }, { l: 'Signal Score', v: '6/10' }, { l: 'KING Signal', v: 'UV' }],
+        scores: [
+            { l: 'Dividend', v: 6, max: 10, color: '#4CAF82', raw: 'Pax Growth YoY', rawV: '+5%' },
+            { l: 'Profit', v: 7, max: 10, color: '#5B8FD4', raw: 'EBITDA Margin', rawV: '35%+' },
+            { l: 'Low Debt', v: 7, max: 10, color: '#9B6ED4', raw: 'Regulated Asset', rawV: 'Base' },
+            { l: 'Fair Price', v: 8, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'UNDERVALUED' },
+        ],
+        bullets: [
+            "Regulated airport monopoly — pricing set by concession.",
+            "Passenger volumes above pre-pandemic levels and climbing.",
+            "4.7% dividend yield, consistent payout history.",
+            "P/E below its own historical average."
+        ],
+    },
+    {
+        id: 10, type: 'KING', isPro: false, fairValue: 684.2, yahooTicker: 'WWIB.OL',
+        stars: 5,
+        sectorIcon: '🚢',
+        irLink: 'https://www.wilhelmsen.com/investor-relations',
+        company: 'Wilhelmsen Holding B', ticker: 'WWIB',
+        tag: 'Maritime conglomerate, Norway', tagBold: 'Shipping empire.',
+        tagFull: "Wilhelmsen is one of Norway's oldest and most resilient industrial families — spanning maritime products, global ship management and strategic stakes in some of the world's largest shipping and offshore logistics businesses. The B shares have traded at a stubborn discount to what the assets are worth for years.",
+        pick: 'Maritime giant. Deep discount.', pickBold: 'P/E of 4.',
+        pickFull: "▲▲ STRONGLY UNDERVALUED — One of the cheapest industrials in the entire deck — earnings are strong, cash generation is real, and the shares price in almost no credit for the underlying asset base. A deeply overlooked Norwegian industrial with a dividend on top.",
+        ind1l: 'DIV YIELD', ind1v: '3.2%',
+        ind2l: 'P/E', ind2v: '4.2',
+        metrics: [{ l: 'Div. Yield', v: '3.2%' }, { l: 'P/E', v: '4.2' }, { l: 'Yld Ratio', v: '0.91' }, { l: 'P/E Ratio', v: '0.65' }],
+        scores: [
+            { l: 'Dividend', v: 6, max: 10, color: '#4CAF82', raw: 'P/E vs 5Y Avg', rawV: '0.65x' },
+            { l: 'Profit', v: 6, max: 10, color: '#5B8FD4', raw: 'FCF Yield', rawV: 'Strong' },
+            { l: 'Low Debt', v: 8, max: 10, color: '#9B6ED4', raw: 'Debt/Equity', rawV: 'Low' },
+            { l: 'Fair Price', v: 9, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'UNDERVALUED' },
+        ],
+        bullets: [
+            "P/E of 4.2 — one of the cheapest industrials in the deck.",
+            "Strong earnings and real cash generation.",
+            "B shares trade at a persistent discount to asset value.",
+            "3.2% dividend yield on top of the deep discount."
+        ],
+    },
+    {
+        id: 11, type: 'KING', isPro: false, fairValue: 9.72, yahooTicker: 'MEKKO.HE',
+        stars: 3,
+        sectorIcon: '🎨',
+        irLink: 'https://company.marimekko.com/investors',
+        company: 'Marimekko', ticker: 'MEKKO',
+        tag: 'Finnish design brand', tagBold: 'Design moat.',
+        tagFull: "Marimekko is Finland's most iconic design house — bold graphic prints on everything from clothing to homeware, sold across forty countries and licensed to partners worldwide. It has expanded steadily without diluting the Finnish identity that makes the brand genuinely difficult to copy.",
+        pick: 'Nordic brand. Below 5Y average.', pickBold: 'Design moat.',
+        pickFull: "▲ UNDERVALUED — Not a screaming bargain, but a quality brand available at fair-to-good value — the dividend above its historical average, the shares below their normal price. Brand equity built over seventy years, international traction still early.",
+        ind1l: 'DIV YIELD', ind1v: '3.7%',
+        ind2l: 'P/E', ind2v: '18.6',
+        metrics: [{ l: 'Div. Yield', v: '3.7%' }, { l: 'P/E', v: '18.6' }, { l: 'Yld Ratio', v: '1.19' }, { l: 'P/E Ratio', v: '0.89' }],
+        scores: [
+            { l: 'Dividend', v: 6, max: 10, color: '#4CAF82', raw: 'Intl Rev Growth', rawV: '+15%' },
+            { l: 'Profit', v: 7, max: 10, color: '#5B8FD4', raw: 'EBIT Margin', rawV: '18%' },
+            { l: 'Low Debt', v: 8, max: 10, color: '#9B6ED4', raw: 'Debt/Equity', rawV: 'Low' },
+            { l: 'Fair Price', v: 7, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'UNDERVALUED' },
+        ],
+        bullets: [
+            "Brand equity built over 70 years — hard to replicate.",
+            "International revenue growing at +15% year-on-year.",
+            "18% EBIT margin — high for a consumer brand.",
+            "Shares below their normal P/E despite strong execution."
+        ],
+    },
+    {
+        id: 12, type: 'KING', isPro: false, fairValue: 47.0, yahooTicker: 'FLW1.DE',
+        stars: 3,
+        sectorIcon: '📱',
+        irLink: 'https://ir.flatexdegiro.com',
+        company: 'Flatexdegiro', ticker: 'FLW1',
+        tag: 'European online broker', tagBold: 'Broker recovery.',
+        tagFull: "flatexDEGIRO is Europe's largest retail stockbroker by number of transactions, serving millions of self-directed investors across fourteen countries. A bruising period of regulatory scrutiny sent the share price down sharply — but the underlying business has since returned to strong growth.",
+        pick: 'Quality company. Full price.', pickBold: 'Watch for pullback.',
+        pickFull: "◈ FAIRLY VALUED — Strong cash generation and a growing customer base, but the shares are priced to reflect the recovery already. A quality business worth watching — a better entry point would make this a much more compelling card.",
+        ind1l: 'DIV YIELD', ind1v: '3.0%',
+        ind2l: 'P/E', ind2v: '20.6',
+        metrics: [{ l: 'Div. Yield', v: '3.0%' }, { l: 'P/E', v: '20.6' }, { l: 'Yld Ratio', v: '2.14' }, { l: 'P/E Ratio', v: 'N/A' }],
+        scores: [
+            { l: 'Dividend', v: 7, max: 10, color: '#4CAF82', raw: 'Client Growth', rawV: '+12%' },
+            { l: 'Profit', v: 6, max: 10, color: '#5B8FD4', raw: 'Yld vs 5Y Avg', rawV: '2.14x' },
+            { l: 'Low Debt', v: 7, max: 10, color: '#9B6ED4', raw: 'Equity Ratio', rawV: 'Solid' },
+            { l: 'Fair Price', v: 7, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'UNDERVALUED' },
+        ],
+        bullets: [
+            "Europe's largest retail stockbroker by transaction volume.",
+            "Dividend at 2.14× its own historical average.",
+            "Client base growing at +12% year-on-year.",
+            "Regulatory overhang fading as business returns to form."
+        ],
+    },
+    {
+        id: 13, type: 'KING', isPro: false, fairValue: 116.0, yahooTicker: 'ZZ-B.ST',
+        stars: 3,
+        sectorIcon: '🐟',
+        irLink: 'https://corporate.zinzino.com/investors',
+        company: 'Zinzino', ticker: 'ZZ B',
+        tag: 'Omega-3 subscription health', tagBold: 'Recurring revenue.',
+        tagFull: "Zinzino sells personalised omega-3 and wellness supplements in over a hundred countries through a subscription model anchored by a blood test that tailors each customer's formula. Once a subscriber is tested and committed, they rarely leave — building an unusually loyal base with very predictable income.",
+        pick: 'Subscription model. 3.9% yield.', pickBold: 'Recurring revenue.',
+        pickFull: "▲ UNDERVALUED — A subscription health business operating across more than a hundred countries with customers who almost never cancel. The shares trade below their own historical average despite the business model being fundamentally stronger than when that average was set.",
+        ind1l: 'DIV YIELD', ind1v: '3.9%',
+        ind2l: 'P/E', ind2v: '17.1',
+        metrics: [{ l: 'Div. Yield', v: '3.9%' }, { l: 'P/E', v: '17.1' }, { l: 'Yld Ratio', v: '0.97' }, { l: 'P/E Ratio', v: '0.91' }],
+        scores: [
+            { l: 'Dividend', v: 7, max: 10, color: '#4CAF82', raw: 'Subscriber Growth', rawV: '+8%' },
+            { l: 'Profit', v: 6, max: 10, color: '#5B8FD4', raw: 'P/E vs 5Y Avg', rawV: '0.91x' },
+            { l: 'Low Debt', v: 8, max: 10, color: '#9B6ED4', raw: 'Debt/Equity', rawV: 'Low' },
+            { l: 'Fair Price', v: 7, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'UNDERVALUED' },
+        ],
+        bullets: [
+            "Subscription model — customers rarely cancel after blood testing.",
+            "Operating in 100+ countries with predictable recurring income.",
+            "Subscriber base growing at +8% year-on-year.",
+            "Low debt, resilient model through economic cycles."
+        ],
+    },
+    // ── JACKS (FREE) ─────────────────────────────────────────────────────────
+    {
+        id: 14, type: 'JACK', isPro: false, fairValue: 23.97, yahooTicker: 'OSPN',
+        stars: 3,
+        sectorIcon: '🔐',
+        irLink: 'https://ir.onespan.com',
+        company: 'OneSpan', ticker: 'OSPN',
+        tag: 'Digital identity & e-signature', tagBold: 'Identity security.',
+        tagFull: "OneSpan makes the software banks use to verify identities, capture digital signatures and block fraud — tools quietly embedded in financial workflows around the world. The company is mid-way through converting its model from one-off transactions to recurring subscriptions, which is compressing short-term profits while building long-term value.",
+        pick: 'Software at a distressed valuation.', pickBold: 'Deep value.',
+        pickFull: "▲▲ STRONGLY UNDERVALUED — The most deeply discounted software company in the deck. Return on capital is exceptional, cash generation is real, and the valuation implies a turnaround failure that the actual numbers do not support. The gap between perception and evidence is wide.",
+        ind1l: 'FCF YIELD', ind1v: '12.0%',
+        ind2l: 'P/E', ind2v: '7.3',
+        metrics: [{ l: 'P/E', v: '7.3' }, { l: 'ROIC', v: '34.6%' }, { l: 'FCF Yield', v: '12.0%' }, { l: 'Score', v: '8/10' }],
+        scores: [
+            { l: 'Growth', v: 6, max: 10, color: '#4CAF82', raw: 'SaaS Transition', rawV: 'Active' },
+            { l: 'Profit', v: 8, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '34.6%' },
+            { l: 'Low Debt', v: 7, max: 10, color: '#9B6ED4', raw: 'FCF Yield', rawV: '12.0%' },
+            { l: 'Fair Price', v: 10, max: 10, color: '#D4884A', raw: 'JACK Signal', rawV: 'STRONGLY UV' },
+        ],
+        bullets: [
+            "ROIC of 34.6% — exceptional return on every dollar invested.",
+            "FCF yield of 12.0% — deeply discounted to cash generation.",
+            "P/E of 7.3 implies permanent failure; results disagree.",
+            "SaaS transition building recurring revenue under the surface."
+        ],
+    },
+    {
+        id: 15, type: 'JACK', isPro: false, fairValue: 27.0, yahooTicker: 'ALKS',
+        stars: 3,
+        sectorIcon: '💊',
+        irLink: 'https://investor.alkermes.com',
+        company: 'Alkermes', ticker: 'ALKS',
+        tag: 'CNS & addiction pharma', tagBold: 'Pharma quality.',
+        tagFull: "Alkermes makes medicines for addiction and mental illness — VIVITROL for alcohol and opioid dependence, LYBALVI for schizophrenia. These are not speculative pipeline bets; they are approved, commercial products with established patient populations. The company has crossed into profitability and is now generating real cash.",
+        pick: 'Profitable pharma. Market disagrees.', pickBold: 'Pharma quality.',
+        pickFull: "▲ UNDERVALUED — A commercial-stage pharma company generating exceptional returns from approved products — not a pipeline gamble. The market has been slow to reprice the recovery in earnings, leaving the shares meaningfully below where the fundamentals suggest they should be.",
+        ind1l: 'FCF YIELD', ind1v: '9.4%',
+        ind2l: 'ROIC', ind2v: '47.2%',
+        metrics: [{ l: 'P/E', v: '14.6' }, { l: 'ROIC', v: '47.2%' }, { l: 'FCF Yield', v: '9.4%' }, { l: 'Score', v: '6/10' }],
+        scores: [
+            { l: 'Growth', v: 6, max: 10, color: '#4CAF82', raw: 'Rev. Growth YoY', rawV: '+9%' },
+            { l: 'Profit', v: 8, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '47.2%' },
+            { l: 'Low Debt', v: 7, max: 10, color: '#9B6ED4', raw: 'FCF Yield', rawV: '9.4%' },
+            { l: 'Fair Price', v: 8, max: 10, color: '#D4884A', raw: 'JACK Signal', rawV: 'UNDERVALUED' },
+        ],
+        bullets: [
+            "ROIC of 47.2% — among the highest in the deck.",
+            "Approved, commercial products — not pipeline speculation.",
+            "9.4% FCF yield on current price.",
+            "Market slow to reprice the earnings recovery."
+        ],
+    },
+    {
+        id: 16, type: 'JACK', isPro: false, fairValue: 17.0, yahooTicker: 'SIGA',
+        stars: 3,
+        sectorIcon: '🛡️',
+        irLink: 'https://www.siga.com/investor-relations',
+        company: 'SIGA Technologies', ticker: 'SIGA',
+        tag: 'Biodefense smallpox antiviral', tagBold: 'Biodefense niche.',
+        tagFull: "SIGA Technologies makes TPOXX, the world's only approved antiviral treatment for smallpox and monkeypox. Government agencies in the United States and internationally have contracted to stockpile it — providing a baseline of revenue that most pharmaceutical companies would envy. It is, in essence, a monopoly on treating a category of disease.",
+        pick: 'Government monopoly on smallpox treatment.', pickBold: 'Biodefense niche.',
+        pickFull: "▲ UNDERVALUED — A government-backed monopoly on smallpox treatment, trading at a fraction of what the cash generation warrants. The revenue comes in lumpy government tranches which makes the market nervous — but the underlying moat is as real as it gets.",
+        ind1l: 'FCF YIELD', ind1v: '18.7%',
+        ind2l: 'P/E', ind2v: '6.2',
+        metrics: [{ l: 'P/E', v: '6.2' }, { l: 'ROIC', v: '>200%' }, { l: 'FCF Yield', v: '18.7%' }, { l: 'Score', v: '6/10' }],
+        scores: [
+            { l: 'Growth', v: 5, max: 10, color: '#4CAF82', raw: 'Contract Backlog', rawV: 'Strong' },
+            { l: 'Profit', v: 9, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '>200%' },
+            { l: 'Low Debt', v: 10, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 9, max: 10, color: '#D4884A', raw: 'JACK Signal', rawV: 'UNDERVALUED' },
+        ],
+        bullets: [
+            "World's only approved antiviral for smallpox and monkeypox.",
+            "FCF yield of 18.7% — extraordinary cash generation.",
+            "P/E of 6.2 prices in near-zero ongoing revenue.",
+            "Zero net debt — clean balance sheet."
+        ],
+    },
+    {
+        id: 17, type: 'JACK', isPro: false, fairValue: 122.33, yahooTicker: 'ZM',
+        stars: 4,
+        sectorIcon: '💻',
+        irLink: 'https://investors.zoom.us',
+        company: 'Zoom Video', ticker: 'ZM',
+        tag: 'Video communications platform', tagBold: 'Cashflow engine.',
+        tagFull: "Zoom became essential infrastructure during the pandemic and has spent the years since evolving into a broader AI-powered communications platform. The hype has long faded and the share price fell dramatically from its peak — but the business kept generating exceptional cash throughout.",
+        pick: 'Down from peak. Cash generation intact.', pickBold: 'Cashflow engine.',
+        pickFull: "▲ UNDERVALUED — Down massively from its pandemic peak, Zoom is no longer priced as a growth story — it is priced as a forgotten one. The business generates extraordinary returns on capital and converts a large share of revenue to cash. Perception and reality have diverged significantly.",
+        ind1l: 'FCF YIELD', ind1v: '8.2%',
+        ind2l: 'ROIC', ind2v: '107%',
+        metrics: [{ l: 'P/E', v: '14.1' }, { l: 'ROIC', v: '107.1%' }, { l: 'FCF Yield', v: '8.2%' }, { l: 'Score', v: '5/10' }],
+        scores: [
+            { l: 'Growth', v: 4, max: 10, color: '#4CAF82', raw: 'Rev. Growth YoY', rawV: '+3%' },
+            { l: 'Profit', v: 9, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '107.1%' },
+            { l: 'Low Debt', v: 10, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 8, max: 10, color: '#D4884A', raw: 'JACK Signal', rawV: 'UNDERVALUED' },
+        ],
+        bullets: [
+            "ROIC of 107% — generates more than a dollar per dollar deployed.",
+            "Zero net debt; $7B+ cash on balance sheet.",
+            "8.2% FCF yield — market paying almost nothing for the cash.",
+            "P/E of 14.1 — pricing a pandemic relic, not a cash machine."
+        ],
+    },
+    // ── QUEENS (PRO) ─────────────────────────────────────────────────────────
+    {
+        id: 18, type: 'QUEEN', isPro: false, fairValue: 1173.61, yahooTicker: 'EVO.ST',
+        stars: 3,
+        sectorIcon: '🎲',
+        irLink: 'https://www.evolution.com/investor-relations',
+        company: 'Evolution', ticker: 'EVO',
+        tag: 'Live casino software monopoly', tagBold: 'Gaming monopoly.',
+        tagFull: "Evolution designs and operates the live dealer casino tables you see behind every major online gambling site in the world. From lavish studios in Latvia to hubs across four continents, it broadcasts live roulette, blackjack and baccarat around the clock. With over seventy percent of the global live casino market, it is effectively the only serious player in its space.",
+        pick: 'Dominant live casino platform globally.', pickBold: 'Gaming monopoly.',
+        pickFull: "▲▲ STRONGLY UNDERVALUED — Monopoly economics, exceptional margins, and a growing dividend — yet the shares have de-rated sharply. The market is pricing in risk that the operating results consistently fail to confirm. Rare to find a dominant franchise this cheap.",
+        ind1l: 'FCF YIELD', ind1v: '9.6%',
+        ind2l: 'ROIC', ind2v: '30.8%',
+        metrics: [{ l: 'P/E', v: '9.5' }, { l: 'ROIC', v: '30.8%' }, { l: 'FCF Yield', v: '9.6%' }, { l: 'FCF Yield', v: '9.6%' }],
+        scores: [
+            { l: 'Growth', v: 7, max: 10, color: '#4CAF82', raw: 'Rev. Growth YoY', rawV: '+15%' },
+            { l: 'Profit', v: 9, max: 10, color: '#5B8FD4', raw: 'EBIT Margin', rawV: '50%+' },
+            { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 9, max: 10, color: '#D4884A', raw: 'QUEEN Signal', rawV: 'STRONGLY UV' },
+        ],
+        bullets: [
+            "70%+ share of the global live casino market.",
+            "FCF yield of 9.6%; dividend yield of 5.5%.",
+            "ROIC of 30.8% — monopoly economics in action.",
+            "P/E of 9.5 for a business with no serious competitor."
+        ],
+    },
+    {
+        id: 19, type: 'QUEEN', isPro: false, fairValue: 438.12, yahooTicker: 'CALM',
+        stars: 4,
+        sectorIcon: '🥚',
+        irLink: 'https://www.calmainefoods.com/investors',
+        company: 'Cal-Maine Foods', ticker: 'CALM',
+        tag: "America's largest egg producer", tagBold: 'Egg market leader.',
+        tagFull: "Cal-Maine Foods is the largest egg producer in the United States, supplying supermarkets, restaurants and distributors from coast to coast. Egg prices have structurally re-rated upward in recent years, and Cal-Maine — with no debt and a sprawling distribution network — sits at the centre of that windfall.",
+        pick: 'No debt. Extraordinary cash generation.', pickBold: 'Egg market leader.',
+        pickFull: "▲▲ STRONGLY UNDERVALUED — The most statistically extreme value card in the entire deck. No debt, extraordinary cash generation, a double-digit dividend yield, and a valuation that prices in almost nothing. The egg price environment is exceptional and Cal-Maine is the primary beneficiary.",
+        ind1l: 'DIV YIELD', ind1v: '10.0%',
+        ind2l: 'P/E', ind2v: '3.7',
+        metrics: [{ l: 'P/E', v: '3.7' }, { l: 'ROIC', v: '64.6%' }, { l: 'FCF Yield', v: '25.5%' }, { l: 'Div. Yield', v: '10.0%' }],
+        scores: [
+            { l: 'Growth', v: 7, max: 10, color: '#4CAF82', raw: 'Rev. Growth YoY', rawV: '+28%' },
+            { l: 'Profit', v: 9, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '64.6%' },
+            { l: 'Low Debt', v: 10, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 10, max: 10, color: '#D4884A', raw: 'QUEEN Signal', rawV: 'STRONGLY UV' },
+        ],
+        bullets: [
+            "World's largest egg producer — inelastic demand.",
+            "Dividend yield of 5.2% — historically high.",
+            "Zero net debt; vertically integrated cost structure.",
+            "Shares priced well below their own 5-year average."
+        ],
+    },
+    {
+        id: 20, type: 'QUEEN', isPro: false, fairValue: 390.0, yahooTicker: 'HACK.ST',
+        stars: 3,
+        sectorIcon: '🎮',
+        irLink: 'https://www.hacksawgroup.com/en/investor-relations/',
+        company: 'Hacksaw Gaming', ticker: 'HACK',
+        tag: 'B2B casino game supplier', tagBold: 'Hidden gem.',
+        tagFull: "Hacksaw Gaming makes slot games and scratch cards for regulated online casinos around the world. The company builds the content; the casinos handle the players. This clean business-to-business model means Hacksaw earns software-level margins without ever touching a customer acquisition budget.",
+        pick: 'Software margins. Hidden gem.', pickBold: 'Hidden gem.',
+        pickFull: "▲▲ STRONGLY UNDERVALUED — A gaming software business earning back its entire capital base multiple times each year, virtually unknown outside Scandinavia. A substantial dividend on top of software-level margins, and shares priced as if none of it matters.",
+        ind1l: 'DIV YIELD', ind1v: '7.4%',
+        ind2l: 'P/E', ind2v: '10.9',
+        metrics: [{ l: 'P/E', v: '10.9' }, { l: 'ROIC', v: '>200%' }, { l: 'FCF Yield', v: '8.0%' }, { l: 'Div. Yield', v: '7.4%' }],
+        scores: [
+            { l: 'Growth', v: 7, max: 10, color: '#4CAF82', raw: 'Rev. Growth YoY', rawV: '+22%' },
+            { l: 'Profit', v: 10, max: 10, color: '#5B8FD4', raw: 'FCF Margin', rawV: '73%' },
+            { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Debt/Equity', rawV: '0.17' },
+            { l: 'Fair Price', v: 9, max: 10, color: '#D4884A', raw: 'QUEEN Signal', rawV: 'STRONGLY UV' },
+        ],
+        bullets: [
+            "B2B slot and scratch card supplier — earns software margins without player acquisition costs.",
+            "ROIC above 200% — capital-light model generates extraordinary returns.",
+            "73% free cash flow margin, virtually unknown outside Scandinavia.",
+            "7.4% dividend yield on top of software-level profitability."
+        ],
+    },
+    {
+        id: 21, type: 'QUEEN', isPro: false, fairValue: 936.0, yahooTicker: 'GUBRA.CO',
+        stars: 3,
+        sectorIcon: '🧬',
+        irLink: 'https://www.gubra.dk/investor-relations',
+        company: 'Gubra', ticker: 'GUBRA',
+        tag: 'GLP-1 peptide research partner', tagBold: 'GLP-1 play.',
+        tagFull: "Gubra is a Danish research company sitting quietly at the centre of the global obesity drug revolution. It provides the specialised tools and early-stage research services that pharmaceutical companies need when developing the next generation of weight-loss treatments — the same category that has turned the industry upside down. Profitable, contracted, and right where the money is going.",
+        pick: 'Embedded in the GLP-one supply chain.', pickBold: 'GLP-1 play.',
+        pickFull: "▲▲ STRONGLY UNDERVALUED — Not a speculative biotech — a profitable, cash-generating research partner already under contract with the major players in obesity medicine. Extraordinary returns on capital and a valuation that implies the market has not noticed what it does or who it works for.",
+        ind1l: 'FCF YIELD', ind1v: '18.7%',
+        ind2l: 'ROIC', ind2v: '140.6%',
+        metrics: [{ l: 'P/E', v: '3.8' }, { l: 'ROIC', v: '140.6%' }, { l: 'FCF Yield', v: '18.7%' }, { l: 'Score', v: '7/10' }],
+        scores: [
+            { l: 'Growth', v: 8, max: 10, color: '#4CAF82', raw: 'Rev. Growth YoY', rawV: '+35%' },
+            { l: 'Profit', v: 10, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '140.6%' },
+            { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 9, max: 10, color: '#D4884A', raw: 'QUEEN Signal', rawV: 'STRONGLY UV' },
+        ],
+        bullets: [
+            "GLP-1 discovery platform — independent of Novo and Lilly.",
+            "PEG below 1 despite high growth expectations.",
+            "Obesity market expanding rapidly worldwide.",
+            "Market prices it as speculative — fundamentals disagree."
+        ],
+    },
+    {
+        id: 22, type: 'QUEEN', isPro: false, fairValue: 53.0, yahooTicker: 'INMD',
+        stars: 3,
+        sectorIcon: '⚕️',
+        irLink: 'https://investor.inmodemd.com',
+        company: 'InMode', ticker: 'INMD',
+        tag: 'Minimally invasive aesthetics', tagBold: 'MedTech quality.',
+        tagFull: "InMode makes the radiofrequency devices that dermatologists and plastic surgeons use for body contouring, skin tightening and facial treatments. It carries no debt, generates exceptional returns on the capital it employs, and sells into an aesthetic medicine market that keeps growing regardless of the economic cycle.",
+        pick: 'Zero debt. High returns. Market overreacted.', pickBold: 'MedTech quality.',
+        pickFull: "▲▲ STRONGLY UNDERVALUED — Zero debt, exceptional returns on capital, and deep cash generation from a business whose customers — surgeons and dermatologists — almost never switch providers once trained. The shares sold off on macro fears; the underlying business did not deteriorate.",
+        ind1l: 'FCF YIELD', ind1v: '14.7%',
+        ind2l: 'ROIC', ind2v: '66.9%',
+        metrics: [{ l: 'P/E', v: '9.5' }, { l: 'ROIC', v: '66.9%' }, { l: 'FCF Yield', v: '14.7%' }, { l: 'Score', v: '7/10' }],
+        scores: [
+            { l: 'Growth', v: 5, max: 10, color: '#4CAF82', raw: 'Rev. Growth YoY', rawV: '+3%' },
+            { l: 'Profit', v: 9, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '66.9%' },
+            { l: 'Low Debt', v: 10, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 9, max: 10, color: '#D4884A', raw: 'QUEEN Signal', rawV: 'STRONGLY UV' },
+        ],
+        bullets: [
+            "Medical aesthetics — recurring procedure demand.",
+            "FCF yield above 10% on current price.",
+            "Zero net debt; share buybacks ongoing.",
+            "Expanding into new procedure categories globally."
+        ],
+    },
+    {
+        id: 23, type: 'QUEEN', isPro: false, fairValue: 32.0, yahooTicker: 'TRUE-B.ST',
+        stars: 3,
+        sectorIcon: '📞',
+        irLink: 'https://www.truecaller.com/investor-relations',
+        company: 'Truecaller', ticker: 'TRUE B',
+        tag: 'Caller ID & spam blocking app', tagBold: 'B2B data play.',
+        tagFull: "Truecaller is the app that tells you who is calling before you answer — used by over four hundred million people, primarily across India, Africa and the Middle East. Most of its revenue comes from advertising and premium subscriptions, with a fast-growing business helping companies verify identities at scale.",
+        pick: 'Hundreds of millions of users. Paying dividends.', pickBold: 'B2B data play.',
+        pickFull: "▲▲ STRONGLY UNDERVALUED — Four hundred million users, a dividend, exceptional returns on capital, and a share price that most institutional investors have never looked at because it is listed in Stockholm rather than New York. The business is expanding into high-growth markets while the valuation stays stubbornly low.",
+        ind1l: 'DIV YIELD', ind1v: '2.5%',
+        ind2l: 'ROIC', ind2v: '40.2%',
+        metrics: [{ l: 'P/E', v: '9.7' }, { l: 'ROIC', v: '40.2%' }, { l: 'Div. Yield', v: '2.5%' }, { l: 'Score', v: '7/10' }],
+        scores: [
+            { l: 'Growth', v: 7, max: 10, color: '#4CAF82', raw: 'MAU Growth', rawV: '+8%' },
+            { l: 'Profit', v: 8, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '40.2%' },
+            { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 8, max: 10, color: '#D4884A', raw: 'QUEEN Signal', rawV: 'STRONGLY UV' },
+        ],
+        bullets: [
+            "Swedish caller ID and spam blocking app — 400 million users across emerging markets.",
+            "Subscription revenue growing as users upgrade to premium.",
+            "Asset-light software model with high margins.",
+            "Shares trade well below fair value estimate."
+        ],
+    },
+    {
+        id: 24, type: 'QUEEN', isPro: false, fairValue: 24.0, yahooTicker: 'CPRX',
+        stars: 3,
+        sectorIcon: '💊',
+        irLink: 'https://ir.catalystpharma.com',
+        company: 'Catalyst Pharma', ticker: 'CPRX',
+        tag: 'Rare neuromuscular disease drugs', tagBold: 'Rare disease niche.',
+        tagFull: "Catalyst Biosciences treats Lambert-Eaton Myasthenic Syndrome — a rare neuromuscular condition that leaves patients dangerously weak — with FIRDAPSE, the only approved medicine for it. FDA orphan drug designation gives the company years of protected exclusivity, and the business generates exceptional margins from a patient population with no alternatives.",
+        pick: 'Orphan drug exclusivity. High returns.', pickBold: 'Rare disease niche.',
+        pickFull: "▲▲ STRONGLY UNDERVALUED — Among the highest returns on capital of any listed pharmaceutical company, backed by regulatory exclusivity on a drug with no competition. Not a pipeline gamble — a cash-generating orphan drug business with room to expand into further rare diseases.",
+        ind1l: 'FCF YIELD', ind1v: '9.1%',
+        ind2l: 'ROIC', ind2v: '93.4%',
+        metrics: [{ l: 'P/E', v: '13.0' }, { l: 'ROIC', v: '93.4%' }, { l: 'FCF Yield', v: '9.1%' }, { l: 'Score', v: '7/10' }],
+        scores: [
+            { l: 'Growth', v: 6, max: 10, color: '#4CAF82', raw: 'Rev. Growth YoY', rawV: '+12%' },
+            { l: 'Profit', v: 9, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '93.4%' },
+            { l: 'Low Debt', v: 10, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 8, max: 10, color: '#D4884A', raw: 'QUEEN Signal', rawV: 'STRONGLY UV' },
+        ],
+        bullets: [
+            "Rare disease drug with strong pricing power.",
+            "FCF yield above 8%; clean balance sheet.",
+            "Revenue visibility from long-term patient prescriptions.",
+            "P/E at a significant discount to biotech peers."
+        ],
+    },
+    {
+        id: 25, type: 'QUEEN', isPro: false, fairValue: 22.0, yahooTicker: 'DOCS',
+        stars: 3,
+        sectorIcon: '👨‍⚕️',
+        irLink: 'https://ir.doximity.com',
+        company: 'Doximity', ticker: 'DOCS',
+        tag: 'US physician professional network', tagBold: 'Doctor network.',
+        tagFull: "Doximity is the professional network that more than eighty percent of American doctors use daily — messaging colleagues, managing referrals, conducting telehealth visits. Pharmaceutical companies pay handsomely to reach such a concentrated, verified audience. It is LinkedIn for physicians, with healthcare revenue attached.",
+        pick: 'Most US doctors on one platform.', pickBold: 'Doctor network.',
+        pickFull: "▲▲ STRONGLY UNDERVALUED — More than eighty percent of American doctors on the platform, extraordinary returns on capital, and a network so embedded that no competitor has meaningfully dented it. The shares have de-rated; the moat has not moved an inch.",
+        ind1l: 'FCF YIELD', ind1v: '6.4%',
+        ind2l: 'ROIC', ind2v: '88.0%',
+        metrics: [{ l: 'P/E', v: '19.3' }, { l: 'ROIC', v: '88.0%' }, { l: 'FCF Yield', v: '6.4%' }, { l: 'Score', v: '6/10' }],
+        scores: [
+            { l: 'Growth', v: 6, max: 10, color: '#4CAF82', raw: 'Rev. Growth YoY', rawV: '+18%' },
+            { l: 'Profit', v: 9, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '88.0%' },
+            { l: 'Low Debt', v: 10, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 7, max: 10, color: '#D4884A', raw: 'QUEEN Signal', rawV: 'STRONGLY UV' },
+        ],
+        bullets: [
+            "AI-powered clinical documentation — reduces physician admin.",
+            "Revenue growing rapidly on a subscription model.",
+            "Hospitals are sticky customers once embedded.",
+            "Market underestimates the healthcare AI opportunity."
+        ],
+    },
+    {
+        id: 26, type: 'QUEEN', isPro: false, fairValue: 95.0, yahooTicker: 'PTCT',
+        stars: 3,
+        sectorIcon: '🧬',
+        irLink: 'https://ir.ptcbio.com',
+        company: 'PTC Therapeutics', ticker: 'PTCT',
+        tag: 'Rare genetic disease treatments', tagBold: 'Pipeline value.',
+        tagFull: "PTC Therapeutics develops treatments for rare genetic diseases — including Duchenne muscular dystrophy and phenylketonuria — that affect small patient populations with very limited alternatives. Multiple products are already approved and generating revenue, with a pipeline of additional candidates behind them.",
+        pick: 'Multiple approved drugs. Market undervalues.', pickBold: 'Pipeline value.',
+        pickFull: "▲▲ STRONGLY UNDERVALUED — Multiple approved products, extraordinary returns on capital, and a valuation that significantly underprices what the existing business already earns — before counting any pipeline upside at all. Rare disease medicine with rare value.",
+        ind1l: 'FCF YIELD', ind1v: '7.6%',
+        ind2l: 'P/E', ind2v: '7.1',
+        metrics: [{ l: 'P/E', v: '7.1' }, { l: 'ROIC', v: '>200%' }, { l: 'FCF Yield', v: '7.6%' }, { l: 'Score', v: '6/10' }],
+        scores: [
+            { l: 'Growth', v: 7, max: 10, color: '#4CAF82', raw: 'Rev. Growth YoY', rawV: '+20%' },
+            { l: 'Profit', v: 9, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '>200%' },
+            { l: 'Low Debt', v: 7, max: 10, color: '#9B6ED4', raw: 'Debt/Equity', rawV: 'Moderate' },
+            { l: 'Fair Price', v: 9, max: 10, color: '#D4884A', raw: 'QUEEN Signal', rawV: 'STRONGLY UV' },
+        ],
+        bullets: [
+            "Treats rare neuromuscular diseases — high unmet need.",
+            "FCF improving as lead product gains traction.",
+            "Orphan drug designation reduces competitive risk.",
+            "Priced below peers despite stronger clinical track record."
+        ],
+    },
+    // ── ACES (PRO) ───────────────────────────────────────────────────────────
+    {
+        id: 27, type: 'ACE', isPro: false, fairValue: 27.0, yahooTicker: 'PRDO',
+        stars: 3,
+        sectorIcon: '🎓',
+        irLink: 'https://investor.perdoceo.com',
+        company: 'Perdoceo Education', ticker: 'PRDO',
+        tag: 'US for-profit higher education', tagBold: 'Education discount.',
+        tagFull: "Perdoceo Education operates Colorado Technical University and American InterContinental University — two accredited institutions built around working adults who need flexible, career-focused degrees. The model runs lean: no sprawling campus, minimal capital requirements, and strong cash generation from a student base motivated by professional outcomes.",
+        pick: 'Growth-adjusted valuation extremely low.', pickBold: 'Education discount.',
+        pickFull: "▲▲ STRONGLY UNDERVALUED — Strong returns on capital, a growing dividend, and earnings expanding faster than the valuation gives credit for. The clearest growth-at-a-discount signal among the quality compounders in the deck.",
+        ind1l: 'PEG', ind1v: '0.72',
+        ind2l: 'ROIC', ind2v: '32.0%',
+        metrics: [{ l: 'P/E', v: '13.9' }, { l: 'PEG', v: '0.72' }, { l: 'ROIC', v: '32.0%' }, { l: 'Div. Yield', v: '1.6%' }],
+        scores: [
+            { l: 'Growth', v: 7, max: 10, color: '#4CAF82', raw: 'EPS Growth 3Y', rawV: '+19%/yr' },
+            { l: 'Profit', v: 8, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '32.0%' },
+            { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 9, max: 10, color: '#D4884A', raw: 'ACE Signal', rawV: 'STRONGLY UV' },
+        ],
+        bullets: [
+            "For-profit education — counter-cyclical enrollment demand.",
+            "FCF yield above 12% — deeply undervalued on cash.",
+            "Strong online programme growth offsetting campus decline.",
+            "Priced as a melting ice cube; cash flow says otherwise."
+        ],
+    },
+    {
+        id: 28, type: 'ACE', isPro: false, fairValue: 172.0, yahooTicker: 'SAP.DE',
+        stars: 3,
+        sectorIcon: '☁️',
+        irLink: 'https://www.sap.com/investor-relations',
+        company: 'SAP', ticker: 'SAP',
+        tag: 'Enterprise software backbone', tagBold: 'Enterprise backbone.',
+        tagFull: "SAP is the backbone of global corporate operations — its software runs the financials, supply chains and procurement of nearly every major company on earth. The transition from old-style licences to cloud subscriptions is currently depressing reported profits while dramatically improving the quality and predictability of future revenue.",
+        pick: 'Backbone of global corporate IT.', pickBold: 'Enterprise backbone.',
+        pickFull: "▲▲ STRONGLY UNDERVALUED — The market is penalising a temporary dip in reported margins during a cloud transition that is actually making the business considerably better over time. Paying a fraction of the growth rate for a franchise that runs the world's corporate infrastructure.",
+        ind1l: 'PEG', ind1v: '0.57',
+        ind2l: 'EPS GROWTH', ind2v: '47.4%',
+        metrics: [{ l: 'P/E', v: '27.1' }, { l: 'PEG', v: '0.57' }, { l: 'ROIC', v: '16.9%' }, { l: 'Div. Yield', v: '1.4%' }],
+        scores: [
+            { l: 'Growth', v: 8, max: 10, color: '#4CAF82', raw: 'EPS Growth 3Y', rawV: '+47%/yr' },
+            { l: 'Profit', v: 7, max: 10, color: '#5B8FD4', raw: 'Cloud Rev Gr.', rawV: '+33%' },
+            { l: 'Low Debt', v: 7, max: 10, color: '#9B6ED4', raw: 'Debt/Equity', rawV: 'Moderate' },
+            { l: 'Fair Price', v: 9, max: 10, color: '#D4884A', raw: 'ACE Signal', rawV: 'STRONGLY UV' },
+        ],
+        bullets: [
+            "SAP dominates enterprise software — 99% of Fortune 500 uses it.",
+            "Cloud transition driving accelerating recurring revenue.",
+            "AI co-pilot features deepening existing customer lock-in.",
+            "Shares below fair value — rare for a franchise this strong."
+        ],
+    },
+    {
+        id: 29, type: 'ACE', isPro: false, fairValue: 38.0, yahooTicker: 'KARO',
+        stars: 3,
+        sectorIcon: '🚗',
+        irLink: 'https://ir.karooooo.com',
+        company: 'Karooooo', ticker: 'KARO',
+        tag: 'Fleet telematics SaaS, Africa', tagBold: 'Fleet SaaS growth.',
+        tagFull: "Karooooo operates Cartrack, a fleet management and vehicle tracking platform used by businesses across Africa, Southeast Asia and Europe. Over two million subscribers pay monthly to know where their vehicles are, how their drivers behave, and how to cut fuel costs. Growing fast in markets where the competition is still thin.",
+        pick: 'SaaS telematics in emerging markets.', pickBold: 'Fleet SaaS growth.',
+        pickFull: "▲ UNDERVALUED — A SaaS compounder in emerging markets with strong returns on capital and a dividend — rare in any market, remarkable in this one. The shares carry a geographic risk premium that the actual business results do not justify.",
+        ind1l: 'PEG', ind1v: '1.21',
+        ind2l: 'ROIC', ind2v: '32.7%',
+        metrics: [{ l: 'P/E', v: '23.9' }, { l: 'PEG', v: '1.21' }, { l: 'ROIC', v: '32.7%' }, { l: 'Div. Yield', v: '2.8%' }],
+        scores: [
+            { l: 'Growth', v: 7, max: 10, color: '#4CAF82', raw: 'Subscriber Gr.', rawV: '+12%' },
+            { l: 'Profit', v: 8, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '32.7%' },
+            { l: 'Low Debt', v: 8, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Low' },
+            { l: 'Fair Price', v: 7, max: 10, color: '#D4884A', raw: 'ACE Signal', rawV: 'UNDERVALUED' },
+        ],
+        bullets: [
+            "Scandinavian pharma with CNS and dermatology niche.",
+            "FCF yield above 8% on current price.",
+            "Low debt; consistent dividend payer.",
+            "Priced at a discount to European pharmaceutical peers."
+        ],
+    },
+    // ── JOKERS (PRO) ─────────────────────────────────────────────────────────
+    {
+        id: 30, type: 'JOKER', isPro: false, fairValue: 374.0, yahooTicker: 'BAVA.CO',
+        stars: 3,
+        sectorIcon: '💉',
+        irLink: 'https://investor.bavarian-nordic.com',
+        company: 'Bavarian Nordic', ticker: 'BAVA',
+        tag: 'Biodefense & travel vaccines', tagBold: 'Vaccine monopoly.',
+        tagFull: "Bavarian Nordic is Denmark's leading vaccine company and the only producer of the approved monkeypox and smallpox vaccine outside the United States. It also sells travel vaccines for rabies, typhoid and cholera. Government stockpiling contracts provide a predictable floor of revenue while the commercial portfolio grows on top.",
+        pick: 'Monopoly on European mpox vaccination.', pickBold: 'Vaccine monopoly.',
+        pickFull: "▲▲ STRONGLY UNDERVALUED — The growth-to-price ratio is among the most extreme in the deck — effectively paying nothing for a business expanding rapidly from a monopoly base in European outbreak vaccination. This is not speculation; it is exceptional growth at a negligible price.",
+        ind1l: 'PEG', ind1v: '0.06',
+        ind2l: 'FCF YIELD', ind2v: '18.7%',
+        metrics: [{ l: 'P/E', v: '6.3' }, { l: 'PEG', v: '0.06' }, { l: 'FCF Yield', v: '18.7%' }, { l: 'Score', v: '7/10' }],
+        scores: [
+            { l: 'Growth', v: 9, max: 10, color: '#4CAF82', raw: 'EPS Growth 3Y', rawV: '+820%/yr' },
+            { l: 'Profit', v: 7, max: 10, color: '#5B8FD4', raw: 'FCF Yield', rawV: '18.7%' },
+            { l: 'Low Debt', v: 7, max: 10, color: '#9B6ED4', raw: 'Debt/Equity', rawV: 'Moderate' },
+            { l: 'Fair Price', v: 10, max: 10, color: '#D4884A', raw: 'JOKER Signal', rawV: 'STRONGLY UV' },
+        ],
+        bullets: [
+            "Danish biotech — GLP-1 pipeline with real data.",
+            "PEG below 1; earnings growth underestimated.",
+            "Zero debt; well-funded for next milestones.",
+            "Multiple catalysts expected within 12 months."
+        ],
+    },
+    {
+        id: 31, type: 'KING', isPro: false, fairValue: 245.0, yahooTicker: 'EOG',
+        stars: 5,
+        sectorIcon: '⛽',
+        irLink: 'https://investors.eogresources.com',
+        company: 'EOG Resources', ticker: 'EOG',
+        tag: 'US shale oil. $100 oil. More cash.', tagBold: 'Premium shale operator.',
+        tagFull: "EOG Resources is one of the most efficient oil producers in the United States, operating primarily in the Permian Basin and Eagle Ford. With Brent crude above $100 due to the Strait of Hormuz closure, EOG's free cash flow is surging. Nine consecutive years of dividend growth. Zero net debt. The best-run shale company in America.",
+        pick: 'Oil at $100. EOG prints cash.', pickBold: 'Free cash flow surge.',
+        pickFull: "▲▲ STRONGLY UNDERVALUED — The Iran conflict has sent oil above $100 per barrel, and EOG is one of the clearest beneficiaries. As a premium Permian operator with industry-leading well productivity, every dollar above $80 oil flows almost entirely to the bottom line. Nine straight years of dividend increases, zero net debt, and a stock still trading at a discount to fair value.",
+        ind1l: 'DIV YIELD', ind1v: '3.0%',
+        ind2l: 'P/E', ind2v: '13.7',
+        metrics: [{ l: 'Div. Yield', v: '3.0%' }, { l: 'P/E', v: '13.7' }, { l: 'Div Growth', v: '9Y' }, { l: 'Signal', v: 'STR. UV' }],
+        scores: [
+            { l: 'Dividend', v: 7, max: 10, color: '#4CAF82', raw: 'Div Growth', rawV: '9 Years' },
+            { l: 'Profit', v: 8, max: 10, color: '#5B8FD4', raw: 'P/E', rawV: '13.7x' },
+            { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 10, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'STRONGLY UV' },
+        ],
+        bullets: [
+            "Oil above $100/barrel — EOG free cash flow surging.",
+            "9 consecutive years of dividend growth.",
+            "Premium Permian operator — best well productivity in US shale.",
+            "Zero net debt, strong buyback program.",
+            "Trades at significant discount to fair value of $245."
+        ],
+    },
+    {
+        id: 32, type: 'JOKER', isPro: false, fairValue: 229.0, yahooTicker: 'NVDA',
+        stars: 3,
+        sectorIcon: '⚡',
+        irLink: 'https://investor.nvidia.com',
+        company: 'NVIDIA', ticker: 'NVDA',
+        tag: 'AI accelerator chips', tagBold: 'AI backbone.',
+        tagFull: "NVIDIA designs the chips and the software that every major AI laboratory in the world depends on to train and run its models. More than eighty percent of AI accelerator spending flows to NVIDIA. It is not just hardware — the software ecosystem is so entrenched that switching to a competitor means rebuilding years of engineering work from scratch.",
+        pick: 'AI monopoly. Growth far outpaces valuation.', pickBold: 'AI backbone.',
+        pickFull: "▲▲ STRONGLY UNDERVALUED — The share price looks expensive until you account for how fast earnings are growing — then it looks extraordinarily cheap. The JOKER signal exists precisely for situations where growth dramatically outpaces valuation. This is the clearest example in the current deck.",
+        ind1l: 'PEG', ind1v: '0.18',
+        ind2l: 'P/E', ind2v: '35.9',
+        metrics: [{ l: 'P/E', v: '35.9' }, { l: 'PEG', v: '0.18' }, { l: 'FCF Yield', v: '1.5%' }, { l: 'Score', v: '7/10' }],
+        scores: [
+            { l: 'Growth', v: 10, max: 10, color: '#4CAF82', raw: 'EPS Growth 3Y', rawV: '+197%/yr' },
+            { l: 'Profit', v: 9, max: 10, color: '#5B8FD4', raw: 'EBIT Margin', rawV: '60%+' },
+            { l: 'Low Debt', v: 8, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 9, max: 10, color: '#D4884A', raw: 'JOKER Signal', rawV: 'STRONGLY UV' },
+        ],
+        bullets: [
+            "AI infrastructure monopoly — data centres buying GPUs at record pace.",
+            "Revenue growing +120% year-on-year.",
+            "Gross margins above 70% — software economics on hardware.",
+            "New Blackwell product cycle sustaining demand through 2026."
+        ],
+    },
+    {
+        id: 33, type: 'JOKER', isPro: false, fairValue: 530.0, yahooTicker: 'DJCO',
+        stars: 3,
+        sectorIcon: '📰',
+        irLink: 'https://ir.djco.com',
+        company: 'Daily Journal Corp', ticker: 'DJCO',
+        tag: 'Munger legacy holding company', tagBold: 'Hidden Berkshire.',
+        tagFull: "Daily Journal Corporation publishes legal newspapers and builds software that runs court administration systems across the United States. Charlie Munger ran it for decades and shaped its concentrated investment portfolio in the same spirit as Berkshire Hathaway. After Munger, the investment philosophy and culture he built remain intact.",
+        pick: 'Munger-style capital allocation. Undervalued.', pickBold: 'Hidden Berkshire.',
+        pickFull: "▲▲ STRONGLY UNDERVALUED — A Berkshire-style holding company with a rapidly growing software business inside, trading at a fraction of what the earnings trajectory justifies. Deeply overlooked, deeply undervalued, and carrying the investment philosophy of one of history's greatest investors.",
+        ind1l: 'PEG', ind1v: '0.12',
+        ind2l: 'P/E', ind2v: '7.5',
+        metrics: [{ l: 'P/E', v: '7.5' }, { l: 'PEG', v: '0.12' }, { l: 'FCF Yield', v: '1.5%' }, { l: 'Score', v: '7/10' }],
+        scores: [
+            { l: 'Growth', v: 8, max: 10, color: '#4CAF82', raw: 'EPS Growth 3Y', rawV: '+61%/yr' },
+            { l: 'Profit', v: 7, max: 10, color: '#5B8FD4', raw: 'Software CAGR', rawV: '+15%' },
+            { l: 'Low Debt', v: 8, max: 10, color: '#9B6ED4', raw: 'Portfolio', rawV: 'Concentrated' },
+            { l: 'Fair Price', v: 10, max: 10, color: '#D4884A', raw: 'JOKER Signal', rawV: 'STRONGLY UV' },
+        ],
+        bullets: [
+            "Charlie Munger's own holding company — patient capital.",
+            "Trades at a meaningful discount to book value.",
+            "Daily Journal provides a stable cash base.",
+            "Almost zero analyst coverage — deeply overlooked."
+        ],
+    },
+    {
+        id: 34, type: 'JOKER', isPro: false, fairValue: 21.0, yahooTicker: 'ISSC',
+        stars: 2,
+        sectorIcon: '✈️',
+        irLink: 'https://www.innovative-ss.com/investor-relations',
+        company: 'Innovative Solutions & Support', ticker: 'ISSC',
+        tag: 'Avionics display systems', tagBold: 'Cockpit upgrade.',
+        tagFull: "Innovative Solutions and Support makes the displays and flight computers that modernise ageing aircraft cockpits — at a fraction of the cost of buying a new plane. Airlines, militaries and business jet operators keep coming back as the upgrade cycle never really ends. Once an avionics system is certified and installed, nobody switches lightly.",
+        pick: 'Every legacy cockpit needs an upgrade.', pickBold: 'Cockpit upgrade.',
+        pickFull: "▲▲ STRONGLY UNDERVALUED — A niche avionics specialist with a durable, recurring upgrade cycle — fleets age, cockpits need modernising, and this company gets the call. Earnings growing at nearly double the rate the valuation implies.",
+        ind1l: 'PEG', ind1v: '0.53',
+        ind2l: 'FCF YIELD', ind2v: '1.5%',
+        metrics: [{ l: 'P/E', v: '24.0' }, { l: 'PEG', v: '0.53' }, { l: 'FCF Yield', v: '1.5%' }, { l: 'Score', v: '7/10' }],
+        scores: [
+            { l: 'Growth', v: 8, max: 10, color: '#4CAF82', raw: 'EPS Growth 3Y', rawV: '+45%/yr' },
+            { l: 'Profit', v: 7, max: 10, color: '#5B8FD4', raw: 'Profit Margin', rawV: '25%' },
+            { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 9, max: 10, color: '#D4884A', raw: 'JOKER Signal', rawV: 'STRONGLY UV' },
+        ],
+        bullets: [
+            "Avionics upgrades non-negotiable for ageing fleets.",
+            "EPS growing at +45% per year over three years.",
+            "PEG of 0.53 — market paying half price for the growth.",
+            "Zero net debt; capital-light business model."
+        ],
+    },
+    {
+        id: 35, type: 'JOKER', isPro: false, fairValue: 28.0, yahooTicker: 'BKTI',
+        stars: 3,
+        sectorIcon: '📡',
+        irLink: 'https://bktechnologies.com/investor-relations',
+        company: 'BK Technologies', ticker: 'BKTI',
+        tag: 'Mission-critical radio systems', tagBold: 'Mission-critical.',
+        tagFull: "BK Technologies makes the digital radios used by American police officers, firefighters and emergency responders — the kind of mission-critical communication where failure is not an option. On many government contracts, BK is the only approved supplier. Once a department is standardised on a radio system, they do not switch.",
+        pick: 'Sole-source supplier to US emergency services.', pickBold: 'Mission-critical.',
+        pickFull: "▲▲ STRONGLY UNDERVALUED — Contract-backed revenue, high switching costs, and earnings growing at nearly double the rate the valuation implies. Small, overlooked, and operating in a category — emergency communications — where reliability trumps price. Exactly the kind of setup the JOKER card looks for.",
+        ind1l: 'PEG', ind1v: '0.54',
+        ind2l: 'FCF YIELD', ind2v: '4.1%',
+        metrics: [{ l: 'P/E', v: '24.3' }, { l: 'PEG', v: '0.54' }, { l: 'FCF Yield', v: '4.1%' }, { l: 'Score', v: '7/10' }],
+        scores: [
+            { l: 'Growth', v: 8, max: 10, color: '#4CAF82', raw: 'EPS Growth 3Y', rawV: '+45%/yr' },
+            { l: 'Profit', v: 7, max: 10, color: '#5B8FD4', raw: 'Gov. Contracts', rawV: 'Sole-source' },
+            { l: 'Low Debt', v: 8, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Low' },
+            { l: 'Fair Price', v: 9, max: 10, color: '#D4884A', raw: 'JOKER Signal', rawV: 'STRONGLY UV' },
+        ],
+        bullets: [
+            "Sole-source supplier on many US emergency services contracts.",
+            "EPS growing at +45% per year over three years.",
+            "PEG of 0.54 — strong growth at a low price.",
+            "Switching costs are extremely high in mission-critical radio."
+        ],
+    },
+    {
+        id: 36, type: 'JOKER', isPro: false, fairValue: 34.0, yahooTicker: 'VLE.TO',
+        stars: 3,
+        sectorIcon: '🛢️',
+        irLink: 'https://www.valeuraenergy.com/investor-information/',
+        company: 'Valeura Energy', ticker: 'VLE',
+        tag: 'Thailand oil producer', tagBold: 'Deep value energy.',
+        tagFull: "Valeura Energy produces oil exclusively in the Gulf of Thailand — one of the lowest-cost offshore basins on the planet. The company acquired established, already-producing fields in 2023 and began generating cash almost immediately. No exploration risk, no debt, and a geography the market has largely forgotten about.",
+        pick: 'Lowest-cost oil basin. Zero debt.', pickBold: 'Deep value energy.',
+        pickFull: "▲ UNDERVALUED — The most extreme value reading in the deck on a growth-adjusted basis. Producing oil at low cost, carrying no debt, generating cash since the day of acquisition — and still priced as if the deal might not work out. It already has.",
+        ind1l: 'PEG', ind1v: '0.02',
+        ind2l: 'FCF YIELD', ind2v: '15.2%',
+        metrics: [{ l: 'P/E', v: '3.3' }, { l: 'PEG', v: '0.02' }, { l: 'FCF Yield', v: '15.2%' }, { l: 'Score', v: '5/10' }],
+        scores: [
+            { l: 'Growth', v: 7, max: 10, color: '#4CAF82', raw: 'EPS Growth 3Y', rawV: '+1200%' },
+            { l: 'Profit', v: 8, max: 10, color: '#5B8FD4', raw: 'FCF Yield', rawV: '15.2%' },
+            { l: 'Low Debt', v: 10, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 8, max: 10, color: '#D4884A', raw: 'JOKER Signal', rawV: 'UNDERVALUED' },
+        ],
+        bullets: [
+            "P/E of 3.3 — priced for disaster that has not come.",
+            "FCF yield of 15.2% — extraordinary cash generation.",
+            "Zero net debt; Gulf of Thailand is lowest-cost offshore oil.",
+            "EPS growth of +1200% over three years yet PEG is 0.02."
+        ],
+    },
+    {
+        id: 37, type: 'JOKER', isPro: false, fairValue: 171.0, yahooTicker: 'KRYS',
+        stars: 3,
+        sectorIcon: '🧬',
+        irLink: 'https://ir.krystalbiotech.com',
+        company: 'Krystal Biotech', ticker: 'KRYS',
+        tag: 'Gene therapy for rare skin disease', tagBold: 'Rare skin disease.',
+        tagFull: "Krystal Biotech treats dystrophic epidermolysis bullosa — a rare and devastating genetic skin disease where the slightest friction causes severe blistering. VYJUVEK is the world's first approved redosable gene therapy, meaning patients can apply it repeatedly rather than receiving a one-time treatment. No meaningful competitor exists.",
+        pick: 'Only approved gene therapy for this disease.', pickBold: 'Rare skin disease.',
+        pickFull: "▲ UNDERVALUED — A commercial-stage gene therapy company with the only approved treatment for its disease, earnings growing rapidly as the product gains patients, and a valuation that still underprices that growth. The transition from clinical to commercial is complete — the market has not fully caught up.",
+        ind1l: 'PEG', ind1v: '0.80',
+        ind2l: 'FCF YIELD', ind2v: '1.2%',
+        metrics: [{ l: 'P/E', v: '38.9' }, { l: 'PEG', v: '0.80' }, { l: 'FCF Yield', v: '1.2%' }, { l: 'Score', v: '5/10' }],
+        scores: [
+            { l: 'Growth', v: 8, max: 10, color: '#4CAF82', raw: 'EPS Growth 3Y', rawV: '+49%/yr' },
+            { l: 'Profit', v: 6, max: 10, color: '#5B8FD4', raw: 'Rev. Growth', rawV: '+85%' },
+            { l: 'Low Debt', v: 8, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Low' },
+            { l: 'Fair Price', v: 7, max: 10, color: '#D4884A', raw: 'JOKER Signal', rawV: 'UNDERVALUED' },
+        ],
+        bullets: [
+            "Only approved redosable gene therapy for its disease worldwide.",
+            "Revenue growing at +85% year-on-year.",
+            "No meaningful competitor in late-stage trials.",
+            "EPS growing at +49% per year; PEG of 0.80."
+        ],
+    },
+    // ── KINGS — FAIRLY VALUED ─────────────────────────────────────────────────
+    {
+        id: 38, type: 'KING', isPro: false, fairValue: 12.0, yahooTicker: 'NICL.L',
+        stars: 4,
+        sectorIcon: '🥤',
+        irLink: 'https://www.nicholsplc.co.uk/investor-relations',
+        company: 'Nichols PLC', ticker: 'NICL',
+        tag: 'Vimto soft drinks brand', tagBold: 'Vimto brand.',
+        tagFull: "Nichols owns Vimto — a British soft drinks brand with a surprisingly global footprint, beloved across the Middle East, sub-Saharan Africa and the Caribbean as much as in the United Kingdom. The business runs lean, pays a steady dividend, and has been consistently profitable for decades with very little capital needed to sustain it.",
+        pick: 'Quality brand. Fair price.', pickBold: 'Vimto brand.',
+        pickFull: "◈ FAIRLY VALUED — Solid brand, consistent cash flows, and a dividend with history behind it — but the shares are priced fairly, not cheaply. Worth watching for a pullback before committing.",
+        ind1l: 'DIV YIELD', ind1v: '3.3%',
+        ind2l: 'P/E', ind2v: '20.1',
+        metrics: [{ l: 'Div. Yield', v: '3.3%' }, { l: 'P/E', v: '20.1' }, { l: 'Yld Ratio', v: '1.38' }, { l: 'P/E Ratio', v: '1.32' }],
+        scores: [
+            { l: 'Dividend', v: 5, max: 10, color: '#4CAF82', raw: 'Rev. Growth', rawV: 'Steady' },
+            { l: 'Profit', v: 6, max: 10, color: '#5B8FD4', raw: 'FCF Margin', rawV: '15%+' },
+            { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Low' },
+            { l: 'Fair Price', v: 4, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'FAIRLY VALUED' },
+        ],
+        bullets: [
+            "Vimto brand — beloved across UK, Middle East, Africa.",
+            "Consistent cash generation for decades.",
+            "3.3% dividend yield; predictable payout history.",
+            "Quality franchise available at a fair, not expensive, price."
+        ],
+    },
+    {
+        id: 39, type: 'KING', isPro: false, fairValue: 46.0, yahooTicker: 'ITRN',
+        stars: 3,
+        sectorIcon: '📡',
+        irLink: 'https://www.ituran.com/ituran/investor-relations/',
+        company: 'Ituran Location & Control', ticker: 'ITRN',
+        tag: 'Vehicle telematics & stolen recovery', tagBold: 'Telematics leader.',
+        tagFull: "Ituran connects and tracks vehicles across Israel, Brazil and the United States through a subscription model that customers almost never leave. Once a car is wired into the network — for stolen vehicle recovery, fleet management or insurance purposes — the monthly fee becomes invisible. Renewal is nearly automatic.",
+        pick: 'Telematics. Yield above 3%.', pickBold: 'Income + value.',
+        pickFull: "▲ UNDERVALUED — A vehicle telematics business built on subscriptions that almost never cancel, paying a solid dividend, and trading at a modest valuation. Quiet, consistent, and easy to overlook — which is usually where value hides.",
+        ind1l: 'DIV YIELD', ind1v: '3.9%',
+        ind2l: 'P/E', ind2v: '16.8',
+        metrics: [{ l: 'Div. Yield', v: '3.9%' }, { l: 'P/E', v: '16.8' }, { l: 'Yld Ratio', v: '1.18' }, { l: 'P/E Ratio', v: '1.21' }],
+        scores: [
+            { l: 'Dividend', v: 5, max: 10, color: '#4CAF82', raw: 'Subscriber Gr.', rawV: '+5%' },
+            { l: 'Profit', v: 6, max: 10, color: '#5B8FD4', raw: 'P/E vs 5Y Avg', rawV: '1.21x' },
+            { l: 'Low Debt', v: 8, max: 10, color: '#9B6ED4', raw: 'Debt/Equity', rawV: 'Low' },
+            { l: 'Fair Price', v: 4, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'FAIRLY VALUED' },
+        ],
+        bullets: [
+            "Israeli GPS fleet tracking — 170+ countries, high renewal rates.",
+            "Recurring subscription revenue; low debt.",
+            "Shares below their own 5-year P/E average.",
+            "Defensive: fleet operators don't cancel tracking contracts."
+        ],
+    },
+    {
+        id: 40, type: 'KING', isPro: false, fairValue: 41.0, yahooTicker: 'WEYS',
+        stars: 4,
+        sectorIcon: '👟',
+        irLink: 'https://www.weycogroup.com/investors',
+        company: 'Weyco Group', ticker: 'WEYS',
+        tag: 'Wholesale footwear brands', tagBold: 'Footwear brands.',
+        tagFull: "Weyco Group is a Milwaukee-based footwear company behind Florsheim, Stacy Adams and Nunn Bush — dress shoes and work boots sold through department stores and online across the United States. Family-controlled and conservative, it has paid a dividend every single year for over seventy consecutive years, an extraordinary record for any small company.",
+        pick: 'Family footwear. Real yield.', pickBold: 'Dividend compounder.',
+        pickFull: "▲ UNDERVALUED — Seventy-plus years of uninterrupted dividends, a sensible valuation, and solid cash generation from a business that has survived every retail disruption of the past century. Small, quiet, and priced right.",
+        ind1l: 'DIV YIELD', ind1v: '3.4%',
+        ind2l: 'P/E', ind2v: '12.1',
+        metrics: [{ l: 'Div. Yield', v: '3.4%' }, { l: 'P/E', v: '12.1' }, { l: 'Yld Ratio', v: '0.94' }, { l: 'P/E Ratio', v: '1.20' }],
+        scores: [
+            { l: 'Dividend', v: 4, max: 10, color: '#4CAF82', raw: 'Div. Streak', rawV: '70+ yrs' },
+            { l: 'Profit', v: 5, max: 10, color: '#5B8FD4', raw: 'P/E vs 5Y Avg', rawV: '1.20x' },
+            { l: 'Low Debt', v: 8, max: 10, color: '#9B6ED4', raw: 'Equity Ratio', rawV: 'High' },
+            { l: 'Fair Price', v: 4, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'FAIRLY VALUED' },
+        ],
+        bullets: [
+            "US footwear brand — consistent dividend for 40+ years.",
+            "4.0%+ dividend yield; shares below historical norm.",
+            "Niche work and outdoor footwear with loyal customer base.",
+            "Priced for decline; business keeps growing quietly."
+        ],
+    },
+    // ── KINGS — OVERVALUED ────────────────────────────────────────────────────
+    {
+        id: 41, type: 'KING', isPro: false, fairValue: 127.0, yahooTicker: 'PM',
+        stars: 3,
+        sectorIcon: '🚬',
+        irLink: 'https://www.pmi.com/investor-relations',
+        company: 'Philip Morris International', ticker: 'PM',
+        tag: 'International tobacco & nicotine', tagBold: 'Global tobacco.',
+        tagFull: "Philip Morris International sells Marlboro and other cigarette brands to the rest of the world, and has moved further and faster than any peer toward heated tobacco with its IQOS device — now a meaningful and growing share of total revenue. The transition from combustibles to smoke-free products is well underway.",
+        pick: 'Great franchise. Dividend stalwart.', pickBold: 'Check current valuation.',
+        pickFull: "A genuinely impressive business executing a serious smoke-free transition — shifting revenue from cigarettes to heated tobacco and oral nicotine at scale. Durable pricing power, loyal customer base, and decades of consistent dividends.",
+        ind1l: 'DIV YIELD', ind1v: '3.0%',
+        ind2l: 'P/E', ind2v: '25.7',
+        metrics: [{ l: 'Div. Yield', v: '3.0%' }, { l: 'P/E', v: '25.7' }, { l: 'Signal Score', v: '2/10' }, { l: 'KING Signal', v: 'OVERVALUED' }],
+        scores: [
+            { l: 'Dividend', v: 5, max: 10, color: '#4CAF82', raw: 'IQOS Growth', rawV: '+15%' },
+            { l: 'Profit', v: 8, max: 10, color: '#5B8FD4', raw: 'FCF Margin', rawV: '35%+' },
+            { l: 'Low Debt', v: 5, max: 10, color: '#9B6ED4', raw: 'Debt/EBITDA', rawV: '2.8' },
+            { l: 'Fair Price', v: 2, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'OVERVALUED' },
+        ],
+        bullets: [
+            "Smoke-free products now 40% of revenue and growing.",
+            "Dividend yield above 4%; raised every year for 15+ years.",
+            "Operating in 180 countries — geographically diversified.",
+            "Shares below DCF fair value on normalised FCF."
+        ],
+    },
+    {
+        id: 42, type: 'KING', isPro: false, fairValue: 22.0, yahooTicker: 'TEN.MI',
+        stars: 3,
+        sectorIcon: '🔩',
+        irLink: 'https://www.tenaris.com/en/investors/',
+        company: 'Tenaris', ticker: 'TEN',
+        tag: 'Steel pipes for oil & gas', tagBold: 'Energy pipes.',
+        tagFull: "Tenaris is the world's leading manufacturer of steel pipes for oil and gas wells, supplying drilling operations across North America, Latin America and the Middle East. It controls the entire process from steel production to finished pipe, giving it cost and quality advantages that smaller rivals cannot easily match.",
+        pick: 'Industrial supplier. Real value.', pickBold: 'Yield above 3%.',
+        pickFull: "▲ UNDERVALUED — A solid dividend, fair valuation, and healthy cash generation from the dominant global supplier of oil and gas pipes. Energy infrastructure spending remains strong and Tenaris is positioned to capture it.",
+        ind1l: 'DIV YIELD', ind1v: '3.1%',
+        ind2l: 'P/E', ind2v: '14.8',
+        metrics: [{ l: 'Div. Yield', v: '3.1%' }, { l: 'P/E', v: '14.8' }, { l: 'Yld Ratio', v: '1.07' }, { l: 'P/E Ratio', v: '1.40' }],
+        scores: [
+            { l: 'Dividend', v: 4, max: 10, color: '#4CAF82', raw: 'Rev. Trend', rawV: 'Declining' },
+            { l: 'Profit', v: 6, max: 10, color: '#5B8FD4', raw: 'EBIT Margin', rawV: '18%' },
+            { l: 'Low Debt', v: 8, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 2, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'OVERVALUED' },
+        ],
+        bullets: [
+            "Italian industrial filters — mission-critical components.",
+            "Serves automotive, energy, and marine sectors globally.",
+            "Low debt; strong European industrial order book.",
+            "Niche supplier with high switching costs."
+        ],
+    },
+    {
+        id: 43, type: 'KING', isPro: false, fairValue: 26.0, yahooTicker: 'EBF',
+        stars: 4,
+        sectorIcon: '🏭',
+        irLink: 'https://www.ennis.com/about/investor-relations/',
+        company: 'Ennis Inc', ticker: 'EBF',
+        tag: 'Business forms & print', tagBold: 'Business forms.',
+        tagFull: "Ennis manufactures business forms, labels and printed promotional materials for companies across the United States. It is not a glamorous business, but it is a durable one — serving a steady demand for physical print in an economy that still runs on paperwork. Dividends raised consistently for over a decade.",
+        pick: 'Business forms. Steady yield.', pickBold: 'Durable income.',
+        pickFull: "▲ UNDERVALUED — A strong dividend yield, modest valuation, and steady cash generation from a business that does not need the economy to grow in order to sell labels and forms. Over a decade of consistent dividends. Income with low drama.",
+        ind1l: 'DIV YIELD', ind1v: '4.7%',
+        ind2l: 'P/E', ind2v: '12.7',
+        metrics: [{ l: 'Div. Yield', v: '4.7%' }, { l: 'P/E', v: '12.7' }, { l: 'Yld Ratio', v: '0.89' }, { l: 'P/E Ratio', v: '1.02' }],
+        scores: [
+            { l: 'Dividend', v: 8, max: 10, color: '#4CAF82', raw: 'EPS Growth', rawV: 'Steady' },
+            { l: 'Profit', v: 6, max: 10, color: '#5B8FD4', raw: 'FCF Margin', rawV: '11%' },
+            { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Equity Ratio', rawV: '86%' },
+            { l: 'Fair Price', v: 2, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'OVERVALUED' },
+        ],
+        bullets: [
+            "US business forms and labels — steady demand regardless of economy.",
+            "Consistent FCF; pricing power intact.",
+            "Death rate provides a demographic tailwind.",
+            "Shares trade at a discount to the sector average."
+        ],
+    },
+    {
+        id: 44, type: 'KING', isPro: false, fairValue: 55.0, yahooTicker: 'FMMB.ST',
+        stars: 3,
+        sectorIcon: '🚿',
+        irLink: 'https://www.fmmgroup.se/en/investor-relations/',
+        company: 'FM Mattsson Mora Group', ticker: 'FMM B',
+        tag: 'Nordic bathroom fittings', tagBold: 'Bathroom fittings.',
+        tagFull: "FM Mattsson Mora Group is Sweden's leading maker of taps, showers and bathroom fittings — brands including Mora Armatur and Damixa that are trusted fixtures in Scandinavian homes and hotels. A quiet, quality industrial with a long history of steady dividends.",
+        pick: 'Quality Nordic. Fair price.', pickBold: 'Bathroom fittings.',
+        pickFull: "◈ FAIRLY VALUED — A quality Scandinavian industrial with a reliable dividend and solid cash generation — but priced fairly, not cheaply. The kind of business you want to own when the price is right.",
+        ind1l: 'DIV YIELD', ind1v: '3.1%',
+        ind2l: 'P/E', ind2v: '23.3',
+        metrics: [{ l: 'Div. Yield', v: '3.1%' }, { l: 'P/E', v: '23.3' }, { l: 'Yld Ratio', v: '0.78' }, { l: 'P/E Ratio', v: '1.40' }],
+        scores: [
+            { l: 'Dividend', v: 4, max: 10, color: '#4CAF82', raw: 'Rev. Growth', rawV: 'Low' },
+            { l: 'Profit', v: 5, max: 10, color: '#5B8FD4', raw: 'EBIT Margin', rawV: '12%' },
+            { l: 'Low Debt', v: 7, max: 10, color: '#9B6ED4', raw: 'Debt/Equity', rawV: 'Low' },
+            { l: 'Fair Price', v: 1, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'OVERVALUED' },
+        ],
+        bullets: [
+            "Swedish premium faucet and kitchen mixer manufacturer — family-owned heritage brand.",
+            "Dividend yield above 5%; consistent payout history.",
+            "Shares deeply below fair value estimate.",
+            "Stable demand from renovation and construction markets."
+        ],
+    },
+    {
+        id: 45, type: 'KING', isPro: false, fairValue: 72.0, yahooTicker: 'EVS.BR',
+        stars: 3,
+        sectorIcon: '📺',
+        irLink: 'https://www.evs.com/en/investor-relations',
+        company: 'EVS Broadcast Equipment', ticker: 'EVS',
+        tag: 'Live broadcast production systems', tagBold: 'Broadcast tech.',
+        tagFull: "EVS Broadcast Equipment makes the servers and software behind live sports television — the systems that deliver instant replays, multi-angle cuts and real-time production at every major tournament, Olympics and championship broadcast. It is the invisible standard that broadcasters around the world have quietly relied on for decades.",
+        pick: 'Broadcast tech. Decent yield.', pickBold: 'Niche leader.',
+        pickFull: "▲ UNDERVALUED — The dominant supplier of live sports broadcast technology, with a solid dividend and healthy cash generation, trading at a fair and undemanding valuation. A niche monopoly that rarely gets expensive.",
+        ind1l: 'DIV YIELD', ind1v: '3.2%',
+        ind2l: 'P/E', ind2v: '13.4',
+        metrics: [{ l: 'Div. Yield', v: '3.2%' }, { l: 'P/E', v: '13.4' }, { l: 'Yld Ratio', v: '0.68' }, { l: 'P/E Ratio', v: '1.29' }],
+        scores: [
+            { l: 'Dividend', v: 4, max: 10, color: '#4CAF82', raw: 'Rev. Growth', rawV: 'Cyclical' },
+            { l: 'Profit', v: 6, max: 10, color: '#5B8FD4', raw: 'EBIT Margin', rawV: '20%+' },
+            { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 1, max: 10, color: '#D4884A', raw: 'KING Signal', rawV: 'OVERVALUED' },
+        ],
+        bullets: [
+            "Belgian broadcast equipment — Eurovision and major events rely on it.",
+            "Recurring maintenance and upgrade contracts.",
+            "Dividend yield above 4%; zero net debt.",
+            "Shares at a meaningful discount to intrinsic value."
+        ],
+    },
+    // ── QUEENS — FAIRLY VALUED ────────────────────────────────────────────────
+    {
+        id: 46, type: 'QUEEN', isPro: false, fairValue: 103.0, yahooTicker: 'CRUS',
+        stars: 2,
+        sectorIcon: '🎵',
+        irLink: 'https://investor.cirrus.com',
+        company: 'Cirrus Logic', ticker: 'CRUS',
+        tag: 'Audio chips for Apple devices', tagBold: 'Apple audio chip.',
+        tagFull: "Cirrus Logic designs the chips inside iPhones that handle audio — the codecs and amplifiers that make the sound work. Apple is by far its largest customer, and design wins typically lock in several years of supply. Getting into an iPhone means getting into the next generation too, creating unusual revenue visibility for a chipmaker.",
+        pick: 'Apple-linked. Fair price now.', pickBold: 'Apple audio chip.',
+        pickFull: "◈ FAIRLY VALUED — A quality business with genuine Apple dependency — which cuts both ways. Strong fundamentals, but the shares are priced fairly at the moment. A pullback would make this considerably more interesting.",
+        ind1l: 'FCF YIELD', ind1v: '5.9%',
+        ind2l: 'ROIC', ind2v: '27.9%',
+        metrics: [{ l: 'P/E', v: '18.0' }, { l: 'ROIC', v: '27.9%' }, { l: 'FCF Yield', v: '5.9%' }, { l: 'Signal', v: 'FAIRLY' }],
+        scores: [
+            { l: 'Growth', v: 5, max: 10, color: '#4CAF82', raw: 'Rev. Growth', rawV: 'Apple-linked' },
+            { l: 'Profit', v: 7, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '27.9%' },
+            { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 3, max: 10, color: '#D4884A', raw: 'QUEEN Signal', rawV: 'FAIRLY VALUED' },
+        ],
+        bullets: [
+            "Audio chips inside every iPhone — Apple relationship is durable.",
+            "FCF yield above 8%; zero net debt.",
+            "Content per device rising as Apple adds features.",
+            "Fabless model — no manufacturing risk."
+        ],
+    },
+    {
+        id: 47, type: 'QUEEN', isPro: false, fairValue: 871.0, yahooTicker: 'REGN',
+        stars: 3,
+        sectorIcon: '💉',
+        irLink: 'https://investor.regeneron.com',
+        company: 'Regeneron Pharmaceuticals', ticker: 'REGN',
+        tag: 'Biotech — EYLEA & Dupixent', tagBold: 'Biotech quality.',
+        tagFull: "Regeneron is one of the most successful biotechnology companies of the modern era — commercialising EYLEA for eye disease and Dupixent for atopic dermatitis, two of the best-selling medicines in their respective categories. A deep oncology pipeline sits behind them, funded by exceptional cash generation.",
+        pick: 'Top-tier biotech. Fair price.', pickBold: 'Biotech quality.',
+        pickFull: "◈ FAIRLY VALUED — Exceptional quality at a fair price. Pipeline news tends to create volatility in this stock — worth having it on the watchlist and waiting for the market to offer a better entry than today.",
+        ind1l: 'FCF YIELD', ind1v: '4.3%',
+        ind2l: 'ROIC', ind2v: '29.8%',
+        metrics: [{ l: 'P/E', v: '18.1' }, { l: 'ROIC', v: '29.8%' }, { l: 'FCF Yield', v: '4.3%' }, { l: 'Signal', v: 'FAIRLY' }],
+        scores: [
+            { l: 'Growth', v: 6, max: 10, color: '#4CAF82', raw: 'Dupixent Rev.', rawV: '+22%' },
+            { l: 'Profit', v: 8, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '29.8%' },
+            { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 3, max: 10, color: '#D4884A', raw: 'QUEEN Signal', rawV: 'FAIRLY VALUED' },
+        ],
+        bullets: [
+            "EYLEA and Dupixent generating billions in recurring revenue.",
+            "FCF yield above 6%; exceptional ROIC.",
+            "Pipeline diversified across oncology, rare disease, and immunology.",
+            "One of the most productive biotech R&D engines per dollar spent."
+        ],
+    },
+    // ── QUEENS — OVERVALUED ───────────────────────────────────────────────────
+    {
+        id: 48, type: 'QUEEN', isPro: false, fairValue: 51.0, yahooTicker: 'CPRT',
+        stars: 3,
+        sectorIcon: '🚗',
+        irLink: 'https://www.copart.com/content/us/en/investor-relations.html',
+        company: 'Copart', ticker: 'CPRT',
+        tag: 'Salvage auto auction monopoly', tagBold: 'Auction monopoly.',
+        tagFull: "Copart runs the dominant marketplace for salvage and used vehicles — the platform that insurance companies, dealers and rebuilders use to buy and sell cars after accidents, floods and repossessions. Its network of over two hundred locations and vast land holdings have been accumulated over decades and would take a generation to replicate.",
+        pick: 'Excellent moat. Asset-light.', pickBold: 'Check current valuation.',
+        pickFull: "One of the strongest competitive positions in the entire deck — a near-monopoly in salvage vehicle auctions with a two-sided marketplace that gets stronger the larger it grows. Asset-light, highly cash generative, and virtually impossible to replicate.",
+        ind1l: 'FCF YIELD', ind1v: '3.3%',
+        ind2l: 'ROIC', ind2v: '35.0%',
+        metrics: [{ l: 'P/E', v: '23.1' }, { l: 'ROIC', v: '35.0%' }, { l: 'FCF Yield', v: '3.3%' }, { l: 'Signal', v: 'OVERVALUED' }],
+        scores: [
+            { l: 'Growth', v: 7, max: 10, color: '#4CAF82', raw: 'Rev. Growth', rawV: '+8%' },
+            { l: 'Profit', v: 8, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '35.0%' },
+            { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Low' },
+            { l: 'Fair Price', v: 1, max: 10, color: '#D4884A', raw: 'QUEEN Signal', rawV: 'OVERVALUED' },
+        ],
+        bullets: [
+            "Online salvage auction monopoly in the US.",
+            "ROIC above 25%; asset-light marketplace economics.",
+            "Revenue grows with every accident and insurance claim.",
+            "Shares below fair value despite 20-year compounding record."
+        ],
+    },
+    {
+        id: 49, type: 'QUEEN', isPro: false, fairValue: 257.0, yahooTicker: 'RMD',
+        stars: 3,
+        sectorIcon: '😴',
+        irLink: 'https://investor.resmed.com',
+        company: 'ResMed', ticker: 'RMD',
+        tag: 'Sleep apnea & respiratory devices', tagBold: 'Sleep tech leader.',
+        tagFull: "ResMed is the world leader in devices for sleep apnoea — the AirSense machines that millions of patients use every night, connected to cloud software that monitors compliance and feeds data to doctors. Each device sold creates years of mask, humidifier and software subscription revenue behind it.",
+        pick: 'Sleep apnea leader. Recurring revenue.', pickBold: 'Check current valuation.',
+        pickFull: "A genuinely excellent business with a durable recurring revenue model — every device sold creates years of mask, humidifier and software subscription revenue. Strong competitive position in a chronic, underdiagnosed condition affecting hundreds of millions globally.",
+        ind1l: 'FCF YIELD', ind1v: '4.5%',
+        ind2l: 'ROIC', ind2v: '25.5%',
+        metrics: [{ l: 'P/E', v: '25.2' }, { l: 'ROIC', v: '25.5%' }, { l: 'FCF Yield', v: '4.5%' }, { l: 'Signal', v: 'OVERVALUED' }],
+        scores: [
+            { l: 'Growth', v: 6, max: 10, color: '#4CAF82', raw: 'Rev. Growth', rawV: '+11%' },
+            { l: 'Profit', v: 7, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '25.5%' },
+            { l: 'Low Debt', v: 7, max: 10, color: '#9B6ED4', raw: 'Debt/Equity', rawV: 'Moderate' },
+            { l: 'Fair Price', v: 1, max: 10, color: '#D4884A', raw: 'QUEEN Signal', rawV: 'OVERVALUED' },
+        ],
+        bullets: [
+            "170M sleep apnea patients — subscription software growing fast.",
+            "ROIC above 25%; FCF yield above 5%.",
+            "GLP-1 obesity fears overstated — ResMed's data says otherwise.",
+            "Shares below fair value despite dominant market position."
+        ],
+    },
+    {
+        id: 50, type: 'QUEEN', isPro: false, fairValue: 238.0, yahooTicker: 'GOOGL',
+        stars: 3,
+        sectorIcon: '🔍',
+        irLink: 'https://abc.xyz/investor/',
+        company: 'Alphabet', ticker: 'GOOGL',
+        tag: 'Google search & cloud platform', tagBold: 'Search monopoly.',
+        tagFull: "Alphabet owns Google — which means it controls over ninety percent of global internet search, runs the world's second-largest cloud computing platform, and owns YouTube. It generates staggering amounts of cash every year, with resources to invest in almost anything it chooses.",
+        pick: 'Search monopoly. Cloud compounder.', pickBold: 'Check current valuation.',
+        pickFull: "Exceptional business with dominant positions in search, cloud, and digital advertising. Artificial intelligence creates both opportunity and uncertainty — but the core search franchise remains deeply embedded in daily life, and cloud growth continues to compound.",
+        ind1l: 'FCF YIELD', ind1v: '1.8%',
+        ind2l: 'ROIC', ind2v: '36.1%',
+        metrics: [{ l: 'P/E', v: '28.6' }, { l: 'ROIC', v: '36.1%' }, { l: 'FCF Yield', v: '1.8%' }, { l: 'Signal', v: 'OVERVALUED' }],
+        scores: [
+            { l: 'Growth', v: 7, max: 10, color: '#4CAF82', raw: 'Cloud Growth', rawV: '+28%' },
+            { l: 'Profit', v: 8, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '36.1%' },
+            { l: 'Low Debt', v: 10, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 1, max: 10, color: '#D4884A', raw: 'QUEEN Signal', rawV: 'OVERVALUED' },
+        ],
+        bullets: [
+            "Google controls 90% of global search — structural moat.",
+            "FCF yield above 6%; $100B+ cash on hand.",
+            "YouTube and Cloud both growing at double-digit rates.",
+            "Shares below DCF fair value for the first time in a decade."
+        ],
+    },
+    // ── ACES — FAIRLY VALUED ──────────────────────────────────────────────────
+    {
+        id: 51, type: 'ACE', isPro: false, fairValue: 78.0, yahooTicker: 'GAW.L',
+        stars: 3,
+        sectorIcon: '🎲',
+        irLink: 'https://investor.games-workshop.com',
+        company: 'Games Workshop', ticker: 'GAW',
+        tag: 'Warhammer miniatures & IP', tagBold: 'Cultural moat.',
+        tagFull: "Games Workshop owns the Warhammer universe — the fantasy and science fiction world populated by Space Marines, Orcs and endless hand-painted miniatures. It sells models, rulebooks and paints to one of the most intensely loyal hobbyist communities in the world, and licences the intellectual property to video game studios, filmmakers and merchandise companies.",
+        pick: 'Warhammer moat. Fair price.', pickBold: 'Cultural moat.',
+        pickFull: "◈ FAIRLY VALUED — Extraordinary returns on capital from an intellectual property franchise with no real substitute — but the shares are priced to reflect that quality. Worth owning at a better price.",
+        ind1l: 'PEG', ind1v: '1.89',
+        ind2l: 'ROIC', ind2v: '107.7%',
+        metrics: [{ l: 'P/E', v: '28.7' }, { l: 'PEG', v: '1.89' }, { l: 'ROIC', v: '107.7%' }, { l: 'Div. Yield', v: '3.1%' }],
+        scores: [
+            { l: 'Growth', v: 6, max: 10, color: '#4CAF82', raw: 'EPS Growth', rawV: '+15%/yr' },
+            { l: 'Profit', v: 10, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '107.7%' },
+            { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 3, max: 10, color: '#D4884A', raw: 'ACE Signal', rawV: 'FAIRLY VALUED' },
+        ],
+        bullets: [
+            "Games Workshop — Warhammer IP licensing revenues growing globally.",
+            "FCF margin above 30%; zero net debt.",
+            "Amazon Warhammer series multiplying the brand's global audience.",
+            "Pricing power extraordinary — customers accept annual rises."
+        ],
+    },
+    {
+        id: 52, type: 'ACE', isPro: false, fairValue: 164.67, yahooTicker: 'MEDI.OL',
+        stars: 3,
+        sectorIcon: '🏥',
+        irLink: 'https://www.medistim.com/investor-relations/',
+        company: 'Medistim', ticker: 'MEDI',
+        tag: 'Cardiac surgery ultrasound tools', tagBold: 'Cardiac surgery niche.',
+        tagFull: "Medistim makes the ultrasound probes and blood flow sensors that cardiac surgeons use during bypass operations to verify that grafts are working as intended. The tools are used in the operating theatre itself — right at the moment of highest consequence — creating switching costs that are essentially absolute. Once a surgical team builds confidence in a system, they do not change.",
+        pick: 'Cardiac niche. Fair price.', pickBold: 'Cardiac surgery niche.',
+        pickFull: "◈ FAIRLY VALUED — A genuinely rare business — high-quality, niche, near-impossible to displace — but the valuation is fair at current levels. A lower entry point would make this one of the most compelling cards in the deck.",
+        ind1l: 'PEG', ind1v: '2.26',
+        ind2l: 'ROIC', ind2v: '52.1%',
+        metrics: [{ l: 'P/E', v: '26.2' }, { l: 'PEG', v: '2.26' }, { l: 'ROIC', v: '52.1%' }, { l: 'Div. Yield', v: '3.5%' }],
+        scores: [
+            { l: 'Growth', v: 5, max: 10, color: '#4CAF82', raw: 'EPS Growth', rawV: '+12%/yr' },
+            { l: 'Profit', v: 9, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '52.1%' },
+            { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 3, max: 10, color: '#D4884A', raw: 'ACE Signal', rawV: 'FAIRLY VALUED' },
+        ],
+        bullets: [
+            "Ultrasound systems used in cardiac surgery worldwide.",
+            "ROIC above 30%; capital-light, recurring consumables revenue.",
+            "Surgical quality assurance is non-negotiable — high switching costs.",
+            "Consistent double-digit growth; zero debt."
+        ],
+    },
+    {
+        id: 53, type: 'ACE', isPro: false, fairValue: 419.0, yahooTicker: 'MSFT',
+        stars: 3,
+        sectorIcon: '💻',
+        irLink: 'https://www.microsoft.com/en-us/investor',
+        company: 'Microsoft', ticker: 'MSFT',
+        tag: 'Enterprise software & Azure cloud', tagBold: 'Enterprise backbone.',
+        tagFull: "Microsoft is the world's most valuable software company — Azure cloud, Office 365, Teams, LinkedIn, GitHub and now Copilot AI threaded through all of it. Each new product reinforces the ones around it, and the artificial intelligence layer is being added on top of a franchise that already had no meaningful substitute.",
+        pick: 'AI-powered monopoly. Watch price.', pickBold: 'Quality anchor.',
+        pickFull: "◈ FAIRLY VALUED — The quality anchor of the deck — the business you want to own when the price is right. Right now it is priced fairly. A meaningful pullback would likely turn this into an undervalued card, and patient investors watch it closely for that moment.",
+        ind1l: 'PEG', ind1v: '1.35',
+        ind2l: 'ROIC', ind2v: '26.8%',
+        metrics: [{ l: 'P/E', v: '24.5' }, { l: 'PEG', v: '1.35' }, { l: 'ROIC', v: '26.8%' }, { l: 'Div. Yield', v: '0.9%' }],
+        scores: [
+            { l: 'Growth', v: 7, max: 10, color: '#4CAF82', raw: 'Cloud Growth', rawV: '+21%' },
+            { l: 'Profit', v: 8, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '26.8%' },
+            { l: 'Low Debt', v: 8, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Low' },
+            { l: 'Fair Price', v: 3, max: 10, color: '#D4884A', raw: 'ACE Signal', rawV: 'FAIRLY VALUED' },
+        ],
+        bullets: [
+            "Azure growing at +21% year-on-year.",
+            "Copilot AI driving ARPU expansion across Office suite.",
+            "ROIC above 30%; FCF margin above 35%.",
+            "Enterprise switching costs are enormous — lock-in is absolute."
+        ],
+    },
+    {
+        id: 54, type: 'ACE', isPro: false, fairValue: 170.0, yahooTicker: 'GRMN',
+        stars: 3,
+        sectorIcon: '🧭',
+        irLink: 'https://www.garmin.com/en-US/company/investor-relations/',
+        company: 'Garmin', ticker: 'GRMN',
+        tag: 'GPS devices & wearables', tagBold: 'GPS leader.',
+        tagFull: "Garmin started as a navigation company and quietly reinvented itself as a premium hardware brand across aviation, marine, fitness and outdoor adventure. The car GPS that built it is a minor footnote now — the real business is high-margin devices for pilots, sailors, runners and hikers who care deeply about precision.",
+        pick: 'GPS moat. Fairly priced.', pickBold: 'GPS leader.',
+        pickFull: "◈ FAIRLY VALUED — Strong returns on capital and a well-diversified product portfolio — but the shares are priced at fair value, not a discount. The kind of business worth buying on weakness.",
+        ind1l: 'PEG', ind1v: '1.49',
+        ind2l: 'ROIC', ind2v: '25.5%',
+        metrics: [{ l: 'P/E', v: '29.2' }, { l: 'PEG', v: '1.49' }, { l: 'ROIC', v: '25.5%' }, { l: 'Div. Yield', v: '1.4%' }],
+        scores: [
+            { l: 'Growth', v: 6, max: 10, color: '#4CAF82', raw: 'EPS Growth', rawV: '+18%/yr' },
+            { l: 'Profit', v: 7, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '25.5%' },
+            { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 3, max: 10, color: '#D4884A', raw: 'ACE Signal', rawV: 'FAIRLY VALUED' },
+        ],
+        bullets: [
+            "GPS and wearables with a deeply loyal customer base.",
+            "FCF yield above 5%; zero net debt.",
+            "Aviation and marine divisions growing at double-digit rates.",
+            "Shares trade below fair value for a business this consistent."
+        ],
+    },
+    {
+        id: 55, type: 'ACE', isPro: false, fairValue: 51.0, yahooTicker: 'ORNBV.HE',
+        stars: 2,
+        sectorIcon: '💊',
+        irLink: 'https://www.orion.fi/en/investors/',
+        company: 'Orion Corporation B', ticker: 'ORNBV',
+        tag: 'Finnish pharma & Parkinson drugs', tagBold: 'Finnish pharma.',
+        tagFull: "Orion is Finland's largest pharmaceutical company, developing drugs for Parkinson's disease, cancer and critical care while building a global respiratory franchise around its Easyhaler inhaler. A steady, research-led business with a long history of dividends and a management culture that values predictability over drama.",
+        pick: 'Finnish pharma. Fair price.', pickBold: 'Finnish pharma.',
+        pickFull: "◈ FAIRLY VALUED — High-quality pharmaceutical business at a fair price. Strong returns on capital, solid dividend, and the kind of steady compounding that rewards patient investors — but not cheaply priced today.",
+        ind1l: 'PEG', ind1v: '1.50',
+        ind2l: 'ROIC', ind2v: '38.8%',
+        metrics: [{ l: 'P/E', v: '19.1' }, { l: 'PEG', v: '1.50' }, { l: 'ROIC', v: '38.8%' }, { l: 'Div. Yield', v: '2.7%' }],
+        scores: [
+            { l: 'Growth', v: 5, max: 10, color: '#4CAF82', raw: 'EPS Growth', rawV: '+13%/yr' },
+            { l: 'Profit', v: 8, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '38.8%' },
+            { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Low' },
+            { l: 'Fair Price', v: 3, max: 10, color: '#D4884A', raw: 'ACE Signal', rawV: 'FAIRLY VALUED' },
+        ],
+        bullets: [
+            "Finnish pharma — Parkinson's franchise is durable.",
+            "FCF yield attractive at current price; low debt.",
+            "Shares below their own 5-year P/E average.",
+            "Speciality pharma with strong IP and pricing stability."
+        ],
+    },
+    // ── ACES — OVERVALUED ─────────────────────────────────────────────────────
+    {
+        id: 56, type: 'ACE', isPro: false, fairValue: 166.0, yahooTicker: 'JKHY',
+        stars: 3,
+        sectorIcon: '🏦',
+        irLink: 'https://investors.jackhenry.com',
+        company: 'Jack Henry & Associates', ticker: 'JKHY',
+        tag: 'Fintech for community banks', tagBold: 'Bank tech.',
+        tagFull: "Jack Henry provides the core banking software and payment infrastructure that keeps more than seven thousand smaller American banks running. A bank does not change its core system lightly — the implementation costs, staff retraining and operational risk make switching essentially prohibitive. That stickiness creates the kind of recurring revenue stream that compounds reliably over decades.",
+        pick: 'Fintech for banks. Sticky revenue.', pickBold: 'Check current valuation.',
+        pickFull: "A brilliant business model built around deep integrations with community banks and credit unions — switching costs are enormous, revenue is highly recurring, and the installed base compounds quietly year after year. A true fintech infrastructure compounder.",
+        ind1l: 'PEG', ind1v: '2.03',
+        ind2l: 'ROIC', ind2v: '19.2%',
+        metrics: [{ l: 'P/E', v: '23.3' }, { l: 'PEG', v: '2.03' }, { l: 'ROIC', v: '19.2%' }, { l: 'Div. Yield', v: '1.4%' }],
+        scores: [
+            { l: 'Growth', v: 4, max: 10, color: '#4CAF82', raw: 'EPS Growth', rawV: '+11%/yr' },
+            { l: 'Profit', v: 5, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '19.2%' },
+            { l: 'Low Debt', v: 8, max: 10, color: '#9B6ED4', raw: 'Debt/Equity', rawV: 'Low' },
+            { l: 'Fair Price', v: 1, max: 10, color: '#D4884A', raw: 'ACE Signal', rawV: 'OVERVALUED' },
+        ],
+        bullets: [
+            "Payment software for community banks — 97% recurring subscriptions.",
+            "ROIC above 20%; FCF yield above 4%; zero debt.",
+            "Banks do not switch core processing systems — lock-in absolute.",
+            "30-year compounding track record; rarely this cheap."
+        ],
+    },
+    {
+        id: 57, type: 'ACE', isPro: false, fairValue: 142.0, yahooTicker: 'CEVI.ST',
+        stars: 3,
+        sectorIcon: '🔬',
+        irLink: 'https://www.cellavision.com/investors',
+        company: 'CellaVision', ticker: 'CEVI',
+        tag: 'AI blood cell analysis systems', tagBold: 'Lab diagnostics.',
+        tagFull: "CellaVision makes the AI-powered systems that hospital laboratories use to analyse blood cells — replacing the manual microscope work that haematology technicians used to do by hand. Faster, more accurate, and dramatically cheaper to operate at scale. The systems become embedded in lab workflows that rarely get redesigned.",
+        pick: 'Medtech compounder. Recurring dx.', pickBold: 'Check current valuation.',
+        pickFull: "A high-quality medtech compounder with a genuinely differentiated product in cervical cancer screening — addressing a large, underserved global market with a clinically validated solution and strong recurring diagnostic revenue.",
+        ind1l: 'PEG', ind1v: '2.62',
+        ind2l: 'ROIC', ind2v: '19.2%',
+        metrics: [{ l: 'P/E', v: '23.6' }, { l: 'PEG', v: '2.62' }, { l: 'ROIC', v: '19.2%' }, { l: 'Div. Yield', v: '1.8%' }],
+        scores: [
+            { l: 'Growth', v: 4, max: 10, color: '#4CAF82', raw: 'EPS Growth', rawV: '+9%/yr' },
+            { l: 'Profit', v: 5, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '19.2%' },
+            { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 1, max: 10, color: '#D4884A', raw: 'ACE Signal', rawV: 'OVERVALUED' },
+        ],
+        bullets: [
+            "Swedish small-cap with strong FCF and activist alignment.",
+            "Shares at a significant discount to book value.",
+            "Low debt; management aligned with shareholders.",
+            "Catalyst-driven recovery potential beyond pure income."
+        ],
+    },
+    {
+        id: 58, type: 'ACE', isPro: false, fairValue: 53.0, yahooTicker: 'RVRC.ST',
+        stars: 2,
+        sectorIcon: '🧥',
+        irLink: 'https://www.revolutionrace.com/investor-relations',
+        company: 'Revolutionrace', ticker: 'RVRC',
+        tag: 'Direct-to-consumer outdoor apparel', tagBold: 'Outdoor DTC.',
+        tagFull: "Revolutionrace is a Swedish outdoor apparel brand that sells technical jackets, trousers and hiking gear directly to customers online across Europe and beyond — no stores, no retailers taking a cut, no intermediaries. The direct model keeps margins high and gives the company a direct relationship with every buyer.",
+        pick: 'Swedish outdoor brand. Strong FCF.', pickBold: 'Check current valuation.',
+        pickFull: "Growing well and generating strong cash flow from a premium outdoor and lifestyle brand with a loyal Scandinavian customer base. Expanding internationally with disciplined capital allocation and high return on equity.",
+        ind1l: 'PEG', ind1v: '2.31',
+        ind2l: 'ROIC', ind2v: '34.7%',
+        metrics: [{ l: 'P/E', v: '23.6' }, { l: 'PEG', v: '2.31' }, { l: 'ROIC', v: '34.7%' }, { l: 'Div. Yield', v: '2.0%' }],
+        scores: [
+            { l: 'Growth', v: 5, max: 10, color: '#4CAF82', raw: 'EPS Growth', rawV: '+10%/yr' },
+            { l: 'Profit', v: 8, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '34.7%' },
+            { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 1, max: 10, color: '#D4884A', raw: 'ACE Signal', rawV: 'OVERVALUED' },
+        ],
+        bullets: [
+            "Outdoor apparel with a loyal Nordic customer base.",
+            "Shares deeply below fair value on normalised earnings.",
+            "High repeat purchase rates through online channels.",
+            "Valuation implies margin compression that has not materialised."
+        ],
+    },
+    // ── JOKERS — FAIRLY VALUED ────────────────────────────────────────────────
+    {
+        id: 59, type: 'JOKER', isPro: false, fairValue: 256.0, yahooTicker: 'DAVE',
+        stars: 3,
+        sectorIcon: '📱',
+        irLink: 'https://investors.dave.com',
+        company: 'Dave Inc', ticker: 'DAVE',
+        tag: 'Neobank for underserved Americans', tagBold: 'Neobank growth.',
+        tagFull: "Dave is an American neobank built for people who live paycheque to paycheque — offering fee-free accounts, small cash advances to cover short-term gaps, and budgeting tools designed for real financial stress. Having turned profitable, it is now expanding into credit and broader financial wellness products for a customer base that traditional banks largely ignore.",
+        pick: 'Neobank turned profitable. Watch.', pickBold: 'Neobank growth.',
+        pickFull: "◈ FAIRLY VALUED — Better fundamentals than the market gives it credit for, but the shares sit at fair value rather than a discount. A business worth understanding deeply — and buying on weakness.",
+        ind1l: 'FCF YIELD', ind1v: '6.7%',
+        ind2l: 'ROIC', ind2v: '49.4%',
+        metrics: [{ l: 'P/E', v: '17.5' }, { l: 'ROIC', v: '49.4%' }, { l: 'FCF Yield', v: '6.7%' }, { l: 'Signal', v: 'FAIRLY' }],
+        scores: [
+            { l: 'Growth', v: 7, max: 10, color: '#4CAF82', raw: 'Rev. Growth', rawV: '+40%' },
+            { l: 'Profit', v: 8, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '49.4%' },
+            { l: 'Low Debt', v: 7, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Low' },
+            { l: 'Fair Price', v: 3, max: 10, color: '#D4884A', raw: 'JOKER Signal', rawV: 'FAIRLY VALUED' },
+        ],
+        bullets: [
+            "US neobank serving 11M+ members — turning profitable.",
+            "Revenue growing at +20%+; operating leverage building.",
+            "ExtraCash advance product generating high-margin recurring revenue.",
+            "Priced as a startup despite a demonstrated profitable model."
+        ],
+    },
+    {
+        id: 60, type: 'JOKER', isPro: false, fairValue: 239.0, yahooTicker: 'DUOL',
+        stars: 2,
+        sectorIcon: '🦉',
+        irLink: 'https://investors.duolingo.com',
+        company: 'Duolingo', ticker: 'DUOL',
+        tag: 'AI-powered language learning app', tagBold: 'Language learning.',
+        tagFull: "Duolingo is the most downloaded language learning application in the world — over a hundred million people open it every month to practise Spanish, French, Japanese or any of forty other languages. The green owl has become genuinely habitual for millions of users, and the subscription revenue attached to that habit is accelerating as the company has recently crossed into profitability.",
+        pick: 'Language monopoly. Fair price.', pickBold: 'Language learning.',
+        pickFull: "◈ FAIRLY VALUED — Exceptional quality metrics on one of the most habit-forming consumer apps ever built. The shares sit at fair value today — a meaningful pullback would very likely turn this into an undervalued signal on a business that is only getting stronger.",
+        ind1l: 'FCF YIELD', ind1v: '6.8%',
+        ind2l: 'ROIC', ind2v: '138.0%',
+        metrics: [{ l: 'P/E', v: '11.9' }, { l: 'ROIC', v: '138.0%' }, { l: 'FCF Yield', v: '6.8%' }, { l: 'Signal', v: 'FAIRLY' }],
+        scores: [
+            { l: 'Growth', v: 8, max: 10, color: '#4CAF82', raw: 'DAU Growth', rawV: '+40%' },
+            { l: 'Profit', v: 10, max: 10, color: '#5B8FD4', raw: 'ROIC', rawV: '138.0%' },
+            { l: 'Low Debt', v: 9, max: 10, color: '#9B6ED4', raw: 'Net Debt', rawV: 'Zero' },
+            { l: 'Fair Price', v: 3, max: 10, color: '#D4884A', raw: 'JOKER Signal', rawV: 'FAIRLY VALUED' },
+        ],
+        bullets: [
+            "100M+ daily active learners; fastest-growing language app.",
+            "Revenue growing at +40%+ year-on-year.",
+            "Max subscription driving strong ARPU expansion.",
+            "AI-powered content reducing cost per lesson dramatically."
+        ],
+    },
 ];
 const DEAL_ORIGINS = [
     'translate(120vw,-80vh) rotate(25deg)',
@@ -257,66 +1795,15 @@ function Home() {
               return currentPrice < fairValue * 1.05;
           });
 
-        // STEP 1: Sort by stars descending — best cards first
-        const sortedEligible = [...eligibleCards].sort((a, b) => (b.stars || 0) - (a.stars || 0));
+        // Separate by type: FREE (KING/JACK silver) vs PRO (QUEEN/ACE/JOKER gold)
+        const freePool = eligibleCards.filter(c => c.type === 'KING' || c.type === 'JACK');
+        const proPool  = eligibleCards.filter(c => c.type === 'QUEEN' || c.type === 'ACE' || c.type === 'JOKER');
 
-        // STEP 2: Deduplicate by ticker — company appears only on its highest-scoring card
-        // (Best Strategy Rule: since sorted by stars, first occurrence = best strategy)
-        const seenTickers = new Set();
-        const dedupedCards = sortedEligible.filter(c => {
-            if (seenTickers.has(c.ticker)) return false;
-            seenTickers.add(c.ticker);
-            return true;
-        });
-
-        // STEP 3: Split into free (KING/JACK) and pro (QUEEN/ACE/JOKER) pools
-        const freePool = dedupedCards.filter(c => c.type === 'KING' || c.type === 'JACK');
-        const proPool  = dedupedCards.filter(c => c.type === 'QUEEN' || c.type === 'ACE' || c.type === 'JOKER');
-
-        // STEP 4: Quality-tiered shuffle with sector cap (max 2 per sector)
-        function pickPool(pool, seed, count) {
-            const tier5 = pool.filter(c => c.stars === 5);
-            const tier4 = pool.filter(c => c.stars === 4);
-            const tier3 = pool.filter(c => (c.stars || 3) <= 3);
-            const ordered = [
-                ...seededRand(seed,     tier5.length).map(i => tier5[i]),
-                ...seededRand(seed + 1, tier4.length).map(i => tier4[i]),
-                ...seededRand(seed + 2, tier3.length).map(i => tier3[i]),
-            ];
-            const picked = [];
-            const sectorCount = {};
-            for (const card of ordered) {
-                const sec = card.sector || 'Other';
-                if ((sectorCount[sec] || 0) >= 2) continue;
-                sectorCount[sec] = (sectorCount[sec] || 0) + 1;
-                picked.push(card);
-                if (picked.length === count) break;
-            }
-            return picked;
-        }
-
-        // STEP 5: Keeper + rotation
-        // keeperSeed changes every 2 days — best card stays 2 days
-        // todaySeed changes every day — other 2 slots rotate daily
-        const dayNumber  = Math.floor(todaySeed / 86400);
-        const keeperSeed = Math.floor(dayNumber / 2) * 86400;
-
-        function pickKeeper(pool, kseed) {
-            return pickPool(pool, kseed, 1)[0] || null;
-        }
-
-        function pickRotators(pool, seed, keeper, count) {
-            const withoutKeeper = pool.filter(c => !keeper || c.ticker !== keeper.ticker);
-            return pickPool(withoutKeeper, seed, count);
-        }
-
-        const freeKeeper   = pickKeeper(freePool, keeperSeed);
-        const freeRotators = pickRotators(freePool, todaySeed, freeKeeper, 2);
-        const todayFree    = [freeKeeper, ...freeRotators].filter(Boolean);
-
-        const proKeeper    = pickKeeper(proPool, keeperSeed + 1);
-        const proRotators  = pickRotators(proPool, todaySeed + 1, proKeeper, 2);
-        const todayPro     = [proKeeper, ...proRotators].filter(Boolean);
+        // Pick 3 FREE and 3 PRO cards for today
+        const freeOrder = seededRand(todaySeed, freePool.length);
+        const proOrder  = seededRand(todaySeed + 1, proPool.length);
+        const todayFree = freeOrder.slice(0, 3).map(i => freePool[i]).filter(c => c);
+        const todayPro  = proOrder.slice(0, 3).map(i => proPool[i]).filter(c => c);
         
         // IMPORTANT: Show FREE cards first (silver), then PRO cards (gold)
         const deckCards = [
@@ -566,11 +2053,7 @@ function Home() {
                                                     ((_c = prices[card.id]) === null || _c === void 0 ? void 0 : _c.pe) && card.ind2l === 'P/E' ? ' ●' : ''),
                                                 React.createElement("p", { style: { color: ct.color, fontWeight: 500, fontSize: '1.55rem', fontFamily: 'Barlow Condensed,sans-serif' } }, card.ind2l === 'P/E' && ((_d = prices[card.id]) === null || _d === void 0 ? void 0 : _d.pe)
                                                     ? prices[card.id].pe.toFixed(1)
-                                                    : card.ind2l === 'UNDERVALUED BY' && prices[card.id] && card.fairValue
-                                                        ? (prices[card.id].price < card.fairValue
-                                                            ? Math.round((card.fairValue - prices[card.id].price) / card.fairValue * 100) + '%'
-                                                            : Math.round((card.fairValue - prices[card.id].price) / card.fairValue * 100) + '%')
-                                                        : card.ind2v)))),
+                                                    : card.ind2v)))),
                                     React.createElement("div", { style: { position: 'relative', flexShrink: 0, height: '5rem', marginBottom: '3px' } },
                                         React.createElement("div", { style: { position: 'absolute', bottom: 0, left: 0, right: 0, textAlign: 'center' } },
                                             React.createElement("div", { style: Object.assign({ fontSize: ct.symbolSize || '4.2rem', lineHeight: 1, transform: 'rotate(180deg)', display: 'inline-block', marginBottom: ct.symbolSize ? '0.5rem' : '0' }, (ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.symbol)),
@@ -737,28 +2220,28 @@ function Home() {
                             let stratRows = [];
                             if (ec.type === 'KING') {
                                 stratRows = [
-                                    ['DIVIDEND %', fromMetrics('div') || '—'],
-                                    ['P/E RATIO', pe],
+                                    ['Div. Yield', fromMetrics('div') || '—'],
+                                    ['P/E Ratio', pe],
                                 ];
                             } else if (ec.type === 'QUEEN') {
                                 stratRows = [
-                                    ['RETURN ON CAPITAL', fromMetrics('roic') || fromScores('roic') || '—'],
-                                    ['CASH FLOW %', fromMetrics('fcf') || fromScores('fcf yield', 'fcf') || '—'],
+                                    ['ROIC', fromMetrics('roic') || fromScores('roic') || '—'],
+                                    ['FCF Yield', fromMetrics('fcf') || fromScores('fcf yield', 'fcf') || '—'],
                                 ];
                             } else if (ec.type === 'JACK') {
                                 stratRows = [
-                                    ['EARNINGS GROWTH', ec.epsGrowth || fromScores('eps growth', 'eps') || '—'],
-                                    ['1Y PERFORMANCE', ec.rsRating || fromScores('rel. strength', 'rs rating') || '—'],
+                                    ['EPS Growth', ec.epsGrowth || fromScores('eps growth', 'eps') || '—'],
+                                    ['Rel. Strength', ec.rsRating || fromScores('rel. strength', 'rs rating') || '—'],
                                 ];
                             } else if (ec.type === 'ACE') {
                                 stratRows = [
-                                    ['EARNINGS GROWTH', ec.epsGrowth || fromScores('eps growth', 'piotroski') || '—'],
-                                    ['RETURN ON CAPITAL', fromMetrics('roic') || fromScores('roic') || '—'],
+                                    ['F-Score', ec.fScore || fromScores('f-score', 'piotroski') || '—'],
+                                    ['ROIC', fromMetrics('roic') || fromScores('roic') || '—'],
                                 ];
                             } else if (ec.type === 'JOKER') {
                                 stratRows = [
-                                    ['EARNINGS GROWTH', ec.epsGrowth || fromScores('eps growth', 'eps') || '—'],
-                                    ['REVENUE GROWTH', ec.revGrowth || fromScores('rev. growth', 'rev growth') || '—'],
+                                    ['EPS Growth', ec.epsGrowth || fromScores('eps growth', 'eps') || '—'],
+                                    ['Rev. Growth', fromScores('rev. growth', 'rev growth') || '—'],
                                 ];
                             }
                             const cells = [
