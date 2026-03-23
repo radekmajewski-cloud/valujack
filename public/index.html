@@ -272,7 +272,21 @@ function Home() {
 
         function pickRotators(pool, seed, keeper, count) {
             const withoutKeeper = pool.filter(c => !keeper || c.ticker !== keeper.ticker);
-            return pickPool(withoutKeeper, seed, count);
+            // Build 7-day exclusion set — cards that showed as rotators in past 7 days
+            const dayNum = Math.floor(seed / 86400);
+            const recentTickers = new Set();
+            for (let d = 1; d <= 7; d++) {
+                const pastSeed = (dayNum - d) * 86400;
+                const pastKeeperSeed = Math.floor((dayNum - d) / 2) * 86400;
+                const pastKeeper = pickPool(pool, pastKeeperSeed, 1)[0];
+                const pastEligible = pool.filter(c => !pastKeeper || c.ticker !== pastKeeper.ticker);
+                const pastRotators = pickPool(pastEligible, pastSeed, count);
+                pastRotators.forEach(c => recentTickers.add(c.ticker));
+            }
+            // Exclude recent rotators, but keep pool if exclusion leaves too few
+            const freshPool = withoutKeeper.filter(c => !recentTickers.has(c.ticker));
+            const usePool = freshPool.length >= count ? freshPool : withoutKeeper;
+            return pickPool(usePool, seed, count);
         }
 
         const freeKeeper   = pickKeeper(freePool, keeperSeed);
