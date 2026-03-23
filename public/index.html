@@ -208,6 +208,11 @@ function Home() {
                   return false;
               }
 
+              // Minimum 3 stars to appear in rotation
+              if ((c.stars || 0) < 3) {
+                  return false;
+              }
+
               // KING: undervalued only (strict — dividend thesis requires price discount)
               if (c.type === 'KING') {
                   return currentPrice < fairValue;
