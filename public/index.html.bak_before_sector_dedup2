@@ -181,12 +181,7 @@ function Home() {
         // Seed based on date so same cards show all day
         const todaySeed = (function(){
           var d = new Date();
-          // Use day-of-year as seed so it changes daily and keeper math works
-          var start = new Date(d.getFullYear(), 0, 0);
-          var diff = d - start;
-          var oneDay = 86400000;
-          var dayOfYear = Math.floor(diff / oneDay);
-          return d.getFullYear() * 1000 + dayOfYear;
+          return d.getFullYear() * 10000 + (d.getMonth()+1) * 100 + d.getDate();
         })();
         function seededRand(seed, n) {
           // Simple LCG shuffle pick
@@ -314,24 +309,12 @@ function Home() {
         const acePool   = dedupedCards.filter(c => c.type === 'ACE');
         const jokerPool = dedupedCards.filter(c => c.type === 'JOKER');
 
-        // Pick one per strategy, avoiding sector duplicates across the hand
-        function pickOne(pool, kseed, dseed, usedSectors) {
-            // First try keeper
-            const keeper = pickKeeper(pool, kseed);
-            if (keeper && !usedSectors.has(keeper.sector)) return keeper;
-            // Then try rotators avoiding used sectors
-            const filtered = pool.filter(c => !usedSectors.has(c.sector));
-            if (filtered.length === 0) return pickKeeper(pool, kseed) || pickRotators(pool, dseed, null, 1)[0] || null;
-            return pickRotators(filtered, dseed, null, 1)[0] || null;
-        }
-
-        const usedSectors = new Set();
-        const todayKing  = pickOne(kingPool,  keeperSeed+0,  todaySeed+0,  usedSectors); if(todayKing)  usedSectors.add(todayKing.sector);
-        const todayJack  = pickOne(jackPool,  keeperSeed+2,  todaySeed+2,  usedSectors); if(todayJack)  usedSectors.add(todayJack.sector);
-        const todayTwo   = pickOne(twoPool,   keeperSeed+4,  todaySeed+4,  usedSectors); if(todayTwo)   usedSectors.add(todayTwo.sector);
-        const todayQueen = pickOne(queenPool, keeperSeed+6,  todaySeed+6,  usedSectors); if(todayQueen) usedSectors.add(todayQueen.sector);
-        const todayAce   = pickOne(acePool,   keeperSeed+8,  todaySeed+8,  usedSectors); if(todayAce)   usedSectors.add(todayAce.sector);
-        const todayJoker = pickOne(jokerPool, keeperSeed+10, todaySeed+10, usedSectors);
+        const todayKing  = pickKeeper(kingPool,  keeperSeed + 0) || pickRotators(kingPool,  todaySeed + 0, null, 1)[0] || null;
+        const todayJack  = pickKeeper(jackPool,  keeperSeed + 2) || pickRotators(jackPool,  todaySeed + 2, null, 1)[0] || null;
+        const todayTwo   = pickKeeper(twoPool,   keeperSeed + 4) || pickRotators(twoPool,   todaySeed + 4, null, 1)[0] || null;
+        const todayQueen = pickKeeper(queenPool, keeperSeed + 6) || pickRotators(queenPool, todaySeed + 6, null, 1)[0] || null;
+        const todayAce   = pickKeeper(acePool,   keeperSeed + 8) || pickRotators(acePool,   todaySeed + 8, null, 1)[0] || null;
+        const todayJoker = pickKeeper(jokerPool, keeperSeed + 10) || pickRotators(jokerPool, todaySeed + 10, null, 1)[0] || null;
 
         const todayFree = [todayKing, todayJack, todayTwo].filter(Boolean);
         const todayPro  = [todayQueen, todayAce, todayJoker].filter(Boolean);

@@ -44,7 +44,7 @@ window.showProLoader = function() {
     el.style.transition = 'opacity 0.7s';
     el.style.opacity = '0';
     setTimeout(function(){ el.style.display = 'none'; el.style.transition=''; }, 700);
-  }, 4000);
+  }, 6000);
 };
 </script>
 
@@ -54,10 +54,9 @@ const { useState, useEffect } = React;
 const CARD_TYPES = {
     KING: { color: '#C0152A', symbol: '♚', corner: 'K', isGold: false, symbolColor: null, cornerColor: null },
     JACK: { color: '#1A1A1A', symbol: '♞', corner: 'J', isGold: false, symbolColor: null, cornerColor: null },
-    TWO: { color: '#7A1A1A', symbol: '♠', corner: '2', isGold: false, symbolColor: 'SILVER', cornerColor: '#C8C8C8', symbolSize: '2.1rem' },
     QUEEN: { color: '#4A1A6B', symbol: '♛', corner: 'Q', isGold: true, symbolColor: 'GOLD', cornerColor: '#4A1A6B' },
-    ACE: { color: '#4A1A6B', symbol: '♠', corner: 'A', isGold: true, symbolColor: 'GOLD', cornerColor: '#4A1A6B', symbolSize: '3.2rem' },
-    JOKER: { color: '#4A1A6B', symbol: '★', corner: '★', isGold: true, symbolColor: 'GOLD', cornerColor: '#4A1A6B' },
+    ACE: { color: '#1A1A1A', symbol: '♠', corner: 'A', isGold: true, symbolColor: 'GOLD', cornerColor: '#4A1A6B', symbolSize: '3.2rem' },
+    JOKER: { color: '#1A4A2A', symbol: '★', corner: '★', isGold: true, symbolColor: 'GOLD', cornerColor: '#4A1A6B' },
 };
 const SILVER = 'linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#E0DDDA 45%,#A9A9A9 65%,#D0CDCA 80%,#8A8A8A 100%)';
 const GOLD = 'linear-gradient(135deg,#BFA882 0%,#DDBF88 22%,#A88A60 42%,#CAB07A 62%,#8C7858 80%,#C0AA75 100%)';
@@ -98,9 +97,7 @@ function Home() {
     const [isMobile, setIsMobile] = useState(false);
     const [dealt, setDealt] = useState([]);
     const [showInfo, setShowInfo] = useState(false);
-    const initPrices = {};
-    (window.CARDS_DATA || []).forEach(c => { if (c.type === 'TWO') initPrices[c.id] = { price: c.fairValue * 0.8, currency: 'USD' }; });
-    const [prices, setPrices] = useState(initPrices);
+    const [prices, setPrices] = useState({});
     const [priceAge, setPriceAge] = useState('');
     const [priceErr, setPriceErr] = useState(false);
     const [chartData, setChartData] = useState(null);   // { points:[{t,c}], loading, error }
@@ -126,8 +123,7 @@ function Home() {
         check();
         window.addEventListener('resize', check);
         cards.forEach((card, i) => {
-            const delay = 100 + (i % 3) * 100;
-            setTimeout(() => setDealt(d => [...d, card.id]), delay);
+            setTimeout(() => setDealt(d => [...d, card.id]), 150 + i * 160);
         });
         // Fetch live prices from Yahoo Finance via our API route
         const fetchPrices = async () => {
@@ -181,12 +177,7 @@ function Home() {
         // Seed based on date so same cards show all day
         const todaySeed = (function(){
           var d = new Date();
-          // Use day-of-year as seed so it changes daily and keeper math works
-          var start = new Date(d.getFullYear(), 0, 0);
-          var diff = d - start;
-          var oneDay = 86400000;
-          var dayOfYear = Math.floor(diff / oneDay);
-          return d.getFullYear() * 1000 + dayOfYear;
+          return d.getFullYear() * 10000 + (d.getMonth()+1) * 100 + d.getDate();
         })();
         function seededRand(seed, n) {
           // Simple LCG shuffle pick
@@ -205,19 +196,21 @@ function Home() {
         // Show cards ONLY when: current_price < fair_value (undervalued)
         // Cards automatically appear/disappear as prices change
         
-        const effectivePrices = { ...prices };
-        cards.forEach(c => { if (c.type === 'TWO' && !effectivePrices[c.id]) effectivePrices[c.id] = { price: c.fairValue * 0.8, currency: 'USD' }; });
-        const eligibleCards = cards.filter(c => {
-              const quote = effectivePrices[c.id];
+        const eligibleCards = Object.keys(prices).length === 0
+          ? cards  // No prices loaded yet, show all cards
+          : cards.filter(c => {
+              const quote = prices[c.id];
               const currentPrice = quote?.price;
               const fairValue = c.fairValue;
-              if (!currentPrice || !fairValue) return false;
 
-              // Minimum 3 stars to appear in rotation (TWO cards use lower threshold — contrarian strategy)
-              if (c.type === 'TWO') {
-                  if ((c.stars || 0) < 2) return false;
-              } else {
-                  if ((c.stars || 0) < 3) return false;
+              // Skip if missing data
+              if (!currentPrice || !fairValue) {
+                  return false;
+              }
+
+              // Minimum 3 stars to appear in rotation
+              if ((c.stars || 0) < 3) {
+                  return false;
               }
 
               // KING: undervalued only (strict — dividend thesis requires price discount)
@@ -228,11 +221,6 @@ function Home() {
               // JACK / JOKER: momentum & growth strategies — allow up to 20% overvalued
               if (c.type === 'JACK' || c.type === 'JOKER') {
                   return currentPrice < fairValue * 1.20;
-              }
-
-              // TWO: contrarian recovery — always eligible if showing recovery signal
-              if (c.type === 'TWO') {
-                  return true;
               }
 
               // QUEEN / ACE (including mega caps): undervalued + fairly valued (up to 5% over)
@@ -252,7 +240,7 @@ function Home() {
         });
 
         // STEP 3: Split into free (KING/JACK) and pro (QUEEN/ACE/JOKER) pools
-        const freePool = dedupedCards.filter(c => c.type === 'KING' || c.type === 'JACK' || c.type === 'TWO');
+        const freePool = dedupedCards.filter(c => c.type === 'KING' || c.type === 'JACK');
         const proPool  = dedupedCards.filter(c => c.type === 'QUEEN' || c.type === 'ACE' || c.type === 'JOKER');
 
         // STEP 4: Quality-tiered shuffle with sector cap (max 2 per sector)
@@ -306,35 +294,13 @@ function Home() {
             return pickPool(usePool, seed, count);
         }
 
-        // One guaranteed card per strategy, each with its own keeper/rotator cycle
-        const kingPool  = dedupedCards.filter(c => c.type === 'KING');
-        const jackPool  = dedupedCards.filter(c => c.type === 'JACK');
-        const twoPool   = dedupedCards.filter(c => c.type === 'TWO');
-        const queenPool = dedupedCards.filter(c => c.type === 'QUEEN');
-        const acePool   = dedupedCards.filter(c => c.type === 'ACE');
-        const jokerPool = dedupedCards.filter(c => c.type === 'JOKER');
+        const freeKeeper   = pickKeeper(freePool, keeperSeed);
+        const freeRotators = pickRotators(freePool, todaySeed, freeKeeper, 2);
+        const todayFree    = [freeKeeper, ...freeRotators].filter(Boolean);
 
-        // Pick one per strategy, avoiding sector duplicates across the hand
-        function pickOne(pool, kseed, dseed, usedSectors) {
-            // First try keeper
-            const keeper = pickKeeper(pool, kseed);
-            if (keeper && !usedSectors.has(keeper.sector)) return keeper;
-            // Then try rotators avoiding used sectors
-            const filtered = pool.filter(c => !usedSectors.has(c.sector));
-            if (filtered.length === 0) return pickKeeper(pool, kseed) || pickRotators(pool, dseed, null, 1)[0] || null;
-            return pickRotators(filtered, dseed, null, 1)[0] || null;
-        }
-
-        const usedSectors = new Set();
-        const todayKing  = pickOne(kingPool,  keeperSeed+0,  todaySeed+0,  usedSectors); if(todayKing)  usedSectors.add(todayKing.sector);
-        const todayJack  = pickOne(jackPool,  keeperSeed+2,  todaySeed+2,  usedSectors); if(todayJack)  usedSectors.add(todayJack.sector);
-        const todayTwo   = pickOne(twoPool,   keeperSeed+4,  todaySeed+4,  usedSectors); if(todayTwo)   usedSectors.add(todayTwo.sector);
-        const todayQueen = pickOne(queenPool, keeperSeed+6,  todaySeed+6,  usedSectors); if(todayQueen) usedSectors.add(todayQueen.sector);
-        const todayAce   = pickOne(acePool,   keeperSeed+8,  todaySeed+8,  usedSectors); if(todayAce)   usedSectors.add(todayAce.sector);
-        const todayJoker = pickOne(jokerPool, keeperSeed+10, todaySeed+10, usedSectors);
-
-        const todayFree = [todayKing, todayJack, todayTwo].filter(Boolean);
-        const todayPro  = [todayQueen, todayAce, todayJoker].filter(Boolean);
+        const proKeeper    = pickKeeper(proPool, keeperSeed + 1);
+        const proRotators  = pickRotators(proPool, todaySeed + 1, proKeeper, 2);
+        const todayPro     = [proKeeper, ...proRotators].filter(Boolean);
         
         // IMPORTANT: Show FREE cards first (silver), then PRO cards (gold)
         const deckCards = [
@@ -524,7 +490,7 @@ function Home() {
                 React.createElement("div", { className: "card-grid" }, visibleCards.map((card, idx) => {
                     var _a, _b, _c, _d;
                     const isFlipped = flipped.includes(card.id);
-                    const isDealt = card.type === 'TWO' ? true : dealt.includes(card.id);
+                    const isDealt = dealt.includes(card.id);
                     const ct = CARD_TYPES[card.type];
                     const frame = ct.isGold ? GOLD : SILVER;
                     return (React.createElement("div", { key: card.id, className: `card-wrap${isDealt ? ' dealt' : ''}`, style: { aspectRatio: '5/8', cursor: 'pointer', transform: isDealt ? 'none' : DEAL_ORIGINS[idx] }, onClick: () => handleCardClick(card) },
@@ -545,20 +511,17 @@ function Home() {
                                         React.createElement("span", { style: { fontSize: '0.62rem', opacity: 0.85, letterSpacing: '0.18em', fontFamily: 'Barlow Condensed,sans-serif', background: frame, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, "☝ TAP TO REVEAL")))),
                             React.createElement("div", { className: "cface cface-front", style: { background: frame } },
                                 React.createElement("div", { className: "cinset", style: { background: 'linear-gradient(160deg,#FEFDF8 0%,#F8F0DC 100%)', display: 'flex', flexDirection: 'column' } }, React.createElement("div", { style: { flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 } },
-                                    React.createElement("div", { style: { position: 'relative', flexShrink: 0, height: '5rem', marginTop: '3px', background: card.type === 'TWO' ? 'linear-gradient(180deg,#6B0E0E 0%,#3A0808 100%)' : 'transparent', borderRadius: card.type === 'TWO' ? '5px 5px 0 0' : 0 } },
-                                        React.createElement("div", { style: { position: 'absolute', top: '4px', right: '8px', fontSize: '1.05rem', fontWeight: 700, fontFamily: 'Palatino Linotype, Palatino, Book Antiqua, serif', fontStyle: 'italic', letterSpacing: '0.04em', opacity: 1.0, color: card.type === 'TWO' ? '#C8C8C8' : ct.color } }, { KING: 'Dividends', JACK: 'Momentum', QUEEN: 'Magic Formula', ACE: 'F-Score', JOKER: 'Growth', TWO: 'Contrarian' }[card.type] || ''),
+                                    React.createElement("div", { style: { position: 'relative', flexShrink: 0, height: '5rem', marginTop: '3px' } },
                                         React.createElement("div", { style: { position: 'absolute', top: 0, left: '8px' } },
                                             React.createElement("div", { style: Object.assign({ fontSize: '3.2rem', fontWeight: 900, fontFamily: 'Playfair Display,serif', lineHeight: 0.9 }, (ct.cornerColor ? { color: ct.cornerColor } : ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.corner)),
                                         React.createElement("div", { style: { position: 'absolute', top: 0, left: 0, right: 0, textAlign: 'center' } },
-                                            React.createElement("div", { style: Object.assign({ fontSize: ct.symbolSize || '4.2rem', lineHeight: 1, marginTop: ct.symbolSize ? '0.5rem' : '0' }, (ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : ct.symbolColor === 'WHITE' ? { color: '#FFFFFF' } : ct.symbolColor === 'SILVER' ? { background: 'linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#E0DDDA 45%,#A9A9A9 65%,#D0CDCA 80%,#8A8A8A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.symbol))),
+                                            React.createElement("div", { style: Object.assign({ fontSize: ct.symbolSize || '4.2rem', lineHeight: 1, marginTop: ct.symbolSize ? '0.5rem' : '0' }, (ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.symbol))),
                                     React.createElement("div", { style: { flex: 0.15, flexShrink: 0 } }),
                                     React.createElement("div", { style: { textAlign: 'center', flexShrink: 0, padding: '0 6px' } },
-                                        React.createElement("p", { style: { textAlign: 'center', fontSize: '0.82rem', fontFamily: 'Barlow Condensed,sans-serif', letterSpacing: '0.15em', color: '#888', marginBottom: '2px', marginTop: '2px' } }, card.country || ''),
-                                    React.createElement("p", { style: { color: '#1A1A2E', fontWeight: 700, fontSize: '1.58rem', lineHeight: 1.15, fontFamily: 'Playfair Display,serif' } }, card.company)),
+                                        React.createElement("p", { style: { color: '#1A1A2E', fontWeight: 700, fontSize: '1.58rem', lineHeight: 1.15, fontFamily: 'Playfair Display,serif' } }, card.company)),
                                     React.createElement("div", { style: { height: 1, background: `linear-gradient(to right,transparent,${ct.color},transparent)`, margin: '4px 6%', flexShrink: 0 } }),
                                     React.createElement("div", { style: { textAlign: 'center', flexShrink: 0 } },
                                         React.createElement("span", { style: { color: '#1A1A2E', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 900, fontSize: '3.75rem', letterSpacing: '0.03em', display: 'block', width: '82%', margin: '0 auto', lineHeight: 1 } }, card.ticker)),
-                                    
                                     React.createElement("div", { style: { height: 1, background: `linear-gradient(to right,transparent,${ct.color},transparent)`, margin: '4px 6%', flexShrink: 0 } }),
                                     React.createElement("p", { style: { color: '#444', fontSize: '1.28rem', fontStyle: 'italic', lineHeight: 1.2, textAlign: 'center', flexShrink: 0, padding: '0 6px' } }, card.tag),
                                     React.createElement("p", { style: { color: ct.color, fontWeight: 700, fontSize: '1.32rem', lineHeight: 1.2, textAlign: 'center', marginTop: 4, flexShrink: 0, padding: '0 6px' } }, card.pick),
@@ -594,7 +557,7 @@ function Home() {
                                                         : card.ind2v)))),
                                     React.createElement("div", { style: { position: 'relative', flexShrink: 0, height: '5rem', marginBottom: '3px' } },
                                         React.createElement("div", { style: { position: 'absolute', bottom: 0, left: 0, right: 0, textAlign: 'center' } },
-                                            React.createElement("div", { style: Object.assign({ fontSize: ct.symbolSize || '4.2rem', lineHeight: 1, transform: 'rotate(180deg)', display: 'inline-block', marginBottom: ct.symbolSize ? '0.5rem' : '0' }, (ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : ct.symbolColor === 'WHITE' ? { color: '#FFFFFF' } : ct.symbolColor === 'SILVER' ? { background: 'linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#E0DDDA 45%,#A9A9A9 65%,#D0CDCA 80%,#8A8A8A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.symbol)),
+                                            React.createElement("div", { style: Object.assign({ fontSize: ct.symbolSize || '4.2rem', lineHeight: 1, transform: 'rotate(180deg)', display: 'inline-block', marginBottom: ct.symbolSize ? '0.5rem' : '0' }, (ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.symbol)),
                                         React.createElement("div", { style: { position: 'absolute', bottom: 0, right: '8px', transform: 'rotate(180deg)', transformOrigin: 'center center' } },
                                             React.createElement("div", { style: Object.assign({ fontSize: '3.2rem', fontWeight: 900, fontFamily: 'Playfair Display,serif', lineHeight: 0.9 }, (ct.cornerColor ? { color: ct.cornerColor } : ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.corner)))))))));
                 })),
@@ -783,7 +746,7 @@ function Home() {
                                 ];
                             }
                             const cells = [
-                                { l: 'Live Price', v: livePrice !== '—' ? livePrice + ' ' + (ec.currency || '') : '—' },
+                                { l: 'Live Price', v: livePrice },
                                 { l: 'Fair Value', v: fv },
                                 ...stratRows.map(([l, v]) => ({ l, v })),
                             ];

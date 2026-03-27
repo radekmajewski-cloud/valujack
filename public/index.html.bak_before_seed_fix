@@ -181,12 +181,7 @@ function Home() {
         // Seed based on date so same cards show all day
         const todaySeed = (function(){
           var d = new Date();
-          // Use day-of-year as seed so it changes daily and keeper math works
-          var start = new Date(d.getFullYear(), 0, 0);
-          var diff = d - start;
-          var oneDay = 86400000;
-          var dayOfYear = Math.floor(diff / oneDay);
-          return d.getFullYear() * 1000 + dayOfYear;
+          return d.getFullYear() * 10000 + (d.getMonth()+1) * 100 + d.getDate();
         })();
         function seededRand(seed, n) {
           // Simple LCG shuffle pick
