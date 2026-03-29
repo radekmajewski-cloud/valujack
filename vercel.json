@@ -1,13 +1,13 @@
 {
-  "version": 2,
-  "rewrites": [
-    {
-      "source": "/api/prices",
-      "destination": "/api/prices.js"
-    },
+  "headers": [
     {
       "source": "/(.*)",
-      "destination": "/public/index.html"
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
     }
   ]
 }

@@ -326,48 +326,15 @@ function Home() {
         }
 
         const usedSectors = new Set();
-        // 2-card system with 7-day exclusion
-        const dayOfYear = todaySeed % 1000;
-        const dayInCycle = dayOfYear % 3;
-        
-        // Calculate last 7 days history
-        const excludeTickers = new Set();
-        for (let i = 1; i <= 7; i++) {
-            const pastDay = dayOfYear - i;
-            const pastCycle = pastDay % 3;
-            const pastSeed = todaySeed - i;
-            let pastPool;
-            if (pastCycle === 0) pastPool = kingPool.concat(jokerPool);
-            else if (pastCycle === 1) pastPool = jackPool.concat(queenPool);
-            else pastPool = twoPool.concat(acePool);
-            const pastPicks = pickPool(pastPool, pastSeed, 2);
-            pastPicks.forEach(c => excludeTickers.add(c.ticker));
-        }
-        
-        let todayFreeCard, todayProCard;
-        
-        if (dayInCycle === 0) {
-            const availKing = kingPool.filter(c => !excludeTickers.has(c.ticker) && !usedSectors.has(c.sector));
-            todayFreeCard = pickPool(availKing.length ? availKing : kingPool, todaySeed, 1)[0];
-            if (todayFreeCard) usedSectors.add(todayFreeCard.sector);
-            const availJoker = jokerPool.filter(c => !excludeTickers.has(c.ticker) && !usedSectors.has(c.sector));
-            todayProCard = pickPool(availJoker.length ? availJoker : jokerPool, todaySeed*3, 1)[0];
-        } else if (dayInCycle === 1) {
-            const availJack = jackPool.filter(c => !excludeTickers.has(c.ticker) && !usedSectors.has(c.sector));
-            todayFreeCard = pickPool(availJack.length ? availJack : jackPool, todaySeed, 1)[0];
-            if (todayFreeCard) usedSectors.add(todayFreeCard.sector);
-            const availQueen = queenPool.filter(c => !excludeTickers.has(c.ticker) && !usedSectors.has(c.sector));
-            todayProCard = pickPool(availQueen.length ? availQueen : queenPool, todaySeed*3, 1)[0];
-        } else {
-            const availTwo = twoPool.filter(c => !excludeTickers.has(c.ticker) && !usedSectors.has(c.sector));
-            todayFreeCard = pickPool(availTwo.length ? availTwo : twoPool, todaySeed, 1)[0];
-            if (todayFreeCard) usedSectors.add(todayFreeCard.sector);
-            const availAce = acePool.filter(c => !excludeTickers.has(c.ticker) && !usedSectors.has(c.sector));
-            todayProCard = pickPool(availAce.length ? availAce : acePool, todaySeed*3, 1)[0];
-        }
+        const todayKing  = pickOne(kingPool,  keeperSeed+0,  todaySeed+0,  usedSectors); if(todayKing)  usedSectors.add(todayKing.sector);
+        const todayJack  = pickOne(jackPool,  keeperSeed+2,  todaySeed+2,  usedSectors); if(todayJack)  usedSectors.add(todayJack.sector);
+        const todayTwo   = pickOne(twoPool,   keeperSeed+4,  todaySeed+4,  usedSectors); if(todayTwo)   usedSectors.add(todayTwo.sector);
+        const todayQueen = pickOne(queenPool, keeperSeed+6,  todaySeed+6,  usedSectors); if(todayQueen) usedSectors.add(todayQueen.sector);
+        const todayAce   = pickOne(acePool,   keeperSeed+8,  todaySeed+8,  usedSectors); if(todayAce)   usedSectors.add(todayAce.sector);
+        const todayJoker = pickOne(jokerPool, keeperSeed+10, todaySeed+10, usedSectors);
 
-        const todayFree = [todayFreeCard].filter(Boolean);
-        const todayPro  = [todayProCard].filter(Boolean);
+        const todayFree = [todayKing, todayJack, todayTwo].filter(Boolean);
+        const todayPro  = [todayQueen, todayAce, todayJoker].filter(Boolean);
         
         // IMPORTANT: Show FREE cards first (silver), then PRO cards (gold)
         const deckCards = [
@@ -1207,4 +1174,4 @@ function dismissSplash(){
 </script>
 
 
-</body></html>
+</body>

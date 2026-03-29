@@ -1,0 +1,121 @@
+VALUJACK WEEKLY AI SCAN
+Generated: 2026-03-27 19:39
+Eligible cards: 59
+============================================================
+
+INSTRUCTIONS:
+For each company, search current news and provide:
+
+---
+ID: [id] | [TICKER] | [COMPANY] | [TYPE] | [SECTOR] | [COUNTRY]
+NEWS: [1-2 sentence summary of most relevant recent news]
+SHORT-TERM: [POSITIVE/NEUTRAL/NEGATIVE] — [reason]
+LONG-TERM: [NONE/LOW/MEDIUM/HIGH impact] — [reason]
+THESIS: [INTACT/UNCERTAIN/BROKEN]
+STATUS: [BOOST/NEUTRAL/WARN/BLOCK]
+SCORE: [number -10 to +10]
+REASON: [1 sentence plain English for the user]
+OPPORTUNITY: [YES/NO] — [if YES, why this is a buying opportunity]
+---
+
+KEY RULES:
+- KING: dividend cut = BLOCK
+- JACK: momentum broken = WARN/BLOCK
+- QUEEN: ROIC collapse = BLOCK
+- ACE: F-score deteriorating = BLOCK
+- JOKER: growth slowing = BLOCK
+- TWO: recovery stalled = WARN
+- Short-term noise + intact thesis = BOOST (buying opportunity)
+- Fundamental moat change = BLOCK
+- Same news can be BOOST for one type, BLOCK for another
+- Search web before assessing — never assume
+
+
+============================================================
+KING — Dividends
+============================================================
+
+ID:9 | ARLP | Alliance Resource Partners | Industrials | USA | Stars:3 | FV:282.14 USD
+ID:41 | CTSH | Cognizant Technology Solutions | Consumer Durables | USA | Stars:2 | FV:28.67 USD
+ID:49 | FPE | Fuchs SE | Telecom | UK | Stars:2 | FV:179.96 GBP
+ID:294 | JNJ | Johnson & Johnson | Consumer Durables | USA | Stars:3 | FV:227.93 USD
+ID:61 | MEDI | Medistim | Health Care | USA | Stars:2 | FV:138.42 EUR
+ID:65 | NEDAP | Nedap NV | Food and Beverage | UK | Stars:2 | FV:51.33 GBP
+ID:298 | OMC | Omnicom Group Inc | Consumer Durables | UK | Stars:4 | FV:27.47 GBP
+ID:73 | SNA | Snap-on Inc | Industrials | USA | Stars:2 | FV:3.43 USD
+ID:81 | UZU | Uzin Utz SE | Consumer Durables | USA | Stars:2 | FV:684.2 USD
+
+============================================================
+JACK — Momentum
+============================================================
+
+ID:85 | CRUS | Cirrus Logic Inc | Industrials | Germany | Stars:3 | FV:12.46 
+ID:13 | DAC | Danaos Corp | Energy | Germany | Stars:3 | FV:105.36 
+ID:89 | ETX | Etablissements Maurel & Prom | Food and Beverage | Germany | Stars:2 | FV:152.29 
+ID:1 | ESEA | Euroseas Ltd | Industrials | USA | Stars:5 | FV:23.02 
+ID:97 | ISSC | Innovative Solutions & Support | Industrials | Belgium | Stars:2 | FV:75.04 
+ID:302 | JDEP | JDE Peets NV | Industrials | Italy | Stars:4 | FV:419.07 EUR
+ID:101 | 41L | Laboratorios Farmaceuticos Rovi | Industrials | USA | Stars:2 | FV:223.29 USD
+ID:105 | MOUR | Moury Construct SA | Industrials | Germany | Stars:2 | FV:1.84 
+ID:109 | 2NH | Naturhouse Health SA | Materials | USA | Stars:2 | FV:100.34 USD
+ID:17 | SA2D | SandRidge Energy | Technology | USA | Stars:3 | FV:123.15 
+ID:113 | SPA | Spadel SA | Food and Beverage | Germany | Stars:2 | FV:594.05 
+ID:306 | TSM | Taiwan Semiconductor | Industrials | Germany | Stars:4 | FV:408.94 EUR
+
+============================================================
+QUEEN — Magic Formula
+============================================================
+
+ID:310 | DDOG | Datadog Inc | Consumer Durables | Canada | Stars:4 | FV:124.7 USD
+ID:5 | EVO | Evolution AB | Consumer Durables | Belgium | Stars:3 | FV:87.84 EUR
+ID:133 | IEX | IDEX Corp | Industrials | USA | Stars:3 | FV:192.74 
+ID:141 | PFE | Pfizer Inc | Industrials | Germany | Stars:2 | FV:190.95 
+ID:145 | TLK | Toll Brothers Inc | Industrials | USA | Stars:2 | FV:45.04 
+ID:314 | UHS | Universal Health Services | Industrials | UK | Stars:5 | FV:283.04 GBP
+ID:33 | WAWI | Wallenius Wilhelmsen | Energy | USA | Stars:3 | FV:23.72 
+
+============================================================
+ACE — F-Score
+============================================================
+
+ID:165 | GML0 | Global Industrial Co | Food and Beverage |  | Stars:3 | FV:48.65 EUR
+ID:169 | KRX | Kingspan Group PLC | Industrials |  | Stars:2 | FV:172.86 EUR
+ID:29 | MLI | Mueller Industries | Industrials |  | Stars:4 | FV:45.99 EUR
+ID:181 | SJ | Stella-Jones Inc | Energy | Germany | Stars:2 | FV:34.88 EUR
+ID:185 | 8JM | Vetoquinol SA | Consumer Durables |  | Stars:2 | FV:451.69 USD
+
+============================================================
+JOKER — Growth
+============================================================
+
+ID:189 | GOOG | Alphabet Inc | Technology | USA | Stars:2 | FV:32.48 
+ID:237 | APH | Amphenol Corp | Advertising |  | Stars:3 | FV:74.97 USD
+ID:193 | BITTI | Bittium | Industrials | Germany | Stars:2 | FV:139.38 
+ID:197 | CLA B | Cloetta | Technology | USA | Stars:2 | FV:158.95 
+ID:241 | FIX | Comfort Systems USA Inc | IT Services | Canada | Stars:2 | FV:577.3 CAD
+ID:205 | VH2 | Friedrich Vorwerk Group SE | Health Care | USA | Stars:2 | FV:319.29 
+ID:25 | GMED | Globus Medical | Technology | USA | Stars:3 | FV:336.21 
+ID:245 | GDWN | Goodwin PLC | IT Services |  | Stars:2 | FV:108.91 EUR
+ID:209 | KEX | Kirby Corp | Health Care | USA | Stars:2 | FV:17.0 USD
+ID:213 | MAL | Magellan Aerospace Corp | Technology | USA | Stars:2 | FV:112.77 
+ID:217 | NB3 | Neurocrine Biosciences Inc | Technology | Italy | Stars:2 | FV:17.33 
+ID:225 | PTC | PTC Inc | Technology | USA | Stars:2 | FV:15.3 USD
+ID:221 | PEN | Penumbra Inc | Consumer Durables | USA | Stars:2 | FV:2.13 
+ID:233 | VICR | Vicor Corp | Industrials | USA | Stars:2 | FV:15.75 
+ID:21 | ZM | Zoom Video Communications | Health Care | USA | Stars:2 | FV:11.69 USD
+
+============================================================
+TWO — Contrarian
+============================================================
+
+ID:249 | ACIW | ACI Worldwide Inc | Consumer Durables | USA | Stars:2 | FV:34.0 USD
+ID:254 | DOCU | Docusign Inc | Technology | USA | Stars:2 | FV:32.0 USD
+ID:286 | FISV | Fiserv Inc | Technology | USA | Stars:3 | FV:107.36 USD
+ID:258 | GRND | Grindr Inc | Industrials | USA | Stars:3 | FV:16.0 USD
+ID:262 | LMN | Lumine Group Inc | Technology | Germany | Stars:2 | FV:48.3 EUR
+ID:266 | PCTY | Paylocity Holding | Technology | USA | Stars:2 | FV:136.3 USD
+ID:270 | SCT | Softcat PLC | Technology | USA | Stars:2 | FV:120.7 USD
+ID:274 | NKB2 | TG Therapeutics | Technology | Canada | Stars:3 | FV:3.1 CAD
+ID:278 | TNET | Trinet Group Inc | Health Care | Sweden | Stars:3 | FV:25.8 SEK
+ID:282 | ZG | Zillow Group Inc | Technology | USA | Stars:3 | FV:206.22 USD
+ID:290 | ZS | Zscaler Inc | Technology | USA | Stars:4 | FV:121.04 USD

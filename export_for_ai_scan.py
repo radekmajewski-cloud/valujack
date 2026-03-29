@@ -46,7 +46,7 @@ for m in card_pattern.finditer(content):
     # Apply same eligibility filters as draw logic
     stars = card['stars']
     ctype = card['type']
-    min_stars = 2 if ctype == 'TWO' else 3
+    min_stars = 2
     if stars < min_stars:
         continue
     cards.append(card)
