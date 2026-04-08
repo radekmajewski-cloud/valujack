@@ -132,7 +132,7 @@ function Home() {
         // Fetch live prices from Yahoo Finance via our API route
         const fetchPrices = async () => {
             try {
-                const tickers = cards.map(c => c.yahooTicker).join(',');
+                const tickers = cards.filter(c => c.stars >= 3).map(c => c.yahooTicker).join(",");
                 const res = await fetch('/api/prices?tickers=' + tickers);
                 if (!res.ok)
                     throw new Error('fetch failed');
@@ -817,11 +817,11 @@ function Home() {
                             }
                             const cells = [
                                 { l: 'Live Price', v: livePrice !== '—' ? livePrice + ' ' + (ec.currency || '') : '—' },
-                                { l: 'Fair Value', v: fv },
+                                { l: 'Fair Value', v: fv !== '—' ? fv + ' ' + (ec.currency || '') : '—' },
                                 ...stratRows.map(([l, v]) => ({ l, v })),
                             ];
                             const cellStyle = { flex: 1, padding: '7px 10px', minWidth: 0 };
-                            const labelStyle = { color: '#888', fontSize: '0.67rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', display: 'block', marginBottom: 2 };
+                            const labelStyle = { color: '#888', fontSize: '0.67rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 400, letterSpacing: '0.12em', textTransform: 'uppercase', display: 'block', marginBottom: 2 };
                             const valueStyle = { color: '#1A2A1E', fontSize: '1.05rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 800, display: 'block' };
                             const divStyle = { width: 1, background: 'rgba(0,0,0,0.06)', flexShrink: 0 };
                             const rows = [];
