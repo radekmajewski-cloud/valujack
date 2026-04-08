@@ -132,17 +132,27 @@ function Home() {
         // Fetch live prices from Yahoo Finance via our API route
         const fetchPrices = async () => {
             try {
-                const tickers = cards.filter(c => c.stars >= 3).map(c => c.yahooTicker).join(",");
-                const res = await fetch('/api/prices?tickers=' + tickers);
-                if (!res.ok)
-                    throw new Error('fetch failed');
-                const data = await res.json();
+                const eligibleCards = cards.filter(c => c.stars >= 3);
+                const BATCH_SIZE = 50;
+                const allPrices = {};
+                
+                // Fetch in batches of 50
+                for (let i = 0; i < eligibleCards.length; i += BATCH_SIZE) {
+                    const batch = eligibleCards.slice(i, i + BATCH_SIZE);
+                    const tickers = batch.map(c => c.yahooTicker).join(",");
+                    const res = await fetch('/api/prices?tickers=' + tickers);
+                    if (res.ok) {
+                        const data = await res.json();
+                        Object.assign(allPrices, data);
+                    }
+                }
+                
                 // Map yahooTicker -> card id -> price
                 const priceMap = {};
                 cards.forEach(c => {
                     const yticker = c.yahooTicker;
-                    if (data[yticker])
-                        priceMap[c.id] = data[yticker];
+                    if (allPrices[yticker])
+                        priceMap[c.id] = allPrices[yticker];
                 });
                 setPrices(priceMap);
                 setPriceAge(new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }));
