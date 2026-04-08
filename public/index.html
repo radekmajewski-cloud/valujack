@@ -221,7 +221,7 @@ function Home() {
               const quote = effectivePrices[c.id];
               const currentPrice = quote?.price;
               const fairValue = c.fairValue;
-              if (!currentPrice || !fairValue) return false;
+              // TEMP DISABLED:               if (!currentPrice || !fairValue) return false;
 
               // Minimum 3 stars to appear in rotation (TWO cards use lower threshold — contrarian strategy)
               if (c.type === 'TWO') {
