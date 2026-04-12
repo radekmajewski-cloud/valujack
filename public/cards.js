@@ -102,7 +102,7 @@ window.CARDS_DATA = [
         pickFull: "A KING strategy pick — it services company with solid financials trading below estimated fair value.",
         ind1l: 'DIVIDEND %', ind1v: '2.0%',
         ind2l: 'UNDERVALUED BY', ind2v: '—', epsGrowth: '+12.1%', revGrowth: '+4.9%',
-        metrics: [{ l: 'Div. Yield', v: '2.0%' }, { l: 'P/E', v: '13.4' }, { l: 'ROIC', v: '17.0%' }, { l: 'FCF Yield', v: '12.3%' }],
+        metrics: [{ l: 'Dividend Yield', v: '2.0%' }, { l: 'ROIC', v: '51.4%' }, { l: 'P/E', v: '13.4' }, { l: 'Debt/Equity', v: '0.2' }],
         scores: [{ l: 'Dividend', v: 2, max: 10, color: '#5B8FD4', raw: 'Dividend', rawV: '2/10' }, { l: 'Fair Price', v: 0, max: 10, color: '#D4884A', raw: 'Fair Price', rawV: '0/10' }, { l: 'Profit', v: 4, max: 10, color: '#4CAF82', raw: 'Profit', rawV: '4/10' }, { l: 'Stable Earnings', v: 6, max: 10, color: '#9B6ED4', raw: 'Stable Earnings', rawV: '6/10' }, { l: 'Low Debt', v: 7, max: 10, color: '#C4784A', raw: 'Low Debt', rawV: '7/10' }],
         bullets: ["Cognizant Technology Solutions — it services in USA.", "Fair value estimated at 81.94 USD.", "ROIC 17.0% — strong capital returns.", "Earnings grew +12.1% over 5 years."],
     },
