@@ -2752,7 +2752,7 @@ window.CARDS_DATA = [
         scores: [{ l: 'Earnings Growth', v: 9, max: 10, color: '#5B8FD4', raw: 'Earnings Growth', rawV: '9/10' }, { l: 'Momentum', v: 0, max: 10, color: '#D4884A', raw: 'Momentum', rawV: '0/10' }, { l: 'Profit', v: 2, max: 10, color: '#4CAF82', raw: 'Profit', rawV: '2/10' }, { l: 'Revenue Growth', v: 3, max: 10, color: '#9B6ED4', raw: 'Revenue Growth', rawV: '3/10' }, { l: 'Fair Price', v: 0, max: 10, color: '#C4784A', raw: 'Fair Price', rawV: '0/10' }],
         bullets: ["Woodward Inc — military & defense in USA.", "Fair value estimated at 157.9 USD.", "ROIC 10.5% — strong capital returns.", "Earnings grew +51.7% over 5 years."],
     },
-    { id: 236, type: 'JOKER', isPro: true, fairValue: 165.42, yahooTicker: 'ZAP',
+    { id: 236, type: 'JOKER', isPro: true, fairValue: 15.9, yahooTicker: 'ZAP',
         stars: 3, sector: 'Industrials', sectorIcon: '⚡',
         irLink: 'https://www.google.com/search?q=ZAP+investor+relations',
         company: 'Zaptec', ticker: 'ZAP', country: 'Norway', currency: '',
