@@ -88,7 +88,7 @@ window.CARDS_DATA = [
         pickFull: "A KING strategy pick — farming company with solid financials trading below estimated fair value.",
         ind1l: 'DIVIDEND %', ind1v: '11.1%',
         ind2l: 'UNDERVALUED BY', ind2v: '—', epsGrowth: '+258.7%', revGrowth: '+25.6%',
-        metrics: [{ l: 'Dividend Yield', v: '9.9%' }, { l: 'ROIC', v: '51.4%' }, { l: 'P/E', v: '3.7' }, { l: 'Debt/Equity', v: '0.2' }],
+        metrics: [{ l: 'Dividend Yield', v: '11.1%' }, { l: 'ROIC', v: '51.4%' }, { l: 'P/E', v: '3.7' }, { l: 'Debt/Equity', v: '0.2' }],
         scores: [{ l: 'Dividend', v: 10, max: 10, color: '#5B8FD4', raw: 'Dividend', rawV: '10/10' }, { l: 'Fair Price', v: 0, max: 10, color: '#D4884A', raw: 'Fair Price', rawV: '0/10' }, { l: 'Profit', v: 10, max: 10, color: '#4CAF82', raw: 'Profit', rawV: '10/10' }, { l: 'Stable Earnings', v: 10, max: 10, color: '#9B6ED4', raw: 'Stable Earnings', rawV: '10/10' }, { l: 'Low Debt', v: 7, max: 10, color: '#C4784A', raw: 'Low Debt', rawV: '7/10' }],
         bullets: ["Cal-Maine Foods Inc — farming in USA.", "Fair value estimated at 438.12 USD.", "ROIC 51.4% — strong capital returns.", "Earnings grew +258.7% over 5 years."],
     },
