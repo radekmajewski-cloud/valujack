@@ -802,7 +802,7 @@ function Home() {
                             if (ec.type === 'KING') {
                                 stratRows = [
                                     ['DIVIDEND YIELD', fromMetrics('dividend yield', 'div') || '—'],
-                                    ['RETURN ON CAPITAL', fromMetrics('roic') || '—'],
+                                    ['RETURN ON CAPITAL', fromMetrics('return on capital', 'roic') || '—'],
                                     ['P/E', fromMetrics('p/e', 'pe') || '—'],
                                     ['DEBT/EQUITY', fromMetrics('debt/equity', 'debt') || '—'],
                                 ];
@@ -810,12 +810,12 @@ function Home() {
                                 stratRows = [
                                     ['PRICE STRENGTH', fromMetrics('price strength') || '—'],
                                     ['EPS GROWTH', fromMetrics('eps growth') || '—'],
-                                    ['RETURN ON CAPITAL', fromMetrics('roic') || '—'],
+                                    ['RETURN ON CAPITAL', fromMetrics('return on capital', 'roic') || '—'],
                                     ['FREE CASH', fromMetrics('free cash') || '—'],
                                 ];
                             } else if (ec.type === 'QUEEN') {
                                 stratRows = [
-                                    ['RETURN ON CAPITAL', fromMetrics('roic') || '—'],
+                                    ['RETURN ON CAPITAL', fromMetrics('return on capital', 'roic') || '—'],
                                     ['P/E', fromMetrics('p/e', 'pe') || '—'],
                                     ['EPS GROWTH', fromMetrics('eps growth') || '—'],
                                     ['DEBT/EQUITY', fromMetrics('debt/equity', 'debt') || '—'],
@@ -823,7 +823,7 @@ function Home() {
                             } else if (ec.type === 'ACE') {
                                 stratRows = [
                                     ['F-SCORE', fromMetrics('f-score', 'fscore') || '—'],
-                                    ['RETURN ON CAPITAL', fromMetrics('roic') || '—'],
+                                    ['RETURN ON CAPITAL', fromMetrics('return on capital', 'roic') || '—'],
                                     ['FREE CASH', fromMetrics('free cash') || '—'],
                                     ['DEBT/EQUITY', fromMetrics('debt/equity', 'debt') || '—'],
                                 ];
@@ -831,12 +831,12 @@ function Home() {
                                 stratRows = [
                                     ['EPS GROWTH', fromMetrics('eps growth') || '—'],
                                     ['PRICE STRENGTH', fromMetrics('price strength') || '—'],
-                                    ['RETURN ON CAPITAL', fromMetrics('roic') || '—'],
+                                    ['RETURN ON CAPITAL', fromMetrics('return on capital', 'roic') || '—'],
                                     ['FREE CASH', fromMetrics('free cash') || '—'],
                                 ];
                             } else if (ec.type === 'TWO') {
                                 stratRows = [
-                                    ['RETURN ON CAPITAL', fromMetrics('roic') || '—'],
+                                    ['RETURN ON CAPITAL', fromMetrics('return on capital', 'roic') || '—'],
                                     ['P/E', fromMetrics('p/e', 'pe') || '—'],
                                     ['1M PERFORMANCE', fromMetrics('1m performance') || '—'],
                                     ['DEBT/EQUITY', fromMetrics('debt/equity', 'debt') || '—'],
