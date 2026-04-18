@@ -1,0 +1,91 @@
+Ticker	Company	Card Type	Missing Fields				
+BX	Blackstone Inc	ACE	EPS Growth, RS Rating / Price Strength, Revenue Growth				
+MLI	Mueller Industries	ACE	EPS Growth, Revenue Growth				
+SQE	Strategic Education	ACE	EPS Growth, Revenue Growth				
+ASML	ASML Holding NV	JACK	EPS Growth, RS Rating / Price Strength, Revenue Growth				
+DAC	Danaos Corp	JACK	EPS Growth, RS Rating / Price Strength, Revenue Growth				Basic Info:
+ESEA	Euroseas Ltd	JACK	EPS Growth, RS Rating / Price Strength, Revenue Growth				  • Info - Ticker
+ESP	Espey Manufacturing	JACK	EPS Growth, RS Rating / Price Strength, Revenue Growth				  • Info - Company
+EZPW	EZCORP Inc	JACK	EPS Growth, RS Rating / Price Strength, Revenue Growth				  • Info - Sector
+JDEP	JDE Peets NV	JACK	EPS Growth, RS Rating / Price Strength, Revenue Growth				  • Info - Industry
+LDO	Leonardo SpA	JACK	EPS Growth, RS Rating / Price Strength, Revenue Growth				  • Info - Country
+MPCC	MPC Container Ships	JACK	EPS Growth, RS Rating / Price Strength, Revenue Growth				  • Info - Report Currency
+MPTI	M-Tron Industries	JACK	EPS Growth, RS Rating / Price Strength, Revenue Growth				  • Info - Price Currency
+N4Q1	Hemisphere Energy	JACK	EPS Growth, RS Rating / Price Strength, Revenue Growth				  • Market Cap - Current USD
+RHM	Rheinmetall AG	JACK	EPS Growth, RS Rating / Price Strength, Revenue Growth				
+RR.	Rolls-Royce Holdings PLC	JACK	EPS Growth, RS Rating / Price Strength, Revenue Growth				Performance Metrics:
+SA2D	SandRidge Energy	JACK	EPS Growth, RS Rating / Price Strength, Revenue Growth				  • Performance - Perform. 1y
+SAAB B	Saab AB	JACK	EPS Growth, RS Rating / Price Strength, Revenue Growth				  • Performance - Perform. 1m
+SD	SandRidge Energy	JACK	EPS Growth, RS Rating / Price Strength, Revenue Growth				  • Stock price - Current
+TSM	Taiwan Semiconductor	JACK	EPS Growth, RS Rating / Price Strength, Revenue Growth				  • MA - MA 20d
+AGYS	Agilysys Inc	JOKER	EPS Growth, Revenue Growth				  • Price / MA - MA 20d
+BIOA B	BioArctic AB	JOKER	EPS Growth, Revenue Growth				
+CAMB	Campine NV	JOKER	EPS Growth, Revenue Growth				Valuation Metrics:
+CEK	CeoTronics AG	JOKER	EPS Growth, Revenue Growth				  • P/E - Current
+CRDO	Credo Technology Group	JOKER	EPS Growth, Revenue Growth				  • P/B - Current
+EXEL	Exelixis Inc	JOKER	EPS Growth, Revenue Growth				  • EV/EBITDA - Current
+GMED	Globus Medical	JOKER	EPS Growth, Revenue Growth				  • Fair value
+INCY	Incyte Corp	JOKER	EPS Growth, Revenue Growth				
+NVDA	NVIDIA Corp	JOKER	EPS Growth, Revenue Growth				Profitability Metrics:
+TDW	Tidewater Inc	JOKER	EPS Growth, Revenue Growth				  • ROIC - Current
+ZM	Zoom Video Communications	JOKER	EPS Growth, Revenue Growth				  • Gross marg - Average 1y
+ADP	Automatic Data Processing	KING	EPS Growth, RS Rating / Price Strength, Revenue Growth				  • FCF margin - Current
+AEP	AEP Plantations	KING	EPS Growth, Revenue Growth				  • FCF growth - Growth 5y
+ARLP	Alliance Resource Partners	KING	EPS Growth, Revenue Growth				
+BA.	BAE Systems PLC	KING	EPS Growth, RS Rating / Price Strength, Revenue Growth				Growth Metrics:
+BSM	Black Stone Minerals	KING	EPS Growth, Revenue Growth				  • Earnings/share - Average 5y
+CIX	CompX International	KING	EPS Growth, Revenue Growth				  • Earnings g. - Growth 5y
+CLX	Clorox Co	KING	EPS Growth, RS Rating / Price Strength, Revenue Growth				  • Revenue growth - (need current year %)
+GRG	Greggs PLC	KING	EPS Growth, RS Rating / Price Strength, Revenue Growth				
+MCD	McDonalds Corp	KING	EPS Growth, RS Rating / Price Strength, Revenue Growth				Dividend Metrics:
+MPE	M P Evans Group	KING	EPS Growth, Revenue Growth				  • Dividend yield - Current %
+OMC	Omnicom Group Inc	KING	EPS Growth, RS Rating / Price Strength, Revenue Growth				
+SPGI	S&P Global Inc	KING	EPS Growth, RS Rating / Price Strength, Revenue Growth				Quality Metrics:
+STNG	Scorpio Tankers	KING	EPS Growth, RS Rating / Price Strength, Revenue Growth				  • F-Score - Point
+VAN	Van de Velde	KING	EPS Growth, Revenue Growth				  • Earnings - Stable 5y
+6QK	MS International PLC	QUEEN	EPS Growth, Revenue Growth				  • Debt-Equity - Current
+AMZN	Amazon.com Inc	QUEEN	EPS Growth, RS Rating / Price Strength, Revenue Growth				
+CMRE	Costamare Inc	QUEEN	EPS Growth, Revenue Growth				CANSLIM/Momentum (JOKER cards):
+DDOG	Datadog Inc	QUEEN	EPS Growth, RS Rating / Price Strength, Revenue Growth				  • RS Rating / Price Strength (relative strength rank)
+DECK	Deckers Outdoor Corp	QUEEN	EPS Growth, RS Rating / Price Strength, Revenue Growth				
+EVO	Evolution AB	QUEEN	EPS Growth, Revenue Growth				
+HEE	Hellenic Exchanges	QUEEN	EPS Growth, Revenue Growth				
+LPG	Dorian LPG	QUEEN	EPS Growth, Revenue Growth				
+LULU	Lululemon Athletica	QUEEN	EPS Growth, RS Rating / Price Strength, Revenue Growth				
+PRX	Prosus NV	QUEEN	EPS Growth, RS Rating / Price Strength, Revenue Growth				
+QCOM	Qualcomm Inc	QUEEN	EPS Growth, RS Rating / Price Strength, Revenue Growth				
+UHS	Universal Health Services	QUEEN	EPS Growth, RS Rating / Price Strength, Revenue Growth				
+WAWI	Wallenius Wilhelmsen	QUEEN	EPS Growth, Revenue Growth				
+BETS B	Betsson AB	TWO	1m Perf, Performance 1y, Gross Margin				
+BFAM	Bright Horizons	TWO	1m Perf, Performance 1y, Gross Margin				
+BL	BlackLine Inc	TWO	1m Perf, Performance 1y, Gross Margin				
+CXM	Sprinklr Inc	TWO	1m Perf, Performance 1y, Gross Margin				
+DOCU	Docusign Inc	TWO	1m Perf, Performance 1y, Gross Margin				
+DSG	Descartes Systems	TWO	1m Perf, Performance 1y, Gross Margin				
+DT	Dynatrace Inc	TWO	1m Perf, Performance 1y, Gross Margin				
+EVTC	Evertec Inc	TWO	1m Perf, Performance 1y, Gross Margin				
+EXLS	ExlService Holdings	TWO	1m Perf, Performance 1y, Gross Margin				
+GEO	The GEO Group Inc	TWO	1m Perf, Performance 1y, Gross Margin				
+GRND	Grindr Inc	TWO	1m Perf, Performance 1y, Gross Margin				
+GTM	ZoomInfo Technologies	TWO	1m Perf, Performance 1y, Gross Margin				
+HRB	H&R Block Inc	TWO	1m Perf, Performance 1y, Gross Margin				
+INTU	Intuit Inc	TWO	1m Perf, Performance 1y, Gross Margin				
+KD	Kyndryl Holdings	TWO	1m Perf, Performance 1y, Gross Margin				
+LMN	Lumine Group Inc	TWO	1m Perf, Performance 1y, Gross Margin				
+LRN	Stride Inc	TWO	1m Perf, Performance 1y, Gross Margin				
+NEM	Nemetschek SE	TWO	1m Perf, Performance 1y, Gross Margin				
+NKB2	TG Therapeutics	TWO	1m Perf, Performance 1y, Gross Margin				
+NTNX	Nutanix Inc	TWO	1m Perf, Performance 1y, Gross Margin				
+OKTA	Okta Inc	TWO	1m Perf, Performance 1y, Gross Margin				
+PCTY	Paylocity Holding	TWO	1m Perf, Performance 1y, Gross Margin				
+PINS	Pinterest Inc	TWO	1m Perf, Performance 1y, Gross Margin				
+PTEC	Playtech PLC	TWO	1m Perf, Performance 1y, Gross Margin				
+QLYS	Qualys Inc	TWO	1m Perf, Performance 1y, Gross Margin				
+SCT	Softcat PLC	TWO	1m Perf, Performance 1y, Gross Margin				
+SFM	Sprouts Farmers Market	TWO	1m Perf, Performance 1y, Gross Margin				
+TNET	Trinet Group Inc	TWO	1m Perf, Performance 1y, Gross Margin				
+TRN	Trainline PLC	TWO	1m Perf, Performance 1y, Gross Margin				
+XVIVO	Xvivo Perfusion	TWO	1m Perf, Performance 1y, Gross Margin				
+YELP	Yelp Inc	TWO	1m Perf, Performance 1y, Gross Margin				
+ZAL	Zalando SE	TWO	1m Perf, Performance 1y, Gross Margin				
+ZG	Zillow Group Inc	TWO	1m Perf, Performance 1y, Gross Margin				
