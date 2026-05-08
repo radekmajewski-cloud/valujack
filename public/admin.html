@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ValuJack Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--gd:#0A2810;--gold:linear-gradient(135deg,#BFA882 0%,#DDBF88 22%,#A88A60 42%,#CAB07A 62%,#8C7858 80%,#C0AA75 100%);--silver:linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#E0DDDA 45%,#A9A9A9 65%,#D0CDCA 80%,#8A8A8A 100%);--tp:#E8F5EE;--ts:#9ACAAA;--tm:#5A8A6A;--bd:rgba(90,138,106,0.3);--cb:rgba(15,64,32,0.5);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--gd);color:var(--tp);font-family:"Barlow Condensed",sans-serif;min-height:100vh;}
+#ls{position:fixed;inset:0;z-index:100;background:radial-gradient(ellipse at center,#0a2010 0%,#000 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+.ll{font-family:"Playfair Display",serif;font-size:3rem;font-weight:700;letter-spacing:0.04em;}
+.lv{background:var(--silver);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.lj{background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.lb{border:1px solid rgba(191,168,130,0.3);border-radius:12px;padding:32px 40px;display:flex;flex-direction:column;gap:16px;min-width:320px;background:rgba(10,40,16,0.8);}
+.llab{font-size:0.65rem;letter-spacing:0.22em;font-weight:700;color:var(--tm);text-transform:uppercase;}
+.linp{background:rgba(255,255,255,0.06);border:1px solid rgba(90,138,106,0.4);border-radius:6px;padding:12px 16px;color:var(--tp);font-family:"Barlow Condensed",sans-serif;font-size:1rem;width:100%;outline:none;}
+.lbtn{background:rgba(191,168,130,0.15);border:1px solid rgba(191,168,130,0.5);border-radius:6px;padding:12px;color:rgba(201,168,76,0.95);font-family:"Barlow Condensed",sans-serif;font-size:0.75rem;font-weight:800;letter-spacing:0.28em;text-transform:uppercase;cursor:pointer;}
+.lerr{color:rgba(255,100,100,0.8);font-size:0.72rem;text-align:center;display:none;}
+#as{display:none;}
+.ah{background:rgba(10,40,16,0.9);border-bottom:1px solid var(--bd);padding:16px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;}
+.alo{font-family:"Playfair Display",serif;font-size:1.4rem;font-weight:700;}
+.abg{font-size:0.6rem;letter-spacing:0.2em;font-weight:800;color:var(--tm);border:1px solid var(--bd);border-radius:4px;padding:2px 8px;vertical-align:middle;margin-left:10px;}
+.an{display:flex;gap:4px;}
+.nb{background:none;border:none;padding:8px 16px;border-radius:6px;font-family:"Barlow Condensed",sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.15em;color:var(--tm);cursor:pointer;text-transform:uppercase;}
+.nb.active{color:var(--tp);background:rgba(255,255,255,0.08);}
+.ac{padding:32px;max-width:1200px;margin:0 auto;}
+.pn{background:var(--cb);border:1px solid var(--bd);border-radius:12px;padding:24px;margin-bottom:24px;}
+.pt{font-size:0.65rem;letter-spacing:0.22em;font-weight:800;color:var(--tm);text-transform:uppercase;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--bd);}
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;margin-bottom:24px;}
+.sc{background:rgba(255,255,255,0.04);border:1px solid var(--bd);border-radius:10px;padding:16px;text-align:center;}
+.sn{font-family:"Playfair Display",serif;font-size:2.2rem;font-weight:700;line-height:1;margin-bottom:6px;}
+.sl{font-size:0.62rem;letter-spacing:0.18em;font-weight:700;color:var(--tm);text-transform:uppercase;}
+.tg{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;}
+.tc{background:rgba(255,255,255,0.04);border:1px solid var(--bd);border-radius:8px;padding:14px 10px;text-align:center;}
+.tsym{font-size:1.8rem;line-height:1;margin-bottom:6px;}
+.tn{font-size:0.65rem;letter-spacing:0.18em;font-weight:800;color:var(--tm);margin-bottom:8px;}
+.tct{font-family:"Playfair Display",serif;font-size:1.6rem;font-weight:700;line-height:1;margin-bottom:8px;}
+.sb{font-size:0.6rem;color:var(--tm);line-height:1.6;}
+.tdc{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.tdcd{border:1px solid var(--bd);border-radius:10px;padding:20px;background:rgba(255,255,255,0.03);}
+.tdcl{font-size:0.6rem;letter-spacing:0.2em;font-weight:800;color:var(--tm);margin-bottom:12px;}
+.tdco{font-family:"Playfair Display",serif;font-size:1.3rem;margin-bottom:4px;}
+.tdct{font-size:1rem;font-weight:800;letter-spacing:0.1em;color:var(--ts);margin-bottom:8px;}
+.tdcm{font-size:0.72rem;color:var(--tm);line-height:1.7;}
+.ht{width:100%;border-collapse:collapse;font-size:0.85rem;}
+.ht th{font-size:0.6rem;letter-spacing:0.18em;font-weight:800;color:var(--tm);text-transform:uppercase;padding:8px 12px;text-align:left;border-bottom:1px solid var(--bd);}
+.ht td{padding:10px 12px;border-bottom:1px solid rgba(90,138,106,0.1);color:var(--ts);}
+.htd td{color:var(--tp);}
+.tb{font-size:0.6rem;font-weight:800;letter-spacing:0.12em;padding:2px 8px;border-radius:4px;border:1px solid var(--bd);}
+.tab{display:none;}.tab.active{display:block;}
+.stars{color:rgba(191,168,130,0.8);font-size:0.75rem;}
+.ir td{color:rgba(255,150,80,0.9);}
+.ib{background:rgba(255,100,50,0.15);border:1px solid rgba(255,100,50,0.3);color:rgba(255,150,80,0.9);font-size:0.58rem;padding:1px 6px;border-radius:3px;font-weight:800;margin-right:4px;}
+.dv{height:1px;background:var(--bd);margin:20px 0;}
+.ptabs{display:flex;gap:4px;margin-bottom:20px;flex-wrap:wrap;}
+.ptb{background:rgba(255,255,255,0.04);border:1px solid var(--bd);border-radius:6px;padding:6px 16px;font-family:"Barlow Condensed",sans-serif;font-size:0.68rem;font-weight:800;letter-spacing:0.15em;color:var(--tm);cursor:pointer;text-transform:uppercase;}
+.ptb.active{color:var(--tp);background:rgba(255,255,255,0.1);border-color:rgba(191,168,130,0.4);}
+.ptt{width:100%;border-collapse:collapse;font-size:0.8rem;}
+.ptt th{font-size:0.58rem;letter-spacing:0.15em;font-weight:800;color:var(--tm);text-transform:uppercase;padding:8px 10px;text-align:left;border-bottom:1px solid var(--bd);white-space:nowrap;}
+.ptt td{padding:8px 10px;border-bottom:1px solid rgba(90,138,106,0.08);color:var(--ts);white-space:nowrap;}
+.ptt tr:hover td{background:rgba(255,255,255,0.02);}
+.ptd td{color:#E8F5EE!important;background:rgba(191,168,130,0.08);}
+.pex td{opacity:0.35;}
+.rk{display:inline-block;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,0.06);text-align:center;line-height:22px;font-size:0.6rem;font-weight:800;color:var(--tm);}
+.rk1{background:rgba(191,168,130,0.25);color:#BFA882;}
+.rk2{background:rgba(191,168,130,0.15);color:#BFA882;}
+.rk3{background:rgba(191,168,130,0.08);color:#BFA882;}
+.leg{display:flex;gap:20px;font-size:0.62rem;color:var(--tm);margin-bottom:12px;}
+.lgi{display:flex;align-items:center;gap:6px;}
+.lgd{width:8px;height:8px;border-radius:50%;}
+</style>
+</head>
+<body>
+<div id="ls">
+  <div class="ll"><span class="lv">Valu</span><span class="lj">Jack</span></div>
+  <div class="lb">
+    <div class="llab">Admin Access</div>
+    <input type="password" id="pwi" class="linp" placeholder="Password" onkeydown="if(event.key==='Enter')login()">
+    <button class="lbtn" onclick="login()">Enter Admin</button>
+    <div class="lerr" id="lerr">Incorrect password</div>
+  </div>
+</div>
+<div id="as">
+  <div class="ah">
+    <div><span class="alo"><span class="lv">Valu</span><span class="lj">Jack</span></span><span class="abg">ADMIN</span></div>
+    <div class="an">
+      <button class="nb active" onclick="showTab(this,'t-ov')">Overview</button>
+      <button class="nb" onclick="showTab(this,'t-td')">Today</button>
+      <button class="nb" onclick="showTab(this,'t-hi')">14-Day History</button>
+      <button class="nb" onclick="showTab(this,'t-is')">Issues</button>
+      <button class="nb" onclick="showTab(this,'t-pl')">Card Pool</button>
+    </div>
+    <div style="font-size:0.65rem;color:var(--tm);" id="hd"></div>
+  </div>
+  <div class="ac">
+    <div class="tab active" id="t-ov">
+      <div class="pn"><div class="pt">Pool Overview</div><div class="sg" id="ov-stats"></div><div class="dv"></div><div class="pt" style="margin-top:0">By Strategy</div><div class="tg" id="ov-types"></div></div>
+      <div class="pn"><div class="pt">Stars Distribution</div><div id="ov-stars" style="display:flex;gap:16px;flex-wrap:wrap;"></div></div>
+    </div>
+    <div class="tab" id="t-td">
+      <div class="pn"><div class="pt">Today's Draw</div><div class="tdc" id="td-cards"></div></div>
+      <div class="pn"><div class="pt">Rotation Info</div><div id="td-info" style="font-size:0.85rem;color:var(--ts);line-height:2;"></div></div>
+    </div>
+    <div class="tab" id="t-hi">
+      <div class="pn"><div class="pt">14-Day Draw History</div>
+        <table class="ht"><thead><tr><th>Date</th><th>Free Card</th><th>Strategy</th><th>Stars</th><th>Pro Card</th><th>Strategy</th><th>Stars</th></tr></thead><tbody id="hi-body"></tbody></table>
+      </div>
+    </div>
+    <div class="tab" id="t-is">
+      <div class="pn"><div class="pt">Cards Flagged for Review</div><div id="is-list"></div></div>
+    </div>
+    <div class="tab" id="t-pl">
+      <div class="pn">
+        <div class="pt">Eligible Card Pool</div>
+        <div class="leg">
+          <div class="lgi"><div class="lgd" style="background:#BFA882;"></div>Today's pick</div>
+          <div class="lgi"><div class="lgd" style="background:rgba(255,255,255,0.15);"></div>Excluded 14-day</div>
+        </div>
+        <div class="ptabs" id="pl-tabs"></div>
+        <div id="pl-table"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/cards.js"></script>
+<script>
+var PW="valujack2026";
+var GC="linear-gradient(135deg,#BFA882 0%,#DDBF88 22%,#A88A60 42%,#CAB07A 62%,#8C7858 80%,#C0AA75 100%)";
+var SC="linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#E0DDDA 45%,#A9A9A9 65%,#D0CDCA 80%,#8A8A8A 100%)";
+var TM={KING:{s:"&#9818;",c:"#C8B89A"},JACK:{s:"&#9821;",c:"#A8C4B4"},QUEEN:{s:"&#9819;",c:"#BFA882"},ACE:{s:"&#9824;",c:"#9B8ED4"},JOKER:{s:"&#9733;",c:"#D4A84A"},TWO:{s:"2",c:"#C47878"}};
+var FS=["KING","JACK","TWO"],PS=["QUEEN","ACE","JOKER"];
+var pStrat="KING",pCards=[],pExclude=new Set(),pToday=new Set();
+function login(){if(document.getElementById("pwi").value===PW){document.getElementById("ls").style.display="none";document.getElementById("as").style.display="block";init();}else document.getElementById("lerr").style.display="block";}
+function showTab(b,id){document.querySelectorAll(".tab").forEach(function(t){t.classList.remove("active");});document.querySelectorAll(".nb").forEach(function(x){x.classList.remove("active");});document.getElementById(id).classList.add("active");b.classList.add("active");}
+function gSeed(){var d=new Date();return d.getFullYear()*1000+Math.floor((d-new Date(d.getFullYear(),0,0))/86400000);}
+function gSeedD(d){return d.getFullYear()*1000+Math.floor((d-new Date(d.getFullYear(),0,0))/86400000);}
+function rnd(s,n){var a=[];for(var i=0;i<n;i++)a.push(i);var x=s;for(var i=a.length-1;i>0;i--){x=(x*1664525+1013904223)&0xffffffff;var j=Math.abs(x)%(i+1);var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function pick(pool,s,n){var t5=pool.filter(function(c){return c.stars===5;});var t4=pool.filter(function(c){return c.stars===4;});var t3=pool.filter(function(c){return(c.stars||3)<=3;});var ord=rnd(s,t5.length).map(function(i){return t5[i];}).concat(rnd(s+1,t4.length).map(function(i){return t4[i];})).concat(rnd(s+2,t3.length).map(function(i){return t3[i];}));var res=[],sc={};for(var i=0;i<ord.length;i++){var c=ord[i];var sec=c.sector||"Other";if((sc[sec]||0)>=2)continue;sc[sec]=(sc[sec]||0)+1;res.push(c);if(res.length===n)break;}return res;}
+function gExclude(cards,ts){var ex=new Set();var pools={};["KING","JACK","TWO","QUEEN","ACE","JOKER"].forEach(function(t){pools[t]=cards.filter(function(c){return c.type===t;});});for(var i=1;i<=14;i++){var ps=ts-i;var pf=pick(pools[FS[Math.abs(ps*1664525)%3]],ps,1)[0];var pp=pick(pools[PS[Math.abs(ps*22695477)%3]],ps*3,1)[0];if(pf)ex.add(pf.ticker);if(pp)ex.add(pp.ticker);}return ex;}
+function gPicks(cards,ts){var pools={};["KING","JACK","TWO","QUEEN","ACE","JOKER"].forEach(function(t){pools[t]=cards.filter(function(c){return c.type===t;});});var fi=Math.abs(ts*1664525)%3,pi=Math.abs(ts*22695477)%3;var ex=gExclude(cards,ts);var fp=pools[FS[fi]].filter(function(c){return!ex.has(c.ticker);});var pp2=pools[PS[pi]].filter(function(c){return!ex.has(c.ticker);});return{free:pick(fp.length?fp:pools[FS[fi]],ts,1)[0],pro:pick(pp2.length?pp2:pools[PS[pi]],ts*3,1)[0],fs:FS[fi],ps:PS[pi]};}
+function gMet(card,label){if(!card.metrics)return"";for(var i=0;i<card.metrics.length;i++){var m=card.metrics[i];if(m.l&&m.l.toLowerCase().indexOf(label.toLowerCase())>=0)return m.v;}return"";}
+function starsH(n){return"&#9733;".repeat(n||0)+"&#9734;".repeat(5-(n||0));}
+function init(){var cards=window.CARDS_DATA||[];var today=new Date();var ts=gSeed();document.getElementById("hd").textContent=today.toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric"}).toUpperCase();bOverview(cards);bToday(cards,ts);bHistory(cards,ts,today);bIssues(cards);bPool(cards,ts);}
+function bOverview(cards){var tc={},tsc={},sc={};["KING","JACK","QUEEN","ACE","JOKER","TWO"].forEach(function(t){tc[t]=0;tsc[t]={};});cards.forEach(function(c){tc[c.type]=(tc[c.type]||0)+1;tsc[c.type][c.stars]=(tsc[c.type][c.stars]||0)+1;sc[c.stars]=(sc[c.stars]||0)+1;});var ft=(tc.KING||0)+(tc.JACK||0)+(tc.TWO||0),pt=(tc.QUEEN||0)+(tc.ACE||0)+(tc.JOKER||0);document.getElementById("ov-stats").innerHTML="<div class=\"sc\"><div class=\"sn\">"+cards.length+"</div><div class=\"sl\">Total Cards</div></div><div class=\"sc\"><div class=\"sn\" style=\"background:"+SC+";-webkit-background-clip:text;-webkit-text-fill-color:transparent;\">"+ft+"</div><div class=\"sl\">Free</div></div><div class=\"sc\"><div class=\"sn\" style=\"background:"+GC+";-webkit-background-clip:text;-webkit-text-fill-color:transparent;\">"+pt+"</div><div class=\"sl\">Pro</div></div><div class=\"sc\"><div class=\"sn\" style=\"color:#4CAF82;\">"+cards.filter(function(c){return c.stars>=4;}).length+"</div><div class=\"sl\">4-5&#9733;</div></div><div class=\"sc\"><div class=\"sn\" style=\"color:#D4884A;\">"+cards.filter(function(c){return c.stars>=3;}).length+"</div><div class=\"sl\">3+ Eligible</div></div><div class=\"sc\"><div class=\"sn\" style=\"color:#9B6ED4;\">"+cards.filter(function(c){return c.stars===5;}).length+"</div><div class=\"sl\">5&#9733; Elite</div></div>";document.getElementById("ov-types").innerHTML=["KING","JACK","QUEEN","ACE","JOKER","TWO"].map(function(t){var m=TM[t];var sl=Object.entries(tsc[t]).sort(function(a,b){return b[0]-a[0];}).map(function(e){return"&#9733;".repeat(parseInt(e[0]))+" "+e[1];}).join("<br>");return"<div class=\"tc\"><div class=\"tsym\">"+m.s+"</div><div class=\"tn\">"+t+"</div><div class=\"tct\" style=\"color:"+m.c+"\">"+tc[t]+"</div><div class=\"sb\">"+sl+"</div></div>";}).join("");document.getElementById("ov-stars").innerHTML=Object.entries(sc).sort(function(a,b){return b[0]-a[0];}).map(function(e){return"<div class=\"sc\" style=\"min-width:100px;\"><div class=\"sn\" style=\"font-size:1.5rem;\">"+"&#9733;".repeat(parseInt(e[0]))+"</div><div class=\"sn\" style=\"font-size:1.8rem;color:#BFA882;\">"+e[1]+"</div><div class=\"sl\">"+e[0]+"-star</div></div>";}).join("");}
+function bToday(cards,ts){var r=gPicks(cards,ts);function cH(card,label,isPro){if(!card)return"<div class=\"tdcd\"><div class=\"tdcl\">"+label+"</div><div style=\"color:var(--tm)\">No card</div></div>";var m=TM[card.type];return"<div class=\"tdcd\" style=\"border-color:"+(isPro?"rgba(191,168,130,0.3)":"rgba(90,138,106,0.3)")+";\"><div class=\"tdcl\">"+label+" <span style=\"font-size:0.6rem;color:"+(isPro?"#BFA882":"#9ACAAA")+";border:1px solid currentColor;border-radius:20px;padding:2px 8px;\">"+(isPro?"PRO":"FREE")+"</span></div><div class=\"tdco\">"+card.company+"</div><div class=\"tdct\">"+card.ticker+"</div><div class=\"tdcm\"><span style=\"color:"+m.c+"\">"+m.s+" "+card.type+"</span> &middot; "+(card.country||"")+" &middot; "+(card.sector||"")+"<br><span class=\"stars\">"+starsH(card.stars)+"</span> &middot; FV: "+card.fairValue+" "+(card.currency||"")+"<br>"+(card.tag||"")+"</div></div>";}document.getElementById("td-cards").innerHTML=cH(r.free,"Free - "+r.fs,false)+cH(r.pro,"Pro - "+r.ps,true);document.getElementById("td-info").innerHTML="Seed: <b style=\"color:var(--tp)\">"+ts+"</b><br>Free: <b style=\"color:var(--tp)\">"+r.fs+"</b> (idx "+Math.abs(ts*1664525)%3+")<br>Pro: <b style=\"color:var(--tp)\">"+r.ps+"</b> (idx "+Math.abs(ts*22695477)%3+")";}
+function bHistory(cards,ts,today){var rows=[];for(var i=0;i<=13;i++){var d=new Date(today);d.setDate(d.getDate()-i);var s=gSeedD(d);var r=gPicks(cards,s);var ds=i===0?"<b>TODAY</b>":d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"});rows.push("<tr class=\"" +(i===0?"htd":"")+"\"><td>"+ds+"</td><td>"+(r.free?r.free.company:"&mdash;")+"</td><td><span class=\"tb\">"+r.fs+"</span></td><td class=\"stars\">"+(r.free?"&#9733;".repeat(r.free.stars||0):"&mdash;")+"</td><td>"+(r.pro?r.pro.company:"&mdash;")+"</td><td><span class=\"tb\">"+r.ps+"</span></td><td class=\"stars\">"+(r.pro?"&#9733;".repeat(r.pro.stars||0):"&mdash;")+"</td></tr>");}document.getElementById("hi-body").innerHTML=rows.join("");}
+function bIssues(cards){var BAD=["0","0.0","0.0%","—","-","null","","undefined","N/A","n/a","0%"];var issues=[];cards.forEach(function(c){var ci=[];if(!c.ind1v||BAD.indexOf(c.ind1v)>=0)ci.push("ind1v empty");if(!c.fairValue||c.fairValue===0)ci.push("fairValue missing");if(!c.currency)ci.push("currency empty");if(c.tag===c.pick)ci.push("tag==pick");if(c.metrics)c.metrics.forEach(function(m){if(!m.v||BAD.indexOf(m.v)>=0)ci.push("metric "+m.l);});if(ci.length>0)issues.push({card:c,issues:ci});});if(!issues.length){document.getElementById("is-list").innerHTML="<div style=\"color:#4CAF82;padding:16px;\">&#10003; No issues.</div>";return;}document.getElementById("is-list").innerHTML="<div style=\"color:rgba(255,150,80,0.9);font-size:0.8rem;margin-bottom:16px;\">"+issues.length+" cards flagged</div><table class=\"ht\"><thead><tr><th>ID</th><th>Company</th><th>Type</th><th>Stars</th><th>Issues</th></tr></thead><tbody>"+issues.map(function(x){return"<tr class=\"ir\"><td>"+x.card.id+"</td><td>"+x.card.company+"</td><td><span class=\"tb\">"+x.card.type+"</span></td><td class=\"stars\">"+("&#9733;".repeat(x.card.stars||0))+"</td><td>"+x.issues.map(function(i){return"<span class=\"ib\">"+i+"</span>";}).join("")+"</td></tr>";}).join("")+"</tbody></table>";}
+var COLS={KING:[{l:"#",k:"_r"},{l:"Company",k:"company"},{l:"Ticker",k:"ticker"},{l:"Stars",k:"_s"},{l:"Country",k:"country"},{l:"Fair Value",k:"_fv"},{l:"Div Yield",k:"ind1v"},{l:"ROIC",k:"_roic"},{l:"P/E",k:"_pe"},{l:"D/E",k:"_de"}],JACK:[{l:"#",k:"_r"},{l:"Company",k:"company"},{l:"Ticker",k:"ticker"},{l:"Stars",k:"_s"},{l:"Country",k:"country"},{l:"Fair Value",k:"_fv"},{l:"EPS Growth",k:"ind1v"},{l:"ROIC",k:"_roic"},{l:"P/E",k:"_pe"},{l:"Price Str",k:"_rs"}],QUEEN:[{l:"#",k:"_r"},{l:"Company",k:"company"},{l:"Ticker",k:"ticker"},{l:"Stars",k:"_s"},{l:"Country",k:"country"},{l:"Fair Value",k:"_fv"},{l:"Cash Flow",k:"ind1v"},{l:"ROIC",k:"_roic"},{l:"P/E",k:"_pe"},{l:"D/E",k:"_de"}],ACE:[{l:"#",k:"_r"},{l:"Company",k:"company"},{l:"Ticker",k:"ticker"},{l:"Stars",k:"_s"},{l:"Country",k:"country"},{l:"Fair Value",k:"_fv"},{l:"EPS Growth",k:"ind1v"},{l:"F-Score",k:"_fs"},{l:"ROIC",k:"_roic"},{l:"P/E",k:"_pe"}],JOKER:[{l:"#",k:"_r"},{l:"Company",k:"company"},{l:"Ticker",k:"ticker"},{l:"Stars",k:"_s"},{l:"Country",k:"country"},{l:"Fair Value",k:"_fv"},{l:"EPS Growth",k:"ind1v"},{l:"ROIC",k:"_roic"},{l:"P/E",k:"_pe"},{l:"FCF",k:"_fcf"}],TWO:[{l:"#",k:"_r"},{l:"Company",k:"company"},{l:"Ticker",k:"ticker"},{l:"Stars",k:"_s"},{l:"Country",k:"country"},{l:"Fair Value",k:"_fv"},{l:"1Y Perf",k:"ind1v"},{l:"F-Score",k:"_fs"},{l:"ROIC",k:"_roic"},{l:"Gross Margin",k:"_gm"}]};
+function gV(card,key,rank){if(key==="._r"){var cl=rank<3?"rk"+(rank+1):"";return"<span class=\"rk "+cl+"\">"+(rank+1)+"</span>";}if(key==="_r"){var cl=rank<3?"rk"+(rank+1):"";return"<span class=\"rk "+cl+"\">"+(rank+1)+"</span>";}if(key==="_s")return"<span class=\"stars\">"+("&#9733;".repeat(card.stars||0))+"</span>";if(key==="_fv")return card.fairValue+" "+(card.currency||"");if(key==="_roic")return gMet(card,"ROIC")||"&mdash;";if(key==="_pe")return gMet(card,"P/E")||"&mdash;";if(key==="_de")return gMet(card,"Debt/Equity")||"&mdash;";if(key==="_rs")return gMet(card,"Price Strength")||card.rsRating||"&mdash;";if(key==="_fs")return gMet(card,"F-Score")||"&mdash;";if(key==="_fcf")return gMet(card,"Free Cash")||"&mdash;";if(key==="_gm")return gMet(card,"Gross Margin")||"&mdash;";return card[key]||"&mdash;";}
+function sScore(c,st){var v=parseFloat((c.ind1v||"0").replace(/[^0-9.-]/g,""))||0;var r=parseFloat((gMet(c,"ROIC")||"0").replace(/[^0-9.-]/g,""))||0;var f=parseFloat((gMet(c,"F-Score")||"0").replace(/[^0-9.-]/g,""))||0;if(st==="KING")return[-(c.stars||0),-v];if(st==="JACK")return[-(c.stars||0),-v];if(st==="QUEEN")return[-(c.stars||0),-r];if(st==="ACE")return[-(c.stars||0),-f];if(st==="JOKER")return[-(c.stars||0),-v];return[-(c.stars||0),v];}
+function rPool(){var strats=["KING","JACK","QUEEN","ACE","JOKER","TWO"];document.getElementById("pl-tabs").innerHTML=strats.map(function(s){return"<button class=\"ptb"+(s===pStrat?" active":"")+"\" onclick=\"sPool('"+s+"')\">"+"&#9818;&#9821;&#9819;&#9824;&#9733;2".split("").slice(["KING","JACK","QUEEN","ACE","JOKER","TWO"].indexOf(s)*2,["KING","JACK","QUEEN","ACE","JOKER","TWO"].indexOf(s)*2+2).join("")+" "+s+"</button>";}).join("");var pool=pCards.filter(function(c){return c.type===pStrat&&(c.stars||0)>=3;});var cols=COLS[pStrat];var sorted=pool.slice().sort(function(a,b){var ka=sScore(a,pStrat),kb=sScore(b,pStrat);for(var i=0;i<ka.length;i++){if(ka[i]<kb[i])return-1;if(ka[i]>kb[i])return 1;}return 0;});var labels={KING:"dividend yield",JACK:"EPS growth",QUEEN:"ROIC",ACE:"F-Score",JOKER:"EPS growth",TWO:"1Y performance"};var thead="<tr>"+cols.map(function(c){return"<th>"+c.l+"</th>";}).join("")+"</tr>";var tbody=sorted.map(function(card,idx){var isT=pToday.has(card.ticker);var isE=pExclude.has(card.ticker)&&!isT;var rc=isT?"ptd":isE?"pex":"";return"<tr class=\""+rc+"\">"+cols.map(function(col){return"<td>"+gV(card,col.k,idx)+"</td>";}).join("")+"</tr>";}).join("");document.getElementById("pl-table").innerHTML="<div style=\"font-size:0.72rem;color:var(--tm);margin-bottom:10px;\">"+sorted.length+" eligible &middot; sorted by "+labels[pStrat]+"</div><table class=\"ptt\"><thead>"+thead+"</thead><tbody>"+tbody+"</tbody></table>";}
+function sPool(s){pStrat=s;rPool();}
+function bPool(cards,ts){pCards=cards;pExclude=gExclude(cards,ts);var r=gPicks(cards,ts);pToday=new Set([r.free&&r.free.ticker,r.pro&&r.pro.ticker].filter(Boolean));rPool();}
+</script>
+</body>
+</html>

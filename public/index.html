@@ -287,36 +287,11 @@ function Home() {
             return picked;
         }
 
-        // STEP 5: Keeper + rotation
-        // keeperSeed changes every 2 days — best card stays 2 days
-        // todaySeed changes every day — other 2 slots rotate daily
-        const dayNumber  = Math.floor(todaySeed / 86400);
-        const keeperSeed = Math.floor(dayNumber / 2) * 86400;
+        // STEP 5: 14-day no-repeat rotation
+        // No keeper system — every card rotates daily
+        // No fixed strategy cycle — free pick from all strategies each day
+        // 14-day exclusion — no card repeats within 14 days
 
-        function pickKeeper(pool, kseed) {
-            return pickPool(pool, kseed, 1)[0] || null;
-        }
-
-        function pickRotators(pool, seed, keeper, count) {
-            const withoutKeeper = pool.filter(c => !keeper || c.ticker !== keeper.ticker);
-            // Build 7-day exclusion set — cards that showed as rotators in past 7 days
-            const dayNum = Math.floor(seed / 86400);
-            const recentTickers = new Set();
-            for (let d = 1; d <= 7; d++) {
-                const pastSeed = (dayNum - d) * 86400;
-                const pastKeeperSeed = Math.floor((dayNum - d) / 2) * 86400;
-                const pastKeeper = pickPool(pool, pastKeeperSeed, 1)[0];
-                const pastEligible = pool.filter(c => !pastKeeper || c.ticker !== pastKeeper.ticker);
-                const pastRotators = pickPool(pastEligible, pastSeed, count);
-                pastRotators.forEach(c => recentTickers.add(c.ticker));
-            }
-            // Exclude recent rotators, but keep pool if exclusion leaves too few
-            const freshPool = withoutKeeper.filter(c => !recentTickers.has(c.ticker));
-            const usePool = freshPool.length >= count ? freshPool : withoutKeeper;
-            return pickPool(usePool, seed, count);
-        }
-
-        // One guaranteed card per strategy, each with its own keeper/rotator cycle
         const kingPool  = dedupedCards.filter(c => c.type === 'KING');
         const jackPool  = dedupedCards.filter(c => c.type === 'JACK');
         const twoPool   = dedupedCards.filter(c => c.type === 'TWO');
@@ -324,57 +299,41 @@ function Home() {
         const acePool   = dedupedCards.filter(c => c.type === 'ACE');
         const jokerPool = dedupedCards.filter(c => c.type === 'JOKER');
 
-        // Pick one per strategy, avoiding sector duplicates across the hand
-        function pickOne(pool, kseed, dseed, usedSectors) {
-            // First try keeper
-            const keeper = pickKeeper(pool, kseed);
-            if (keeper && !usedSectors.has(keeper.sector)) return keeper;
-            // Then try rotators avoiding used sectors
-            const filtered = pool.filter(c => !usedSectors.has(c.sector));
-            if (filtered.length === 0) return pickKeeper(pool, kseed) || pickRotators(pool, dseed, null, 1)[0] || null;
-            return pickRotators(filtered, dseed, null, 1)[0] || null;
+        const freeStrategies  = [kingPool, jackPool, twoPool];
+        const proStrategies   = [queenPool, acePool, jokerPool];
+        const freeNames = ['KING', 'JACK', 'TWO'];
+        const proNames  = ['QUEEN', 'ACE', 'JOKER'];
+
+        // Build 14-day exclusion set from deterministic past picks
+        const excludeTickers = new Set();
+        for (let i = 1; i <= 14; i++) {
+            const pastSeed = todaySeed - i;
+            // Recreate past free pick
+            const pastFreeIdx = Math.abs(pastSeed * 1664525) % 3;
+            const pastFreePool = freeStrategies[pastFreeIdx];
+            const pastFree = pickPool(pastFreePool, pastSeed, 1)[0];
+            if (pastFree) excludeTickers.add(pastFree.ticker);
+            // Recreate past pro pick
+            const pastProIdx = Math.abs(pastSeed * 22695477) % 3;
+            const pastProPool = proStrategies[pastProIdx];
+            const pastPro = pickPool(pastProPool, pastSeed * 3, 1)[0];
+            if (pastPro) excludeTickers.add(pastPro.ticker);
         }
 
         const usedSectors = new Set();
-        // 2-card system with 7-day exclusion
-        const dayOfYear = todaySeed % 1000;
-        const dayInCycle = dayOfYear % 3;
-        
-        // Calculate last 7 days history
-        const excludeTickers = new Set();
-        for (let i = 1; i <= 7; i++) {
-            const pastDay = dayOfYear - i;
-            const pastCycle = pastDay % 3;
-            const pastSeed = todaySeed - i;
-            let pastPool;
-            if (pastCycle === 0) pastPool = kingPool.concat(jokerPool);
-            else if (pastCycle === 1) pastPool = jackPool.concat(queenPool);
-            else pastPool = twoPool.concat(acePool);
-            const pastPicks = pickPool(pastPool, pastSeed, 2);
-            pastPicks.forEach(c => excludeTickers.add(c.ticker));
-        }
-        
-        let todayFreeCard, todayProCard;
-        
-        if (dayInCycle === 0) {
-            const availKing = kingPool.filter(c => !excludeTickers.has(c.ticker) && !usedSectors.has(c.sector));
-            todayFreeCard = pickPool(availKing.length ? availKing : kingPool, todaySeed, 1)[0];
-            if (todayFreeCard) usedSectors.add(todayFreeCard.sector);
-            const availJoker = jokerPool.filter(c => !excludeTickers.has(c.ticker) && !usedSectors.has(c.sector));
-            todayProCard = pickPool(availJoker.length ? availJoker : jokerPool, todaySeed*3, 1)[0];
-        } else if (dayInCycle === 1) {
-            const availJack = jackPool.filter(c => !excludeTickers.has(c.ticker) && !usedSectors.has(c.sector));
-            todayFreeCard = pickPool(availJack.length ? availJack : jackPool, todaySeed, 1)[0];
-            if (todayFreeCard) usedSectors.add(todayFreeCard.sector);
-            const availQueen = queenPool.filter(c => !excludeTickers.has(c.ticker) && !usedSectors.has(c.sector));
-            todayProCard = pickPool(availQueen.length ? availQueen : queenPool, todaySeed*3, 1)[0];
-        } else {
-            const availTwo = twoPool.filter(c => !excludeTickers.has(c.ticker) && !usedSectors.has(c.sector));
-            todayFreeCard = pickPool(availTwo.length ? availTwo : twoPool, todaySeed, 1)[0];
-            if (todayFreeCard) usedSectors.add(todayFreeCard.sector);
-            const availAce = acePool.filter(c => !excludeTickers.has(c.ticker) && !usedSectors.has(c.sector));
-            todayProCard = pickPool(availAce.length ? availAce : acePool, todaySeed*3, 1)[0];
-        }
+
+        // Pick free card — rotate through strategies, exclude recent cards
+        const freeIdx = Math.abs(todaySeed * 1664525) % 3;
+        const todayFreeStrategy = freeStrategies[freeIdx];
+        const availFree = todayFreeStrategy.filter(c => !excludeTickers.has(c.ticker) && !usedSectors.has(c.sector));
+        const todayFreeCard = pickPool(availFree.length ? availFree : todayFreeStrategy, todaySeed, 1)[0];
+        if (todayFreeCard) usedSectors.add(todayFreeCard.sector);
+
+        // Pick pro card — rotate through strategies, exclude recent cards and used sectors
+        const proIdx = Math.abs(todaySeed * 22695477) % 3;
+        const todayProStrategy = proStrategies[proIdx];
+        const availPro = todayProStrategy.filter(c => !excludeTickers.has(c.ticker) && !usedSectors.has(c.sector));
+        const todayProCard = pickPool(availPro.length ? availPro : todayProStrategy, todaySeed * 3, 1)[0];
 
         const todayFree = [todayFreeCard].filter(Boolean);
         const todayPro  = [todayProCard].filter(Boolean);
@@ -410,13 +369,13 @@ function Home() {
           perspective:1400px; opacity:0;
           transition:transform 0.6s cubic-bezier(0.22,1,0.36,1), opacity 0.5s ease;
         }
-        .card-wrap.dealt{ opacity:1; transform:none !important; }
+        .card-wrap.dealt{ opacity:1; transform:none !important; box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.3); }
         .card-wrap.dealt:not(.flipped){
           animation: cardPulse 2.5s ease-in-out infinite;
         }
         @keyframes cardPulse {
-          0%, 100% { box-shadow: 0 0 0px rgba(168,212,184,0); }
-          50% { box-shadow: 0 0 18px rgba(168,212,184,0.35); }
+          0%, 100% { box-shadow: 0 16px 64px rgba(0,0,0,0.9), 0 4px 16px rgba(0,0,0,0.6); }
+          50% { box-shadow: 0 16px 64px rgba(0,0,0,0.9), 0 4px 16px rgba(0,0,0,0.6), 0 0 18px rgba(168,212,184,0.35); }
         }
         .card-wrap.flipped::after {
           content: "TAP FOR DETAILS";
@@ -453,7 +412,7 @@ function Home() {
           overflow:hidden; isolation:isolate;
         }
 
-        .card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:0 28px 28px;}
+        .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,520px));gap:24px;padding:0 28px 28px;justify-content:center;}
         @media(max-width:767px){
           .card-grid{grid-template-columns:1fr;gap:18px;padding:0 18px 18px;}
         }
@@ -510,24 +469,17 @@ function Home() {
                             marginBottom: 10,
                         } }, today),
                     React.createElement("p", { style: { color: priceErr ? 'rgba(255,120,80,0.8)' : priceAge ? 'rgba(100,220,140,0.8)' : 'rgba(255,255,255,0.35)', fontSize: '0.55rem', letterSpacing: '0.14em', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, marginBottom: 4, textAlign: 'center' } }, priceErr ? '⚠ LIVE PRICES UNAVAILABLE' : priceAge ? '● LIVE ' + priceAge : '○ LOADING...'),
-                    Object.keys(prices).length > 0 && React.createElement("p", { style: { color: 'rgba(100,220,140,0.7)', fontSize: '0.5rem', letterSpacing: '0.12em', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 600, marginBottom: 6, textAlign: 'center' } }, eligibleCards.length + ' UNDERVALUED NOW'),
+                    priceAge && React.createElement("p", { style: { color: 'rgba(100,220,140,0.7)', fontSize: '0.5rem', letterSpacing: '0.12em', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 600, marginBottom: 6, textAlign: 'center' } }, eligibleCards.length + ' UNDERVALUED NOW'),
                     React.createElement("div", { style: {
                             display: 'inline-block',
-                            background: 'linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 18%,#BFA882 36%,#DDBF88 50%,#C8C8C8 64%,#BFA882 82%,#8A8A8A 100%)',
+                            padding: '10px 36px',
                             borderRadius: '999px',
-                            padding: '3px',
+                            border: '2px solid rgba(255,255,255,0.7)',
                             marginBottom: 2,
                         } },
-                        React.createElement("div", { style: {
-                                background: '#0F4020',
-                                borderRadius: '999px',
-                                padding: isMobile ? '10px 32px' : '12px 42px',
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                            } },
                             React.createElement("h1", { style: { fontFamily: 'Playfair Display,serif', fontSize: isMobile ? '2.8rem' : '3.6rem', fontWeight: 700, letterSpacing: '0.04em', lineHeight: 1, margin: 0 } },
                                 React.createElement("span", { style: { background: SILVER, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, "Valu"),
-                                React.createElement("span", { style: { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, "Jack")))),
+                                React.createElement("span", { style: { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, "Jack"))),
                     React.createElement("p", { style: {
                             color: '#9ACAAA',
                             fontSize: isMobile ? '0.95rem' : '1.05rem',
@@ -893,7 +845,7 @@ function Home() {
                             const expandedMin = fv ? Math.min(rawMin, fv) : rawMin;
                             const expandedMax = fv ? Math.max(rawMax, fv) : rawMax;
                             const expandedRange = expandedMax - expandedMin;
-                            const useExpanded = fv && expandedRange < priceRange * 2.5;
+                            const useExpanded = fv != null;
                             const minP = (useExpanded ? expandedMin : rawMin) * 0.98;
                             const maxP = (useExpanded ? expandedMax : rawMax) * 1.02;
                             const range = maxP - minP || 1;
@@ -978,7 +930,7 @@ function Home() {
                     React.createElement("p", { style: { color: '#A8C4B4', fontSize: '1.1rem', lineHeight: 1.75, fontFamily: 'EB Garamond,serif' } }, "The result is a hand of cards. Each card is a real company, selected by a real process \u2014 not an algorithm chasing momentum, not a sponsored pick. The casino metaphor is intentional: investing well requires nerve, patience, and knowing when the odds are in your favour.")),
                 React.createElement("div", { className: "info-section", style: { borderColor: '#3A8A5A' } },
                     React.createElement("p", { style: { color: '#5A8A6A', fontSize: '0.72rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, letterSpacing: '0.2em', marginBottom: 8 } }, "THE CARDS"),
-                    React.createElement("h2", { style: { fontFamily: 'Playfair Display,serif', fontSize: '1.7rem', color: '#E8F5EE', lineHeight: 1.2, marginBottom: 16 } }, "Five card types. Five proven strategies."),
+                    React.createElement("h2", { style: { fontFamily: 'Playfair Display,serif', fontSize: '1.7rem', color: '#E8F5EE', lineHeight: 1.2, marginBottom: 16 } }, "Six card types. Six proven strategies."),
                     React.createElement("div", { style: { marginBottom: 14 } },
                         React.createElement("div", { style: { display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 } },
                             React.createElement("span", { className: "card-pill", style: { background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.18)', color: '#D8EAE0' } }, "\u265A KING"),
@@ -1015,7 +967,14 @@ function Home() {
                             React.createElement("span", { className: "card-pill", style: { background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.18)', color: '#A8C4B4', fontSize: '0.75rem' } }, "PRO")),
                         React.createElement("p", { style: { color: '#A8C4B4', fontSize: '1.05rem', lineHeight: 1.7, fontFamily: 'EB Garamond,serif' } },
                             React.createElement("span", { style: { color: '#E8F5EE', fontWeight: 700, fontFamily: 'EB Garamond,serif' } }, "Fast Growth —"),
-                            " Tomorrow's market leaders, found today. CANSLIM looks for companies with exploding earnings, rising revenue, and institutions buying heavily. These stocks are already near their highs — because the best growth stocks keep making new highs. High conviction, high upside, higher risk."))),
+                            " Tomorrow's market leaders, found today. CANSLIM looks for companies with exploding earnings, rising revenue, and institutions buying heavily. These stocks are already near their highs — because the best growth stocks keep making new highs. High conviction, high upside, higher risk.")),
+                    React.createElement("div", { style: { marginBottom: 4 } },
+                        React.createElement("div", { style: { display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 } },
+                            React.createElement("span", { className: "card-pill", style: { background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.18)', color: '#D8EAE0' } }, "2 TWO"),
+                            React.createElement("span", { className: "card-pill", style: { background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.18)', color: '#A8C4B4', fontSize: '0.75rem' } }, "FREE")),
+                        React.createElement("p", { style: { color: '#A8C4B4', fontSize: '1.05rem', lineHeight: 1.7, fontFamily: 'EB Garamond,serif' } },
+                            React.createElement("span", { style: { color: '#E8F5EE', fontWeight: 700, fontFamily: 'EB Garamond,serif' } }, "Contrarian Recovery —"),
+                            " Quality companies temporarily beaten down by the market. They still have strong fundamentals — high return on capital, solid cash flow, low debt — but their price has fallen hard. The thesis is simple: good businesses recover. You buy the fear and wait for the market to remember what these companies are worth."))),
                 React.createElement("div", { className: "info-section", style: { borderColor: '#3A8A5A' } },
                     React.createElement("p", { style: { color: '#5A8A6A', fontSize: '0.72rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, letterSpacing: '0.2em', marginBottom: 8 } }, "READING A CARD"),
                     React.createElement("h2", { style: { fontFamily: 'Playfair Display,serif', fontSize: '1.7rem', color: '#E8F5EE', lineHeight: 1.2, marginBottom: 12 } }, "Tap once to reveal. Tap again to go deep."),
@@ -1060,7 +1019,7 @@ function Home() {
                     } },
                     React.createElement("p", { id: "proSection", style: { color: '#C9A84C', fontSize: '0.72rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, letterSpacing: '0.2em', marginBottom: 8 } }, "VALUJACK PRO"),
                     React.createElement("h2", { style: { fontFamily: 'Playfair Display,serif', fontSize: '1.7rem', lineHeight: 1.2, marginBottom: 12, background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, "The full hand. $9.99/month."),
-                    React.createElement("p", { style: { color: '#A8C4B4', fontSize: '1.05rem', lineHeight: 1.75, fontFamily: 'EB Garamond,serif', marginBottom: 14 } }, "Free members receive two cards daily \u2014 the King (deep value, high dividend) and the Jack (oversold recovery play). PRO members get the full hand: Queen, Ace, and Joker. Three additional cards, three additional investment styles, selected by the same rigorous process. Five cards every morning. Cancel any time."),
+                    React.createElement("p", { style: { color: '#A8C4B4', fontSize: '1.05rem', lineHeight: 1.75, fontFamily: 'EB Garamond,serif', marginBottom: 14 } }, "Free members receive two cards daily \u2014 the King (dividend compounder), the Jack (momentum winner), or the Two (contrarian recovery). PRO members get the full hand: Queen, Ace, and Joker. Three additional strategies, selected by the same rigorous process. Two cards every morning, six strategies in rotation. Cancel any time."),
                     React.createElement("button", { onClick: function(){ var o=document.querySelector('.info-overlay'); if(o) o.style.display='none'; setShowInfo(false); window.showProLoader(); window.VJ_proUnlocked = true; setFlipped(function(f){ return f.slice(); }); }, style: {
                             background: GOLD, border: 'none', borderRadius: 8,
                             padding: '12px 28px', cursor: 'pointer',

@@ -1,0 +1,31 @@
+STRATEGY METRICS MAPPING (aligned with ValuJack Score weights)
+
+KING - Dividend Aristocrats:
+  Page 1: ind1=DIVIDEND %, ind2=UNDERVALUED BY
+  Page 2 (6 metrics): Price, Fair Value, Dividend Yield, ROIC, P/E, D/E
+  Radar: Dividend (25%), Fair Price (20%), Profit/ROIC (15%), Stable Earnings (10%), Low Debt (10%)
+
+JACK - Minervini Momentum:
+  Page 1: ind1=RS RATING, ind2=EARNINGS GROWTH
+  Page 2: Price, Fair Value, RS Rating, EPS Growth, ROIC, Revenue Growth
+  Radar: Growth (25%), Momentum (20%), Profit (20%), Fair Price (15%), Stable Earnings (5%)
+
+QUEEN - Magic Formula:
+  Page 1: ind1=ROIC, ind2=UNDERVALUED BY
+  Page 2: Price, Fair Value, ROIC, P/E, EPS Growth, D/E
+  Radar: Profit (25%), Fair Price (20%), Low Debt (10%), Growth (10%), Momentum (10%), Stable Earnings (10%)
+
+ACE - Piotroski F-Score:
+  Page 1: ind1=F-SCORE, ind2=UNDERVALUED BY
+  Page 2: Price, Fair Value, F-Score, ROIC, FCF Yield, D/E
+  Radar: Stable Earnings (20%), Low Debt (20%), Fair Price (15%), Profit (15%), Growth (10%), Momentum (10%)
+
+JOKER - CANSLIM Growth:
+  Page 1: ind1=EPS GROWTH, ind2=RS RATING (no undervaluation - growth stock)
+  Page 2: Price, Fair Value, EPS Growth, Revenue Growth, RS Rating, ROIC
+  Radar: Growth (35%), Profit (20%), Momentum (20%), Fair Price (10%), Stable Earnings (5%)
+
+TWO - Contrarian:
+  Page 1: ind1=RECOVERY SIGNAL, ind2=UNDERVALUED BY
+  Page 2: Price, Fair Value, ROIC, P/E, 1m Performance, D/E
+  Radar: Profit (30%), Fair Price (25%), Stable Earnings (20%), Low Debt (10%), Growth (10%)
