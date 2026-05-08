@@ -91,7 +91,6 @@ body{background:var(--gd);color:var(--tp);font-family:"Barlow Condensed",sans-se
       <button class="nb" onclick="showTab(this,'t-hi')">14-Day History</button>
       <button class="nb" onclick="showTab(this,'t-is')">Issues</button>
       <button class="nb" onclick="showTab(this,'t-pl')">Card Pool</button>
-      <button class="nb" onclick="showTab(this,'t-mg')">Manage</button>
     </div>
     <div style="font-size:0.65rem;color:var(--tm);" id="hd"></div>
   </div>
@@ -123,31 +122,6 @@ body{background:var(--gd);color:var(--tp);font-family:"Barlow Condensed",sans-se
         <div id="pl-table"></div>
       </div>
     </div>
-    <div class="tab" id="t-mg">
-      <div class="pn">
-        <div class="pt">Manage Cards</div>
-        <div style="font-size:0.78rem;color:var(--ts);margin-bottom:14px;line-height:1.6;">
-          Edit context score (0–10), context note, and manual block per card. Changes are held in memory until you download an updated cards.js file. Replace your local cards.js with the downloaded file and redeploy.
-        </div>
-        <div style="display:flex;gap:12px;align-items:center;margin-bottom:16px;flex-wrap:wrap;">
-          <input type="text" id="mg-search" placeholder="Search by company or ticker…" style="flex:1;min-width:240px;background:rgba(255,255,255,0.06);border:1px solid var(--bd);border-radius:6px;padding:10px 14px;color:var(--tp);font-family:'Barlow Condensed',sans-serif;font-size:0.95rem;outline:none;">
-          <select id="mg-filter" style="background:rgba(255,255,255,0.06);border:1px solid var(--bd);border-radius:6px;padding:10px 14px;color:var(--tp);font-family:'Barlow Condensed',sans-serif;font-size:0.85rem;outline:none;">
-            <option value="all">All cards</option>
-            <option value="blocked">Blocked only</option>
-            <option value="edited">Edited only (unsaved)</option>
-            <option value="KING">KING</option>
-            <option value="JACK">JACK</option>
-            <option value="QUEEN">QUEEN</option>
-            <option value="ACE">ACE</option>
-            <option value="JOKER">JOKER</option>
-            <option value="TWO">TWO</option>
-          </select>
-          <button id="mg-download" style="background:rgba(191,168,130,0.18);border:1px solid rgba(191,168,130,0.5);border-radius:6px;padding:10px 18px;color:rgba(201,168,76,0.95);font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;">Download cards.js</button>
-        </div>
-        <div id="mg-status" style="font-size:0.78rem;color:var(--tm);margin-bottom:10px;"></div>
-        <div id="mg-table" style="max-height:70vh;overflow-y:auto;"></div>
-      </div>
-    </div>
   </div>
 </div>
 <script src="/cards.js"></script>
@@ -168,7 +142,7 @@ function gExclude(cards,ts){var ex=new Set();var pools={};["KING","JACK","TWO","
 function gPicks(cards,ts){var pools={};["KING","JACK","TWO","QUEEN","ACE","JOKER"].forEach(function(t){pools[t]=cards.filter(function(c){return c.type===t;});});var fi=Math.abs(ts*1664525)%3,pi=Math.abs(ts*22695477)%3;var ex=gExclude(cards,ts);var fp=pools[FS[fi]].filter(function(c){return!ex.has(c.ticker);});var pp2=pools[PS[pi]].filter(function(c){return!ex.has(c.ticker);});return{free:pick(fp.length?fp:pools[FS[fi]],ts,1)[0],pro:pick(pp2.length?pp2:pools[PS[pi]],ts*3,1)[0],fs:FS[fi],ps:PS[pi]};}
 function gMet(card,label){if(!card.metrics)return"";for(var i=0;i<card.metrics.length;i++){var m=card.metrics[i];if(m.l&&m.l.toLowerCase().indexOf(label.toLowerCase())>=0)return m.v;}return"";}
 function starsH(n){return"&#9733;".repeat(n||0)+"&#9734;".repeat(5-(n||0));}
-function init(){var cards=window.CARDS_DATA||[];var today=new Date();var ts=gSeed();document.getElementById("hd").textContent=today.toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric"}).toUpperCase();bOverview(cards);bToday(cards,ts);bHistory(cards,ts,today);bIssues(cards);bPool(cards,ts);bManage(cards);}
+function init(){var cards=window.CARDS_DATA||[];var today=new Date();var ts=gSeed();document.getElementById("hd").textContent=today.toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric"}).toUpperCase();bOverview(cards);bToday(cards,ts);bHistory(cards,ts,today);bIssues(cards);bPool(cards,ts);}
 function bOverview(cards){var tc={},tsc={},sc={};["KING","JACK","QUEEN","ACE","JOKER","TWO"].forEach(function(t){tc[t]=0;tsc[t]={};});cards.forEach(function(c){tc[c.type]=(tc[c.type]||0)+1;tsc[c.type][c.stars]=(tsc[c.type][c.stars]||0)+1;sc[c.stars]=(sc[c.stars]||0)+1;});var ft=(tc.KING||0)+(tc.JACK||0)+(tc.TWO||0),pt=(tc.QUEEN||0)+(tc.ACE||0)+(tc.JOKER||0);document.getElementById("ov-stats").innerHTML="<div class=\"sc\"><div class=\"sn\">"+cards.length+"</div><div class=\"sl\">Total Cards</div></div><div class=\"sc\"><div class=\"sn\" style=\"background:"+SC+";-webkit-background-clip:text;-webkit-text-fill-color:transparent;\">"+ft+"</div><div class=\"sl\">Free</div></div><div class=\"sc\"><div class=\"sn\" style=\"background:"+GC+";-webkit-background-clip:text;-webkit-text-fill-color:transparent;\">"+pt+"</div><div class=\"sl\">Pro</div></div><div class=\"sc\"><div class=\"sn\" style=\"color:#4CAF82;\">"+cards.filter(function(c){return c.stars>=4;}).length+"</div><div class=\"sl\">4-5&#9733;</div></div><div class=\"sc\"><div class=\"sn\" style=\"color:#D4884A;\">"+cards.filter(function(c){return c.stars>=3;}).length+"</div><div class=\"sl\">3+ Eligible</div></div><div class=\"sc\"><div class=\"sn\" style=\"color:#9B6ED4;\">"+cards.filter(function(c){return c.stars===5;}).length+"</div><div class=\"sl\">5&#9733; Elite</div></div>";document.getElementById("ov-types").innerHTML=["KING","JACK","QUEEN","ACE","JOKER","TWO"].map(function(t){var m=TM[t];var sl=Object.entries(tsc[t]).sort(function(a,b){return b[0]-a[0];}).map(function(e){return"&#9733;".repeat(parseInt(e[0]))+" "+e[1];}).join("<br>");return"<div class=\"tc\"><div class=\"tsym\">"+m.s+"</div><div class=\"tn\">"+t+"</div><div class=\"tct\" style=\"color:"+m.c+"\">"+tc[t]+"</div><div class=\"sb\">"+sl+"</div></div>";}).join("");document.getElementById("ov-stars").innerHTML=Object.entries(sc).sort(function(a,b){return b[0]-a[0];}).map(function(e){return"<div class=\"sc\" style=\"min-width:100px;\"><div class=\"sn\" style=\"font-size:1.5rem;\">"+"&#9733;".repeat(parseInt(e[0]))+"</div><div class=\"sn\" style=\"font-size:1.8rem;color:#BFA882;\">"+e[1]+"</div><div class=\"sl\">"+e[0]+"-star</div></div>";}).join("");}
 function bToday(cards,ts){var r=gPicks(cards,ts);function cH(card,label,isPro){if(!card)return"<div class=\"tdcd\"><div class=\"tdcl\">"+label+"</div><div style=\"color:var(--tm)\">No card</div></div>";var m=TM[card.type];return"<div class=\"tdcd\" style=\"border-color:"+(isPro?"rgba(191,168,130,0.3)":"rgba(90,138,106,0.3)")+";\"><div class=\"tdcl\">"+label+" <span style=\"font-size:0.6rem;color:"+(isPro?"#BFA882":"#9ACAAA")+";border:1px solid currentColor;border-radius:20px;padding:2px 8px;\">"+(isPro?"PRO":"FREE")+"</span></div><div class=\"tdco\">"+card.company+"</div><div class=\"tdct\">"+card.ticker+"</div><div class=\"tdcm\"><span style=\"color:"+m.c+"\">"+m.s+" "+card.type+"</span> &middot; "+(card.country||"")+" &middot; "+(card.sector||"")+"<br><span class=\"stars\">"+starsH(card.stars)+"</span> &middot; FV: "+card.fairValue+" "+(card.currency||"")+"<br>"+(card.tag||"")+"</div></div>";}document.getElementById("td-cards").innerHTML=cH(r.free,"Free - "+r.fs,false)+cH(r.pro,"Pro - "+r.ps,true);document.getElementById("td-info").innerHTML="Seed: <b style=\"color:var(--tp)\">"+ts+"</b><br>Free: <b style=\"color:var(--tp)\">"+r.fs+"</b> (idx "+Math.abs(ts*1664525)%3+")<br>Pro: <b style=\"color:var(--tp)\">"+r.ps+"</b> (idx "+Math.abs(ts*22695477)%3+")";}
 function bHistory(cards,ts,today){var rows=[];for(var i=0;i<=13;i++){var d=new Date(today);d.setDate(d.getDate()-i);var s=gSeedD(d);var r=gPicks(cards,s);var ds=i===0?"<b>TODAY</b>":d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"});rows.push("<tr class=\"" +(i===0?"htd":"")+"\"><td>"+ds+"</td><td>"+(r.free?r.free.company:"&mdash;")+"</td><td><span class=\"tb\">"+r.fs+"</span></td><td class=\"stars\">"+(r.free?"&#9733;".repeat(r.free.stars||0):"&mdash;")+"</td><td>"+(r.pro?r.pro.company:"&mdash;")+"</td><td><span class=\"tb\">"+r.ps+"</span></td><td class=\"stars\">"+(r.pro?"&#9733;".repeat(r.pro.stars||0):"&mdash;")+"</td></tr>");}document.getElementById("hi-body").innerHTML=rows.join("");}
@@ -179,203 +153,6 @@ function sScore(c,st){var v=parseFloat((c.ind1v||"0").replace(/[^0-9.-]/g,""))||
 function rPool(){var strats=["KING","JACK","QUEEN","ACE","JOKER","TWO"];document.getElementById("pl-tabs").innerHTML=strats.map(function(s){return"<button class=\"ptb"+(s===pStrat?" active":"")+"\" onclick=\"sPool('"+s+"')\">"+"&#9818;&#9821;&#9819;&#9824;&#9733;2".split("").slice(["KING","JACK","QUEEN","ACE","JOKER","TWO"].indexOf(s)*2,["KING","JACK","QUEEN","ACE","JOKER","TWO"].indexOf(s)*2+2).join("")+" "+s+"</button>";}).join("");var pool=pCards.filter(function(c){return c.type===pStrat&&(c.stars||0)>=3;});var cols=COLS[pStrat];var sorted=pool.slice().sort(function(a,b){var ka=sScore(a,pStrat),kb=sScore(b,pStrat);for(var i=0;i<ka.length;i++){if(ka[i]<kb[i])return-1;if(ka[i]>kb[i])return 1;}return 0;});var labels={KING:"dividend yield",JACK:"EPS growth",QUEEN:"ROIC",ACE:"F-Score",JOKER:"EPS growth",TWO:"1Y performance"};var thead="<tr>"+cols.map(function(c){return"<th>"+c.l+"</th>";}).join("")+"</tr>";var tbody=sorted.map(function(card,idx){var isT=pToday.has(card.ticker);var isE=pExclude.has(card.ticker)&&!isT;var rc=isT?"ptd":isE?"pex":"";return"<tr class=\""+rc+"\">"+cols.map(function(col){return"<td>"+gV(card,col.k,idx)+"</td>";}).join("")+"</tr>";}).join("");document.getElementById("pl-table").innerHTML="<div style=\"font-size:0.72rem;color:var(--tm);margin-bottom:10px;\">"+sorted.length+" eligible &middot; sorted by "+labels[pStrat]+"</div><table class=\"ptt\"><thead>"+thead+"</thead><tbody>"+tbody+"</tbody></table>";}
 function sPool(s){pStrat=s;rPool();}
 function bPool(cards,ts){pCards=cards;pExclude=gExclude(cards,ts);var r=gPicks(cards,ts);pToday=new Set([r.free&&r.free.ticker,r.pro&&r.pro.ticker].filter(Boolean));rPool();}
-
-// ── MANAGE TAB ──────────────────────────────────────────────────────────────
-// Holds reference to the live cards array; mutations here are tracked and exported.
-var mgCards = [];
-var mgEdited = new Set();      // ids of cards modified in this session
-var mgSearchTerm = "";
-var mgFilter = "all";
-
-function bManage(cards) {
-    mgCards = cards;
-    document.getElementById("mg-search").addEventListener("input", function(e){
-        mgSearchTerm = e.target.value.toLowerCase();
-        renderManage();
-    });
-    document.getElementById("mg-filter").addEventListener("change", function(e){
-        mgFilter = e.target.value;
-        renderManage();
-    });
-    document.getElementById("mg-download").addEventListener("click", downloadCards);
-    renderManage();
-}
-
-function renderManage() {
-    var status = document.getElementById("mg-status");
-    var total = mgCards.length;
-    var blocked = mgCards.filter(function(c){ return c.manualBlock === true; }).length;
-    var edited = mgEdited.size;
-    status.innerHTML = total + " cards total &middot; " + blocked + " blocked &middot; " +
-        (edited > 0
-            ? "<span style=\"color:#D4884A\">" + edited + " unsaved edits</span>"
-            : "no unsaved edits");
-
-    var filtered = mgCards.filter(function(c){
-        // Filter dropdown
-        if (mgFilter === "blocked" && !c.manualBlock) return false;
-        if (mgFilter === "edited" && !mgEdited.has(c.id)) return false;
-        if (["KING","JACK","QUEEN","ACE","JOKER","TWO"].indexOf(mgFilter) >= 0 && c.type !== mgFilter) return false;
-        // Search box
-        if (mgSearchTerm) {
-            var hay = ((c.company||"") + " " + (c.ticker||"")).toLowerCase();
-            if (hay.indexOf(mgSearchTerm) < 0) return false;
-        }
-        return true;
-    });
-
-    if (filtered.length === 0) {
-        document.getElementById("mg-table").innerHTML =
-            "<div style=\"color:var(--tm);padding:24px;text-align:center;\">No cards match.</div>";
-        return;
-    }
-
-    // Cap rendering at 200 rows for performance; show count if more
-    var capped = filtered.slice(0, 200);
-    var moreNote = filtered.length > 200
-        ? "<div style=\"color:var(--tm);padding:10px;font-size:0.78rem;\">Showing first 200 of " + filtered.length + " — narrow your search to see others.</div>"
-        : "";
-
-    var rows = capped.map(function(c){
-        var tm = TM[c.type] || {s:"?",c:"#888"};
-        var blockedStyle = c.manualBlock
-            ? "background:rgba(212,136,74,0.08);"
-            : "";
-        var editedDot = mgEdited.has(c.id)
-            ? "<span style=\"display:inline-block;width:6px;height:6px;border-radius:50%;background:#D4884A;margin-right:6px;\" title=\"Unsaved edit\"></span>"
-            : "";
-        return "<tr style=\"" + blockedStyle + "border-bottom:1px solid rgba(90,138,106,0.15);\">" +
-            "<td style=\"padding:10px 8px;font-size:0.82rem;\">" + editedDot + c.id + "</td>" +
-            "<td style=\"padding:10px 8px;\"><div style=\"font-weight:600;\">" + (c.company||"") + "</div><div style=\"color:var(--tm);font-size:0.72rem;\">" + (c.ticker||"") + " &middot; " + (c.country||"") + " &middot; " + (c.sector||"") + "</div></td>" +
-            "<td style=\"padding:10px 8px;\"><span style=\"color:" + tm.c + ";font-weight:700;\">" + tm.s + "</span> <span style=\"font-size:0.72rem;\">" + c.type + "</span><br><span class=\"stars\" style=\"font-size:0.78rem;\">" + ("&#9733;".repeat(c.stars||0)) + "</span></td>" +
-            "<td style=\"padding:10px 8px;\"><input type=\"number\" min=\"0\" max=\"10\" step=\"1\" value=\"" + (c.contextScore != null ? c.contextScore : 5) + "\" onchange=\"setContextScore(" + c.id + ", this.value)\" style=\"width:60px;background:rgba(255,255,255,0.06);border:1px solid var(--bd);border-radius:4px;padding:6px 8px;color:var(--tp);font-family:'Barlow Condensed',sans-serif;font-size:0.85rem;text-align:center;\"></td>" +
-            "<td style=\"padding:10px 8px;\"><input type=\"text\" value=\"" + escapeAttr(c.contextNote || "") + "\" placeholder=\"One-sentence context…\" oninput=\"setContextNote(" + c.id + ", this.value)\" style=\"width:100%;min-width:280px;background:rgba(255,255,255,0.06);border:1px solid var(--bd);border-radius:4px;padding:6px 10px;color:var(--tp);font-family:'Barlow Condensed',sans-serif;font-size:0.82rem;\"></td>" +
-            "<td style=\"padding:10px 8px;text-align:center;\"><label style=\"cursor:pointer;\"><input type=\"checkbox\" " + (c.manualBlock ? "checked" : "") + " onchange=\"setManualBlock(" + c.id + ", this.checked)\" style=\"width:18px;height:18px;cursor:pointer;\"></label></td>" +
-            "</tr>";
-    }).join("");
-
-    document.getElementById("mg-table").innerHTML = moreNote +
-        "<table style=\"width:100%;border-collapse:collapse;font-size:0.85rem;\">" +
-        "<thead><tr style=\"background:rgba(15,64,32,0.6);position:sticky;top:0;\">" +
-        "<th style=\"padding:10px 8px;text-align:left;font-size:0.7rem;letter-spacing:0.15em;color:var(--tm);font-weight:700;\">ID</th>" +
-        "<th style=\"padding:10px 8px;text-align:left;font-size:0.7rem;letter-spacing:0.15em;color:var(--tm);font-weight:700;\">Company</th>" +
-        "<th style=\"padding:10px 8px;text-align:left;font-size:0.7rem;letter-spacing:0.15em;color:var(--tm);font-weight:700;\">Type</th>" +
-        "<th style=\"padding:10px 8px;text-align:left;font-size:0.7rem;letter-spacing:0.15em;color:var(--tm);font-weight:700;\">Score 0–10</th>" +
-        "<th style=\"padding:10px 8px;text-align:left;font-size:0.7rem;letter-spacing:0.15em;color:var(--tm);font-weight:700;\">Context Note</th>" +
-        "<th style=\"padding:10px 8px;text-align:center;font-size:0.7rem;letter-spacing:0.15em;color:var(--tm);font-weight:700;\">Block</th>" +
-        "</tr></thead><tbody>" + rows + "</tbody></table>";
-}
-
-function escapeAttr(s) {
-    return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-}
-
-function setManualBlock(id, value) {
-    var card = mgCards.find(function(c){ return c.id === id; });
-    if (!card) return;
-    card.manualBlock = !!value;
-    mgEdited.add(id);
-    renderManage();
-}
-
-function setContextScore(id, value) {
-    var card = mgCards.find(function(c){ return c.id === id; });
-    if (!card) return;
-    var n = parseInt(value, 10);
-    if (isNaN(n) || n < 0) n = 0;
-    if (n > 10) n = 10;
-    card.contextScore = n;
-    card.contextDate = new Date().toISOString().slice(0,10);  // YYYY-MM-DD
-    mgEdited.add(id);
-    renderManage();
-}
-
-function setContextNote(id, value) {
-    var card = mgCards.find(function(c){ return c.id === id; });
-    if (!card) return;
-    card.contextNote = value;
-    card.contextDate = new Date().toISOString().slice(0,10);
-    mgEdited.add(id);
-    // Don't re-render on every keystroke — just update status
-    var status = document.getElementById("mg-status");
-    var blocked = mgCards.filter(function(c){ return c.manualBlock === true; }).length;
-    status.innerHTML = mgCards.length + " cards total &middot; " + blocked + " blocked &middot; " +
-        "<span style=\"color:#D4884A\">" + mgEdited.size + " unsaved edits</span>";
-}
-
-function downloadCards() {
-    // Serialise cards array back to JS source matching the original format.
-    // Each card on its own line, valid JS object literal.
-    var lines = ["/* ValuJack Card Data — auto-generated, do not edit manually */", "window.CARDS_DATA = ["];
-    mgCards.forEach(function(c){
-        lines.push("    " + serialiseCard(c) + ",");
-    });
-    lines.push("];");
-    var content = lines.join("\n");
-
-    var blob = new Blob([content], { type: "text/javascript;charset=utf-8" });
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement("a");
-    a.href = url;
-    a.download = "cards.js";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
-
-    // Mark all edits as saved
-    mgEdited.clear();
-    renderManage();
-}
-
-function serialiseCard(c) {
-    // Manual serialiser to keep JS literal style (single quotes for strings,
-    // unquoted keys, and arrays/objects formatted compactly like the original).
-    var parts = [];
-    var keys = Object.keys(c);
-    keys.forEach(function(k){
-        var v = c[k];
-        parts.push(k + ": " + jsValue(v));
-    });
-    return "{ " + parts.join(", ") + " }";
-}
-
-function jsValue(v) {
-    if (v === null) return "null";
-    if (v === undefined) return "undefined";
-    if (typeof v === "boolean") return v ? "true" : "false";
-    if (typeof v === "number") return String(v);
-    if (typeof v === "string") return jsString(v);
-    if (Array.isArray(v)) {
-        return "[" + v.map(jsValue).join(", ") + "]";
-    }
-    if (typeof v === "object") {
-        var inner = Object.keys(v).map(function(k){
-            return k + ": " + jsValue(v[k]);
-        }).join(", ");
-        return "{ " + inner + " }";
-    }
-    return "null";
-}
-
-function jsString(s) {
-    // Prefer single-quoted unless the string contains unescaped single quotes
-    // or special chars that are safer in a double-quoted string.
-    var hasSingle = s.indexOf("'") >= 0;
-    var hasDouble = s.indexOf('"') >= 0;
-    var quote = hasSingle && !hasDouble ? '"' : "'";
-    var escaped = s
-        .replace(/\\/g, "\\\\")
-        .replace(/\n/g, "\\n")
-        .replace(/\r/g, "\\r")
-        .replace(/\t/g, "\\t");
-    if (quote === "'") {
-        escaped = escaped.replace(/'/g, "\\'");
-    } else {
-        escaped = escaped.replace(/"/g, '\\"');
-    }
-    return quote + escaped + quote;
-}
 </script>
 </body>
 </html>

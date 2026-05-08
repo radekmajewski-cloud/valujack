@@ -218,9 +218,6 @@ function Home() {
         const effectivePrices = { ...prices };
         cards.forEach(c => { if (c.type === 'TWO' && !effectivePrices[c.id]) effectivePrices[c.id] = { price: c.fairValue * 0.8, currency: 'USD' }; });
         const eligibleCards = cards.filter(c => {
-              // PHASE 1: Manual block — admin override, drops card from rotation
-              if (c.manualBlock === true) return false;
-
               const quote = effectivePrices[c.id];
               const currentPrice = quote?.price;
               const fairValue = c.fairValue;
