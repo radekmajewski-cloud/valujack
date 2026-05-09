@@ -163,15 +163,241 @@ function showTab(b,id){document.querySelectorAll(".tab").forEach(function(t){t.c
 function gSeed(){var d=new Date();return d.getFullYear()*1000+Math.floor((d-new Date(d.getFullYear(),0,0))/86400000);}
 function gSeedD(d){return d.getFullYear()*1000+Math.floor((d-new Date(d.getFullYear(),0,0))/86400000);}
 function rnd(s,n){var a=[];for(var i=0;i<n;i++)a.push(i);var x=s;for(var i=a.length-1;i>0;i--){x=(x*1664525+1013904223)&0xffffffff;var j=Math.abs(x)%(i+1);var t=a[i];a[i]=a[j];a[j]=t;}return a;}
-function pick(pool,s,n){var t5=pool.filter(function(c){return c.stars===5;});var t4=pool.filter(function(c){return c.stars===4;});var t3=pool.filter(function(c){return(c.stars||3)<=3;});var ord=rnd(s,t5.length).map(function(i){return t5[i];}).concat(rnd(s+1,t4.length).map(function(i){return t4[i];})).concat(rnd(s+2,t3.length).map(function(i){return t3[i];}));var res=[],sc={};for(var i=0;i<ord.length;i++){var c=ord[i];var sec=c.sector||"Other";if((sc[sec]||0)>=2)continue;sc[sec]=(sc[sec]||0)+1;res.push(c);if(res.length===n)break;}return res;}
-function gExclude(cards,ts){var ex=new Set();var pools={};["KING","JACK","TWO","QUEEN","ACE","JOKER"].forEach(function(t){pools[t]=cards.filter(function(c){return c.type===t;});});for(var i=1;i<=14;i++){var ps=ts-i;var pf=pick(pools[FS[Math.abs(ps*1664525)%3]],ps,1)[0];var pp=pick(pools[PS[Math.abs(ps*22695477)%3]],ps*3,1)[0];if(pf)ex.add(pf.ticker);if(pp)ex.add(pp.ticker);}return ex;}
-function gPicks(cards,ts){var pools={};["KING","JACK","TWO","QUEEN","ACE","JOKER"].forEach(function(t){pools[t]=cards.filter(function(c){return c.type===t;});});var fi=Math.abs(ts*1664525)%3,pi=Math.abs(ts*22695477)%3;var ex=gExclude(cards,ts);var fp=pools[FS[fi]].filter(function(c){return!ex.has(c.ticker);});var pp2=pools[PS[pi]].filter(function(c){return!ex.has(c.ticker);});return{free:pick(fp.length?fp:pools[FS[fi]],ts,1)[0],pro:pick(pp2.length?pp2:pools[PS[pi]],ts*3,1)[0],fs:FS[fi],ps:PS[pi]};}
+
+// ── PRICE FETCHING (mirrors main app) ───────────────────────────────────────
+// Fetches live prices from /api/prices. Returns a map of cardId -> {price, currency}.
+// If the endpoint is unreachable (e.g. running locally without the Vercel API),
+// returns an empty map and the picker will gracefully show "Prices unavailable".
+var pricesByCardId = {};
+var pricesLoaded = false;
+var pricesError = false;
+async function fetchPrices(cards){
+    var BATCH_SIZE = 50;
+    var eligible = cards.filter(function(c){ return c.stars >= 3 && c.yahooTicker; });
+    var allPrices = {};
+    try {
+        for (var i = 0; i < eligible.length; i += BATCH_SIZE) {
+            var batch = eligible.slice(i, i + BATCH_SIZE);
+            var tickers = batch.map(function(c){ return c.yahooTicker; }).join(",");
+            var res = await fetch("/api/prices?tickers=" + encodeURIComponent(tickers));
+            if (res.ok) {
+                var data = await res.json();
+                Object.assign(allPrices, data);
+            }
+        }
+        var priceMap = {};
+        cards.forEach(function(c){
+            if (allPrices[c.yahooTicker]) priceMap[c.id] = allPrices[c.yahooTicker];
+        });
+        pricesByCardId = priceMap;
+        pricesLoaded = true;
+    } catch(e) {
+        pricesError = true;
+        pricesLoaded = true;  // mark as "done trying" so UI doesn't spin forever
+    }
+}
+
+// ── ELIGIBILITY (mirrors main app exactly) ──────────────────────────────────
+// Same logic as index.html's eligibleCards filter, plus manualBlock.
+function isEligible(c, prices){
+    if (c.manualBlock === true) return false;
+    var quote = prices[c.id];
+    var currentPrice = quote ? quote.price : null;
+    var fairValue = c.fairValue;
+
+    // Stars threshold (TWO uses lower)
+    if (c.type === "TWO") {
+        if ((c.stars || 0) < 2) return false;
+    } else {
+        if ((c.stars || 0) < 3) return false;
+    }
+
+    // TWO: contrarian, always eligible if stars OK
+    if (c.type === "TWO") return true;
+
+    // Other strategies: need price data and fairValue
+    if (!currentPrice || !fairValue) return false;
+
+    if (c.type === "KING") return currentPrice < fairValue;
+    if (c.type === "JACK" || c.type === "JOKER") return currentPrice < fairValue * 1.20;
+    // QUEEN, ACE: undervalued + fairly valued (up to 5% over)
+    return currentPrice < fairValue * 1.05;
+}
+
+// Build the deduplicated eligible set, sorted by stars desc
+function buildEligible(cards, prices){
+    var elig = cards.filter(function(c){ return isEligible(c, prices); });
+    elig.sort(function(a, b){ return (b.stars || 0) - (a.stars || 0); });
+    var seen = new Set();
+    return elig.filter(function(c){
+        if (seen.has(c.ticker)) return false;
+        seen.add(c.ticker);
+        return true;
+    });
+}
+
+// Tiered shuffle with sector cap (max 2 per sector) — mirrors main app pickPool
+function pick(pool, s, n){
+    var t5 = pool.filter(function(c){ return c.stars === 5; });
+    var t4 = pool.filter(function(c){ return c.stars === 4; });
+    var t3 = pool.filter(function(c){ return (c.stars || 3) <= 3; });
+    var ord = rnd(s, t5.length).map(function(i){ return t5[i]; })
+        .concat(rnd(s + 1, t4.length).map(function(i){ return t4[i]; }))
+        .concat(rnd(s + 2, t3.length).map(function(i){ return t3[i]; }));
+    var res = [], sc = {};
+    for (var i = 0; i < ord.length; i++){
+        var c = ord[i];
+        var sec = c.sector || "Other";
+        if ((sc[sec] || 0) >= 2) continue;
+        sc[sec] = (sc[sec] || 0) + 1;
+        res.push(c);
+        if (res.length === n) break;
+    }
+    return res;
+}
+
+// Build 14-day exclusion set — mirrors main app excludeTickers
+function gExclude(deduped, ts){
+    var ex = new Set();
+    var freeStrategies = [
+        deduped.filter(function(c){ return c.type === "KING"; }),
+        deduped.filter(function(c){ return c.type === "JACK"; }),
+        deduped.filter(function(c){ return c.type === "TWO"; })
+    ];
+    var proStrategies = [
+        deduped.filter(function(c){ return c.type === "QUEEN"; }),
+        deduped.filter(function(c){ return c.type === "ACE"; }),
+        deduped.filter(function(c){ return c.type === "JOKER"; })
+    ];
+    for (var i = 1; i <= 14; i++){
+        var ps = ts - i;
+        var fIdx = Math.abs(ps * 1664525) % 3;
+        var pIdx = Math.abs(ps * 22695477) % 3;
+        var pf = pick(freeStrategies[fIdx], ps, 1)[0];
+        var pp = pick(proStrategies[pIdx], ps * 3, 1)[0];
+        if (pf) ex.add(pf.ticker);
+        if (pp) ex.add(pp.ticker);
+    }
+    return ex;
+}
+
+// Get today's picks — mirrors main app's free/pro selection with sector cap
+function gPicks(cards, ts){
+    var deduped = buildEligible(cards, pricesByCardId);
+    var freeStrategies = [
+        deduped.filter(function(c){ return c.type === "KING"; }),
+        deduped.filter(function(c){ return c.type === "JACK"; }),
+        deduped.filter(function(c){ return c.type === "TWO"; })
+    ];
+    var proStrategies = [
+        deduped.filter(function(c){ return c.type === "QUEEN"; }),
+        deduped.filter(function(c){ return c.type === "ACE"; }),
+        deduped.filter(function(c){ return c.type === "JOKER"; })
+    ];
+    var freeNames = ["KING", "JACK", "TWO"];
+    var proNames  = ["QUEEN", "ACE", "JOKER"];
+
+    var ex = gExclude(deduped, ts);
+    var fi = Math.abs(ts * 1664525) % 3;
+    var pi = Math.abs(ts * 22695477) % 3;
+    var usedSectors = new Set();
+
+    var freeStrat = freeStrategies[fi];
+    var availFree = freeStrat.filter(function(c){
+        return !ex.has(c.ticker) && !usedSectors.has(c.sector);
+    });
+    var freeCard = pick(availFree.length ? availFree : freeStrat, ts, 1)[0];
+    if (freeCard) usedSectors.add(freeCard.sector);
+
+    var proStrat = proStrategies[pi];
+    var availPro = proStrat.filter(function(c){
+        return !ex.has(c.ticker) && !usedSectors.has(c.sector);
+    });
+    var proCard = pick(availPro.length ? availPro : proStrat, ts * 3, 1)[0];
+
+    return { free: freeCard, pro: proCard, fs: freeNames[fi], ps: proNames[pi] };
+}
 function gMet(card,label){if(!card.metrics)return"";for(var i=0;i<card.metrics.length;i++){var m=card.metrics[i];if(m.l&&m.l.toLowerCase().indexOf(label.toLowerCase())>=0)return m.v;}return"";}
 function starsH(n){return"&#9733;".repeat(n||0)+"&#9734;".repeat(5-(n||0));}
-function init(){var cards=window.CARDS_DATA||[];var today=new Date();var ts=gSeed();document.getElementById("hd").textContent=today.toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric"}).toUpperCase();bOverview(cards);bToday(cards,ts);bHistory(cards,ts,today);bIssues(cards);bPool(cards,ts);bManage(cards);}
+async function init(){
+    var cards = window.CARDS_DATA || [];
+    var today = new Date();
+    var ts = gSeed();
+    document.getElementById("hd").textContent = today.toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric"}).toUpperCase();
+
+    // Build the parts that don't depend on prices first
+    bOverview(cards);
+    bIssues(cards);
+    bPool(cards, ts);
+    bManage(cards);
+
+    // Show loading state for the price-dependent tabs
+    document.getElementById("td-cards").innerHTML = '<div style="grid-column:1/-1;color:var(--tm);padding:24px;text-align:center;">Loading live prices…</div>';
+    document.getElementById("td-info").innerHTML = '';
+    document.getElementById("hi-body").innerHTML = '<tr><td colspan="7" style="color:var(--tm);padding:24px;text-align:center;">Loading live prices…</td></tr>';
+
+    // Fetch prices
+    await fetchPrices(cards);
+
+    // Now build the price-dependent views
+    bToday(cards, ts);
+    bHistory(cards, ts, today);
+}
 function bOverview(cards){var tc={},tsc={},sc={};["KING","JACK","QUEEN","ACE","JOKER","TWO"].forEach(function(t){tc[t]=0;tsc[t]={};});cards.forEach(function(c){tc[c.type]=(tc[c.type]||0)+1;tsc[c.type][c.stars]=(tsc[c.type][c.stars]||0)+1;sc[c.stars]=(sc[c.stars]||0)+1;});var ft=(tc.KING||0)+(tc.JACK||0)+(tc.TWO||0),pt=(tc.QUEEN||0)+(tc.ACE||0)+(tc.JOKER||0);document.getElementById("ov-stats").innerHTML="<div class=\"sc\"><div class=\"sn\">"+cards.length+"</div><div class=\"sl\">Total Cards</div></div><div class=\"sc\"><div class=\"sn\" style=\"background:"+SC+";-webkit-background-clip:text;-webkit-text-fill-color:transparent;\">"+ft+"</div><div class=\"sl\">Free</div></div><div class=\"sc\"><div class=\"sn\" style=\"background:"+GC+";-webkit-background-clip:text;-webkit-text-fill-color:transparent;\">"+pt+"</div><div class=\"sl\">Pro</div></div><div class=\"sc\"><div class=\"sn\" style=\"color:#4CAF82;\">"+cards.filter(function(c){return c.stars>=4;}).length+"</div><div class=\"sl\">4-5&#9733;</div></div><div class=\"sc\"><div class=\"sn\" style=\"color:#D4884A;\">"+cards.filter(function(c){return c.stars>=3;}).length+"</div><div class=\"sl\">3+ Eligible</div></div><div class=\"sc\"><div class=\"sn\" style=\"color:#9B6ED4;\">"+cards.filter(function(c){return c.stars===5;}).length+"</div><div class=\"sl\">5&#9733; Elite</div></div>";document.getElementById("ov-types").innerHTML=["KING","JACK","QUEEN","ACE","JOKER","TWO"].map(function(t){var m=TM[t];var sl=Object.entries(tsc[t]).sort(function(a,b){return b[0]-a[0];}).map(function(e){return"&#9733;".repeat(parseInt(e[0]))+" "+e[1];}).join("<br>");return"<div class=\"tc\"><div class=\"tsym\">"+m.s+"</div><div class=\"tn\">"+t+"</div><div class=\"tct\" style=\"color:"+m.c+"\">"+tc[t]+"</div><div class=\"sb\">"+sl+"</div></div>";}).join("");document.getElementById("ov-stars").innerHTML=Object.entries(sc).sort(function(a,b){return b[0]-a[0];}).map(function(e){return"<div class=\"sc\" style=\"min-width:100px;\"><div class=\"sn\" style=\"font-size:1.5rem;\">"+"&#9733;".repeat(parseInt(e[0]))+"</div><div class=\"sn\" style=\"font-size:1.8rem;color:#BFA882;\">"+e[1]+"</div><div class=\"sl\">"+e[0]+"-star</div></div>";}).join("");}
-function bToday(cards,ts){var r=gPicks(cards,ts);function cH(card,label,isPro){if(!card)return"<div class=\"tdcd\"><div class=\"tdcl\">"+label+"</div><div style=\"color:var(--tm)\">No card</div></div>";var m=TM[card.type];return"<div class=\"tdcd\" style=\"border-color:"+(isPro?"rgba(191,168,130,0.3)":"rgba(90,138,106,0.3)")+";\"><div class=\"tdcl\">"+label+" <span style=\"font-size:0.6rem;color:"+(isPro?"#BFA882":"#9ACAAA")+";border:1px solid currentColor;border-radius:20px;padding:2px 8px;\">"+(isPro?"PRO":"FREE")+"</span></div><div class=\"tdco\">"+card.company+"</div><div class=\"tdct\">"+card.ticker+"</div><div class=\"tdcm\"><span style=\"color:"+m.c+"\">"+m.s+" "+card.type+"</span> &middot; "+(card.country||"")+" &middot; "+(card.sector||"")+"<br><span class=\"stars\">"+starsH(card.stars)+"</span> &middot; FV: "+card.fairValue+" "+(card.currency||"")+"<br>"+(card.tag||"")+"</div></div>";}document.getElementById("td-cards").innerHTML=cH(r.free,"Free - "+r.fs,false)+cH(r.pro,"Pro - "+r.ps,true);document.getElementById("td-info").innerHTML="Seed: <b style=\"color:var(--tp)\">"+ts+"</b><br>Free: <b style=\"color:var(--tp)\">"+r.fs+"</b> (idx "+Math.abs(ts*1664525)%3+")<br>Pro: <b style=\"color:var(--tp)\">"+r.ps+"</b> (idx "+Math.abs(ts*22695477)%3+")";}
-function bHistory(cards,ts,today){var rows=[];for(var i=0;i<=13;i++){var d=new Date(today);d.setDate(d.getDate()-i);var s=gSeedD(d);var r=gPicks(cards,s);var ds=i===0?"<b>TODAY</b>":d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"});rows.push("<tr class=\"" +(i===0?"htd":"")+"\"><td>"+ds+"</td><td>"+(r.free?r.free.company:"&mdash;")+"</td><td><span class=\"tb\">"+r.fs+"</span></td><td class=\"stars\">"+(r.free?"&#9733;".repeat(r.free.stars||0):"&mdash;")+"</td><td>"+(r.pro?r.pro.company:"&mdash;")+"</td><td><span class=\"tb\">"+r.ps+"</span></td><td class=\"stars\">"+(r.pro?"&#9733;".repeat(r.pro.stars||0):"&mdash;")+"</td></tr>");}document.getElementById("hi-body").innerHTML=rows.join("");}
+function bToday(cards,ts){
+    var r = gPicks(cards, ts);
+    function cH(card, label, isPro){
+        if (!card) return "<div class=\"tdcd\"><div class=\"tdcl\">"+label+"</div><div style=\"color:var(--tm)\">No card</div></div>";
+        var m = TM[card.type];
+        // Add live price + MoS info
+        var quote = pricesByCardId[card.id];
+        var priceLine = "";
+        if (quote && quote.price && card.fairValue){
+            var mos = ((card.fairValue - quote.price) / card.fairValue * 100).toFixed(1);
+            var mosColor = mos >= 0 ? "#4CAF82" : "#D4884A";
+            priceLine = "<br>Price: <b>"+quote.price.toFixed(2)+"</b> "+(quote.currency||card.currency||"")+
+                " &middot; MoS: <b style=\"color:"+mosColor+"\">"+mos+"%</b>";
+        } else if (card.type === "TWO") {
+            priceLine = "<br><span style=\"color:var(--tm);font-size:0.7rem;\">TWO: contrarian, no live price required</span>";
+        } else if (!quote) {
+            priceLine = "<br><span style=\"color:#D4884A;font-size:0.7rem;\">Price unavailable</span>";
+        }
+        return "<div class=\"tdcd\" style=\"border-color:"+(isPro?"rgba(191,168,130,0.3)":"rgba(90,138,106,0.3)")+";\"><div class=\"tdcl\">"+label+" <span style=\"font-size:0.6rem;color:"+(isPro?"#BFA882":"#9ACAAA")+";border:1px solid currentColor;border-radius:20px;padding:2px 8px;\">"+(isPro?"PRO":"FREE")+"</span></div><div class=\"tdco\">"+card.company+"</div><div class=\"tdct\">"+card.ticker+"</div><div class=\"tdcm\"><span style=\"color:"+m.c+"\">"+m.s+" "+card.type+"</span> &middot; "+(card.country||"")+" &middot; "+(card.sector||"")+"<br><span class=\"stars\">"+starsH(card.stars)+"</span> &middot; FV: "+card.fairValue+" "+(card.currency||"")+priceLine+"<br>"+(card.tag||"")+"</div></div>";
+    }
+    var statusBanner = "";
+    if (pricesError){
+        statusBanner = "<div style=\"grid-column:1/-1;background:rgba(212,136,74,0.12);border:1px solid rgba(212,136,74,0.4);border-radius:6px;padding:10px 14px;font-size:0.78rem;color:#D4884A;\">⚠ Live prices could not be fetched. Showing picks based on stars + manualBlock only — picks shown here may differ from the live app.</div>";
+    } else {
+        var fetchedCount = Object.keys(pricesByCardId).length;
+        statusBanner = "<div style=\"grid-column:1/-1;font-size:0.7rem;color:var(--tm);\">Live prices: "+fetchedCount+" cards &middot; Picks below match live app.</div>";
+    }
+    document.getElementById("td-cards").innerHTML = statusBanner + cH(r.free, "Free - "+r.fs, false) + cH(r.pro, "Pro - "+r.ps, true);
+    document.getElementById("td-info").innerHTML = "Seed: <b style=\"color:var(--tp)\">"+ts+"</b><br>Free: <b style=\"color:var(--tp)\">"+r.fs+"</b> (idx "+Math.abs(ts*1664525)%3+")<br>Pro: <b style=\"color:var(--tp)\">"+r.ps+"</b> (idx "+Math.abs(ts*22695477)%3+")";
+}
+function bHistory(cards,ts,today){
+    var rows = [];
+    for (var i = 0; i <= 13; i++){
+        var d = new Date(today);
+        d.setDate(d.getDate() - i);
+        var s = gSeedD(d);
+        var r = gPicks(cards, s);
+        var ds = i === 0 ? "<b>TODAY</b>" : d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"});
+        rows.push("<tr class=\""+(i===0?"htd":"")+"\"><td>"+ds+"</td><td>"+(r.free?r.free.company:"&mdash;")+"</td><td><span class=\"tb\">"+r.fs+"</span></td><td class=\"stars\">"+(r.free?"&#9733;".repeat(r.free.stars||0):"&mdash;")+"</td><td>"+(r.pro?r.pro.company:"&mdash;")+"</td><td><span class=\"tb\">"+r.ps+"</span></td><td class=\"stars\">"+(r.pro?"&#9733;".repeat(r.pro.stars||0):"&mdash;")+"</td></tr>");
+    }
+    var note = "<div style=\"font-size:0.72rem;color:var(--tm);margin-bottom:12px;font-style:italic;line-height:1.5;\">Note: past dates are reconstructed using <b>today's</b> live prices and current card data. Today's row matches the live app. Historical rows are best-effort — actual past picks depended on the prices and card state on those days.</div>";
+    document.getElementById("hi-body").innerHTML = rows.join("");
+    // Add the note above the history table
+    var historyTab = document.getElementById("t-hi");
+    if (historyTab && !historyTab.querySelector(".hi-note")){
+        var noteDiv = document.createElement("div");
+        noteDiv.className = "hi-note";
+        noteDiv.innerHTML = note;
+        var firstChild = historyTab.querySelector(".pn");
+        if (firstChild){
+            firstChild.insertBefore(noteDiv, firstChild.children[1] || null);
+        }
+    }
+}
 function bIssues(cards){var BAD=["0","0.0","0.0%","—","-","null","","undefined","N/A","n/a","0%"];var issues=[];cards.forEach(function(c){var ci=[];if(!c.ind1v||BAD.indexOf(c.ind1v)>=0)ci.push("ind1v empty");if(!c.fairValue||c.fairValue===0)ci.push("fairValue missing");if(!c.currency)ci.push("currency empty");if(c.tag===c.pick)ci.push("tag==pick");if(c.metrics)c.metrics.forEach(function(m){if(!m.v||BAD.indexOf(m.v)>=0)ci.push("metric "+m.l);});if(ci.length>0)issues.push({card:c,issues:ci});});if(!issues.length){document.getElementById("is-list").innerHTML="<div style=\"color:#4CAF82;padding:16px;\">&#10003; No issues.</div>";return;}document.getElementById("is-list").innerHTML="<div style=\"color:rgba(255,150,80,0.9);font-size:0.8rem;margin-bottom:16px;\">"+issues.length+" cards flagged</div><table class=\"ht\"><thead><tr><th>ID</th><th>Company</th><th>Type</th><th>Stars</th><th>Issues</th></tr></thead><tbody>"+issues.map(function(x){return"<tr class=\"ir\"><td>"+x.card.id+"</td><td>"+x.card.company+"</td><td><span class=\"tb\">"+x.card.type+"</span></td><td class=\"stars\">"+("&#9733;".repeat(x.card.stars||0))+"</td><td>"+x.issues.map(function(i){return"<span class=\"ib\">"+i+"</span>";}).join("")+"</td></tr>";}).join("")+"</tbody></table>";}
 var COLS={KING:[{l:"#",k:"_r"},{l:"Company",k:"company"},{l:"Ticker",k:"ticker"},{l:"Stars",k:"_s"},{l:"Country",k:"country"},{l:"Fair Value",k:"_fv"},{l:"Div Yield",k:"ind1v"},{l:"ROIC",k:"_roic"},{l:"P/E",k:"_pe"},{l:"D/E",k:"_de"}],JACK:[{l:"#",k:"_r"},{l:"Company",k:"company"},{l:"Ticker",k:"ticker"},{l:"Stars",k:"_s"},{l:"Country",k:"country"},{l:"Fair Value",k:"_fv"},{l:"EPS Growth",k:"ind1v"},{l:"ROIC",k:"_roic"},{l:"P/E",k:"_pe"},{l:"Price Str",k:"_rs"}],QUEEN:[{l:"#",k:"_r"},{l:"Company",k:"company"},{l:"Ticker",k:"ticker"},{l:"Stars",k:"_s"},{l:"Country",k:"country"},{l:"Fair Value",k:"_fv"},{l:"Cash Flow",k:"ind1v"},{l:"ROIC",k:"_roic"},{l:"P/E",k:"_pe"},{l:"D/E",k:"_de"}],ACE:[{l:"#",k:"_r"},{l:"Company",k:"company"},{l:"Ticker",k:"ticker"},{l:"Stars",k:"_s"},{l:"Country",k:"country"},{l:"Fair Value",k:"_fv"},{l:"EPS Growth",k:"ind1v"},{l:"F-Score",k:"_fs"},{l:"ROIC",k:"_roic"},{l:"P/E",k:"_pe"}],JOKER:[{l:"#",k:"_r"},{l:"Company",k:"company"},{l:"Ticker",k:"ticker"},{l:"Stars",k:"_s"},{l:"Country",k:"country"},{l:"Fair Value",k:"_fv"},{l:"EPS Growth",k:"ind1v"},{l:"ROIC",k:"_roic"},{l:"P/E",k:"_pe"},{l:"FCF",k:"_fcf"}],TWO:[{l:"#",k:"_r"},{l:"Company",k:"company"},{l:"Ticker",k:"ticker"},{l:"Stars",k:"_s"},{l:"Country",k:"country"},{l:"Fair Value",k:"_fv"},{l:"1Y Perf",k:"ind1v"},{l:"F-Score",k:"_fs"},{l:"ROIC",k:"_roic"},{l:"Gross Margin",k:"_gm"}]};
 function gV(card,key,rank){if(key==="._r"){var cl=rank<3?"rk"+(rank+1):"";return"<span class=\"rk "+cl+"\">"+(rank+1)+"</span>";}if(key==="_r"){var cl=rank<3?"rk"+(rank+1):"";return"<span class=\"rk "+cl+"\">"+(rank+1)+"</span>";}if(key==="_s")return"<span class=\"stars\">"+("&#9733;".repeat(card.stars||0))+"</span>";if(key==="_fv")return card.fairValue+" "+(card.currency||"");if(key==="_roic")return gMet(card,"ROIC")||"&mdash;";if(key==="_pe")return gMet(card,"P/E")||"&mdash;";if(key==="_de")return gMet(card,"Debt/Equity")||"&mdash;";if(key==="_rs")return gMet(card,"Price Strength")||card.rsRating||"&mdash;";if(key==="_fs")return gMet(card,"F-Score")||"&mdash;";if(key==="_fcf")return gMet(card,"Free Cash")||"&mdash;";if(key==="_gm")return gMet(card,"Gross Margin")||"&mdash;";return card[key]||"&mdash;";}
