@@ -1,0 +1,48 @@
+Priority	King	Dividends
+3	Market cap	>1B USD
+1	Div. Yield	>2%
+1	Div. Payout 3y	30%-70%
+2	FCF Margin	>10%
+2	Earnings growth 5y	>3%
+1	Div. stable 5y	>5
+2	Valuation	<10% overvalued
+		
+Priority	Queen	Magic Formula
+1	Return on invested Capital Roic	>20%
+1	EV/EBITDA	<10%
+2	Earnings growth 5y	>0%
+2	Debt/Equity 	<1
+1	Valuation vs Fair Value	<10% overvalued
+		
+Priority	Ace	Financial Score
+1	Financial score	>6
+1	Growing Roic	ROIC current >ROIC avg. 5Y
+2	Earnings growth 5y	>0%
+2	Market cap 	>50M USD
+2	Market cap 	<500M USD
+1	Valuation P/B	<2
+2	Valuation vs Fair Value	Undervalued by more than 15%
+		
+Priority	Jack 	Momentum
+1	Relative Strength RS Rank	>80
+1	Price vs Moving Average	Price>MA20>MA50>MA200
+1	Earnings accelerating	Earnings growth 1y > Earnings growth 5y
+1	Earnings 1y	>25%
+3	Valuation P/E 	<100
+	Stop loss orders 	7-8%
+		
+Priority	Joker	CANSLIM
+1	Earnings growth Q/Q	>25%
+2	Earnings growth 1y	>10%
+1	Relative Strength RS Rank	>80
+2	Return on invested Capital ROIC	>0%
+1	Index growth	Nasdaq sentiment
+		
+Priority	2 - TWO	Contrarian+early momentum
+1	Price to Book P/B	<2
+1	EV/EBITDA	<10
+1	Return on invested Capital ROIC	>8%
+1	Bottom reached and starting grow	MA50>MA200
+1	Valuation P/E	<15
+1	Valuation fair value 	Undervalued by more than 10%
+1	1 y performance 	←15%

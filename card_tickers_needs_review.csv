@@ -1,0 +1,208 @@
+id,company,ticker,current_yahoo,suggested,country,sector,type,category,reason
+31,Hellenic Exchanges,HEE,EXAE.AT,?,Germany,Financials,QUEEN,SUFFIX MISMATCH,Has .AT but country=Germany expects .DE — verify which is correct
+49,Fuchs SE,FPE,FPE,FPE.DE,Germany,Materials,KING,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+52,Hapag-Lloyd AG,HLAG,HLAG,HLAG.DE,Germany,Industrials,KING,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+54,Henkel AG & Co KGaA,HEN,HEN,HEN.DE,Germany,Food and Beverage,KING,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+70,Pason Systems Inc,PSI,PSI,PSI.TO,Canada,Energy,KING,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+72,Pizza Pizza Royalty Corp,PZA,PZA,PZA.TO,Canada,Consumer Durables,KING,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+77,Transcontinental Inc,TCL.A,TCL.A,?,Canada,Materials,KING,SUFFIX MISMATCH,Has .A but country=Canada expects .TO — verify which is correct
+78,Trelleborg,TREL B,TREL B,TREL-B.ST,Sweden,Materials,KING,TICKER HAS SPACE,Space probably needs to become hyphen: TREL B -> TREL-B.ST
+81,Uzin Utz SE,UZU,UZU,UZU.DE,Germany,Materials,KING,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+83,Whitecap Resources Inc,WCP,WCP,WCP.TO,Canada,Energy,KING,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+86,dAmico International Shipping SA,B7C0,B7C0,B7C0.DE,Germany,Industrials,JACK,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+87,Elmos Semiconductor SE,ELG,ELG,ELG.DE,Germany,Technology,JACK,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+89,Etablissements Maurel & Prom,ETX,ETX,ETX.DE,Germany,Energy,JACK,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+90,First Resources Ltd,5F1,5F1,5F1.DE,Germany,Food and Beverage,JACK,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+91,FM Mattsson,FMM B,FMM B,FMM-B.ST,Sweden,Industrials,JACK,TICKER HAS SPACE,Space probably needs to become hyphen: FMM B -> FMM-B.ST
+95,Harju Elekter Group,HD8,HD8,HD8.DE,Germany,Industrials,JACK,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+96,Headwater Exploration Inc,HWX,HWX,HWX.TO,Canada,Energy,JACK,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+99,Jensen-Group NV,XD1,XD1,XD1.DE,Germany,Industrials,JACK,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+101,Laboratorios Farmaceuticos Rovi,41L,41L,41L.DE,Germany,Health Care,JACK,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+104,Matson Inc,68M,68M,68M.DE,Germany,Industrials,JACK,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+106,Moury Construct SA,FO3,FO3,FO3.DE,Germany,Industrials,JACK,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+109,Naturhouse Health SA,2NH,2NH,2NH.DE,Germany,Food and Beverage,JACK,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+114,Spadel SA,YX5,YX5,YX5.DE,Germany,Food and Beverage,JACK,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+115,TORM,TRMD A,TRMD A,TRMD-A.CO,Denmark,Energy,JACK,TICKER HAS SPACE,Space probably needs to become hyphen: TRMD A -> TRMD-A.CO
+120,Canadian National Railway Co,CNR,CNR,CNR.TO,Canada,Industrials,QUEEN,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+121,CCL Industries Inc,CCL.B,CCL.B,?,Canada,Materials,QUEEN,SUFFIX MISMATCH,Has .B but country=Canada expects .TO — verify which is correct
+127,Epiroc B,EPI B,EPI B,EPI-B.ST,Sweden,Industrials,QUEEN,TICKER HAS SPACE,Space probably needs to become hyphen: EPI B -> EPI-B.ST
+128,GeoPark Ltd,G6O,G6O,G6O.DE,Germany,Energy,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+142,Rai Way SpA,4RW,4RW,4RW.DE,Germany,Industrials,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+145,Toll Brothers Inc,TLK,TLK,TLK.DE,Germany,Industrials,QUEEN,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+148,ZEAL Network SE,TIMA,TIMA,TIMA.DE,Germany,Consumer Durables,QUEEN,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+173,MBB SE,MBB,MBB,MBB.DE,Germany,Industrials,ACE,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+182,Subsea 7 SA,SOC,SOC,SOC.DE,Germany,Energy,ACE,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+188,ALK-Abello,ALK B,ALK B,ALK-B.CO,Denmark,Health Care,JOKER,TICKER HAS SPACE,Space probably needs to become hyphen: ALK B -> ALK-B.CO
+192,Birkenstock Holding PLC,7PV,7PV,7PV.DE,Germany,Consumer Durables,JOKER,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+194,Bombardier Inc,BBD,BBD,BBD.DE,Germany,Industrials,JOKER,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+195,Bombardier Inc,BBD.B,BBD.B,?,Canada,Industrials,JOKER,SUFFIX MISMATCH,Has .B but country=Canada expects .TO — verify which is correct
+197,Cloetta,CLA B,CLA B,CLA-B.ST,Sweden,Food and Beverage,JOKER,TICKER HAS SPACE,Space probably needs to become hyphen: CLA B -> CLA-B.ST
+199,D-Box Technologies Inc,DBO,DBO,DBO.TO,Canada,Technology,JOKER,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+205,Friedrich Vorwerk Group SE,VH2,VH2,VH2.DE,Germany,Industrials,JOKER,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+212,Magellan Aerospace Corp,4M7A,4M7A,4M7A.DE,Germany,Industrials,JOKER,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+213,Magellan Aerospace Corp,MAL,MAL,MAL.TO,Canada,Industrials,JOKER,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+217,Neurocrine Biosciences Inc,NB3,NB3,NB3.DE,Germany,Health Care,JOKER,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+218,NVIDIA Corp,1NVDA,1NVDA,1NVDA.MI,Italy,Technology,JOKER,OTHER COUNTRY,Less common country — verify Italy primary suffix is .MI
+232,UCB SA,UNC,UNC,UNC.DE,Germany,Health Care,JOKER,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+242,Docebo Inc,DCBO,DCBO,DCBO.TO,Canada,IT Services,JOKER,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+262,Lumine Group Inc,LMN,LMN.V,?,Canada,Technology,TWO,SUFFIX MISMATCH,Has .V but country=Canada expects .TO — verify which is correct
+274,TG Therapeutics,NKB2,TGTX,TGTX.DE,Germany,Health Care,TWO,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+275,Descartes Systems,DSG,DSGX,DSGX.TO,Canada,Technology,TWO,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+311,Lululemon Athletica,LULU,LULU,LULU.TO,Canada,Consumer Durables,QUEEN,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+319,Exxaro Resources Ltd,LCQ,LCQ,LCQ.DE,Germany,Energy,KING,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+320,Nippon Yusen Kabushiki Kaisha,NYKA,NYKA,NYKA.DE,Germany,Industrials,KING,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+323,Vidrala SA,VIR,VIR,VIR.DE,Germany,Materials,KING,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+324,Jumbo SA,5JB,5JB,5JB.DE,Germany,Consumer Durables,KING,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+325,Bosideng International Holdings,3BD,3BD,3BD.DE,Germany,Consumer Durables,KING,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+326,Grand Pharmaceutical Group Ltd,MX6A,MX6A,MX6A.DE,Germany,Health Care,KING,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+327,ANTA Sports Products Ltd,AS7,AS7,AS7.DE,Germany,Consumer Durables,KING,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+328,Krka DD,KN8,KN8,KN8.DE,Germany,Health Care,KING,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+329,Hexpol,HPOL B,HPOL B,HPOL-B.ST,Sweden,Materials,KING,TICKER HAS SPACE,Space probably needs to become hyphen: HPOL B -> HPOL-B.ST
+334,Azbil Corp,YMK,YMK,YMK.DE,Germany,Industrials,KING,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+337,Boston Pizza Royalties Income,BPF.UN,BPF.UN,?,Canada,Consumer Durables,KING,SUFFIX MISMATCH,Has .UN but country=Canada expects .TO — verify which is correct
+338,Cembre SpA,J0L,J0L,J0L.DE,Germany,Industrials,KING,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+340,COSCO SHIPPING International Co,CSB,CSB,CSB.DE,Germany,Industrials,KING,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+341,EBARA JITSUGYO Co Ltd,EJI,EJI,EJI.DE,Germany,Industrials,KING,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+342,ENAV SpA,ENV,ENV,ENV.DE,Germany,Industrials,KING,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+343,EUROKAI GmbH & Co KGaA,EUK3,EUK3,EUK3.DE,Germany,Industrials,KING,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+344,Evertz Technologies Ltd,74E,74E,74E.DE,Germany,Technology,KING,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+346,Frosta AG,NLM,NLM,NLM.DE,Germany,Food and Beverage,KING,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+349,Giordano International Ltd,GIO,GIO,GIO.DE,Germany,Consumer Durables,KING,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+350,Gr. Sarantis SA,SSA1,SSA1,SSA1.DE,Germany,Food and Beverage,KING,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+352,Hirose Electric Co Ltd,HRO,HRO,HRO.DE,Germany,Technology,KING,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+357,Komori Corp,KOI,KOI,KOI.DE,Germany,Industrials,KING,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+358,Kunlun Energy Co Ltd,CTJ1,CTJ1,CTJ1.DE,Germany,Energy,KING,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+360,Luka Koper DD,2FA,2FA,2FA.DE,Germany,Industrials,KING,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+361,Maschinenfabrik Berthold Hermle,MBH3,MBH3,MBH3.DE,Germany,Industrials,KING,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+363,Naturenergie Holding AG,KWK3,KWK3,KWK3.DE,Germany,Utilities,KING,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+364,NetEase Inc,4Y01,4Y01,4Y01.DE,Germany,Consumer Durables,KING,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+367,Orell Fussli AG,OFH,OFH,OFH.DE,Germany,Industrials,KING,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+368,Orient Overseas Ltd,ORI1,ORI1,ORI1.DE,Germany,Industrials,KING,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+369,Pacific Basin Shipping Ltd,OYD,OYD,OYD.DE,Germany,Industrials,KING,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+371,Raffles Medical Group Ltd,02M1,02M1,02M1.DE,Germany,Health Care,KING,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+374,Russel Metals Inc,RUS,RUS,RUS.TO,Canada,Industrials,KING,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+375,Seiren Co Ltd,1AB,1AB,1AB.DE,Germany,Consumer Durables,KING,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+377,Socfinasia SA Holding,Y1T,Y1T,Y1T.DE,Germany,Food and Beverage,KING,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+382,Tourmaline Oil Corp,TOU,TOU,TOU.TO,Canada,Energy,KING,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+383,UIE Plc,I55,I55,I55.DE,Germany,Food and Beverage,KING,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+387,ACT Energy Technologies Ltd,ACX,ACX,ACX.TO,Canada,Unknown,JACK,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+391,Biosyent Inc,RX,RX,RX.TO,Canada,Unknown,JACK,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+394,Boston Pizza Royalties Income,BPF.UN,BPF.UN,?,Canada,Unknown,JACK,SUFFIX MISMATCH,Has .UN but country=Canada expects .TO — verify which is correct
+395,Cembre SpA,J0L,J0L,J0L.DE,Germany,Unknown,JACK,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+396,CES Energy Solutions Corp,CEU,CEU,CEU.TO,Canada,Unknown,JACK,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+401,Draegerwerk AG & Co KGaA,DRW3,DRW3,DRW3.DE,Germany,Unknown,JACK,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+405,ENAV SpA,ENV,ENV,ENV.DE,Germany,Unknown,JACK,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+406,Evertz Technologies Ltd,74E,74E,74E.DE,Germany,Unknown,JACK,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+407,Filtronic PLC,FTI,FTI,FTI.DE,Germany,Unknown,JACK,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+408,Firan Technology Group Corp,FTG,FTG,FTG.TO,Canada,Unknown,JACK,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+419,Itafos Inc,IFOS,IFOS,IFOS.TO,Canada,Unknown,JACK,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+423,KWS SAAT SE & Co KGaA,KWS,KWS,KWS.DE,Germany,Unknown,JACK,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+425,Limes Schlosskliniken AG,LIK,LIK,LIK.DE,Germany,Unknown,JACK,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+428,Masterflex SE,MZX,MZX,MZX.DE,Germany,Unknown,JACK,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+437,PharmaNutra SpA,761,761,761.DE,Germany,Unknown,JACK,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+439,PHX Energy Services Corp,PHX,PHX,PHX.TO,Canada,Unknown,JACK,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+446,Saputo Inc,SAP,SAP,SAP.TO,Canada,Unknown,JACK,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+447,Savaria Corp,SIS,SIS,SIS.TO,Canada,Unknown,JACK,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+452,SOL SpA,QOL,QOL,QOL.DE,Germany,Unknown,JACK,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+457,Topaz Energy Corp,TPZ,TPZ,TPZ.TO,Canada,Unknown,JACK,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+458,Toromont Industries Ltd,TIH,TIH,TIH.TO,Canada,Unknown,JACK,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+459,Total Energy Services Inc,TOT,TOT,TOT.TO,Canada,Unknown,JACK,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+460,Trican Well Service Ltd,TCW,TCW,TCW.TO,Canada,Unknown,JACK,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+462,Valeura Energy Inc,83PN,83PN,83PN.DE,Germany,Unknown,JACK,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+466,ZTO Express Inc,ZTOB,ZTOB,ZTOB.DE,Germany,Unknown,JACK,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+467,A.b.p. Nocivelli SpA,9UZ,9UZ,9UZ.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+469,Alvopetro Energy Ltd,A6Y0,A6Y0,A6Y0.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+472,Ardmore Shipping Corp,A61,A61,A61.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+473,Bains de Mer Monaco,RJ8,RJ8,RJ8.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+474,Bic,BIF,BIF,BIF.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+475,Boston Pizza Royalties Income,BPF.UN,BPF.UN,?,Canada,Unknown,QUEEN,SUFFIX MISMATCH,Has .UN but country=Canada expects .TO — verify which is correct
+478,Cairn Homes PLC,C5H,C5H,C5H.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+479,Cardinal Energy Ltd,CJ,CJ,CJ.TO,Canada,Unknown,QUEEN,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+480,Cembre SpA,J0L,J0L,J0L.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+483,COSCO SHIPPING Holdings Co Ltd,C6G,C6G,C6G.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+484,Cosmo Pharmaceuticals NV,C43,C43,C43.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+486,EBARA JITSUGYO Co Ltd,EJI,EJI,EJI.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+487,Ernst Russ AG,ERAG,ERAG,ERAG.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+488,EUROKAI GmbH & Co KGaA,EUK3,EUK3,EUK3.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+489,Euroseas Ltd,2LE1,2LE1,2LE1.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+490,Evertz Technologies Ltd,74E,74E,74E.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+491,Exxaro Resources Ltd,LCQ,LCQ,LCQ.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+492,Faes Farma SA,FFEA,FFEA,FFEA.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+493,Freehold Royalties Ltd,1FH,1FH,1FH.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+497,Gr. Sarantis SA,SSA1,SSA1,SSA1.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+500,Hammond Power Solutions Inc,HPS.A,HPS.A,?,Canada,Unknown,QUEEN,SUFFIX MISMATCH,Has .A but country=Canada expects .TO — verify which is correct
+502,Hirose Electric Co Ltd,HRO,HRO,HRO.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+503,International Seaways Inc,IS5,IS5,IS5.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+505,Kri-Kri Milk Industry SA,AO2,AO2,AO2.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+506,Krka DD,KN8,KN8,KN8.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+507,Luka Koper DD,2FA,2FA,2FA.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+508,Minth Group Ltd,M3I,M3I,M3I.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+509,Miquel y Costas & Miquel SA,MQ4,MQ4,MQ4.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+512,NAPCO Security Technologies Inc,NS1,NS1,NS1.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+513,Nippon Yusen Kabushiki Kaisha,NYKA,NYKA,NYKA.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+515,OMV Petrom SA,XNE,XNE,XNE.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+516,Orell Fussli AG,OFH,OFH,OFH.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+517,Orient Overseas Ltd,ORI1,ORI1,ORI1.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+518,Otsuka Holdings Co Ltd,OS1,OS1,OS1.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+519,Paramount Resources Ltd,POU,POU,POU.TO,Canada,Unknown,QUEEN,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+521,Raffles Medical Group Ltd,02M1,02M1,02M1.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+523,Safe Bulkers Inc,SBL,SBL,SBL.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+524,Santen Pharmaceutical Co Ltd,SZD,SZD,SZD.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+525,Seiren Co Ltd,1AB,1AB,1AB.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+526,Sipef SA,BZ3,BZ3,BZ3.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+527,SNGN Romgaz SA,RZ8B,RZ8B,RZ8B.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+528,Societatea Nationala,53V,53V,53V.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+529,SUESS MicroTec SE,SMHN,SMHN,SMHN.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+530,Teekay Tankers Ltd,S52,S52,S52.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+531,Tenaris SA,TW10,TW10,TW10.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+532,Tourmaline Oil Corp,TOU,TOU,TOU.TO,Canada,Unknown,QUEEN,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+533,Trican Well Service Ltd,TCW,TCW,TCW.TO,Canada,Unknown,QUEEN,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+534,TTW Pcl,F1P,F1P,F1P.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+535,UIE Plc,I55,I55,I55.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+538,VBG Group,VBG B,VBG B,VBG-B.ST,Sweden,Unknown,QUEEN,TICKER HAS SPACE,Space probably needs to become hyphen: VBG B -> VBG-B.ST
+539,Viscofan SA,VIS,VIS,VIS.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+541,Winpak Ltd,WPK,WPK,WPK.TO,Canada,Unknown,QUEEN,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+542,Wuxi AppTec Co Ltd,WX8,WX8,WX8.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+544,ZTO Express Inc,ZTOB,ZTOB,ZTOB.DE,Germany,Unknown,QUEEN,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+546,Alvopetro Energy Ltd,ALV,ALV,ALV.TO,Canada,Energy,ACE,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+547,Athabasca Oil Corp,ATH,ATH,ATH.TO,Canada,Energy,ACE,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+548,Bijou Brigitte Modische,BIJ,BIJ,BIJ.DE,Germany,Consumer Durables,ACE,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+550,Caltagirone SpA,QCG,QCG,QCG.DE,Germany,Industrials,ACE,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+555,Cipher Pharmaceuticals Inc,CPH,CPH,CPH.TO,Canada,Health Care,ACE,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+559,EUROKAI GmbH & Co KGaA,EUK3,EUK3,EUK3.DE,Germany,Industrials,ACE,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+560,Evertz Technologies Ltd,ET,ET,ET.TO,Canada,Technology,ACE,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+563,Glenveagh Properties PLC,GVR,GVR,GVR.DE,Germany,Industrials,ACE,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+565,Gr. Sarantis SA,SSA1,SSA1,SSA1.DE,Germany,Food and Beverage,ACE,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+568,Itafos Inc,IFOS,IFOS,IFOS.TO,Canada,Food and Beverage,ACE,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+572,Krka DD,KN8,KN8,KN8.DE,Germany,Health Care,ACE,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+577,Orient Overseas Ltd,ORI1,ORI1,ORI1.DE,Germany,Industrials,ACE,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+578,Pacific Basin Shipping Ltd,OYD,OYD,OYD.DE,Germany,Industrials,ACE,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+582,Prevas,PREV B,PREV B,PREV-B.ST,Sweden,Technology,ACE,TICKER HAS SPACE,Space probably needs to become hyphen: PREV B -> PREV-B.ST
+585,Sea1 Offshore,SEA1,SEA1,SEA1.OL,Norway,Energy,ACE,OTHER COUNTRY,Less common country — verify Norway primary suffix is .OL
+590,Tenaris SA,TW10,TW10,TW10.DE,Germany,Energy,ACE,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+591,The North West Co Inc,NWC,NWC,NWC.TO,Canada,Food and Beverage,ACE,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+592,Total Energy Services Inc,TOT,TOT,TOT.TO,Canada,Energy,ACE,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+595,Winpak Ltd,WPK,WPK,WPK.TO,Canada,Materials,ACE,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+597,Yue Yuen Industrial Ltd,YUE1,YUE1,YUE1.DE,Germany,Consumer Durables,ACE,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+598,ZTO Express Inc,ZTOB,ZTOB,ZTOB.DE,Germany,Industrials,ACE,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+599,5th Planet Games,5PG,5PG,5PG.OL,Norway,Consumer Durables,JOKER,OTHER COUNTRY,Less common country — verify Norway primary suffix is .OL
+602,Akita Drilling Ltd,AKT.A,AKT.A,?,Canada,Energy,JOKER,SUFFIX MISMATCH,Has .A but country=Canada expects .TO — verify which is correct
+603,Almirall SA,E2Z,E2Z,E2Z.DE,Germany,Health Care,JOKER,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+613,Cematrix Corp,CEMX,CEMX,CEMX.TO,Canada,Industrials,JOKER,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+614,CNX Resources Corp,CGD,CGD,CGD.DE,Germany,Energy,JOKER,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+616,Concejo B,CNCJO B,CNCJO B,CNCJO-B.ST,Sweden,Technology,JOKER,TICKER HAS SPACE,Space probably needs to become hyphen: CNCJO B -> CNCJO-B.ST
+618,Eco Animal Health Group PLC,LWA,LWA,LWA.DE,Germany,Health Care,JOKER,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+622,Glenveagh Properties PLC,GVR,GVR,GVR.DE,Germany,Industrials,JOKER,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+630,Koninklijke Vopak NV,VPK5,VPK5,VPK5.DE,Germany,Energy,JOKER,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+655,Tonies SE,TNIE,TNIE,TNIE.DE,Germany,Consumer Durables,JOKER,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+659,Valeura Energy Inc,83PN,83PN,83PN.DE,Germany,Energy,JOKER,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+663,Aramis Group SA,6T6,6T6,6T6.DE,Germany,Consumer Durables,TWO,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+670,BTS Group,BTS B,BTS B,BTS-B.ST,Sweden,Industrials,TWO,TICKER HAS SPACE,Space probably needs to become hyphen: BTS B -> BTS-B.ST
+673,Computer Modelling Group Ltd,CMG,CMG,CMG.TO,Canada,Technology,TWO,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+679,Engcon,ENGCON B,ENGCON B,ENGCON-B.ST,Sweden,Industrials,TWO,TICKER HAS SPACE,Space probably needs to become hyphen: ENGCON B -> ENGCON-B.ST
+682,Fenix Outdoor,FOI B,FOI B,FOI-B.ST,Sweden,Consumer Durables,TWO,TICKER HAS SPACE,Space probably needs to become hyphen: FOI B -> FOI-B.ST
+693,Linedata Services SA,LN4,LN4,LN4.DE,Germany,Technology,TWO,GERMANY (verify primary listing),Possible Frankfurt proxy code (non-German company)
+694,MAX Automation SE,MXHN,MXHN,MXHN.DE,Germany,Industrials,TWO,GERMANY (verify primary listing),Germany is high-noise — verify primary exchange before fixing
+699,Revenio,REG1V,REG1V,REG1V.HE,Finland,Health Care,TWO,OTHER COUNTRY,Less common country — verify Finland primary suffix is .HE
+704,Tecsys Inc,TCS,TCS,TCS.TO,Canada,Technology,TWO,CANADA (TO vs V vs US listing),Verify TSX (.TO) vs TSX Venture (.V) vs US listing
+707,Vitec Software,VIT B,VIT B,VIT-B.ST,Sweden,Technology,TWO,TICKER HAS SPACE,Space probably needs to become hyphen: VIT B -> VIT-B.ST

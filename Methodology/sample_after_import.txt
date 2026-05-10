@@ -1,0 +1,276 @@
+=== SAMPLE CARDS (first 5 per strategy from import) ===
+
+══════ KING ══════
+
+  VIS — Viscofan SA  (was 3★, now 1★ ↓)
+    Stars: 1  Weighted avg: 1.98
+    [VETO: Div Yield None% (req >2%); Div Payout None% (req 30-70%); Div Stable None/5 (req =5)]
+    [P1] Dividend                    0 / 10
+    [P1] Payout                      0 / 10
+    [P2] Cash Flow                   0 / 10
+    [P2] Earnings Growth           7.8 / 10
+    [P2] Low Debt                   10 / 10
+
+  OLED — Universal Display Corp  (was 3★, now 5★ ↑)
+    Stars: 5  Weighted avg: 8.46
+    [VETO: Div Yield 2.0% (req >2%)]
+    [P1] Dividend                  7.5 / 10
+    [P1] Payout                     10 / 10
+    [P2] Cash Flow                  10 / 10
+    [P2] Earnings Growth           4.0 / 10
+    [P2] Low Debt                  9.6 / 10
+
+  I55 — UIE Plc  (was 3★, now 5★ ↑)
+    Stars: 5  Weighted avg: 8.94
+    [P1] Dividend                  8.4 / 10
+    [P1] Payout                     10 / 10
+    [P2] Cash Flow                  10 / 10
+    [P2] Earnings Growth           5.7 / 10
+    [P2] Low Debt                  9.6 / 10
+
+  TOU — Tourmaline Oil Corp  (was 3★, now 2★ ↓)
+    Stars: 2  Weighted avg: 4.88
+    [VETO: Div Payout 245.0% (req 30-70%)]
+    [P1] Dividend                  9.2 / 10
+    [P1] Payout                      1 / 10
+    [P2] Cash Flow                 4.9 / 10
+    [P2] Earnings Growth             0 / 10
+    [P2] Low Debt                  8.4 / 10
+
+  TRMD — TORM Plc  (was 3★, now 4★ ↑)
+    Stars: 4  Weighted avg: 6.94
+    [VETO: Div Payout 83.0% (req 30-70%); Div Stable 4.0/5 (req =5)]
+    [P1] Dividend                  8.5 / 10
+    [P1] Payout                      3 / 10
+    [P2] Cash Flow                  10 / 10
+    [P2] Earnings Growth            10 / 10
+    [P2] Low Debt                  8.0 / 10
+
+══════ QUEEN ══════
+
+  ZTOB — ZTO Express Inc  (was 3★, now 5★ ↑)
+    Stars: 5  Weighted avg: 8.28
+    [P1] ROIC                       10 / 10
+    [P1] Earnings Yield            7.5 / 10
+    [P2] Earnings Growth            10 / 10
+    [P2] Profit Quality            3.6 / 10
+    [P2] Low Debt                  8.4 / 10
+
+  YUM — Yum Brands Inc  (was 3★, now 4★ ↑)
+    Stars: 4  Weighted avg: 6.58
+    [VETO: EV/EBITDA 19.0 (req 0<x<10)]
+    [P1] ROIC                       10 / 10
+    [P1] Earnings Yield            3.4 / 10
+    [P2] Earnings Growth           2.6 / 10
+    [P2] Profit Quality            6.4 / 10
+    [P2] Low Debt                   10 / 10
+
+  WX8 — Wuxi AppTec Co Ltd  (was 3★, now 4★ ↑)
+    Stars: 4  Weighted avg: 7.74
+    [VETO: EV/EBITDA 15.7 (req 0<x<10)]
+    [P1] ROIC                       10 / 10
+    [P1] Earnings Yield            4.8 / 10
+    [P2] Earnings Growth            10 / 10
+    [P2] Profit Quality            6.5 / 10
+    [P2] Low Debt                  8.8 / 10
+
+  WPK — Winpak Ltd  (was 3★, now 2★ ↓)
+    Stars: 2  Weighted avg: 4.96
+    [VETO: ROIC 4.6% (floor >10%); EV/EBITDA 15.0 (req 0<x<10)]
+    [P1] ROIC                      2.3 / 10
+    [P1] Earnings Yield            5.0 / 10
+    [P2] Earnings Growth           6.3 / 10
+    [P2] Profit Quality             10 / 10
+    [P2] Low Debt                  6.4 / 10
+
+  WTS — Watts Water Technologies Inc  (was 3★, now 4★ ↑)
+    Stars: 4  Weighted avg: 7.07
+    [VETO: EV/EBITDA 17.4 (req 0<x<10)]
+    [P1] ROIC                      8.6 / 10
+    [P1] Earnings Yield            4.2 / 10
+    [P2] Earnings Growth            10 / 10
+    [P2] Profit Quality            6.8 / 10
+    [P2] Low Debt                  8.4 / 10
+
+══════ ACE ══════
+
+  ZTOB — ZTO Express Inc  (was 3★, now 4★ ↑)
+    Stars: 4  Weighted avg: 6.89
+    [VETO: P/B 2.1 (req 0<x<2)]
+    [P1] F-Score                   8.9 / 10
+    [P1] ROIC Growing              7.4 / 10
+    [P1] Valuation P/B             2.7 / 10
+    [P2] Earnings Growth           8.8 / 10
+    [P2] Size (sm-cap)              10 / 10
+
+  YUE1 — Yue Yuen Industrial Ltd  (was 3★, now 4★ ↑)
+    Stars: 4  Weighted avg: 7.60
+    [VETO: F-Score 5.0 (req >6)]
+    [P1] F-Score                   5.6 / 10
+    [P1] ROIC Growing              6.0 / 10
+    [P1] Valuation P/B             9.6 / 10
+    [P2] Earnings Growth            10 / 10
+    [P2] Size (sm-cap)              10 / 10
+
+  YAR — Yara International  (was 3★, now 4★ ↑)
+    Stars: 4  Weighted avg: 7.68
+    [P1] F-Score                   8.9 / 10
+    [P1] ROIC Growing              6.6 / 10
+    [P1] Valuation P/B             6.0 / 10
+    [P2] Earnings Growth            10 / 10
+    [P2] Size (sm-cap)              10 / 10
+
+  WPK — Winpak Ltd
+    Stars: 3  Weighted avg: 5.35
+    [VETO: F-Score None (req >6)]
+    [P1] F-Score                   0.0 / 10
+    [P1] ROIC Growing              5.4 / 10
+    [P1] Valuation P/B             8.8 / 10
+    [P2] Earnings Growth           6.3 / 10
+    [P2] Size (sm-cap)              10 / 10
+
+  VIS — Viscofan SA  (was 3★, now 2★ ↓)
+    Stars: 2  Weighted avg: 3.65
+    [VETO: F-Score 1.0 (req >6); ROIC not growing (None% vs 5y -175.6%); P/B -12.8 (req 0<x<2)]
+    [P1] F-Score                   1.1 / 10
+    [P1] ROIC Growing                0 / 10
+    [P1] Valuation P/B              10 / 10
+    [P2] Earnings Growth           6.9 / 10
+    [P2] Size (sm-cap)               0 / 10
+
+══════ JACK ══════
+
+  ZTOB — ZTO Express Inc  (was 3★, now 1★ ↓)
+    Stars: 1  Weighted avg: 3.26
+    [VETO: RS Rank 68.0 (req >80); Price not >MA20 (priceVsMa20 -1.1%); EPS 1y 3.9% (req >25%); EPS not accelerating (1y 3.9% vs 5y 16.0%)]
+    [P1] Relative Strength         5.8 / 10
+    [P1] Trend (MA stack)            4 / 10
+    [P1] EPS Growth 1y             1.0 / 10
+    [P1] Acceleration                0 / 10
+    [P2] Profit                     10 / 10
+
+  WAB — Westinghouse Air Brake  (was 3★, now 2★ ↓)
+    Stars: 2  Weighted avg: 4.18
+    [VETO: RS Rank 73.0 (req >80); EPS 1y 10.6% (req >25%); EPS not accelerating (1y 10.6% vs 5y 19.0%)]
+    [P1] Relative Strength         6.6 / 10
+    [P1] Trend (MA stack)          6.6 / 10
+    [P1] EPS Growth 1y             2.8 / 10
+    [P1] Acceleration              0.8 / 10
+    [P2] Profit                    3.9 / 10
+
+  WDC — Western Digital Corp  (was 3★, now 5★ ↑)
+    Stars: 5  Weighted avg: 9.86
+    [P1] Relative Strength          10 / 10
+    [P1] Trend (MA stack)          9.4 / 10
+    [P1] EPS Growth 1y              10 / 10
+    [P1] Acceleration               10 / 10
+    [P2] Profit                     10 / 10
+
+  VLGEA — Village Super Market Inc  (was 3★, now 2★ ↓)
+    Stars: 2  Weighted avg: 3.73
+    [VETO: RS Rank 73.0 (req >80); EPS 1y 5.2% (req >25%); EPS not accelerating (1y 5.2% vs 5y 22.7%)]
+    [P1] Relative Strength         6.6 / 10
+    [P1] Trend (MA stack)          6.7 / 10
+    [P1] EPS Growth 1y             1.4 / 10
+    [P1] Acceleration                0 / 10
+    [P2] Profit                    4.4 / 10
+
+  83PN — Valeura Energy Inc  (was 3★, now 2★ ↓)
+    Stars: 2  Weighted avg: 4.17
+    [VETO: EPS 1y -90.8% (req >25%); EPS not accelerating (1y -90.8% vs 5y 23.8%)]
+    [P1] Relative Strength         9.0 / 10
+    [P1] Trend (MA stack)          8.0 / 10
+    [P1] EPS Growth 1y               0 / 10
+    [P1] Acceleration                0 / 10
+    [P2] Profit                    3.2 / 10
+
+══════ JOKER ══════
+
+  WHATS — Whats Cooking Group NVSA  (was 3★, now 5★ ↑)
+    Stars: 5  Weighted avg: 9.19
+    [P1] EPS Growth 1y              10 / 10
+    [P2] EPS Growth 5y              10 / 10
+    [P2] Revenue Growth            5.9 / 10
+    [P1] Market Leader             9.6 / 10
+    [P2] Profit                    8.0 / 10
+
+  WDC — Western Digital Corp  (was 3★, now 5★ ↑)
+    Stars: 5  Weighted avg: 10.00
+    [P1] EPS Growth 1y              10 / 10
+    [P2] EPS Growth 5y              10 / 10
+    [P2] Revenue Growth             10 / 10
+    [P1] Market Leader              10 / 10
+    [P2] Profit                     10 / 10
+
+  VCYT — Veracyte Inc  (was 3★, now 4★ ↑)
+    Stars: 4  Weighted avg: 7.48
+    [VETO: RS Rank 70.0 (req >80)]
+    [P1] EPS Growth 1y              10 / 10
+    [P2] EPS Growth 5y             8.4 / 10
+    [P2] Revenue Growth            6.1 / 10
+    [P1] Market Leader             6.0 / 10
+    [P2] Profit                    4.8 / 10
+
+  83PN — Valeura Energy Inc  (was 3★, now 2★ ↓)
+    Stars: 2  Weighted avg: 4.26
+    [VETO: EPS 1y -90.8% (req >25%)]
+    [P1] EPS Growth 1y               0 / 10
+    [P2] EPS Growth 5y             8.1 / 10
+    [P2] Revenue Growth              0 / 10
+    [P1] Market Leader             9.0 / 10
+    [P2] Profit                    3.2 / 10
+
+  TWIN — Twin Disc Inc  (was 3★, now 5★ ↑)
+    Stars: 5  Weighted avg: 8.60
+    [P1] EPS Growth 1y              10 / 10
+    [P2] EPS Growth 5y             8.0 / 10
+    [P2] Revenue Growth            4.2 / 10
+    [P1] Market Leader              10 / 10
+    [P2] Profit                    5.2 / 10
+
+══════ TWO ══════
+
+  MAPS — WM Technology Inc  (was 3★, now 1★ ↓)
+    Stars: 1  Weighted avg: 3.08
+    [VETO: P/B -30.6 (req 0<x<2); EV/EBITDA -14.0 (req 0<x<10); ROIC None% (req >8%); P/E -12.0 (req 0<x<15); Perf 1y 22.2% (req <-15%)]
+    [P1] Quality (ROIC)              0 / 10
+    [P1] Cheapness                   0 / 10
+    [P1] Negative 1y                 0 / 10
+    [P1] Recovery Begin             10 / 10
+    [P2] Low Debt                   10 / 10
+
+  VTEX — Vtex  (was 3★, now 2★ ↓)
+    Stars: 2  Weighted avg: 4.77
+    [VETO: P/B 2.9 (req 0<x<2); EV/EBITDA 22.6 (req 0<x<10); MA50 not >MA200 (ma50/200 -1.9%); P/E 33.7 (req 0<x<15)]
+    [P1] Quality (ROIC)             10 / 10
+    [P1] Cheapness                 0.1 / 10
+    [P1] Negative 1y               7.9 / 10
+    [P1] Recovery Begin              0 / 10
+    [P2] Low Debt                  8.0 / 10
+
+  VIT B — Vitec Software
+    Stars: 3  Weighted avg: 5.56
+    [VETO: P/B 2.1 (req 0<x<2); ROIC 4.9% (req >8%); MA50 not >MA200 (ma50/200 -19.1%); P/E 23.0 (req 0<x<15)]
+    [P1] Quality (ROIC)            3.1 / 10
+    [P1] Cheapness                 4.1 / 10
+    [P1] Negative 1y               8.5 / 10
+    [P1] Recovery Begin              7 / 10
+    [P2] Low Debt                  4.2 / 10
+
+  VIMIAN — Vimian Group  (was 3★, now 2★ ↓)
+    Stars: 2  Weighted avg: 4.30
+    [VETO: P/B 2.1 (req 0<x<2); EV/EBITDA 15.6 (req 0<x<10); ROIC 3.8% (req >8%); MA50 not >MA200 (ma50/200 -5.2%); P/E 40.4 (req 0<x<15)]
+    [P1] Quality (ROIC)            2.4 / 10
+    [P1] Cheapness                 1.3 / 10
+    [P1] Negative 1y               5.4 / 10
+    [P1] Recovery Begin              7 / 10
+    [P2] Low Debt                  7.6 / 10
+
+  TRIP — Tripadvisor Inc  (was 3★, now 2★ ↓)
+    Stars: 2  Weighted avg: 3.89
+    [VETO: EV/EBITDA -2.6 (req 0<x<10); ROIC -95.9% (req >8%); MA50 not >MA200 (ma50/200 -4.9%); P/E -4.5 (req 0<x<15); Perf 1y 80.0% (req <-15%)]
+    [P1] Quality (ROIC)              0 / 10
+    [P1] Cheapness                 6.8 / 10
+    [P1] Negative 1y                 0 / 10
+    [P1] Recovery Begin              7 / 10
+    [P2] Low Debt                  9.2 / 10

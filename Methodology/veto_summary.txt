@@ -1,0 +1,1029 @@
+=== VETO SUMMARY ===
+Cards with vetoFailed=true will be skipped by the picker.
+
+Total vetoed: 506 of 680
+
+
+──── KING (73 vetoed) ────
+  id= 385         VIS  Viscofan SA                             
+        Div Yield None% (req >2%); Div Payout None% (req 30-70%); Div Stable None/5 (req =5)
+  id= 384        OLED  Universal Display Corp                  
+        Div Yield 2.0% (req >2%)
+  id= 382         TOU  Tourmaline Oil Corp                     
+        Div Payout 245.0% (req 30-70%)
+  id= 381        TRMD  TORM Plc                                
+        Div Payout 83.0% (req 30-70%); Div Stable 4.0/5 (req =5)
+  id= 379        SYSR  Systemair                               
+        Div Yield 1.9% (req >2%)
+  id= 377         Y1T  Socfinasia SA Holding                   
+        Div Payout 162.0% (req 30-70%)
+  id= 376        SCVL  Shoe Carnival Inc                       
+        Div Payout 23.0% (req 30-70%)
+  id= 375         1AB  Seiren Co Ltd                           
+        Div Payout 27.0% (req 30-70%)
+  id= 371        02M1  Raffles Medical Group Ltd               
+        Div Payout 72.0% (req 30-70%); Div Stable 4.0/5 (req =5)
+  id= 369         OYD  Pacific Basin Shipping Ltd              
+        Div Payout 107.0% (req 30-70%)
+  id= 368        ORI1  Orient Overseas Ltd                     
+        Div Payout 123.0% (req 30-70%)
+  id= 367         OFH  Orell Fussli AG                         
+        Div Stable 4.0/5 (req =5)
+  id= 363        KWK3  Naturenergie Holding AG                 
+        Div Payout 20.0% (req 30-70%)
+  id= 361        MBH3  Maschinenfabrik Berthold Hermle         
+        Div Payout 95.0% (req 30-70%)
+  id= 359         LEN  Lennar Corp                             
+        Div Yield None% (req >2%); Div Payout None% (req 30-70%); Div Stable 2.0/5 (req =5)
+  id= 356         KBH  KB Home                                 
+        Div Yield 2.0% (req >2%); Div Payout 15.0% (req 30-70%)
+  id= 355        JJSF  J&J Snack Foods Corp                    
+        Div Payout 87.0% (req 30-70%)
+  id= 351        DINO  HF Sinclair Corp                        
+        Div Payout 105.0% (req 30-70%)
+  id= 349         GIO  Giordano International Ltd              
+        Div Payout 136.0% (req 30-70%)
+  id= 348         GEN  Genuit Group PLC                        
+        Div Payout 80.0% (req 30-70%)
+  id= 344         74E  Evertz Technologies Ltd                 
+        Div Payout 135.0% (req 30-70%)
+  id= 342         ENV  ENAV SpA                                
+        Div Payout 117.0% (req 30-70%)
+  id= 340         CSB  COSCO SHIPPING International Co         
+        Div Payout 93.0% (req 30-70%)
+  id= 338         J0L  Cembre SpA                              
+        Div Payout 71.0% (req 30-70%)
+  id= 337      BPF.UN  Boston Pizza Royalties Income           
+        Div Payout 88.0% (req 30-70%)
+  id= 334         YMK  Azbil Corp                              
+        Div Yield 2.0% (req >2%)
+  id= 330        GNTX  Gentex Corp                             
+        Div Payout 25.0% (req 30-70%)
+  id= 329      HPOL B  Hexpol                                  
+        Div Payout 73.0% (req 30-70%)
+  id= 325         3BD  Bosideng International Holdings         
+        Div Payout 72.0% (req 30-70%)
+  id= 324         5JB  Jumbo SA                                
+        Div Payout 88.0% (req 30-70%)
+  id= 323         VIR  Vidrala SA                              
+        Div Yield None% (req >2%); Div Payout None% (req 30-70%); Div Stable None/5 (req =5)
+  id= 321        AUTO  Autotrader Group PLC                    
+        Div Yield 2.0% (req >2%)
+  id= 299         GRG  Greggs PLC                              
+        Div Stable 4.0/5 (req =5)
+  id= 298         OMC  Omnicom Group Inc                       
+        Div Payout -616.0% (req 30-70%)
+  id= 296        SPGI  S&P Global Inc                          
+        Div Yield 0.9% (req >2%); Div Payout 27.0% (req 30-70%)
+  id= 293         CLX  Clorox Co                               
+        Div Payout 122.0% (req 30-70%)
+  id= 292         BA.  BAE Systems PLC                         
+        Div Yield 1.8% (req >2%)
+  id=  84        WWIB  Wilh. Wilhelmsen B                      
+        Div Payout 12.0% (req 30-70%)
+  id=  83         WCP  Whitecap Resources Inc                  
+        Div Payout 74.0% (req 30-70%)
+  id=  82        WEYS  Weyco Group Inc                         
+        Div Payout 84.0% (req 30-70%)
+  id=  80        TSTL  Tristel PLC                             
+        Div Payout 94.0% (req 30-70%)
+  id=  79         TRI  Trigano SA                              
+        Div Payout 23.0% (req 30-70%)
+  id=  78      TREL B  Trelleborg                              
+        Div Yield 2.0% (req >2%)
+  id=  77       TCL.A  Transcontinental Inc                    
+        Div Payout 99.0% (req 30-70%)
+  id=  75         TEN  Tenaris SA                              
+        Div Payout 22.0% (req 30-70%)
+  id=  73         SNA  Snap-on Inc                             
+        Div Yield None% (req >2%); Div Payout None% (req 30-70%); Div Stable None/5 (req =5)
+  id=  72         PZA  Pizza Pizza Royalty Corp                
+        Div Payout 109.0% (req 30-70%)
+  id=  69         ORK  Orkla                                   
+        Div Payout 123.0% (req 30-70%)
+  id=  67        NVEC  NVE Corp                                
+        Div Payout 123.0% (req 30-70%)
+  id=  66        NICL  Nichols PLC                             
+        Div Payout 137.0% (req 30-70%)
+  id=  65       NEDAP  Nedap NV                                
+        Div Payout 97.0% (req 30-70%)
+  id=  63        MONY  Mony Group PLC                          
+        Div Payout 84.0% (req 30-70%)
+  id=  61        MEDI  Medistim                                
+        Div Payout 97.0% (req 30-70%)
+  id=  60       MEKKO  Marimekko                               
+        Div Payout 81.0% (req 30-70%)
+  id=  59         LPE  Laurent-Perrier                         
+        Div Payout 24.0% (req 30-70%)
+  id=  58         KRP  Kimbell Royalty Partners LP             
+        Div Payout -338.0% (req 30-70%)
+  id=  57         JHD  James Halstead PLC                      
+        Div Payout 90.0% (req 30-70%)
+  id=  55        HILS  Hill & Smith PLC                        
+        Div Yield 2.0% (req >2%)
+  id=  53         HSP  Hargreaves Services PLC                 
+        Div Payout 78.0% (req 30-70%)
+  id=  52        HLAG  Hapag-Lloyd AG                          
+        Div Payout 201.0% (req 30-70%)
+  id=  50        GAMA  Gamma Communications PLC                
+        Div Payout 28.0% (req 30-70%)
+  id=  46         EOG  EOG Resources Inc                       
+        Div Yield None% (req >2%); Div Payout None% (req 30-70%); Div Stable None/5 (req =5)
+  id=  45         EBF  Ennis Inc                               
+        Div Payout 116.0% (req 30-70%)
+  id=  44        DMLP  Dorchester Minerals LP                  
+        Div Payout 201.0% (req 30-70%)
+  id=  42        COLM  Columbia Sportswear Co                  
+        Div Yield 1.9% (req >2%)
+  id=  41        CTSH  Cognizant Technology Solutions          
+        Div Payout 27.0% (req 30-70%)
+  id=  39         BOY  Bodycote PLC                            
+        Div Payout 111.0% (req 30-70%)
+  id=  16        STNG  Scorpio Tankers                         
+        Div Yield 2.0% (req >2%); Div Payout 16.0% (req 30-70%)
+  id=  11         AEP  AEP Plantations                         
+        Div Yield None% (req >2%); Div Payout None% (req 30-70%); Div Stable None/5 (req =5)
+  id=  10         CIX  CompX International                     
+        Div Payout 170.0% (req 30-70%)
+  id=   9        ARLP  Alliance Resource Partners              
+        Div Payout 89.0% (req 30-70%)
+  id=   6         VAN  Van de Velde                            
+        Div Payout 117.0% (req 30-70%)
+  id=   4         BSM  Black Stone Minerals                    
+        Div Payout 115.0% (req 30-70%)
+
+──── QUEEN (80 vetoed) ────
+  id= 543         YUM  Yum Brands Inc                          
+        EV/EBITDA 19.0 (req 0<x<10)
+  id= 542         WX8  Wuxi AppTec Co Ltd                      
+        EV/EBITDA 15.7 (req 0<x<10)
+  id= 541         WPK  Winpak Ltd                              
+        ROIC 4.6% (floor >10%); EV/EBITDA 15.0 (req 0<x<10)
+  id= 540         WTS  Watts Water Technologies Inc            
+        EV/EBITDA 17.4 (req 0<x<10)
+  id= 539         VIS  Viscofan SA                             
+        ROIC None% (floor >10%); EV/EBITDA -5.3 (req 0<x<10)
+  id= 538       VBG B  VBG Group                               
+        ROIC 7.7% (floor >10%); EV/EBITDA 11.7 (req 0<x<10)
+  id= 536        USLM  United States Lime & Minerals Inc       
+        EV/EBITDA 15.5 (req 0<x<10)
+  id= 534         F1P  TTW Pcl                                 
+        EV/EBITDA 11.6 (req 0<x<10)
+  id= 532         TOU  Tourmaline Oil Corp                     
+        ROIC 3.3% (floor >10%)
+  id= 529        SMHN  SUESS MicroTec SE                       
+        EV/EBITDA 17.7 (req 0<x<10)
+  id= 524         SZD  Santen Pharmaceutical Co Ltd            
+        EV/EBITDA 10.0 (req 0<x<10)
+  id= 523         SBL  Safe Bulkers Inc                        
+        ROIC 3.3% (floor >10%)
+  id= 521        02M1  Raffles Medical Group Ltd               
+        ROIC 9.0% (floor >10%); EV/EBITDA 12.0 (req 0<x<10)
+  id= 519         POU  Paramount Resources Ltd                 
+        EV/EBITDA 12.5 (req 0<x<10)
+  id= 515         XNE  OMV Petrom SA                           
+        ROIC 7.3% (floor >10%)
+  id= 513        NYKA  Nippon Yusen Kabushiki Kaisha           
+        ROIC 8.8% (floor >10%)
+  id= 512         NS1  NAPCO Security Technologies Inc         
+        EV/EBITDA 23.1 (req 0<x<10)
+  id= 511        MYCR  Mycronic                                
+        EV/EBITDA 22.7 (req 0<x<10)
+  id= 510        MONC  Moncler SpA                             
+        EV/EBITDA 11.8 (req 0<x<10)
+  id= 506         KN8  Krka DD                                 
+        EV/EBITDA 12.2 (req 0<x<10)
+  id= 505         AO2  Kri-Kri Milk Industry SA                
+        EV/EBITDA 16.8 (req 0<x<10)
+  id= 504        KARO  Karooooo Ltd                            
+        EV/EBITDA 18.2 (req 0<x<10)
+  id= 500       HPS.A  Hammond Power Solutions Inc             
+        EV/EBITDA 31.6 (req 0<x<10)
+  id= 498        GRNT  Granite Ridge Resources Inc             
+        ROIC 2.3% (floor >10%)
+  id= 497        SSA1  Gr. Sarantis SA                         
+        EV/EBITDA 10.2 (req 0<x<10)
+  id= 496        GRMN  Garmin Ltd                              
+        EV/EBITDA 20.2 (req 0<x<10)
+  id= 495         GAW  Games Workshop Group PLC                
+        EV/EBITDA 19.7 (req 0<x<10)
+  id= 494        WILC  G. Willi-Food International Ltd         
+        EV/EBITDA 16.4 (req 0<x<10)
+  id= 493         1FH  Freehold Royalties Ltd                  
+        ROIC 6.9% (floor >10%); EV/EBITDA 11.5 (req 0<x<10)
+  id= 492        FFEA  Faes Farma SA                           
+        ROIC 7.8% (floor >10%); EV/EBITDA 14.7 (req 0<x<10)
+  id= 490         74E  Evertz Technologies Ltd                 
+        EV/EBITDA 11.3 (req 0<x<10)
+  id= 488        EUK3  EUROKAI GmbH & Co KGaA                  
+        EV/EBITDA 10.1 (req 0<x<10)
+  id= 484         C43  Cosmo Pharmaceuticals NV                
+        ROIC -0.8% (floor >10%); EV/EBITDA 200.5 (req 0<x<10)
+  id= 482        COKE  Coca-Cola Consolidated Inc              
+        EV/EBITDA 13.3 (req 0<x<10)
+  id= 481         CKN  Clarkson PLC                            
+        EV/EBITDA 10.8 (req 0<x<10)
+  id= 480         J0L  Cembre SpA                              
+        EV/EBITDA 19.2 (req 0<x<10)
+  id= 479          CJ  Cardinal Energy Ltd                     
+        ROIC 1.7% (floor >10%); EV/EBITDA 10.7 (req 0<x<10)
+  id= 477         WHD  Cactus Inc                              
+        EV/EBITDA 11.5 (req 0<x<10)
+  id= 476         BRC  Brady Corp                              
+        EV/EBITDA 12.3 (req 0<x<10)
+  id= 475      BPF.UN  Boston Pizza Royalties Income           
+        EV/EBITDA 12.1 (req 0<x<10)
+  id= 474         BIF  Bic                                     
+        ROIC 4.0% (floor >10%); EV/EBITDA -3.2 (req 0<x<10)
+  id= 473         RJ8  Bains de Mer Monaco                     
+        ROIC 7.9% (floor >10%); EV/EBITDA 14.1 (req 0<x<10)
+  id= 472         A61  Ardmore Shipping Corp                   
+        ROIC 5.7% (floor >10%)
+  id= 471          AQ  AQ Group                                
+        EV/EBITDA 16.8 (req 0<x<10)
+  id= 470         AIT  Applied Industrial Technologies         
+        EV/EBITDA 20.0 (req 0<x<10)
+  id= 468          MO  Altria Group Inc                        
+        EV/EBITDA 10.8 (req 0<x<10)
+  id= 313        QCOM  Qualcomm Inc                            
+        EV/EBITDA 18.6 (req 0<x<10)
+  id= 312         PRX  Prosus NV                               
+        EV/EBITDA 436.3 (req 0<x<10)
+  id= 310        DDOG  Datadog Inc                             
+        EV/EBITDA 1760.8 (req 0<x<10)
+  id= 308        AMZN  Amazon.com Inc                          
+        EV/EBITDA 19.1 (req 0<x<10)
+  id= 149         ZIM  ZIM Integrated Shipping Services        
+        ROIC 6.8% (floor >10%)
+  id= 148        TIMA  ZEAL Network SE                         
+        EV/EBITDA 12.6 (req 0<x<10)
+  id= 147         WES  Western Midstream Partners LP           
+        ROIC None% (floor >10%); EV/EBITDA 10.7 (req 0<x<10)
+  id= 146         UNP  Union Pacific Corp                      
+        EV/EBITDA 15.1 (req 0<x<10)
+  id= 144         SSD  Simpson Manufacturing Co Inc            
+        EV/EBITDA 14.4 (req 0<x<10)
+  id= 143          RL  Ralph Lauren Corp                       
+        EV/EBITDA 15.3 (req 0<x<10)
+  id= 141         PFE  Pfizer Inc                              
+        ROIC 4.7% (floor >10%)
+  id= 140        NDSN  Nordson Corp                            
+        ROIC 9.7% (floor >10%); EV/EBITDA 19.9 (req 0<x<10)
+  id= 139         MWA  Mueller Water Products Inc              
+        EV/EBITDA 12.2 (req 0<x<10)
+  id= 137        LECO  Lincoln Electric Holdings Inc           
+        EV/EBITDA 18.6 (req 0<x<10)
+  id= 136         JNJ  Johnson & Johnson                       
+        EV/EBITDA 16.9 (req 0<x<10)
+  id= 135        IDCC  InterDigital Inc                        
+        EV/EBITDA 13.3 (req 0<x<10)
+  id= 134         ITW  Illinois Tool Works Inc                 
+        EV/EBITDA 17.6 (req 0<x<10)
+  id= 133         IEX  IDEX Corp                               
+        ROIC 8.7% (floor >10%); EV/EBITDA 18.5 (req 0<x<10)
+  id= 132        HUBB  Hubbell Inc                             
+        EV/EBITDA 19.4 (req 0<x<10)
+  id= 130        GILD  Gilead Sciences Inc                     
+        EV/EBITDA 12.1 (req 0<x<10)
+  id= 129         GIL  Gildan Activewear Inc                   
+        ROIC 3.0% (floor >10%); EV/EBITDA 17.1 (req 0<x<10)
+  id= 128         G6O  GeoPark Ltd                             
+        ROIC 6.2% (floor >10%)
+  id= 127       EPI B  Epiroc B                                
+        EV/EBITDA 19.7 (req 0<x<10)
+  id= 126        EBAY  eBay Inc                                
+        EV/EBITDA 19.2 (req 0<x<10)
+  id= 125         DOV  Dover Corp                              
+        EV/EBITDA 17.8 (req 0<x<10)
+  id= 124         DCI  Donaldson Co Inc                        
+        EV/EBITDA 16.0 (req 0<x<10)
+  id= 123          KO  Coca-Cola Co                            
+        EV/EBITDA 22.1 (req 0<x<10)
+  id= 122        CSCO  Cisco Systems Inc                       
+        EV/EBITDA 24.5 (req 0<x<10)
+  id= 120         CNR  Canadian National Railway Co            
+        ROIC -1.3% (floor >10%)
+  id= 119        AMGN  Amgen Inc                               
+        EV/EBITDA 14.5 (req 0<x<10)
+  id= 118        ALSN  Allison Transmission Holdings Inc       
+        ROIC 7.6% (floor >10%); EV/EBITDA 13.9 (req 0<x<10)
+  id= 117        ALFA  Alfa Laval                              
+        EV/EBITDA 16.7 (req 0<x<10)
+  id=  36         6QK  MS International PLC                    
+        EV/EBITDA 11.4 (req 0<x<10)
+  id=  34         LPG  Dorian LPG                              
+        ROIC 9.1% (floor >10%)
+
+──── ACE (74 vetoed) ────
+  id= 598        ZTOB  ZTO Express Inc                         
+        P/B 2.1 (req 0<x<2)
+  id= 597        YUE1  Yue Yuen Industrial Ltd                 
+        F-Score 5.0 (req >6)
+  id= 595         WPK  Winpak Ltd                              
+        F-Score None (req >6)
+  id= 594         VIS  Viscofan SA                             
+        F-Score 1.0 (req >6); ROIC not growing (None% vs 5y -175.6%); P/B -12.8 (req 0<x<2)
+  id= 593        UTMD  Utah Medical Products Inc               
+        F-Score 6.0 (req >6); ROIC not growing (33.0% vs 5y 36.6%)
+  id= 591         NWC  The North West Co Inc                   
+        F-Score 6.0 (req >6); ROIC not growing (11.5% vs 5y 12.9%); P/B 2.9 (req 0<x<2)
+  id= 590        TW10  Tenaris SA                              
+        ROIC not growing (13.3% vs 5y 17.3%)
+  id= 585        SEA1  Sea1 Offshore                           
+        F-Score 4.0 (req >6)
+  id= 584      SCANFL  Scanfil                                 
+        F-Score 5.0 (req >6); ROIC not growing (9.5% vs 5y 13.3%); P/B 2.6 (req 0<x<2)
+  id= 583        PBYI  Puma Biotechnology Inc                  
+        P/B 2.9 (req 0<x<2)
+  id= 582      PREV B  Prevas                                  
+        F-Score 6.0 (req >6); ROIC not growing (7.0% vs 5y 12.7%)
+  id= 581        PLAB  Photronics Inc                          
+        F-Score 5.0 (req >6); ROIC not growing (12.9% vs 5y 14.3%)
+  id= 580         PSE  Petrolia                                
+        F-Score 6.0 (req >6)
+  id= 579        PRDO  Perdoceo Education Corp                 
+        P/B 2.3 (req 0<x<2)
+  id= 578         OYD  Pacific Basin Shipping Ltd              
+        F-Score 6.0 (req >6); ROIC not growing (3.4% vs 5y 20.0%)
+  id= 577        ORI1  Orient Overseas Ltd                     
+        F-Score 5.0 (req >6); ROIC not growing (17.0% vs 5y 84.8%)
+  id= 575         MOV  Movado Group Inc                        
+        F-Score 5.0 (req >6); ROIC not growing (16.8% vs 5y 19.1%); P/B 3.8 (req 0<x<2)
+  id= 574         MCM  Miquel y Costas & Miquel SA             
+        ROIC not growing (10.8% vs 5y 12.7%)
+  id= 573         MLR  Miller Industries Inc                   
+        F-Score 5.0 (req >6); ROIC not growing (4.0% vs 5y 9.2%)
+  id= 572         KN8  Krka DD                                 
+        P/B 3.1 (req 0<x<2)
+  id= 571         KMT  Kennametal Inc                          
+        P/B 2.0 (req 0<x<2)
+  id= 570         KRT  Karat Packaging Inc                     
+        F-Score 6.0 (req >6); P/B 3.6 (req 0<x<2)
+  id= 569        JBSS  John B Sanfilippo & Son Inc             
+        ROIC not growing (13.5% vs 5y 16.0%); P/B 2.4 (req 0<x<2)
+  id= 568        IFOS  Itafos Inc                              
+        F-Score 5.0 (req >6); ROIC not growing (12.4% vs 5y 14.4%)
+  id= 567        INSW  International Seaways Inc               
+        P/B 2.1 (req 0<x<2)
+  id= 566       HYDRA  Hydratec Industries NV                  
+        P/B 2.3 (req 0<x<2)
+  id= 565        SSA1  Gr. Sarantis SA                         
+        P/B 2.3 (req 0<x<2)
+  id= 561        FFIV  F5 Inc                                  
+        P/B 5.6 (req 0<x<2)
+  id= 560          ET  Evertz Technologies Ltd                 
+        F-Score 4.0 (req >6); ROIC not growing (None% vs 5y None%)
+  id= 558       DNORD  D/S Norden                              
+        F-Score 6.0 (req >6); ROIC not growing (6.7% vs 5y 29.1%)
+  id= 557         COP  ConocoPhillips                          
+        F-Score 5.0 (req >6); ROIC not growing (7.1% vs 5y 12.7%); P/B 2.2 (req 0<x<2)
+  id= 556         CKN  Clarkson PLC                            
+        F-Score 4.0 (req >6); ROIC not growing (52.7% vs 5y 92.9%); P/B 2.8 (req 0<x<2)
+  id= 555         CPH  Cipher Pharmaceuticals Inc              
+        ROIC not growing (22.0% vs 5y 39.4%); P/B 2.9 (req 0<x<2)
+  id= 554        CINT  CI&T Inc                                
+        F-Score 5.0 (req >6); ROIC not growing (-93.0% vs 5y -60.9%)
+  id= 553          CF  CF Industries Holdings Inc              
+        ROIC not growing (15.1% vs 5y 17.2%); P/B 2.3 (req 0<x<2)
+  id= 552        CPRX  Catalyst Pharmaceuticals Inc            
+        F-Score 6.0 (req >6); ROIC not growing (86.5% vs 5y 163.4%); P/B 4.0 (req 0<x<2)
+  id= 551        CTLP  Cantaloupe Inc                          
+        ROIC not growing (1.6% vs 5y 6.7%); P/B 3.3 (req 0<x<2)
+  id= 550         QCG  Caltagirone SpA                         
+        ROIC not growing (4.3% vs 5y 4.3%)
+  id= 549         BRC  Brady Corp                              
+        F-Score 6.0 (req >6); ROIC not growing (15.3% vs 5y 16.6%); P/B 2.8 (req 0<x<2)
+  id= 548         BIJ  Bijou Brigitte Modische                 
+        F-Score 6.0 (req >6); ROIC not growing (12.8% vs 5y 14.4%)
+  id= 547         ATH  Athabasca Oil Corp                      
+        F-Score 5.0 (req >6); ROIC not growing (10.6% vs 5y 15.4%); P/B 2.9 (req 0<x<2)
+  id= 546         ALV  Alvopetro Energy Ltd                    
+        F-Score 5.0 (req >6); ROIC not growing (26.8% vs 5y 29.3%); P/B 2.5 (req 0<x<2)
+  id= 545        ALKS  Alkermes PLC                            
+        F-Score 4.0 (req >6); ROIC not growing (4.9% vs 5y 18.0%); P/B 3.3 (req 0<x<2)
+  id= 186        YUMC  Yum China Holdings Inc                  
+        P/B 2.8 (req 0<x<2)
+  id= 183        SUBC  Subsea7                                 
+        P/B 2.1 (req 0<x<2)
+  id= 182         SOC  Subsea 7 SA                             
+        F-Score None (req >6); ROIC not growing (-83.0% vs 5y -32.4%); P/B 3.4 (req 0<x<2)
+  id= 181          SJ  Stella-Jones Inc                        
+        F-Score 6.0 (req >6); ROIC not growing (-204.1% vs 5y -31.1%)
+  id= 179         ECO  Okeanis Eco Tankers Corp                
+        F-Score 5.0 (req >6); P/B 3.7 (req 0<x<2)
+  id= 178         7OK  Okeanis Eco Tankers Corp                
+        F-Score 6.0 (req >6); P/B 3.2 (req 0<x<2)
+  id= 177      OGUN B  Ogunsen                                 
+        ROIC not growing (45.4% vs 5y 111.8%); P/B 4.7 (req 0<x<2)
+  id= 175         NXR  Norcros PLC                             
+        F-Score 2.0 (req >6); P/B None (req 0<x<2)
+  id= 174      MSAB B  Micro Systemation                       
+        F-Score 4.0 (req >6); ROIC not growing (65.5% vs 5y 263.3%); P/B 8.6 (req 0<x<2)
+  id= 172         MYM  Mayr-Melnhof Karton AG                  
+        F-Score 6.0 (req >6); ROIC not growing (2.5% vs 5y 5.0%)
+  id= 170         KCR  Konecranes                              
+        P/B 3.3 (req 0<x<2)
+  id= 169         KRX  Kingspan Group PLC                      
+        ROIC not growing (9.8% vs 5y 11.5%); P/B 2.9 (req 0<x<2)
+  id= 168         H4W  Jardine Matheson Holdings Ltd           
+        ROIC not growing (0.2% vs 5y 0.7%)
+  id= 167         DNR  Industrie De Nora SpA                   
+        ROIC not growing (8.7% vs 5y 12.6%)
+  id= 165        GML0  Global Industrial Co                    
+        ROIC not growing (21.9% vs 5y 23.1%); P/B 3.4 (req 0<x<2)
+  id= 164        EXPD  Expeditors International of             
+        F-Score 6.0 (req >6); ROIC not growing (58.7% vs 5y 62.6%); P/B 9.2 (req 0<x<2)
+  id= 163    ESSITY B  Essity B                                
+        F-Score 6.0 (req >6); P/B 2.0 (req 0<x<2)
+  id= 162         ENS  EnerSys                                 
+        P/B 4.6 (req 0<x<2)
+  id= 161         CTS  CTS Corp                                
+        P/B 3.2 (req 0<x<2)
+  id= 160         HJ1  Core Laboratories Inc                   
+        ROIC not growing (6.3% vs 5y 6.3%); P/B 2.2 (req 0<x<2)
+  id= 159         CLB  Core Laboratories Inc                   
+        ROIC not growing (6.3% vs 5y 6.3%); P/B 2.2 (req 0<x<2)
+  id= 158        CSUA  Corbion NV                              
+        ROIC not growing (7.0% vs 5y 9.8%)
+  id= 157        CRBN  Corbion NV                              
+        ROIC not growing (7.0% vs 5y 9.8%)
+  id= 156        BORG  Björn Borg                              
+        P/B 4.3 (req 0<x<2)
+  id= 155         BKR  Baker Hughes Co                         
+        F-Score 6.0 (req >6); P/B 3.2 (req 0<x<2)
+  id= 154         AZZ  AZZ Inc                                 
+        P/B 3.3 (req 0<x<2)
+  id= 153         AKK  Azkoyen SA                              
+        P/B 2.1 (req 0<x<2)
+  id= 152         AZK  Azkoyen SA                              
+        P/B 2.0 (req 0<x<2)
+  id= 151         ACA  Arcosa Inc                              
+        ROIC not growing (5.1% vs 5y 5.2%); P/B 2.4 (req 0<x<2)
+  id= 150        AENA  Aena SME SA                             
+        F-Score 6.0 (req >6); P/B 3.7 (req 0<x<2)
+  id=  29         MLI  Mueller Industries                      
+        ROIC not growing (41.5% vs 5y 43.9%); P/B 4.6 (req 0<x<2)
+
+──── JACK (109 vetoed) ────
+  id= 466        ZTOB  ZTO Express Inc                         
+        RS Rank 68.0 (req >80); Price not >MA20 (priceVsMa20 -1.1%); EPS 1y 3.9% (req >25%); EPS not accelerating (1y 3.9% vs 5y 16.0%)
+  id= 465         WAB  Westinghouse Air Brake                  
+        RS Rank 73.0 (req >80); EPS 1y 10.6% (req >25%); EPS not accelerating (1y 10.6% vs 5y 19.0%)
+  id= 463       VLGEA  Village Super Market Inc                
+        RS Rank 73.0 (req >80); EPS 1y 5.2% (req >25%); EPS not accelerating (1y 5.2% vs 5y 22.7%)
+  id= 462        83PN  Valeura Energy Inc                      
+        EPS 1y -90.8% (req >25%); EPS not accelerating (1y -90.8% vs 5y 23.8%)
+  id= 460         TCW  Trican Well Service Ltd                 
+        RS Rank 51.0 (req >80); Price not >MA20 (priceVsMa20 -2.6%); EPS 1y 5.5% (req >25%); EPS not accelerating (1y 5.5% vs 5y 21.7%)
+  id= 459         TOT  Total Energy Services Inc               
+        Price not >MA20 (priceVsMa20 -2.7%); EPS not accelerating (1y 27.6% vs 5y 37.6%)
+  id= 458         TIH  Toromont Industries Ltd                 
+        RS Rank 70.0 (req >80); EPS 1y 4.1% (req >25%); EPS not accelerating (1y 4.1% vs 5y 9.5%)
+  id= 457         TPZ  Topaz Energy Corp                       
+        RS Rank 53.0 (req >80); EPS 1y 14.1% (req >25%); EPS not accelerating (1y 14.1% vs 5y 34.5%)
+  id= 456         THR  Thermon Group Holdings Inc              
+        EPS not accelerating (1y 28.8% vs 5y 126.5%)
+  id= 455         TNK  Teekay Tankers Ltd                      
+        EPS 1y -13.5% (req >25%); EPS not accelerating (1y -13.5% vs 5y 31.4%)
+  id= 454        GASS  StealthGas Inc                          
+        EPS 1y -14.1% (req >25%); EPS not accelerating (1y -14.1% vs 5y 39.5%)
+  id= 453        SOFF  Solstad Offshore                        
+        Price not >MA20 (priceVsMa20 -1.1%)
+  id= 452         QOL  SOL SpA                                 
+        RS Rank 70.0 (req >80); Price not >MA20 (priceVsMa20 -3.4%); EPS 1y 13.1% (req >25%)
+  id= 450       SENEA  Seneca Foods Corp                       
+        RS Rank 77.0 (req >80); Price not >MA20 (priceVsMa20 -1.9%)
+  id= 449         SEB  Seaboard Corp                           
+        RS Rank 70.0 (req >80); Price not >MA20 (priceVsMa20 -18.0%)
+  id= 448      SCANFL  Scanfil                                 
+        EPS 1y 13.6% (req >25%)
+  id= 447         SIS  Savaria Corp                            
+        RS Rank 39.0 (req >80); MA50 not >MA200 (ma50/200 -2.7%)
+  id= 446         SAP  Saputo Inc                              
+        RS Rank 52.0 (req >80)
+  id= 445        SAND  Sandvik                                 
+        Price not >MA20 (priceVsMa20 -5.7%); EPS 1y 0.7% (req >25%)
+  id= 444        RPRX  Royalty Pharma PLC                      
+        RS Rank 77.0 (req >80); EPS 1y -22.7% (req >25%); EPS not accelerating (1y -22.7% vs 5y 5.1%)
+  id= 443         REX  REX American Resources Corp             
+        EPS not accelerating (1y 51.5% vs 5y 118.7%)
+  id= 442        PSMT  Pricesmart Inc                          
+        RS Rank 74.0 (req >80); EPS 1y 8.1% (req >25%); EPS not accelerating (1y 8.1% vs 5y 9.8%)
+  id= 441        POWL  Powell Industries Inc                   
+        EPS 1y 7.3% (req >25%); EPS not accelerating (1y 7.3% vs 5y 214.7%)
+  id= 439         PHX  PHX Energy Services Corp                
+        RS Rank 68.0 (req >80); Price not >MA20 (priceVsMa20 -6.8%); EPS 1y -21.8% (req >25%); EPS not accelerating (1y -21.8% vs 5y 15.6%)
+  id= 438        PLAB  Photronics Inc                          
+        EPS 1y -2.1% (req >25%); EPS not accelerating (1y -2.1% vs 5y 21.1%)
+  id= 437         761  PharmaNutra SpA                         
+        Price not >MA20 (priceVsMa20 -3.6%); EPS 1y 20.8% (req >25%)
+  id= 435        PRDO  Perdoceo Education Corp                 
+        RS Rank 66.0 (req >80); EPS 1y 15.1% (req >25%)
+  id= 434         OET  Okeanis Eco Tankers                     
+        EPS 1y 11.5% (req >25%)
+  id= 432       NORAM  Noram Drilling                          
+        EPS 1y -50.1% (req >25%); EPS not accelerating (1y -50.1% vs 5y 19.2%)
+  id= 431         NYT  New York Times Co                       
+        RS Rank 76.0 (req >80)
+  id= 430        NVGS  Navigator Holdings Ltd                  
+        EPS not accelerating (1y 28.9% vs 5y 40.3%)
+  id= 429        NESR  National Energy Services Reunited       
+        Price not >MA20 (priceVsMa20 -3.8%); EPS 1y -35.0% (req >25%); EPS not accelerating (1y -35.0% vs 5y 22.3%)
+  id= 428         MZX  Masterflex SE                           
+        RS Rank 65.0 (req >80); EPS 1y 13.4% (req >25%); EPS not accelerating (1y 13.4% vs 5y 63.3%)
+  id= 426        LQDT  Liquidity Services Inc                  
+        RS Rank 76.0 (req >80); EPS 1y 18.1% (req >25%)
+  id= 425         LIK  Limes Schlosskliniken AG                
+        RS Rank 78.0 (req >80); EPS 1y 7.5% (req >25%); EPS not accelerating (1y 7.5% vs 5y 53.8%)
+  id= 424         LHX  L3Harris Technologies Inc               
+        RS Rank 51.0 (req >80); Price not >MA20 (priceVsMa20 -8.6%); EPS 1y 9.4% (req >25%)
+  id= 423         KWS  KWS SAAT SE & Co KGaA                   
+        RS Rank 68.0 (req >80); EPS 1y 10.9% (req >25%); EPS not accelerating (1y 10.9% vs 5y 11.5%)
+  id= 421        JBSS  John B Sanfilippo & Son Inc             
+        RS Rank 64.0 (req >80); Price not >MA20 (priceVsMa20 -2.5%); EPS 1y 20.6% (req >25%)
+  id= 420         ITT  ITT Inc                                 
+        RS Rank 65.0 (req >80); Price not >MA20 (priceVsMa20 -4.1%); EPS 1y -9.3% (req >25%); EPS not accelerating (1y -9.3% vs 5y 9.4%)
+  id= 419        IFOS  Itafos Inc                              
+        RS Rank 30.0 (req >80); Price not >MA20 (priceVsMa20 -18.7%); EPS 1y -18.9% (req >25%); EPS not accelerating (1y -18.9% vs 5y 9.0%)
+  id= 418        INVA  Innoviva Inc                            
+        RS Rank 63.0 (req >80); Price not >MA20 (priceVsMa20 -2.2%)
+  id= 416       HYDRA  Hydratec Industries NV                  
+        RS Rank 79.0 (req >80); EPS not accelerating (1y 32.1% vs 5y 46.6%)
+  id= 414        HLMA  Halma PLC                               
+        EPS 1y 21.0% (req >25%)
+  id= 413        GPOR  Gulfport Energy Corp                    
+        RS Rank 33.0 (req >80); Price not >MA20 (priceVsMa20 -5.9%)
+  id= 411         GTT  Gaztransport et technigaz SA            
+        EPS 1y 19.1% (req >25%)
+  id= 410        GRMN  Garmin Ltd                              
+        RS Rank 67.0 (req >80); Price not >MA20 (priceVsMa20 -5.7%); EPS 1y 17.9% (req >25%)
+  id= 409         GAW  Games Workshop Group PLC                
+        RS Rank 80.0 (req >80); Price not >MA20 (priceVsMa20 -0.2%); EPS 1y 17.9% (req >25%)
+  id= 408         FTG  Firan Technology Group Corp             
+        EPS 1y -1.9% (req >25%); EPS not accelerating (1y -1.9% vs 5y 121.2%)
+  id= 407         FTI  Filtronic PLC                           
+        EPS 1y -4.8% (req >25%); EPS not accelerating (1y -4.8% vs 5y 172.9%)
+  id= 406         74E  Evertz Technologies Ltd                 
+        RS Rank 73.0 (req >80); Price not >MA20 (priceVsMa20 -0.8%); EPS 1y 3.8% (req >25%); EPS not accelerating (1y 3.8% vs 5y 8.3%)
+  id= 405         ENV  ENAV SpA                                
+        RS Rank 63.0 (req >80); Price not >MA20 (priceVsMa20 -1.1%); EPS 1y -26.1% (req >25%); EPS not accelerating (1y -26.1% vs 5y 11.2%)
+  id= 404         ESI  Element Solutions Inc                   
+        EPS 1y -47.5% (req >25%); EPS not accelerating (1y -47.5% vs 5y -5.4%)
+  id= 403        LOCO  El Pollo Loco Holdings Inc              
+        RS Rank 80.0 (req >80); EPS 1y 5.8% (req >25%)
+  id= 402         DTM  DT Midstream Inc                        
+        RS Rank 73.0 (req >80); EPS 1y 23.2% (req >25%)
+  id= 401        DRW3  Draegerwerk AG & Co KGaA                
+        RS Rank 72.0 (req >80); Price not >MA20 (priceVsMa20 -3.3%)
+  id= 399         DHT  DHT Holdings Inc                        
+        EPS not accelerating (1y 87.3% vs 5y 99.3%)
+  id= 398        COST  Costain Group PLC                       
+        EPS 1y 23.0% (req >25%)
+  id= 397        CHEF  Cheffelo                                
+        RS Rank 75.0 (req >80); EPS 1y 22.6% (req >25%); EPS not accelerating (1y 22.6% vs 5y 78.0%)
+  id= 396         CEU  CES Energy Solutions Corp               
+        Price not >MA20 (priceVsMa20 -3.4%); EPS 1y 13.4% (req >25%); EPS not accelerating (1y 13.4% vs 5y 25.3%)
+  id= 395         J0L  Cembre SpA                              
+        RS Rank 80.0 (req >80); EPS 1y 9.5% (req >25%); EPS not accelerating (1y 9.5% vs 5y 19.6%)
+  id= 394      BPF.UN  Boston Pizza Royalties Income           
+        RS Rank 48.0 (req >80); Price not >MA20 (priceVsMa20 -2.8%); EPS not accelerating (1y 32.0% vs 5y 35.1%)
+  id= 393         BMY  Bloomsbury Publishing PLC               
+        EPS 1y -40.3% (req >25%); EPS not accelerating (1y -40.3% vs 5y 10.3%)
+  id= 392        BKTI  BK Technologies Corp                    
+        EPS not accelerating (1y 57.0% vs 5y 105.8%)
+  id= 391          RX  Biosyent Inc                            
+        RS Rank 58.0 (req >80)
+  id= 390       ATRAV  Atria                                   
+        RS Rank 60.0 (req >80); Price not >MA20 (priceVsMa20 -11.0%); EPS 1y -4.5% (req >25%); EPS not accelerating (1y -4.5% vs 5y 52.3%)
+  id= 388        APEI  American Public Education Inc           
+        Price not >MA20 (priceVsMa20 -2.6%)
+  id= 387         ACX  ACT Energy Technologies Ltd             
+        RS Rank 63.0 (req >80); EPS 1y -43.8% (req >25%)
+  id= 386       ACOMO  Acomo NV                                
+        RS Rank 53.0 (req >80); Price not >MA20 (priceVsMa20 -0.9%)
+  id= 307         RHM  Rheinmetall AG                          
+        RS Rank 13.0 (req >80); Price not >MA20 (priceVsMa20 -14.3%); MA50 not >MA200 (ma50/200 -10.0%)
+  id= 305      SAAB B  Saab AB                                 
+        RS Rank 53.0 (req >80); Price not >MA20 (priceVsMa20 -7.5%)
+  id= 304         RR.  Rolls-Royce Holdings PLC                
+        RS Rank 75.0 (req >80)
+  id= 303         LDO  Leonardo SpA                            
+        RS Rank 41.0 (req >80); Price not >MA20 (priceVsMa20 -4.9%); EPS 1y 1.4% (req >25%); EPS not accelerating (1y 1.4% vs 5y 12.1%)
+  id= 302        JDEP  JDE Peets NV                            
+        RS Rank 73.0 (req >80); Price not >MA20 (priceVsMa20 None%); EPS 1y None% (req >25%); EPS not accelerating (1y None% vs 5y None%)
+  id= 300        ASML  ASML Holding NV                         
+        EPS 1y 21.4% (req >25%)
+  id= 116        UTHR  United Therapeutics Corp                
+        Price not >MA20 (priceVsMa20 -1.7%); EPS 1y 8.1% (req >25%); EPS not accelerating (1y 8.1% vs 5y 22.5%)
+  id= 115      TRMD A  TORM                                    
+        EPS 1y -55.4% (req >25%); EPS not accelerating (1y -55.4% vs 5y 19.6%)
+  id= 114         YX5  Spadel SA                               
+        Price not >MA20 (priceVsMa20 None%); EPS 1y 24.7% (req >25%)
+  id= 113         SPA  Spadel SA                               
+        EPS 1y 24.7% (req >25%)
+  id= 111        RVRC  Revolutionrace                          
+        RS Rank 58.0 (req >80); Price not >MA20 (priceVsMa20 -12.5%); EPS 1y 15.2% (req >25%); EPS not accelerating (1y 15.2% vs 5y 15.3%)
+  id= 110         ODC  Oil-Dri Corp of America                 
+        RS Rank None (req >80); MA50 not >MA200 (ma50/200 None%)
+  id= 109         2NH  Naturhouse Health SA                    
+        RS Rank 71.0 (req >80); Price not >MA20 (priceVsMa20 -1.5%); EPS 1y 6.3% (req >25%)
+  id= 108         NTH  Naturhouse Health SA                    
+        RS Rank 78.0 (req >80); Price not >MA20 (priceVsMa20 -0.3%); EPS 1y 6.3% (req >25%)
+  id= 107         NHC  National Healthcare Corp                
+        EPS 1y 17.2% (req >25%); EPS not accelerating (1y 17.2% vs 5y 23.1%)
+  id= 106         FO3  Moury Construct SA                      
+        RS Rank 78.0 (req >80)
+  id= 104         68M  Matson Inc                              
+        EPS 1y -11.1% (req >25%); EPS not accelerating (1y -11.1% vs 5y -8.8%)
+  id= 103         MGY  Magnolia Oil & Gas Corp                 
+        RS Rank 67.0 (req >80); Price not >MA20 (priceVsMa20 -4.7%); EPS 1y -14.4% (req >25%); EPS not accelerating (1y -14.4% vs 5y -6.3%)
+  id= 102        LGCY  Legacy Education Inc                    
+        RS Rank 76.0 (req >80); Price not >MA20 (priceVsMa20 -3.6%); EPS 1y 19.5% (req >25%)
+  id= 101         41L  Laboratorios Farmaceuticos Rovi         
+        RS Rank 54.0 (req >80); Price not >MA20 (priceVsMa20 -21.5%); EPS 1y -43.0% (req >25%); EPS not accelerating (1y -43.0% vs 5y 16.6%)
+  id= 100        ROVI  Laboratorios Farmaceuticos Rovi         
+        RS Rank 54.0 (req >80); Price not >MA20 (priceVsMa20 -21.4%); EPS 1y -43.0% (req >25%); EPS not accelerating (1y -43.0% vs 5y 16.6%)
+  id=  99         XD1  Jensen-Group NV                         
+        RS Rank 72.0 (req >80); Price not >MA20 (priceVsMa20 -0.1%)
+  id=  98         JEN  Jensen-Group NV                         
+        EPS 1y -19.6% (req >25%); EPS not accelerating (1y -19.6% vs 5y 15.5%)
+  id=  97        ISSC  Innovative Solutions & Support          
+        Price not >MA20 (priceVsMa20 -0.2%)
+  id=  96         HWX  Headwater Exploration Inc               
+        RS Rank 76.0 (req >80); Price not >MA20 (priceVsMa20 -0.7%); EPS 1y -31.8% (req >25%); EPS not accelerating (1y -31.8% vs 5y 20.3%)
+  id=  95         HD8  Harju Elekter Group                     
+        RS Rank 70.0 (req >80); Price not >MA20 (priceVsMa20 -2.0%)
+  id=  93        HAFN  Hafnia Ltd                              
+        EPS 1y -55.3% (req >25%); EPS not accelerating (1y -55.3% vs 5y 10.6%)
+  id=  92         GSL  Global Ship Lease Inc                   
+        EPS 1y 17.0% (req >25%); EPS not accelerating (1y 17.0% vs 5y 56.1%)
+  id=  91       FMM B  FM Mattsson                             
+        Price not >MA20 (priceVsMa20 -7.0%); EPS 1y 17.6% (req >25%)
+  id=  89         ETX  Etablissements Maurel & Prom            
+        Price not >MA20 (priceVsMa20 -0.1%)
+  id=  87         ELG  Elmos Semiconductor SE                  
+        EPS 1y 21.3% (req >25%); EPS not accelerating (1y 21.3% vs 5y 83.2%)
+  id=  86        B7C0  dAmico International Shipping SA        
+        EPS 1y -52.5% (req >25%); EPS not accelerating (1y -52.5% vs 5y 41.7%)
+  id=  18        MPTI  M-Tron Industries                       
+        EPS 1y 5.8% (req >25%); EPS not accelerating (1y 5.8% vs 5y 47.0%)
+  id=  17        SA2D  SandRidge Energy                        
+        RS Rank 65.0 (req >80); Price not >MA20 (priceVsMa20 -2.0%); EPS 1y 12.4% (req >25%); EPS not accelerating (1y 12.4% vs 5y 17.6%)
+  id=  15          SD  SandRidge Energy                        
+        RS Rank 64.0 (req >80); Price not >MA20 (priceVsMa20 -4.4%); EPS 1y 12.4% (req >25%); EPS not accelerating (1y 12.4% vs 5y 17.6%)
+  id=  14         9TG  Gaztransport et Technigaz               
+        RS Rank 72.0 (req >80); EPS 1y 19.1% (req >25%)
+  id=  13         DAC  Danaos Corp                             
+        EPS 1y 2.6% (req >25%); EPS not accelerating (1y 2.6% vs 5y 32.7%)
+  id=   8        MPCC  MPC Container Ships                     
+        RS Rank 78.0 (req >80); EPS 1y -11.1% (req >25%); EPS not accelerating (1y -11.1% vs 5y 39.4%)
+  id=   3        N4Q1  Hemisphere Energy                       
+        EPS 1y -14.7% (req >25%); EPS not accelerating (1y -14.7% vs 5y 129.5%)
+  id=   2         ESP  Espey Manufacturing                     
+        EPS not accelerating (1y 41.3% vs 5y 115.9%)
+  id=   1        ESEA  Euroseas Ltd                            
+        EPS 1y 21.4% (req >25%); EPS not accelerating (1y 21.4% vs 5y 102.5%)
+
+──── JOKER (83 vetoed) ────
+  id= 660        VCYT  Veracyte Inc                            
+        RS Rank 70.0 (req >80)
+  id= 659        83PN  Valeura Energy Inc                      
+        EPS 1y -90.8% (req >25%)
+  id= 655        TNIE  Tonies SE                               
+        RS Rank 76.0 (req >80)
+  id= 654        TBPH  Theravance Biopharma Inc                
+        RS Rank 70.0 (req >80)
+  id= 653         SMG  The Scotts Miracle Gro Co               
+        RS Rank 47.0 (req >80)
+  id= 651        TATT  TAT Technologies Ltd                    
+        RS Rank 33.0 (req >80)
+  id= 650        TALK  Talkspace Inc                           
+        EPS 1y 10.5% (req >25%)
+  id= 647          SN  SharkNinja Inc                          
+        RS Rank 58.0 (req >80)
+  id= 646       SENEA  Seneca Foods Corp                       
+        RS Rank 77.0 (req >80)
+  id= 643        QNST  QuinStreet Inc                          
+        RS Rank 36.0 (req >80)
+  id= 642        QRVO  Qorvo Inc                               
+        RS Rank 59.0 (req >80)
+  id= 641        PRSU  Pursuit Attractions & Hospitality       
+        RS Rank 73.0 (req >80)
+  id= 640        PRLB  Proto Labs Inc                          
+        RS Rank 80.0 (req >80)
+  id= 639        PRVA  Privia Health Group Inc                 
+        RS Rank 50.0 (req >80)
+  id= 638        PLTR  Palantir Technologies Inc               
+        RS Rank 38.0 (req >80)
+  id= 636       ALODC  Omer-Decugis & Cie                      
+        RS Rank 80.0 (req >80)
+  id= 633        RAMP  LiveRamp Holdings Inc                   
+        RS Rank 68.0 (req >80)
+  id= 632         LIF  Life360 Inc                             
+        RS Rank 17.0 (req >80)
+  id= 630        VPK5  Koninklijke Vopak NV                    
+        RS Rank 59.0 (req >80)
+  id= 628         IWS  Integrated Wind                         
+        RS Rank 77.0 (req >80)
+  id= 627        INFU  InfuSystems Holdings Inc                
+        RS Rank 65.0 (req >80)
+  id= 626       INFRA  Infracom                                
+        RS Rank 24.0 (req >80)
+  id= 624        GWRE  Guidewire Software Inc                  
+        RS Rank 23.0 (req >80)
+  id= 622         GVR  Glenveagh Properties PLC                
+        EPS 1y 17.6% (req >25%); RS Rank 68.0 (req >80)
+  id= 621        FRPT  Freshpet Inc                            
+        RS Rank 22.0 (req >80)
+  id= 620         FTK  Flotek Industries Inc                   
+        RS Rank 61.0 (req >80)
+  id= 619        EGAN  eGain Corp                              
+        RS Rank 37.0 (req >80)
+  id= 618         LWA  Eco Animal Health Group PLC             
+        RS Rank 59.0 (req >80)
+  id= 616     CNCJO B  Concejo B                               
+        RS Rank 73.0 (req >80)
+  id= 614         CGD  CNX Resources Corp                      
+        RS Rank 52.0 (req >80)
+  id= 611        CVGW  Calavo Growers Inc                      
+        EPS 1y 15.6% (req >25%); RS Rank 58.0 (req >80)
+  id= 610        BWMN  Bowman Consulting Group Ltd             
+        RS Rank 57.0 (req >80)
+  id= 608        AUPH  Aurinia Pharmaceuticals Inc             
+        RS Rank 75.0 (req >80)
+  id= 607          AD  Array Digital Infrastructure Inc        
+        RS Rank 48.0 (req >80)
+  id= 604          AS  Amer Sports Inc                         
+        RS Rank 58.0 (req >80)
+  id= 603         E2Z  Almirall SA                             
+        RS Rank 52.0 (req >80)
+  id= 602       AKT.A  Akita Drilling Ltd                      
+        EPS 1y -83.3% (req >25%)
+  id= 601        ACAD  ACADIA Pharmaceuticals Inc              
+        RS Rank 54.0 (req >80)
+  id= 247       ALNSC  NSC Groupe SA                           
+        RS Rank 39.0 (req >80)
+  id= 246         IDR  Indra Sistemas SA                       
+        RS Rank 79.0 (req >80)
+  id= 245        GDWN  Goodwin PLC                             
+        RS Rank 32.0 (req >80)
+  id= 243         LLY  Eli Lilly & Co                          
+        RS Rank 60.0 (req >80)
+  id= 242        DCBO  Docebo Inc                              
+        RS Rank 31.0 (req >80)
+  id= 239        BTDR  Bitdeer Technologies Group              
+        RS Rank 44.0 (req >80)
+  id= 238         APP  AppLovin Corp                           
+        RS Rank 78.0 (req >80)
+  id= 237         APH  Amphenol Corp                           
+        RS Rank 60.0 (req >80)
+  id= 235         WWD  Woodward Inc                            
+        RS Rank 79.0 (req >80)
+  id= 234        WLDN  Willdan Group Inc                       
+        RS Rank 58.0 (req >80)
+  id= 232         UNC  UCB SA                                  
+        RS Rank 61.0 (req >80)
+  id= 231         UCB  UCB SA                                  
+        RS Rank 69.0 (req >80)
+  id= 228        TASK  TaskUs Inc                              
+        RS Rank 7.0 (req >80)
+  id= 227        STRT  Strattec Security Corp                  
+        RS Rank 45.0 (req >80)
+  id= 226        RDVT  Red Violet Inc                          
+        RS Rank 63.0 (req >80)
+  id= 225         PTC  PTC Inc                                 
+        RS Rank 28.0 (req >80)
+  id= 224        PRTH  Priority Technology Holdings Inc        
+        RS Rank 39.0 (req >80)
+  id= 222        PLNT  Planet Fitness Inc                      
+        RS Rank 6.0 (req >80)
+  id= 221         PEN  Penumbra Inc                            
+        EPS 1y -126.7% (req >25%)
+  id= 220         PAY  Paymentus Holdings Inc                  
+        EPS 1y -16.0% (req >25%)
+  id= 219        OSPN  OneSpan Inc                             
+        EPS 1y 21.9% (req >25%); RS Rank 41.0 (req >80)
+  id= 217         NB3  Neurocrine Biosciences Inc              
+        RS Rank 60.0 (req >80)
+  id= 216        NBIX  Neurocrine Biosciences Inc              
+        RS Rank 62.0 (req >80)
+  id= 214        MRVL  Marvell Technology Inc                  
+        EPS 1y -25.0% (req >25%); RS Rank 59.0 (req >80)
+  id= 213         MAL  Magellan Aerospace Corp                 
+        EPS 1y 11.3% (req >25%); RS Rank 75.0 (req >80)
+  id= 212        4M7A  Magellan Aerospace Corp                 
+        EPS 1y 11.3% (req >25%)
+  id= 210        LMAT  LeMaitre Vascular Inc                   
+        RS Rank 73.0 (req >80)
+  id= 209         KEX  Kirby Corp                              
+        RS Rank 76.0 (req >80)
+  id= 207         HTG  Hunting PLC                             
+        EPS 1y -138.5% (req >25%); RS Rank 19.0 (req >80)
+  id= 206         HQY  HealthEquity Inc                        
+        RS Rank 40.0 (req >80)
+  id= 205         VH2  Friedrich Vorwerk Group SE              
+        RS Rank 48.0 (req >80)
+  id= 204        EVER  EverQuote Inc                           
+        RS Rank 39.0 (req >80)
+  id= 203        ELMD  Electromed Inc                          
+        RS Rank 62.0 (req >80)
+  id= 202        DUOL  Duolingo Inc                            
+        RS Rank 9.0 (req >80)
+  id= 198        DAKT  Daktronics Inc                          
+        RS Rank 56.0 (req >80)
+  id= 197       CLA B  Cloetta                                 
+        EPS 1y 19.7% (req >25%)
+  id= 192         7PV  Birkenstock Holding PLC                 
+        RS Rank 33.0 (req >80)
+  id= 191        BIRK  Birkenstock Holding PLC                 
+        RS Rank 34.0 (req >80)
+  id=  28        CAMB  Campine NV                              
+        RS Rank 63.0 (req >80)
+  id=  27        INCY  Incyte Corp                             
+        RS Rank 63.0 (req >80)
+  id=  26        AGYS  Agilysys Inc                            
+        RS Rank 20.0 (req >80)
+  id=  25        GMED  Globus Medical                          
+        RS Rank 48.0 (req >80)
+  id=  24         CEK  CeoTronics AG                           
+        RS Rank 23.0 (req >80)
+  id=  21          ZM  Zoom Video Communications               
+        RS Rank 78.0 (req >80)
+  id=  19        NVDA  NVIDIA Corp                             
+        RS Rank 76.0 (req >80)
+
+──── TWO (87 vetoed) ────
+  id= 709        MAPS  WM Technology Inc                       
+        P/B -30.6 (req 0<x<2); EV/EBITDA -14.0 (req 0<x<10); ROIC None% (req >8%); P/E -12.0 (req 0<x<15); Perf 1y 22.2% (req <-15%)
+  id= 708        VTEX  Vtex                                    
+        P/B 2.9 (req 0<x<2); EV/EBITDA 22.6 (req 0<x<10); MA50 not >MA200 (ma50/200 -1.9%); P/E 33.7 (req 0<x<15)
+  id= 707       VIT B  Vitec Software                          
+        P/B 2.1 (req 0<x<2); ROIC 4.9% (req >8%); MA50 not >MA200 (ma50/200 -19.1%); P/E 23.0 (req 0<x<15)
+  id= 706      VIMIAN  Vimian Group                            
+        P/B 2.1 (req 0<x<2); EV/EBITDA 15.6 (req 0<x<10); ROIC 3.8% (req >8%); MA50 not >MA200 (ma50/200 -5.2%); P/E 40.4 (req 0<x<15)
+  id= 705        TRIP  Tripadvisor Inc                         
+        EV/EBITDA -2.6 (req 0<x<10); ROIC -95.9% (req >8%); MA50 not >MA200 (ma50/200 -4.9%); P/E -4.5 (req 0<x<15); Perf 1y 80.0% (req <-15%)
+  id= 704         TCS  Tecsys Inc                              
+        P/B 8.0 (req 0<x<2); EV/EBITDA 35.2 (req 0<x<10); MA50 not >MA200 (ma50/200 -10.8%); P/E 93.0 (req 0<x<15); Perf 1y -12.1% (req <-15%)
+  id= 703      SECARE  Swedencare                              
+        EV/EBITDA 12.4 (req 0<x<10); ROIC 0.5% (req >8%); MA50 not >MA200 (ma50/200 -22.4%); P/E 79.8 (req 0<x<15)
+  id= 702         SUS  Surgical Science                        
+        ROIC 1.8% (req >8%); MA50 not >MA200 (ma50/200 -46.5%); P/E 25.3 (req 0<x<15)
+  id= 701       ALBFR  Sidetrade SA                            
+        P/B 5.5 (req 0<x<2); EV/EBITDA 25.7 (req 0<x<10); MA50 not >MA200 (ma50/200 -25.9%); P/E 28.3 (req 0<x<15)
+  id= 700         SGE  Sage Group PLC                          
+        P/B 11.9 (req 0<x<2); EV/EBITDA 12.5 (req 0<x<10); MA50 not >MA200 (ma50/200 -15.8%); P/E 23.3 (req 0<x<15)
+  id= 699       REG1V  Revenio                                 
+        P/B 3.2 (req 0<x<2); EV/EBITDA 14.0 (req 0<x<10); MA50 not >MA200 (ma50/200 -19.4%); P/E 23.6 (req 0<x<15)
+  id= 698        QNST  QuinStreet Inc                          
+        P/B 2.6 (req 0<x<2); EV/EBITDA 17.4 (req 0<x<10); MA50 not >MA200 (ma50/200 -11.6%)
+  id= 697        PAYO  Payoneer Global Inc                     
+        P/B 2.8 (req 0<x<2); EV/EBITDA -50.1 (req 0<x<10); MA50 not >MA200 (ma50/200 -15.3%); P/E 25.8 (req 0<x<15)
+  id= 696      ORSTED  Orsted                                  
+        EV/EBITDA 10.4 (req 0<x<10); ROIC -0.2% (req >8%); MA50 not >MA200 (ma50/200 -1.1%); P/E -397.1 (req 0<x<15)
+  id= 695         NRO  Neurones                                
+        P/B 2.1 (req 0<x<2); MA50 not >MA200 (ma50/200 -9.9%); P/E 17.7 (req 0<x<15)
+  id= 694        MXHN  MAX Automation SE                       
+        EV/EBITDA 13.8 (req 0<x<10); ROIC 0.1% (req >8%); MA50 not >MA200 (ma50/200 -18.5%); P/E 192.5 (req 0<x<15)
+  id= 693         LN4  Linedata Services SA                    
+        ROIC 7.4% (req >8%); MA50 not >MA200 (ma50/200 -14.5%)
+  id= 692        LIME  Lime Technologies                       
+        P/B 7.5 (req 0<x<2); EV/EBITDA 13.0 (req 0<x<10); MA50 not >MA200 (ma50/200 -26.6%); P/E 25.7 (req 0<x<15)
+  id= 691         KEI  Kolibri Global Energy Inc               
+        ROIC 5.8% (req >8%)
+  id= 690        ICLR  Icon PLC                                
+        ROIC 4.7% (req >8%); MA50 not >MA200 (ma50/200 -30.0%); P/E 16.7 (req 0<x<15); Perf 1y -10.3% (req <-15%)
+  id= 688         HPQ  HP Inc                                  
+        P/B -27.8 (req 0<x<2); MA50 not >MA200 (ma50/200 -16.3%); Perf 1y -12.3% (req <-15%)
+  id= 687         HFG  Hilton Food Group PLC                   
+        ROIC -2.2% (req >8%); MA50 not >MA200 (ma50/200 -29.1%)
+  id= 686         HIK  Hikma Pharmaceuticals PLC               
+        MA50 not >MA200 (ma50/200 -16.7%)
+  id= 685         HPK  HighPeak Energy Inc                     
+        ROIC -5.3% (req >8%); P/E -5.0 (req 0<x<15)
+  id= 684        FRSH  Freshworks Inc                          
+        P/B 2.5 (req 0<x<2); EV/EBITDA 41.7 (req 0<x<10); MA50 not >MA200 (ma50/200 -23.8%)
+  id= 683      FRACTL  Fractal Gaming                          
+        ROIC 1.9% (req >8%); MA50 not >MA200 (ma50/200 -44.1%); P/E 51.9 (req 0<x<15)
+  id= 682       FOI B  Fenix Outdoor                           
+        ROIC 1.9% (req >8%); MA50 not >MA200 (ma50/200 -5.5%); P/E 56.2 (req 0<x<15)
+  id= 681         FDS  FactSet Research Systems Inc            
+        P/B 3.9 (req 0<x<2); EV/EBITDA 10.1 (req 0<x<10); MA50 not >MA200 (ma50/200 -21.2%)
+  id= 680       EVISO  Eviso SpA                               
+        P/B 9.3 (req 0<x<2); EV/EBITDA 18.0 (req 0<x<10); MA50 not >MA200 (ma50/200 None%); P/E 43.4 (req 0<x<15)
+  id= 679    ENGCON B  Engcon                                  
+        P/B 13.6 (req 0<x<2); EV/EBITDA 27.8 (req 0<x<10); MA50 not >MA200 (ma50/200 -13.4%); P/E 43.2 (req 0<x<15)
+  id= 678         ELV  Elevance Health Inc                     
+        EV/EBITDA 13.7 (req 0<x<10); ROIC 4.2% (req >8%); MA50 not >MA200 (ma50/200 -3.4%); P/E 16.0 (req 0<x<15); Perf 1y -9.4% (req <-15%)
+  id= 677         EDR  Edreams Odigeo SA                       
+        MA50 not >MA200 (ma50/200 -39.4%)
+  id= 676         DXC  DXC Technology Co                       
+        ROIC 5.6% (req >8%); MA50 not >MA200 (ma50/200 -9.9%)
+  id= 675        DCTH  Delcath Systems Inc                     
+        P/B 3.7 (req 0<x<2); EV/EBITDA -271.0 (req 0<x<10); ROIC 2.3% (req >8%); MA50 not >MA200 (ma50/200 -2.3%); P/E 574.0 (req 0<x<15); Perf 1y -1.1% (req <-15%)
+  id= 674        CORT  Corcept Therapeutics Inc                
+        P/B 8.5 (req 0<x<2); EV/EBITDA -824.3 (req 0<x<10); MA50 not >MA200 (ma50/200 -31.9%); P/E 113.7 (req 0<x<15)
+  id= 673         CMG  Computer Modelling Group Ltd            
+        P/B 17.9 (req 0<x<2); EV/EBITDA 20.5 (req 0<x<10); MA50 not >MA200 (ma50/200 -9.3%); P/E 29.8 (req 0<x<15)
+  id= 672         GIB  CGI Inc                                 
+        P/B 2.1 (req 0<x<2); MA50 not >MA200 (ma50/200 -15.3%)
+  id= 671        CARS  Cars.com Inc                            
+        ROIC 3.1% (req >8%); MA50 not >MA200 (ma50/200 -17.7%); P/E 27.2 (req 0<x<15); Perf 1y 3.2% (req <-15%)
+  id= 670       BTS B  BTS Group                               
+        P/B 2.0 (req 0<x<2); MA50 not >MA200 (ma50/200 -9.1%); P/E 21.4 (req 0<x<15)
+  id= 669         BAH  Booz Allen Hamilton Holding Corp        
+        P/B 9.3 (req 0<x<2); EV/EBITDA 10.6 (req 0<x<10); MA50 not >MA200 (ma50/200 -12.4%)
+  id= 668       BONEX  Bonesupport                             
+        P/B 16.0 (req 0<x<2); EV/EBITDA 51.8 (req 0<x<10); MA50 not >MA200 (ma50/200 -8.3%); P/E 81.4 (req 0<x<15)
+  id= 667       ALBLD  Bilendi SA                              
+        ROIC 3.0% (req >8%); MA50 not >MA200 (ma50/200 -16.7%); P/E 21.8 (req 0<x<15)
+  id= 666        BBSI  Barrett Business Services Inc           
+        P/B 3.7 (req 0<x<2); EV/EBITDA 10.1 (req 0<x<10); MA50 not >MA200 (ma50/200 -22.1%); P/E 18.9 (req 0<x<15)
+  id= 665         BCG  Baltic Classifieds Group PLC            
+        P/B 3.0 (req 0<x<2); EV/EBITDA 16.0 (req 0<x<10); MA50 not >MA200 (ma50/200 -22.2%); P/E 21.6 (req 0<x<15)
+  id= 664         AZE  Azelis Group NV                         
+        ROIC 2.5% (req >8%); MA50 not >MA200 (ma50/200 -11.4%); P/E 23.1 (req 0<x<15)
+  id= 663         6T6  Aramis Group SA                         
+        ROIC 7.0% (req >8%); MA50 not >MA200 (ma50/200 -21.3%); P/E 16.4 (req 0<x<15)
+  id= 290          ZS  Zscaler Inc                             
+        P/B 10.9 (req 0<x<2); EV/EBITDA 2309.6 (req 0<x<10); ROIC -7.5% (req >8%); MA50 not >MA200 (ma50/200 -37.9%); P/E -353.8 (req 0<x<15)
+  id= 289         ZBH  Zimmer Biomet Holdings                  
+        ROIC 3.9% (req >8%); MA50 not >MA200 (ma50/200 -4.1%); P/E 21.3 (req 0<x<15); Perf 1y -12.5% (req <-15%)
+  id= 288        PAYC  Paycom Software Inc                     
+        P/B 9.2 (req 0<x<2); EV/EBITDA 10.4 (req 0<x<10); MA50 not >MA200 (ma50/200 -24.8%); P/E 15.8 (req 0<x<15)
+  id= 287        PANW  Palo Alto Networks                      
+        P/B 15.1 (req 0<x<2); EV/EBITDA 77.5 (req 0<x<10); MA50 not >MA200 (ma50/200 -8.9%); P/E 111.2 (req 0<x<15); Perf 1y 10.5% (req <-15%)
+  id= 286        FISV  Fiserv Inc                              
+        ROIC 5.6% (req >8%); MA50 not >MA200 (ma50/200 -31.1%)
+  id= 285        EPAM  EPAM Systems Inc                        
+        MA50 not >MA200 (ma50/200 -21.4%)
+  id= 284       ADYEN  Adyen NV                                
+        P/B 5.6 (req 0<x<2); EV/EBITDA 15.8 (req 0<x<10); ROIC -21.3% (req >8%); MA50 not >MA200 (ma50/200 -26.5%); P/E 28.0 (req 0<x<15)
+  id= 283         GTM  ZoomInfo Technologies                   
+        EV/EBITDA 11.0 (req 0<x<10); ROIC 2.2% (req >8%); MA50 not >MA200 (ma50/200 -32.1%); P/E 16.8 (req 0<x<15)
+  id= 282          ZG  Zillow Group Inc                        
+        P/B 2.3 (req 0<x<2); EV/EBITDA 34.1 (req 0<x<10); ROIC 1.6% (req >8%); MA50 not >MA200 (ma50/200 -31.5%); P/E 167.8 (req 0<x<15)
+  id= 281         ZAL  Zalando SE                              
+        MA50 not >MA200 (ma50/200 -9.5%); P/E 24.3 (req 0<x<15)
+  id= 280        YELP  Yelp Inc                                
+        P/B 2.4 (req 0<x<2); MA50 not >MA200 (ma50/200 -10.7%)
+  id= 279       XVIVO  Xvivo Perfusion                         
+        P/B 4.2 (req 0<x<2); EV/EBITDA 52.9 (req 0<x<10); ROIC 3.7% (req >8%); P/E 122.2 (req 0<x<15); Perf 1y -5.2% (req <-15%)
+  id= 278        TNET  Trinet Group Inc                        
+        P/B 24.5 (req 0<x<2); MA50 not >MA200 (ma50/200 -29.9%)
+  id= 277         TRN  Trainline PLC                           
+        P/B 2.6 (req 0<x<2); EV/EBITDA 12.0 (req 0<x<10); ROIC 5.4% (req >8%); P/E 18.9 (req 0<x<15); Perf 1y 16.3% (req <-15%)
+  id= 276         GEO  The GEO Group Inc                       
+        P/B 2.0 (req 0<x<2); MA50 not >MA200 (ma50/200 -3.7%)
+  id= 275         DSG  Descartes Systems                       
+        P/B 3.9 (req 0<x<2); EV/EBITDA 19.1 (req 0<x<10); MA50 not >MA200 (ma50/200 -16.9%); P/E 38.0 (req 0<x<15)
+  id= 274        NKB2  TG Therapeutics                         
+        P/B 10.2 (req 0<x<2); EV/EBITDA 41.4 (req 0<x<10); Perf 1y 18.0% (req <-15%)
+  id= 273         LRN  Stride Inc                              
+        P/B 2.3 (req 0<x<2); MA50 not >MA200 (ma50/200 -11.8%)
+  id= 272         SFM  Sprouts Farmers Market                  
+        P/B 5.6 (req 0<x<2); MA50 not >MA200 (ma50/200 -18.6%); P/E 15.7 (req 0<x<15)
+  id= 271         CXM  Sprinklr Inc                            
+        P/B 2.3 (req 0<x<2); EV/EBITDA 11.6 (req 0<x<10); MA50 not >MA200 (ma50/200 -20.1%); P/E 59.2 (req 0<x<15)
+  id= 270         SCT  Softcat PLC                             
+        P/B 10.0 (req 0<x<2); EV/EBITDA 12.6 (req 0<x<10); MA50 not >MA200 (ma50/200 -12.2%); P/E 20.2 (req 0<x<15)
+  id= 269        QLYS  Qualys Inc                              
+        P/B 5.9 (req 0<x<2); EV/EBITDA 12.1 (req 0<x<10); MA50 not >MA200 (ma50/200 -25.7%); P/E 16.8 (req 0<x<15)
+  id= 268        PTEC  Playtech PLC                            
+        EV/EBITDA 123.8 (req 0<x<10); P/E -7.2 (req 0<x<15)
+  id= 267        PINS  Pinterest Inc                           
+        P/B 5.0 (req 0<x<2); EV/EBITDA 40.1 (req 0<x<10); MA50 not >MA200 (ma50/200 -27.9%); P/E 43.4 (req 0<x<15)
+  id= 266        PCTY  Paylocity Holding                       
+        P/B 5.6 (req 0<x<2); EV/EBITDA 13.6 (req 0<x<10); MA50 not >MA200 (ma50/200 -23.9%); P/E 25.7 (req 0<x<15)
+  id= 265        OKTA  Okta Inc                                
+        P/B 2.1 (req 0<x<2); EV/EBITDA 50.7 (req 0<x<10); ROIC 5.1% (req >8%); MA50 not >MA200 (ma50/200 -10.9%); P/E 63.1 (req 0<x<15)
+  id= 264        NTNX  Nutanix Inc                             
+        P/B -14.9 (req 0<x<2); EV/EBITDA 42.0 (req 0<x<10); ROIC -304.7% (req >8%); MA50 not >MA200 (ma50/200 -27.1%); P/E 46.5 (req 0<x<15)
+  id= 263         NEM  Nemetschek SE                           
+        P/B 8.0 (req 0<x<2); EV/EBITDA 20.3 (req 0<x<10); MA50 not >MA200 (ma50/200 -27.8%); P/E 35.2 (req 0<x<15)
+  id= 262         LMN  Lumine Group Inc                        
+        P/B 4.5 (req 0<x<2); EV/EBITDA 13.9 (req 0<x<10); MA50 not >MA200 (ma50/200 -28.6%); P/E 32.5 (req 0<x<15)
+  id= 261          KD  Kyndryl Holdings                        
+        P/B 2.2 (req 0<x<2); ROIC 5.1% (req >8%); MA50 not >MA200 (ma50/200 -44.2%)
+  id= 260        INTU  Intuit Inc                              
+        P/B 5.8 (req 0<x<2); EV/EBITDA 18.3 (req 0<x<10); MA50 not >MA200 (ma50/200 -28.0%); P/E 25.5 (req 0<x<15)
+  id= 259         HRB  H&R Block Inc                           
+        P/B -196.6 (req 0<x<2); MA50 not >MA200 (ma50/200 -25.7%)
+  id= 258        GRND  Grindr Inc                              
+        P/B 61.0 (req 0<x<2); EV/EBITDA 23.5 (req 0<x<10); MA50 not >MA200 (ma50/200 -7.2%); P/E 33.5 (req 0<x<15)
+  id= 257        EXLS  ExlService Holdings                     
+        P/B 6.4 (req 0<x<2); EV/EBITDA 12.7 (req 0<x<10); MA50 not >MA200 (ma50/200 -18.9%); P/E 19.7 (req 0<x<15)
+  id= 256        EVTC  Evertec Inc                             
+        P/B 2.1 (req 0<x<2); MA50 not >MA200 (ma50/200 -5.6%)
+  id= 255          DT  Dynatrace Inc                           
+        P/B 4.4 (req 0<x<2); EV/EBITDA 40.4 (req 0<x<10); MA50 not >MA200 (ma50/200 -14.5%); P/E 66.7 (req 0<x<15); Perf 1y -15.0% (req <-15%)
+  id= 254        DOCU  Docusign Inc                            
+        P/B 5.0 (req 0<x<2); EV/EBITDA 21.7 (req 0<x<10); MA50 not >MA200 (ma50/200 -24.7%); P/E 31.3 (req 0<x<15)
+  id= 252        BFAM  Bright Horizons                         
+        P/B 3.5 (req 0<x<2); EV/EBITDA 13.8 (req 0<x<10); ROIC 6.9% (req >8%); MA50 not >MA200 (ma50/200 -17.7%); P/E 21.0 (req 0<x<15)
+  id= 251          BL  BlackLine Inc                           
+        P/B 5.1 (req 0<x<2); EV/EBITDA 23.3 (req 0<x<10); MA50 not >MA200 (ma50/200 -28.0%); P/E 76.6 (req 0<x<15)
+  id= 250      BETS B  Betsson AB                              
+        MA50 not >MA200 (ma50/200 -25.5%)
+  id= 249        ACIW  ACI Worldwide Inc                       
+        P/B 3.1 (req 0<x<2); EV/EBITDA 12.3 (req 0<x<10); MA50 not >MA200 (ma50/200 -8.2%); P/E 22.8 (req 0<x<15)

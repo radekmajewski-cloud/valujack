@@ -63,6 +63,50 @@ const SILVER = 'linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#E0DDDA 45%,#A9A9A
 const GOLD = 'linear-gradient(135deg,#BFA882 0%,#DDBF88 22%,#A88A60 42%,#CAB07A 62%,#8C7858 80%,#C0AA75 100%)';
 
 const cards = window.CARDS_DATA || [];
+
+// ── METHODOLOGY: STRATEGY WEIGHTS (Phase 2A) ────────────────────────────────
+// Each strategy weights Fundamentals / Context / Price differently.
+// Combined weight = (Fundamentals × W_fund) + (Context × W_context) + (Price × W_price)
+// Source: ValuJack_Methodology.md (9 May 2026)
+const STRATEGY_WEIGHTS = {
+    KING:  { fund: 1.5, context: 0.5, price: 1.5 },  // Dividend value — context = falling-knife check
+    QUEEN: { fund: 1.5, context: 0.5, price: 2.0 },  // Magic Formula — price-led, context = falling-knife check
+    ACE:   { fund: 2.0, context: 1.5, price: 1.0 },  // Piotroski — fundamentals-led, context validates real improvement
+    JACK:  { fund: 1.0, context: 2.5, price: 0.0 },  // Minervini — context IS the strategy, price ignored
+    JOKER: { fund: 2.0, context: 1.5, price: 0.5 },  // CANSLIM — growth fundamentals + market leadership
+    TWO:   { fund: 1.0, context: 2.0, price: 2.5 }   // Contrarian — deep value + recovery context
+};
+
+// Fundamentals score (0–10): average of the radar axes EXCLUDING "Fair Price"
+function fundamentalsScore(card) {
+    if (!card || !card.scores || !Array.isArray(card.scores)) return 5;
+    const axes = card.scores.filter(s => s && s.l && s.l !== "Fair Price" && typeof s.v === "number");
+    if (axes.length === 0) return 5;
+    return axes.reduce((sum, s) => sum + s.v, 0) / axes.length;
+}
+
+// Price score (0–10): mapped from current MoS%
+function priceScore(mosPercent) {
+    if (mosPercent == null || isNaN(mosPercent)) return 0;
+    if (mosPercent < 0)  return 0;
+    if (mosPercent < 10) return 3;
+    if (mosPercent < 20) return 5;
+    if (mosPercent < 30) return 7;
+    if (mosPercent < 40) return 9;
+    return 10;
+}
+
+// Combined weight using the strategy multipliers
+function combinedWeight(card, mosPercent) {
+    const w = STRATEGY_WEIGHTS[card.type];
+    if (!w) return 0;
+    const f = fundamentalsScore(card);
+    const c = (typeof card.contextScore === "number") ? card.contextScore : 5;
+    const p = priceScore(mosPercent);
+    return (f * w.fund) + (c * w.context) + (p * w.price);
+}
+// ──────────────────────────────────────────────────────────────────────────
+
 const DEAL_ORIGINS = [
     'translate(120vw,-80vh) rotate(25deg)',
     'translate(120vw,-80vh) rotate(20deg)',
@@ -753,50 +797,12 @@ function Home() {
                                 : '—';
                             const pe = fromMetrics('p/e', 'pe') || '—';
                             const fv = ec.fairValue ? String(ec.fairValue) : '—';
-                            let stratRows = [];
-                            if (ec.type === 'KING') {
-                                stratRows = [
-                                    ['DIVIDEND YIELD', fromMetrics('dividend yield', 'div') || '—'],
-                                    ['RETURN ON CAPITAL', fromMetrics('return on capital', 'roic') || '—'],
-                                    ['P/E', fromMetrics('p/e', 'pe') || '—'],
-                                    ['DEBT/EQUITY', fromMetrics('debt/equity', 'debt') || '—'],
-                                ];
-                            } else if (ec.type === 'JACK') {
-                                stratRows = [
-                                    ['PRICE STRENGTH', fromMetrics('price strength') || '—'],
-                                    ['EPS GROWTH', fromMetrics('eps growth') || '—'],
-                                    ['RETURN ON CAPITAL', fromMetrics('return on capital', 'roic') || '—'],
-                                    ['FREE CASH', fromMetrics('free cash') || '—'],
-                                ];
-                            } else if (ec.type === 'QUEEN') {
-                                stratRows = [
-                                    ['RETURN ON CAPITAL', fromMetrics('return on capital', 'roic') || '—'],
-                                    ['P/E', fromMetrics('p/e', 'pe') || '—'],
-                                    ['EPS GROWTH', fromMetrics('eps growth') || '—'],
-                                    ['DEBT/EQUITY', fromMetrics('debt/equity', 'debt') || '—'],
-                                ];
-                            } else if (ec.type === 'ACE') {
-                                stratRows = [
-                                    ['F-SCORE', fromMetrics('f-score', 'fscore') || '—'],
-                                    ['RETURN ON CAPITAL', fromMetrics('return on capital', 'roic') || '—'],
-                                    ['FREE CASH', fromMetrics('free cash') || '—'],
-                                    ['DEBT/EQUITY', fromMetrics('debt/equity', 'debt') || '—'],
-                                ];
-                            } else if (ec.type === 'JOKER') {
-                                stratRows = [
-                                    ['EPS GROWTH', fromMetrics('eps growth') || '—'],
-                                    ['PRICE STRENGTH', fromMetrics('price strength') || '—'],
-                                    ['RETURN ON CAPITAL', fromMetrics('return on capital', 'roic') || '—'],
-                                    ['FREE CASH', fromMetrics('free cash') || '—'],
-                                ];
-                            } else if (ec.type === 'TWO') {
-                                stratRows = [
-                                    ['RETURN ON CAPITAL', fromMetrics('return on capital', 'roic') || '—'],
-                                    ['P/E', fromMetrics('p/e', 'pe') || '—'],
-                                    ['1M PERFORMANCE', fromMetrics('1m performance') || '—'],
-                                    ['DEBT/EQUITY', fromMetrics('debt/equity', 'debt') || '—'],
-                                ];
-                            }
+                            // Read all strategy-specific metrics from the card's metrics array
+                            // (cards.js owns labels and values; UI just renders).
+                            const stratRows = (ec.metrics || []).map(m => [
+                                (m.l || '').toUpperCase(),
+                                m.v || '—'
+                            ]);
                             const cells = [
                                 { l: 'Live Price', v: livePrice !== '—' ? livePrice + ' ' + (ec.currency || '') : '—' },
                                 { l: 'Fair Value', v: fv !== '—' ? fv + ' ' + (ec.currency || '') : '—' },
