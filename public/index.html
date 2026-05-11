@@ -142,6 +142,7 @@ function Home() {
     const [isMobile, setIsMobile] = useState(false);
     const [dealt, setDealt] = useState([]);
     const [showInfo, setShowInfo] = useState(false);
+    const [selectedStrategyTab, setSelectedStrategyTab] = useState('KING');
     const initPrices = {};
     (window.CARDS_DATA || []).forEach(c => { if (c.type === 'TWO') initPrices[c.id] = { price: c.fairValue * 0.8, currency: 'USD' }; });
     const [prices, setPrices] = useState(initPrices);
@@ -810,7 +811,7 @@ function Home() {
                             ];
                             const cellStyle = { flex: 1, padding: '7px 10px', minWidth: 0 };
                             const labelStyle = { color: '#888', fontSize: '0.67rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 400, letterSpacing: '0.12em', textTransform: 'uppercase', display: 'block', marginBottom: 2 };
-                            const valueStyle = { color: '#1A2A1E', fontSize: '1.05rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 800, display: 'block' };
+                            const valueStyle = { color: '#1A2A1E', fontSize: '1.05rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 400, display: 'block' };
                             const divStyle = { width: 1, background: 'rgba(0,0,0,0.06)', flexShrink: 0 };
                             const rows = [];
                             for (let i = 0; i < cells.length; i += 2) {
@@ -935,55 +936,108 @@ function Home() {
                 React.createElement("div", { className: "info-section", style: { borderColor: '#3A8A5A' } },
                     React.createElement("p", { style: { color: '#5A8A6A', fontSize: '0.72rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, letterSpacing: '0.2em', marginBottom: 8 } }, "WHAT IS VALUJACK"),
                     React.createElement("h2", { style: { fontFamily: 'Playfair Display,serif', fontSize: '1.7rem', color: '#E8F5EE', lineHeight: 1.2, marginBottom: 12 } }, "Not a stock tip. A daily edge."),
-                    React.createElement("p", { style: { color: '#A8C4B4', fontSize: '1.1rem', lineHeight: 1.75, fontFamily: 'EB Garamond,serif', marginBottom: 10 } }, "Every day, AI screens hundreds of pre-selected quality companies. Serious analysis \u2014 served in a playful way. We filtered out the junk. You see only quality businesses trading below calculated fair value."),
-                    React.createElement("p", { style: { color: '#A8C4B4', fontSize: '1.1rem', lineHeight: 1.75, fontFamily: 'EB Garamond,serif' } }, "The result is a hand of cards. Each card is a real company, selected by a real process \u2014 not an algorithm chasing momentum, not a sponsored pick. The casino metaphor is intentional: investing well requires nerve, patience, and knowing when the odds are in your favour.")),
+                    React.createElement("p", { style: { color: '#A8C4B4', fontSize: '1.1rem', lineHeight: 1.75, fontFamily: 'EB Garamond,serif', marginBottom: 10 } }, "Every day, we screen hundreds of quality companies through six proven investment strategies \u2014 from dividend aristocrats to momentum leaders, from contrarian recoveries to growth at the right price. Serious analysis, served as playing cards."),
+                    React.createElement("p", { style: { color: '#A8C4B4', fontSize: '1.1rem', lineHeight: 1.75, fontFamily: 'EB Garamond,serif' } }, "Each card is a real company surfaced by a real methodology \u2014 a proven framework developed by a respected investor, applied to today\u2019s market. No sponsored picks. No noise. The blackjack metaphor is intentional: investing well requires nerve, patience, and knowing when the odds are in your favour.")),
                 React.createElement("div", { className: "info-section", style: { borderColor: '#3A8A5A' } },
                     React.createElement("p", { style: { color: '#5A8A6A', fontSize: '0.72rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, letterSpacing: '0.2em', marginBottom: 8 } }, "THE CARDS"),
                     React.createElement("h2", { style: { fontFamily: 'Playfair Display,serif', fontSize: '1.7rem', color: '#E8F5EE', lineHeight: 1.2, marginBottom: 16 } }, "Six card types. Six proven strategies."),
-                    React.createElement("div", { style: { marginBottom: 14 } },
-                        React.createElement("div", { style: { display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 } },
-                            React.createElement("span", { className: "card-pill", style: { background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.18)', color: '#D8EAE0' } }, "\u265A KING"),
-                            React.createElement("span", { className: "card-pill", style: { background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.18)', color: '#A8C4B4', fontSize: '0.75rem' } }, "FREE")),
-                        React.createElement("p", { style: { color: '#A8C4B4', fontSize: '1.05rem', lineHeight: 1.7, fontFamily: 'EB Garamond,serif' } },
-                            React.createElement("span", { style: { color: '#E8F5EE', fontWeight: 700, fontFamily: 'EB Garamond,serif' } }, "Steady Income —"),
-                            " These are businesses that have raised their dividend every single year for at least a decade. They don't need the economy to boom — they just keep paying and growing. You get income while you wait for the price to catch up to fair value. Boring? Maybe. Profitable? Absolutely.")),
-                    React.createElement("div", { style: { marginBottom: 14 } },
-                        React.createElement("div", { style: { display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 } },
-                            React.createElement("span", { className: "card-pill", style: { background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.18)', color: '#D8EAE0' } }, "\u265D JACK"),
-                            React.createElement("span", { className: "card-pill", style: { background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.18)', color: '#A8C4B4', fontSize: '0.75rem' } }, "FREE")),
-                        React.createElement("p", { style: { color: '#A8C4B4', fontSize: '1.05rem', lineHeight: 1.7, fontFamily: 'EB Garamond,serif' } },
-                            React.createElement("span", { style: { color: '#E8F5EE', fontWeight: 700, fontFamily: 'EB Garamond,serif' } }, "Ride the Winners —"),
-                            " Stocks with accelerating earnings backed by a confirmed uptrend. The strategy only buys when the market agrees — price above key moving averages, institutional money flowing in. You hop on the train after it's already picked up speed — when the momentum is on your side.")),
-                    React.createElement("div", { style: { marginBottom: 14 } },
-                        React.createElement("div", { style: { display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 } },
-                            React.createElement("span", { className: "card-pill", style: { background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.18)', color: '#D8EAE0' } }, "\u265B QUEEN"),
-                            React.createElement("span", { className: "card-pill", style: { background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.18)', color: '#A8C4B4', fontSize: '0.75rem' } }, "PRO")),
-                        React.createElement("p", { style: { color: '#A8C4B4', fontSize: '1.05rem', lineHeight: 1.7, fontFamily: 'EB Garamond,serif' } },
-                            React.createElement("span", { style: { color: '#E8F5EE', fontWeight: 700, fontFamily: 'EB Garamond,serif' } }, "Quality Picks —"),
-                            " Magic Formula companies that earn exceptional returns on every dollar they invest, compounding wealth year after year. Found when the market temporarily misprices them. You get a great business without overpaying.")),
-                    React.createElement("div", { style: { marginBottom: 14 } },
-                        React.createElement("div", { style: { display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 } },
-                            React.createElement("span", { className: "card-pill", style: { background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.18)', color: '#D8EAE0' } },
-                                React.createElement("span", { className: "white-spade" }, "\u2660\uFE0E"),
-                                " ACE"),
-                            React.createElement("span", { className: "card-pill", style: { background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.18)', color: '#A8C4B4', fontSize: '0.75rem' } }, "PRO")),
-                        React.createElement("p", { style: { color: '#A8C4B4', fontSize: '1.05rem', lineHeight: 1.7, fontFamily: 'EB Garamond,serif' } },
-                            React.createElement("span", { style: { color: '#E8F5EE', fontWeight: 700, fontFamily: 'EB Garamond,serif' } }, "Promising Improvers —"),
-                            " Companies quietly getting stronger behind the scenes. The Piotroski F-Score captures nine signs of improving financial health — rising cash flow, shrinking debt, and widening margins. These businesses rarely make headlines. But the numbers are tightening up, and the market hasn't noticed yet.")),
-                    React.createElement("div", { style: { marginBottom: 4 } },
-                        React.createElement("div", { style: { display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 } },
-                            React.createElement("span", { className: "card-pill", style: { background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.18)', color: '#D8EAE0' } }, "\u2605 JOKER"),
-                            React.createElement("span", { className: "card-pill", style: { background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.18)', color: '#A8C4B4', fontSize: '0.75rem' } }, "PRO")),
-                        React.createElement("p", { style: { color: '#A8C4B4', fontSize: '1.05rem', lineHeight: 1.7, fontFamily: 'EB Garamond,serif' } },
-                            React.createElement("span", { style: { color: '#E8F5EE', fontWeight: 700, fontFamily: 'EB Garamond,serif' } }, "Fast Growth —"),
-                            " Tomorrow's market leaders, found today. CANSLIM looks for companies with exploding earnings, rising revenue, and institutions buying heavily. These stocks are already near their highs — because the best growth stocks keep making new highs. High conviction, high upside, higher risk.")),
-                    React.createElement("div", { style: { marginBottom: 4 } },
-                        React.createElement("div", { style: { display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 } },
-                            React.createElement("span", { className: "card-pill", style: { background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.18)', color: '#D8EAE0' } }, "2 TWO"),
-                            React.createElement("span", { className: "card-pill", style: { background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.18)', color: '#A8C4B4', fontSize: '0.75rem' } }, "FREE")),
-                        React.createElement("p", { style: { color: '#A8C4B4', fontSize: '1.05rem', lineHeight: 1.7, fontFamily: 'EB Garamond,serif' } },
-                            React.createElement("span", { style: { color: '#E8F5EE', fontWeight: 700, fontFamily: 'EB Garamond,serif' } }, "Contrarian Recovery —"),
-                            " Quality companies temporarily beaten down by the market. They still have strong fundamentals — high return on capital, solid cash flow, low debt — but their price has fallen hard. The thesis is simple: good businesses recover. You buy the fear and wait for the market to remember what these companies are worth."))),
+                    (function(){
+                        const STRATEGIES = [
+                            { code: 'KING',  name: 'KING',  tagline: 'Dividends',       tier: 'FREE', pick: 'Consistency that compounds',
+                              tag: 'Companies combining attractive dividends, strong cash generation, sustainable payouts, and consistent earnings.',
+                              body: "Established businesses with a long track record of stable cash generation and reliable, growing dividends. They operate with discipline and resilience across economic cycles — through recessions, oil shocks, and pandemics. You earn income while the price catches up to fair value.",
+                              why: "Dividend growth strategies have historically delivered competitive returns with lower volatility, supported by both income and capital appreciation." },
+                            { code: 'JACK',  name: 'JACK',  tagline: 'Momentum',        tier: 'FREE', pick: 'Strength that continues',
+                              tag: 'Mark Minervini\u2019s momentum strategy: leaders with sustained price strength and accelerating earnings.',
+                              body: "Companies already demonstrating strong performance — sustained upward price trends, accelerating earnings, confirmation from market behaviour. Rather than anticipating reversals, this approach aligns with proven strength.",
+                              why: "Momentum is one of the most persistent factors in financial markets. Companies that outperform tend to continue outperforming — often longer than expected." },
+                            { code: 'TWO',   name: 'TWO',   tagline: 'Contrarian',     tier: 'FREE', pick: 'Value through patience',
+                              tag: 'David Dreman\u2019s contrarian play: sound companies that have bottomed and are beginning a new uptrend.',
+                              body: "Strong balance sheets, real cash flow, returning capital — but the price has fallen on weak sentiment. The focus stays on underlying strength, not market mood. You buy the fear while the quality is intact.",
+                              why: "Investor behaviour overreacts to negative developments. When sentiment normalises, valuations follow." },
+                            { code: 'QUEEN', name: 'QUEEN', tagline: 'Magic Formula',   tier: 'PRO',  pick: 'Quality, disciplined by price',
+                              tag: 'Joel Greenblatt\u2019s formula: good businesses ranked on profitability and earnings yield.',
+                              body: "Combines strong underlying business quality with attractive valuation, ranked systematically. Greenblatt deliberately removed the qualitative judgement that lets emotion creep in.",
+                              why: "Over time, markets reward efficient, high-quality businesses — especially when acquired at reasonable prices." },
+                            { code: 'ACE',   name: 'ACE',   tagline: 'Financial Score', tier: 'PRO',  pick: 'Improvement before recognition',
+                              tag: 'Joseph Piotroski\u2019s F-Score: cheap stocks getting fundamentally stronger.',
+                              body: "Companies where fundamentals are quietly strengthening — improving profitability, stronger balance sheets, rising cash flow quality. These changes are often not yet reflected in the share price.",
+                              why: "Markets are not always efficient in the short term. Early improvements in financial health often precede significant revaluation." },
+                            { code: 'JOKER', name: 'JOKER', tagline: 'Growth',          tier: 'PRO',  pick: 'Tomorrow\u2019s leaders',
+                              tag: 'William O\u2019Neil\u2019s CANSLIM: explosive earnings, market leadership, institutional buying.',
+                              body: "Strong earnings and revenue expansion, market leadership characteristics, increasing institutional interest. Dynamic businesses shaping their industries.",
+                              why: "A large share of long-term market winners originate from periods of sustained high growth before becoming widely recognised." },
+                        ];
+                        const sel = STRATEGIES.find(s => s.code === selectedStrategyTab) || STRATEGIES[0];
+                        const ct = CARD_TYPES[sel.code];
+                        // Tab bar
+                        const tabs = React.createElement("div", { style: { display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 18 } },
+                            STRATEGIES.map(s => {
+                                const active = s.code === selectedStrategyTab;
+                                const tct = CARD_TYPES[s.code];
+                                return React.createElement("button", {
+                                    key: s.code,
+                                    onClick: () => setSelectedStrategyTab(s.code),
+                                    style: {
+                                        flex: '1 1 30%', minWidth: 90, padding: '8px 6px',
+                                        background: active ? 'rgba(255,255,255,0.10)' : 'rgba(255,255,255,0.03)',
+                                        border: active ? '1px solid ' + (s.tier === 'PRO' ? '#C9A84C' : '#B8B8B8') : '1px solid rgba(255,255,255,0.10)',
+                                        borderRadius: 8, cursor: 'pointer', textAlign: 'center',
+                                        transition: 'all 0.15s ease',
+                                    }
+                                },
+                                    React.createElement("div", { style: Object.assign({ fontSize: '1.5rem', lineHeight: 1, marginBottom: 4 },
+                                        (s.tier === 'PRO'
+                                            ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }
+                                            : { background: 'linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#E0DDDA 45%,#A9A9A9 65%,#D0CDCA 80%,#8A8A8A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }
+                                        )) }, tct.symbol),
+                                    React.createElement("div", { style: { fontFamily: 'Barlow Condensed,sans-serif', fontSize: '0.85rem', fontWeight: 700, letterSpacing: '0.12em', color: '#E8F5EE', marginBottom: 2 } }, s.name),
+                                    React.createElement("div", { style: { fontFamily: 'EB Garamond,serif', fontSize: '0.78rem', fontStyle: 'italic', color: '#A8C4B4' } }, s.tagline),
+                                );
+                            })
+                        );
+                        // The card — styled like a drawn card, but with strategy content
+                        // Card frame is gold for PRO, silver for FREE (replaces old corner pill)
+                        const tierBorder = sel.tier === 'PRO'
+                            ? '6px solid #C9A84C'
+                            : '6px solid #B8B8B8';
+                        const card = React.createElement("div", {
+                            style: {
+                                background: '#F5EFDF', borderRadius: 16, padding: '24px 22px 28px',
+                                position: 'relative', overflow: 'hidden',
+                                boxShadow: '0 12px 32px rgba(0,0,0,0.35)',
+                                border: tierBorder,
+                                color: '#1A1A2E',
+                            }
+                        },
+                            // Top corner: K / Q / J etc — use strategy color (always visible on cream)
+                            React.createElement("div", { style: { position: 'absolute', top: 12, left: 14 } },
+                                React.createElement("div", { style: { fontSize: '2.4rem', fontWeight: 900, fontFamily: 'Playfair Display,serif', lineHeight: 0.9, color: ct.color } }, ct.corner)),
+                            // Center symbol — solid beige/silver to avoid gradient render bug
+                            React.createElement("div", { style: { textAlign: 'center', marginTop: 10, marginBottom: 4 } },
+                                React.createElement("div", { style: Object.assign({ fontSize: '3.2rem', lineHeight: 1 },
+                                    (ct.symbolColor === 'GOLD' || ct.symbolColor === 'SILVER' || ct.symbolColor === 'WHITE'
+                                        ? { color: sel.tier === 'PRO' ? '#C9A84C' : '#B8B8B8' }
+                                        : { color: ct.color })) }, ct.symbol)),
+                            // Strategy name
+                            React.createElement("p", { style: { textAlign: 'center', color: '#1A1A2E', fontWeight: 700, fontSize: '1.7rem', fontFamily: 'Playfair Display,serif', lineHeight: 1.1, marginTop: 6 } }, sel.name),
+                            // Tagline (italic) — Dividends / Magic Formula / etc
+                            React.createElement("p", { style: { textAlign: 'center', color: ct.color, fontSize: '1.1rem', fontStyle: 'italic', fontFamily: 'EB Garamond,serif', marginTop: 2 } }, sel.tagline),
+                            // Divider
+                            React.createElement("div", { style: { height: 1, background: 'linear-gradient(to right,transparent,' + ct.color + ',transparent)', margin: '14px 6%' } }),
+                            // Pick headline — use strategy color (always visible on cream)
+                            React.createElement("p", { style: { textAlign: 'center', color: ct.color, fontWeight: 700, fontSize: '1.2rem', fontFamily: 'Playfair Display,serif', marginTop: 4 } }, sel.pick),
+                            // Tag/subtitle
+                            React.createElement("p", { style: { textAlign: 'center', color: '#444', fontSize: '0.98rem', fontStyle: 'italic', fontFamily: 'EB Garamond,serif', lineHeight: 1.4, padding: '6px 4px 0' } }, sel.tag),
+                            // Body description
+                            React.createElement("p", { style: { color: '#2A2A38', fontSize: '1.02rem', fontFamily: 'EB Garamond,serif', lineHeight: 1.7, marginTop: 14, padding: '0 4px' } }, sel.body),
+                            // Why it works box — soft band, indented, italic
+                            React.createElement("div", { style: { marginTop: 16, padding: '12px 14px', background: 'rgba(0,0,0,0.04)', borderLeft: '3px solid ' + (sel.tier === 'PRO' ? '#C9A84C' : '#B8B8B8'), borderRadius: 4 } },
+                                React.createElement("p", { style: { color: '#5A5A6A', fontSize: '0.72rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, letterSpacing: '0.2em', marginBottom: 4 } }, "WHY IT WORKS"),
+                                React.createElement("p", { style: { color: '#2A2A38', fontSize: '0.96rem', fontFamily: 'EB Garamond,serif', fontStyle: 'italic', lineHeight: 1.55 } }, sel.why)),
+                        );
+                        return [tabs, card];
+                    })()),
                 React.createElement("div", { className: "info-section", style: { borderColor: '#3A8A5A' } },
                     React.createElement("p", { style: { color: '#5A8A6A', fontSize: '0.72rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, letterSpacing: '0.2em', marginBottom: 8 } }, "READING A CARD"),
                     React.createElement("h2", { style: { fontFamily: 'Playfair Display,serif', fontSize: '1.7rem', color: '#E8F5EE', lineHeight: 1.2, marginBottom: 12 } }, "Tap once to reveal. Tap again to go deep."),
@@ -1028,7 +1082,7 @@ function Home() {
                     } },
                     React.createElement("p", { id: "proSection", style: { color: '#C9A84C', fontSize: '0.72rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, letterSpacing: '0.2em', marginBottom: 8 } }, "VALUJACK PRO"),
                     React.createElement("h2", { style: { fontFamily: 'Playfair Display,serif', fontSize: '1.7rem', lineHeight: 1.2, marginBottom: 12, background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, "The full hand. $9.99/month."),
-                    React.createElement("p", { style: { color: '#A8C4B4', fontSize: '1.05rem', lineHeight: 1.75, fontFamily: 'EB Garamond,serif', marginBottom: 14 } }, "Free members receive two cards daily \u2014 the King (dividend compounder), the Jack (momentum winner), or the Two (contrarian recovery). PRO members get the full hand: Queen, Ace, and Joker. Three additional strategies, selected by the same rigorous process. Two cards every morning, six strategies in rotation. Cancel any time."),
+                    React.createElement("p", { style: { color: '#A8C4B4', fontSize: '1.05rem', lineHeight: 1.75, fontFamily: 'EB Garamond,serif', marginBottom: 14 } }, "Free gives you three strategies: King, Jack, and Two. PRO unlocks the other three \u2014 Queen, Ace, and Joker \u2014 completing the full hand. Six strategies designed to perform across different market conditions: dividends, momentum, contrarian recovery, value, improving fundamentals, and growth. A complete portfolio toolkit, not just a watchlist. Two cards every morning. Cancel any time."),
                     React.createElement("button", { onClick: function(){ var o=document.querySelector('.info-overlay'); if(o) o.style.display='none'; setShowInfo(false); window.showProLoader(); window.VJ_proUnlocked = true; setFlipped(function(f){ return f.slice(); }); }, style: {
                             background: GOLD, border: 'none', borderRadius: 8,
                             padding: '12px 28px', cursor: 'pointer',
