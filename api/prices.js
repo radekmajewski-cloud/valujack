@@ -1,6 +1,16 @@
 // Vercel serverless function to proxy Yahoo Finance requests
 // This avoids CORS issues when fetching live prices from the browser
 
+// Yahoo Finance returns UK stocks in pence (currency = "GBp" or "GBX").
+// Normalize to pounds (GBP) so downstream code can treat all prices uniformly.
+function normalize(price, currency) {
+  if (price == null) return { price: null, currency: currency };
+  if (currency === 'GBp' || currency === 'GBX') {
+    return { price: price / 100, currency: 'GBP' };
+  }
+  return { price: price, currency: currency || 'USD' };
+}
+
 export default async function handler(req, res) {
   // Enable CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -32,13 +42,14 @@ export default async function handler(req, res) {
 
           const data = await response.json();
           const result = data?.chart?.result?.[0];
-          const price = result?.meta?.regularMarketPrice;
-          const currency = result?.meta?.currency;
+          const rawPrice = result?.meta?.regularMarketPrice;
+          const rawCurrency = result?.meta?.currency;
 
-          if (price) {
+          if (rawPrice) {
+            const { price, currency } = normalize(rawPrice, rawCurrency);
             results[t] = {
               price: price,
-              currency: currency || 'USD'
+              currency: currency
             };
           }
         } catch (error) {
@@ -69,18 +80,20 @@ export default async function handler(req, res) {
     
     // Extract the current price
     const result = data?.chart?.result?.[0];
-    const price = result?.meta?.regularMarketPrice;
-    const currency = result?.meta?.currency;
+    const rawPrice = result?.meta?.regularMarketPrice;
+    const rawCurrency = result?.meta?.currency;
     const symbol = result?.meta?.symbol;
 
-    if (!price) {
+    if (!rawPrice) {
       throw new Error('Price data not available');
     }
+
+    const { price, currency } = normalize(rawPrice, rawCurrency);
 
     return res.status(200).json({
       ticker: symbol || ticker,
       price: price,
-      currency: currency || 'USD',
+      currency: currency,
       timestamp: Date.now()
     });
 

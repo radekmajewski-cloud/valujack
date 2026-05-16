@@ -35,8 +35,11 @@ export default async function handler(req) {
         }
         const timestamps = result.timestamp;
         const closes = result.indicators.quote[0].close;
+        // Normalize UK stocks quoted in pence (GBp / GBX) to pounds (GBP)
+        const currency = result.meta?.currency;
+        const divisor = (currency === 'GBp' || currency === 'GBX') ? 100 : 1;
         const points = timestamps
-            .map((t, i) => ({ t, c: closes[i] }))
+            .map((t, i) => ({ t, c: closes[i] != null ? closes[i] / divisor : closes[i] }))
             .filter(p => p.c !== null && p.c !== undefined && !isNaN(p.c));
         if (points.length < 4) throw new Error('Insufficient data');
         cache[ticker] = { ts: now, data: points };
