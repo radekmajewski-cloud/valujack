@@ -1130,8 +1130,9 @@ function Home() {
                                 React.createElement("div", { style: { height: 1, background: 'rgba(0,0,0,0.06)', marginTop: 4 } }));
                         })(),
                         (() => {
-                            const _badgeLive = prices && prices[ec.id] && prices[ec.id].price ? prices[ec.id].price : null;
-                            const _badgeMos = _badgeLive && ec.fairValue ? (_badgeLive - ec.fairValue) / ec.fairValue * -1 : null;
+                            const _badgeLiveRaw = prices && prices[ec.id] && prices[ec.id].price ? prices[ec.id].price : null;
+                            const _badgeLive = normalizePrice(_badgeLiveRaw, ec);
+                            const _badgeMos = _badgeLive && ec.fairValue ? (ec.fairValue - _badgeLive) / ec.fairValue : null;
                             const _badgeLabel = _badgeMos === null ? null : _badgeMos >= 0.25 ? '▲▲ STRONGLY UNDERVALUED' : _badgeMos >= 0.05 ? '▲ UNDERVALUED' : _badgeMos >= -0.05 ? '◈ FAIRLY VALUED' : '▽ OVERVALUED';
                             const _badgePc = _badgeLabel && _badgeLabel.includes('STRONGLY') ? { bg: 'rgba(27,94,32,0.10)', bd: 'rgba(76,175,80,0.35)', c: '#2E7D32' } : _badgeLabel && _badgeLabel.includes('UNDERVALUED') ? { bg: 'rgba(139,105,20,0.08)', bd: 'rgba(201,168,76,0.4)', c: '#7A4A00' } : _badgeLabel && _badgeLabel.includes('FAIRLY') ? { bg: 'rgba(30,80,150,0.07)', bd: 'rgba(80,130,200,0.3)', c: '#1A4A8A' } : _badgeLabel ? { bg: 'rgba(150,30,30,0.07)', bd: 'rgba(200,80,80,0.3)', c: '#8A1A1A' } : null;
                             return _badgeLabel && _badgePc ? React.createElement("div", { style: { textAlign: 'center', padding: '6px 10px 0' } }, React.createElement("span", { style: { fontSize: '0.62rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, letterSpacing: '0.13em', textTransform: 'uppercase', color: _badgePc.c, background: _badgePc.bg, border: '1px solid ' + _badgePc.bd, borderRadius: 20, padding: '3px 14px' } }, _badgeLabel)) : null;
