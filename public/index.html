@@ -327,7 +327,16 @@ function Home() {
             .then(r => r.ok ? r.json() : Promise.reject('fetch'))
             .then(pts => {
                 if (pts.error) throw new Error(pts.error);
-                setChartData({ points: pts, loading: false, error: null });
+                // Normalize UK pence-quoted historical prices: if .L ticker AND median price > 10x fairValue, divide all closes by 100
+                let normalized = pts;
+                if (card.yahooTicker && card.yahooTicker.endsWith('.L') && card.fairValue && Array.isArray(pts) && pts.length > 0) {
+                    const sortedCloses = pts.map(p => p.c).filter(c => c != null).sort((a,b) => a-b);
+                    const median = sortedCloses[Math.floor(sortedCloses.length/2)];
+                    if (median > card.fairValue * 10) {
+                        normalized = pts.map(p => ({ ...p, c: p.c / 100 }));
+                    }
+                }
+                setChartData({ points: normalized, loading: false, error: null });
             })
             .catch(() => setChartData({ points: null, loading: false, error: true }));
     }, [expanded]);
