@@ -250,6 +250,18 @@ function priceScore(mosPercent) {
     return 10;
 }
 
+// Normalize live price for unit mismatches.
+// LSE (.L) stocks are quoted in pence (GBX). When Yahoo returns 356 for a £3.56 stock,
+// the price needs to be divided by 100. We only correct when the ratio is clearly wrong
+// (price > 10x fair value) to avoid touching legitimate prices.
+function normalizePrice(rawPrice, card) {
+    if (!rawPrice || !card || !card.yahooTicker) return rawPrice;
+    if (card.yahooTicker.endsWith('.L') && card.fairValue && rawPrice > card.fairValue * 10) {
+        return rawPrice / 100;
+    }
+    return rawPrice;
+}
+
 // Combined weight using the strategy multipliers
 function combinedWeight(card, mosPercent) {
     const w = STRATEGY_WEIGHTS[card.type];
@@ -431,7 +443,7 @@ function Home() {
               }
 
               const quote = effectivePrices[c.id];
-              const currentPrice = quote?.price;
+              const currentPrice = normalizePrice(quote?.price, c);
               const fairValue = c.fairValue;
               // TEMP DISABLED:               if (!currentPrice || !fairValue) return false;
 
@@ -823,9 +835,7 @@ function Home() {
                                                 React.createElement("p", { style: { color: ct.color, fontWeight: 500, fontSize: '1.55rem', fontFamily: 'Barlow Condensed,sans-serif' } }, card.ind2l === 'P/E' && ((_d = prices[card.id]) === null || _d === void 0 ? void 0 : _d.pe)
                                                     ? prices[card.id].pe.toFixed(1)
                                                     : card.ind2l === 'UNDERVALUED BY' && prices[card.id] && card.fairValue
-                                                        ? (prices[card.id].price < card.fairValue
-                                                            ? Math.round((card.fairValue - prices[card.id].price) / card.fairValue * 100) + '%'
-                                                            : Math.round((card.fairValue - prices[card.id].price) / card.fairValue * 100) + '%')
+                                                        ? (function(){ var p = normalizePrice(prices[card.id].price, card); return Math.round((card.fairValue - p) / card.fairValue * 100) + '%'; })()
                                                         : card.ind2v)))),
                                     React.createElement("div", { style: { position: 'relative', flexShrink: 0, height: '5rem', marginBottom: '3px' } },
                                         React.createElement("div", { style: { position: 'absolute', bottom: 0, left: 0, right: 0, textAlign: 'center' } },
@@ -886,8 +896,9 @@ function Home() {
                     React.createElement("div", { style: { flex: 1, minHeight: 0, overflowY: 'auto', overflowX: 'hidden', padding: '0 0 8px', WebkitOverflowScrolling: 'touch' } },
                         React.createElement("p", { style: { color: '#444', fontSize: isMobile ? '1.05rem' : '1.18rem', fontStyle: 'italic', fontFamily: 'EB Garamond,serif', lineHeight: 1.65, padding: '8px 18px 6px', margin: 0 } }, (() => { const s = (ec.tagFull || '').match(/[^.!?]+[.!?]+/g) || [ec.tagFull]; return s.slice(0, 2).join(' ').trim(); })()),
                                                 ec.scores && ec.scores.length > 0 && (() => {
-                            const _spLive = prices && prices[ec.id] && prices[ec.id].price ? prices[ec.id].price : (typeof prices[ec.id] === 'number' ? prices[ec.id] : null);
-                            const _spMos = _spLive && ec.fairValue ? (ec.fairValue - _spLive) / _spLive : null;
+                            const _spLiveRaw = prices && prices[ec.id] && prices[ec.id].price ? prices[ec.id].price : (typeof prices[ec.id] === 'number' ? prices[ec.id] : null);
+                            const _spLive = normalizePrice(_spLiveRaw, ec);
+                            const _spMos = _spLive && ec.fairValue ? (ec.fairValue - _spLive) / ec.fairValue : null;
                             const _spFairV = _spMos === null ? null : _spMos >= 0.25 ? 10 : _spMos >= 0.20 ? 9 : _spMos >= 0.10 ? 7 : _spMos >= 0.05 ? 6 : _spMos >= -0.05 ? 5 : 3;
                             const scores = _spFairV === null ? ec.scores : ec.scores.map(s => s.l === 'Fair Price' ? {...s, v: _spFairV} : s);
                             const N = scores.length;
@@ -1009,8 +1020,9 @@ function Home() {
                                 return null;
                             };
                             const priceData = prices[ec.id];
-                            const livePrice = priceData && priceData.price
-                                ? (priceData.price > 1000 ? Math.round(priceData.price).toLocaleString() : priceData.price > 100 ? priceData.price.toFixed(1) : priceData.price.toFixed(2))
+                            const _normalizedPrice = priceData && priceData.price ? normalizePrice(priceData.price, ec) : null;
+                            const livePrice = _normalizedPrice
+                                ? (_normalizedPrice > 1000 ? Math.round(_normalizedPrice).toLocaleString() : _normalizedPrice > 100 ? _normalizedPrice.toFixed(1) : _normalizedPrice.toFixed(2))
                                 : '—';
                             const pe = fromMetrics('p/e', 'pe') || '—';
                             const fv = ec.fairValue ? String(ec.fairValue) : '—';
@@ -1086,8 +1098,9 @@ function Home() {
                             const isUp = pctChange >= 0;
                             const lineCol = isUp ? '#4CAF82' : '#E06060';
                             const fvY = fv ? clamp(py(fv)) : null;
-                            const _livePrice = prices && prices[ec.id] && prices[ec.id].price ? prices[ec.id].price : (typeof prices[ec.id] === 'number' ? prices[ec.id] : null);
-                            const _mos = _livePrice && ec.fairValue ? (ec.fairValue - _livePrice) / _livePrice : null;
+                            const _livePriceRaw = prices && prices[ec.id] && prices[ec.id].price ? prices[ec.id].price : (typeof prices[ec.id] === 'number' ? prices[ec.id] : null);
+                            const _livePrice = normalizePrice(_livePriceRaw, ec);
+                            const _mos = _livePrice && ec.fairValue ? (ec.fairValue - _livePrice) / ec.fairValue : null;
                             const _dynLabel = _mos === null ? null : _mos >= 0.25 ? '▲▲ STRONGLY UNDERVALUED' : _mos >= 0.05 ? '▲ UNDERVALUED' : _mos >= -0.05 ? '◈ FAIRLY VALUED' : '▽ OVERVALUED';
                             const _rawBody = (ec.pickFull || '').replace(/^[▲◈▽]+\s*[A-Z\s]+\s*[—–-]+\s*/, '').trim();
                             const _raw = _dynLabel ? _dynLabel + ' — ' + _rawBody : (ec.pickFull || '');
