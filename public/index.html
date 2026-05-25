@@ -441,6 +441,8 @@ function Home() {
         const effectivePrices = { ...prices };
         cards.forEach(c => { if (c.type === 'TWO' && !effectivePrices[c.id]) effectivePrices[c.id] = { price: c.fairValue * 0.8, currency: 'USD' }; });
         const eligibleCards = cards.filter(c => {
+              // PHASE 0: Weekly approved pool — only cards approved on Sunday can appear
+              if (c.approvedWeek !== true) return false;
               // PHASE 1: Manual block — admin override, drops card from rotation
               if (c.manualBlock === true) return false;
 
