@@ -91,6 +91,7 @@ body{background:var(--gd);color:var(--tp);font-family:"Barlow Condensed",sans-se
       <button class="nb" onclick="showTab(this,'t-hi')">14-Day History</button>
       <button class="nb" onclick="showTab(this,'t-is')">Issues</button>
       <button class="nb" onclick="showTab(this,'t-pl')">Card Pool</button>
+      <button class="nb" onclick="showTab(this,'t-wr')">Weekly Review</button>
       <button class="nb" onclick="showTab(this,'t-mg')">Manage</button>
     </div>
     <div style="font-size:0.65rem;color:var(--tm);" id="hd"></div>
@@ -106,7 +107,7 @@ body{background:var(--gd);color:var(--tp);font-family:"Barlow Condensed",sans-se
     </div>
     <div class="tab" id="t-hi">
       <div class="pn"><div class="pt">14-Day Draw History</div>
-        <table class="ht"><thead><tr><th>Date</th><th>Free Card</th><th>Strategy</th><th>Stars</th><th>Pro Card</th><th>Strategy</th><th>Stars</th></tr></thead><tbody id="hi-body"></tbody></table>
+        <div style="margin-bottom:12px;display:flex;gap:8px;align-items:center;"><button id="hi-export" style="background:rgba(191,168,130,0.18);border:1px solid rgba(191,168,130,0.5);border-radius:6px;padding:8px 14px;color:rgba(201,168,76,0.95);font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;">Download CSV</button><button id="hi-clear" style="background:rgba(180,80,80,0.12);border:1px solid rgba(180,80,80,0.4);border-radius:6px;padding:8px 14px;color:rgba(220,140,140,0.9);font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;">Clear Log</button><span id="hi-count" style="font-size:0.7rem;color:var(--tm);letter-spacing:0.14em;"></span></div><table class="ht"><thead><tr><th>Date</th><th>Free Card</th><th>Strategy</th><th>★</th><th>Price</th><th>Pro Card</th><th>Strategy</th><th>★</th><th>Price</th></tr></thead><tbody id="hi-body"></tbody></table>
       </div>
     </div>
     <div class="tab" id="t-is">
@@ -121,6 +122,21 @@ body{background:var(--gd);color:var(--tp);font-family:"Barlow Condensed",sans-se
         </div>
         <div class="ptabs" id="pl-tabs"></div>
         <div id="pl-table"></div>
+      </div>
+    </div>
+    <div class="tab" id="t-wr">
+      <div class="pn">
+        <div class="pt">Weekly Review</div>
+        <div style="font-size:0.78rem;color:var(--ts);margin-bottom:14px;line-height:1.6;">
+          Review proposed weekly context signals from the Sunday news scan. Each card can be BLOCK (drop from rotation for 14 days), NEUTRAL (no change), or BOOST (highlight on card with news note). Edit any signal or note inline, tick "Approve" for each card you want to apply, then click <em>Save approved &amp; download cards.js</em>. Replace your local cards.js with the downloaded file and redeploy.
+        </div>
+        <div style="display:flex;gap:12px;align-items:center;margin-bottom:16px;flex-wrap:wrap;">
+          <button class="bd-btn" onclick="wrApproveAll()" style="background:rgba(76,175,130,0.15);border:1px solid rgba(76,175,130,0.5);color:#9FE0BD;">Approve all</button>
+          <button class="bd-btn" onclick="wrApproveNone()">Clear approvals</button>
+          <button class="bd-btn" onclick="wrSaveDownload()" style="background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.5);color:#E8D4A0;">Save approved &amp; download cards.js</button>
+          <span id="wr-status" style="font-size:0.78rem;color:var(--ts);"></span>
+        </div>
+        <div id="wr-table"></div>
       </div>
     </div>
     <div class="tab" id="t-mg">
@@ -157,7 +173,7 @@ var GC="linear-gradient(135deg,#BFA882 0%,#DDBF88 22%,#A88A60 42%,#CAB07A 62%,#8
 var SC="linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#E0DDDA 45%,#A9A9A9 65%,#D0CDCA 80%,#8A8A8A 100%)";
 var TM={KING:{s:"&#9818;",c:"#C8B89A"},JACK:{s:"&#9821;",c:"#A8C4B4"},QUEEN:{s:"&#9819;",c:"#BFA882"},ACE:{s:"&#9824;",c:"#9B8ED4"},JOKER:{s:"&#9733;",c:"#D4A84A"},TWO:{s:"2",c:"#C47878"}};
 var FS=["KING","JACK","TWO"],PS=["QUEEN","ACE","JOKER"];
-var pStrat="KING",pCards=[],pExclude=new Set(),pToday=new Set();
+var pStrat="KING",pCards=[],pExclude=new Set(),pToday=new Set(),pSortKey=null,pSortDir=1;
 
 // ── METHODOLOGY: STRATEGY WEIGHTS (Phase 2A) ────────────────────────────────
 // Each strategy weights Fundamentals / Context / Price differently.
@@ -209,6 +225,92 @@ function combinedWeight(card, mosPercent) {
 // ──────────────────────────────────────────────────────────────────────────
 
 function login(){if(document.getElementById("pwi").value===PW){document.getElementById("ls").style.display="none";document.getElementById("as").style.display="block";init();}else document.getElementById("lerr").style.display="block";}
+
+// ─── Draw log: render history table + CSV export ───────────────────────
+function vjRenderHistory(){
+    try{
+        var raw = localStorage.getItem('vj_draw_log');
+        var rows = raw ? JSON.parse(raw) : [];
+        rows.sort(function(a,b){ return (b.date||'').localeCompare(a.date||''); });
+        var tbody = document.getElementById('hi-body');
+        var count = document.getElementById('hi-count');
+        if (count) count.textContent = rows.length + ' entries';
+        if (!tbody) return;
+        if (rows.length === 0){
+            tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:24px;color:var(--tm);">No draws logged yet. Open valujack.com once for today\'s draw to be recorded.</td></tr>';
+            return;
+        }
+        tbody.innerHTML = rows.map(function(r){
+            function fmt(p,c){ if(p==null) return '<span style="color:var(--tm)">—</span>'; return (Math.round(p*100)/100) + ' ' + (c||''); }
+            return '<tr>'+
+                '<td>'+(r.date||'')+'</td>'+
+                '<td>'+(r.free_ticker||'')+' <span style="color:var(--tm);font-size:0.78em;">'+(r.free_company||'')+'</span></td>'+
+                '<td>'+(r.free_type||'')+'</td>'+
+                '<td>'+(r.free_stars||0)+'</td>'+
+                '<td>'+fmt(r.free_price, r.free_currency)+'</td>'+
+                '<td>'+(r.pro_ticker||'')+' <span style="color:var(--tm);font-size:0.78em;">'+(r.pro_company||'')+'</span></td>'+
+                '<td>'+(r.pro_type||'')+'</td>'+
+                '<td>'+(r.pro_stars||0)+'</td>'+
+                '<td>'+fmt(r.pro_price, r.pro_currency)+'</td>'+
+                '</tr>';
+        }).join('');
+    } catch(e){ console.error('vjRenderHistory failed', e); }
+}
+
+function vjCsvEscape(v){
+    if (v == null) return '';
+    var s = String(v);
+    if (s.indexOf(',')>=0 || s.indexOf('"')>=0 || s.indexOf('\n')>=0){
+        return '"' + s.replace(/"/g,'""') + '"';
+    }
+    return s;
+}
+
+function vjExportCsv(){
+    var raw = localStorage.getItem('vj_draw_log');
+    var rows = raw ? JSON.parse(raw) : [];
+    rows.sort(function(a,b){ return (a.date||'').localeCompare(b.date||''); });
+    var cols = ['date','free_id','free_ticker','free_company','free_type','free_stars','free_price','free_currency','pro_id','pro_ticker','pro_company','pro_type','pro_stars','pro_price','pro_currency'];
+    var out = [cols.join(',')];
+    rows.forEach(function(r){
+        out.push(cols.map(function(k){ return vjCsvEscape(r[k]); }).join(','));
+    });
+    var blob = new Blob([out.join('\n')], {type:'text/csv;charset=utf-8'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    var stamp = new Date().toISOString().slice(0,10);
+    a.href = url; a.download = 'valujack_draw_log_'+stamp+'.csv';
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); }, 0);
+}
+
+function vjClearLog(){
+    if (!confirm('Clear the entire draw log? This cannot be undone.')) return;
+    localStorage.removeItem('vj_draw_log');
+    vjRenderHistory();
+}
+
+// Wire up buttons + re-render on tab switch + initial render
+(function vjInitDrawLogUi(){
+    function wire(){
+        var ex = document.getElementById('hi-export');
+        var cl = document.getElementById('hi-clear');
+        if (ex && !ex.__wired){ ex.addEventListener('click', vjExportCsv); ex.__wired = true; }
+        if (cl && !cl.__wired){ cl.addEventListener('click', vjClearLog);  cl.__wired = true; }
+    }
+    document.addEventListener('DOMContentLoaded', function(){
+        wire(); vjRenderHistory();
+        // Re-render whenever the History tab is clicked
+        var btns = document.querySelectorAll('.nb');
+        btns.forEach(function(b){
+            if ((b.textContent||'').indexOf('History') >= 0){
+                b.addEventListener('click', function(){ setTimeout(function(){ wire(); vjRenderHistory(); },0); });
+            }
+        });
+    });
+})();
+// ──────────────────────────────────────────────────────────────────────
+
 function showTab(b,id){document.querySelectorAll(".tab").forEach(function(t){t.classList.remove("active");});document.querySelectorAll(".nb").forEach(function(x){x.classList.remove("active");});document.getElementById(id).classList.add("active");b.classList.add("active");}
 function gSeed(){var d=new Date();return d.getFullYear()*1000+Math.floor((d-new Date(d.getFullYear(),0,0))/86400000);}
 function gSeedD(d){return d.getFullYear()*1000+Math.floor((d-new Date(d.getFullYear(),0,0))/86400000);}
@@ -251,6 +353,14 @@ async function fetchPrices(cards){
 // Same logic as index.html's eligibleCards filter, plus manualBlock.
 function isEligible(c, prices){
     if (c.manualBlock === true) return false;
+
+    // Weekly context BLOCK — news-based veto, expires after 14 days (matches index.html)
+    if (c.weeklyContext === "BLOCK" && c.weeklyDate) {
+        var blockDate = new Date(c.weeklyDate);
+        var daysSince = (Date.now() - blockDate.getTime()) / (1000 * 60 * 60 * 24);
+        if (daysSince <= 14) return false;
+    }
+
     var quote = prices[c.id];
     var currentPrice = quote ? quote.price : null;
     var fairValue = c.fairValue;
@@ -306,7 +416,7 @@ function pick(pool, s, n){
     return res;
 }
 
-// Build 14-day exclusion set — mirrors main app excludeTickers
+// Build 14-day exclusion set — mirrors main app excludeTickers (v123 strict rotation)
 function gExclude(deduped, ts){
     var ex = new Set();
     var freeStrategies = [
@@ -321,8 +431,9 @@ function gExclude(deduped, ts){
     ];
     for (var i = 1; i <= 14; i++){
         var ps = ts - i;
-        var fIdx = Math.abs(ps * 1664525) % 3;
-        var pIdx = Math.abs(ps * 22695477) % 3;
+        var pDayOfYear = ps % 1000;
+        var fIdx = (pDayOfYear + 1) % 3;
+        var pIdx = pDayOfYear % 3;
         var pf = pick(freeStrategies[fIdx], ps, 1)[0];
         var pp = pick(proStrategies[pIdx], ps * 3, 1)[0];
         if (pf) ex.add(pf.ticker);
@@ -331,7 +442,7 @@ function gExclude(deduped, ts){
     return ex;
 }
 
-// Get today's picks — mirrors main app's free/pro selection with sector cap
+// Get today's picks — mirrors main app's free/pro selection with sector cap (v123)
 function gPicks(cards, ts){
     var deduped = buildEligible(cards, pricesByCardId);
     var freeStrategies = [
@@ -348,22 +459,42 @@ function gPicks(cards, ts){
     var proNames  = ["QUEEN", "ACE", "JOKER"];
 
     var ex = gExclude(deduped, ts);
-    var fi = Math.abs(ts * 1664525) % 3;
-    var pi = Math.abs(ts * 22695477) % 3;
+    var dayOfYear = ts % 1000;
+    var fi = (dayOfYear + 1) % 3;
+    var pi = dayOfYear % 3;
     var usedSectors = new Set();
 
-    var freeStrat = freeStrategies[fi];
-    var availFree = freeStrat.filter(function(c){
-        return !ex.has(c.ticker) && !usedSectors.has(c.sector);
-    });
-    var freeCard = pick(availFree.length ? availFree : freeStrat, ts, 1)[0];
+    // Cross-strategy fallback: if today's strategy is exhausted, pull from other strategies in same tier
+    // BOOSTed cards (within 14 days) get priority within today's strategy.
+    function pickWithFallback(primaryPool, allTierPools, seed){
+        var avail = primaryPool.filter(function(c){
+            return !ex.has(c.ticker) && !usedSectors.has(c.sector);
+        });
+        if (avail.length > 0) {
+            // BOOST priority: if any card in today's strategy has a fresh BOOST, pick it first
+            var boosted = avail.filter(function(c){
+                if (c.weeklyContext !== "BOOST" || !c.weeklyDate) return false;
+                var boostDate = new Date(c.weeklyDate);
+                var daysSince = (Date.now() - boostDate.getTime()) / (1000 * 60 * 60 * 24);
+                return daysSince <= 14;
+            });
+            if (boosted.length > 0) return pick(boosted, seed, 1)[0];
+            return pick(avail, seed, 1)[0];
+        }
+        var allUnseen = [].concat.apply([], allTierPools).filter(function(c){
+            return !ex.has(c.ticker) && !usedSectors.has(c.sector);
+        });
+        if (allUnseen.length > 0) return pick(allUnseen, seed, 1)[0];
+        var anyCard = [].concat.apply([], allTierPools).filter(function(c){
+            return !usedSectors.has(c.sector);
+        });
+        return pick(anyCard.length ? anyCard : [].concat.apply([], allTierPools), seed, 1)[0];
+    }
+
+    var freeCard = pickWithFallback(freeStrategies[fi], freeStrategies, ts);
     if (freeCard) usedSectors.add(freeCard.sector);
 
-    var proStrat = proStrategies[pi];
-    var availPro = proStrat.filter(function(c){
-        return !ex.has(c.ticker) && !usedSectors.has(c.sector);
-    });
-    var proCard = pick(availPro.length ? availPro : proStrat, ts * 3, 1)[0];
+    var proCard = pickWithFallback(proStrategies[pi], proStrategies, ts * 3);
 
     return { free: freeCard, pro: proCard, fs: freeNames[fi], ps: proNames[pi] };
 }
@@ -380,6 +511,7 @@ async function init(){
     bIssues(cards);
     bPool(cards, ts);
     bManage(cards);
+    bWeekly(cards);
 
     // Show loading state for the price-dependent tabs
     document.getElementById("td-cards").innerHTML = '<div style="grid-column:1/-1;color:var(--tm);padding:24px;text-align:center;">Loading live prices…</div>';
@@ -454,9 +586,204 @@ function bIssues(cards){var BAD=["0","0.0","0.0%","—","-","null","","undefined
 var COLS={KING:[{l:"#",k:"_r"},{l:"Company",k:"company"},{l:"Ticker",k:"ticker"},{l:"Stars",k:"_s"},{l:"Country",k:"country"},{l:"Fair Value",k:"_fv"},{l:"Div Yield",k:"ind1v"},{l:"ROIC",k:"_roic"},{l:"P/E",k:"_pe"},{l:"D/E",k:"_de"}],JACK:[{l:"#",k:"_r"},{l:"Company",k:"company"},{l:"Ticker",k:"ticker"},{l:"Stars",k:"_s"},{l:"Country",k:"country"},{l:"Fair Value",k:"_fv"},{l:"EPS Growth",k:"ind1v"},{l:"ROIC",k:"_roic"},{l:"P/E",k:"_pe"},{l:"Price Str",k:"_rs"}],QUEEN:[{l:"#",k:"_r"},{l:"Company",k:"company"},{l:"Ticker",k:"ticker"},{l:"Stars",k:"_s"},{l:"Country",k:"country"},{l:"Fair Value",k:"_fv"},{l:"Cash Flow",k:"ind1v"},{l:"ROIC",k:"_roic"},{l:"P/E",k:"_pe"},{l:"D/E",k:"_de"}],ACE:[{l:"#",k:"_r"},{l:"Company",k:"company"},{l:"Ticker",k:"ticker"},{l:"Stars",k:"_s"},{l:"Country",k:"country"},{l:"Fair Value",k:"_fv"},{l:"EPS Growth",k:"ind1v"},{l:"F-Score",k:"_fs"},{l:"ROIC",k:"_roic"},{l:"P/E",k:"_pe"}],JOKER:[{l:"#",k:"_r"},{l:"Company",k:"company"},{l:"Ticker",k:"ticker"},{l:"Stars",k:"_s"},{l:"Country",k:"country"},{l:"Fair Value",k:"_fv"},{l:"EPS Growth",k:"ind1v"},{l:"ROIC",k:"_roic"},{l:"P/E",k:"_pe"},{l:"FCF",k:"_fcf"}],TWO:[{l:"#",k:"_r"},{l:"Company",k:"company"},{l:"Ticker",k:"ticker"},{l:"Stars",k:"_s"},{l:"Country",k:"country"},{l:"Fair Value",k:"_fv"},{l:"1Y Perf",k:"ind1v"},{l:"F-Score",k:"_fs"},{l:"ROIC",k:"_roic"},{l:"Gross Margin",k:"_gm"}]};
 function gV(card,key,rank){if(key==="._r"){var cl=rank<3?"rk"+(rank+1):"";return"<span class=\"rk "+cl+"\">"+(rank+1)+"</span>";}if(key==="_r"){var cl=rank<3?"rk"+(rank+1):"";return"<span class=\"rk "+cl+"\">"+(rank+1)+"</span>";}if(key==="_s")return"<span class=\"stars\">"+("&#9733;".repeat(card.stars||0))+"</span>";if(key==="_fv")return card.fairValue+" "+(card.currency||"");if(key==="_roic")return gMet(card,"ROIC")||"&mdash;";if(key==="_pe")return gMet(card,"P/E")||"&mdash;";if(key==="_de")return gMet(card,"Debt/Equity")||"&mdash;";if(key==="_rs")return gMet(card,"Price Strength")||card.rsRating||"&mdash;";if(key==="_fs")return gMet(card,"F-Score")||"&mdash;";if(key==="_fcf")return gMet(card,"Free Cash")||"&mdash;";if(key==="_gm")return gMet(card,"Gross Margin")||"&mdash;";return card[key]||"&mdash;";}
 function sScore(c,st){var v=parseFloat((c.ind1v||"0").replace(/[^0-9.-]/g,""))||0;var r=parseFloat((gMet(c,"ROIC")||"0").replace(/[^0-9.-]/g,""))||0;var f=parseFloat((gMet(c,"F-Score")||"0").replace(/[^0-9.-]/g,""))||0;if(st==="KING")return[-(c.stars||0),-v];if(st==="JACK")return[-(c.stars||0),-v];if(st==="QUEEN")return[-(c.stars||0),-r];if(st==="ACE")return[-(c.stars||0),-f];if(st==="JOKER")return[-(c.stars||0),-v];return[-(c.stars||0),v];}
-function rPool(){var strats=["KING","JACK","QUEEN","ACE","JOKER","TWO"];document.getElementById("pl-tabs").innerHTML=strats.map(function(s){return"<button class=\"ptb"+(s===pStrat?" active":"")+"\" onclick=\"sPool('"+s+"')\">"+"&#9818;&#9821;&#9819;&#9824;&#9733;2".split("").slice(["KING","JACK","QUEEN","ACE","JOKER","TWO"].indexOf(s)*2,["KING","JACK","QUEEN","ACE","JOKER","TWO"].indexOf(s)*2+2).join("")+" "+s+"</button>";}).join("");var pool=pCards.filter(function(c){return c.type===pStrat&&(c.stars||0)>=3;});var cols=COLS[pStrat];var sorted=pool.slice().sort(function(a,b){var ka=sScore(a,pStrat),kb=sScore(b,pStrat);for(var i=0;i<ka.length;i++){if(ka[i]<kb[i])return-1;if(ka[i]>kb[i])return 1;}return 0;});var labels={KING:"dividend yield",JACK:"EPS growth",QUEEN:"ROIC",ACE:"F-Score",JOKER:"EPS growth",TWO:"1Y performance"};var thead="<tr>"+cols.map(function(c){return"<th>"+c.l+"</th>";}).join("")+"</tr>";var tbody=sorted.map(function(card,idx){var isT=pToday.has(card.ticker);var isE=pExclude.has(card.ticker)&&!isT;var rc=isT?"ptd":isE?"pex":"";return"<tr class=\""+rc+"\">"+cols.map(function(col){return"<td>"+gV(card,col.k,idx)+"</td>";}).join("")+"</tr>";}).join("");document.getElementById("pl-table").innerHTML="<div style=\"font-size:0.72rem;color:var(--tm);margin-bottom:10px;\">"+sorted.length+" eligible &middot; sorted by "+labels[pStrat]+"</div><table class=\"ptt\"><thead>"+thead+"</thead><tbody>"+tbody+"</tbody></table>";}
-function sPool(s){pStrat=s;rPool();}
+function sortVal(card,key){
+  if(key==="_s")return card.stars||0;
+  if(key==="_fv")return parseFloat(card.fairValue)||0;
+  if(key==="_roic"){var v=gMet(card,"ROIC")||"";return parseFloat(v.replace(/[^0-9.-]/g,""))||0;}
+  if(key==="_pe"){var v=gMet(card,"P/E")||"";return parseFloat(v.replace(/[^0-9.-]/g,""))||0;}
+  if(key==="_de"){var v=gMet(card,"Debt/Equity")||"";return parseFloat(v.replace(/[^0-9.-]/g,""))||0;}
+  if(key==="_rs"){var v=gMet(card,"Price Strength")||card.rsRating||"";return parseFloat(v.replace(/[^0-9.-]/g,""))||0;}
+  if(key==="_fs"){var v=gMet(card,"F-Score")||"";return parseFloat(v.replace(/[^0-9.-]/g,""))||0;}
+  if(key==="_fcf"){var v=gMet(card,"Free Cash")||"";return parseFloat(v.replace(/[^0-9.-]/g,""))||0;}
+  if(key==="_gm"){var v=gMet(card,"Gross Margin")||"";return parseFloat(v.replace(/[^0-9.-]/g,""))||0;}
+  if(key==="ind1v"){return parseFloat((card.ind1v||"0").replace(/[^0-9.-]/g,""))||0;}
+  var v=card[key];
+  if(typeof v==="number")return v;
+  if(typeof v==="string")return v.toLowerCase();
+  return "";
+}
+function sPoolCol(key){if(pSortKey===key){pSortDir=-pSortDir;}else{pSortKey=key;pSortDir=1;}rPool();}
+function rPool(){var strats=["KING","JACK","QUEEN","ACE","JOKER","TWO"];document.getElementById("pl-tabs").innerHTML=strats.map(function(s){return"<button class=\"ptb"+(s===pStrat?" active":"")+"\" onclick=\"sPool('"+s+"')\">"+"&#9818;&#9821;&#9819;&#9824;&#9733;2".split("").slice(["KING","JACK","QUEEN","ACE","JOKER","TWO"].indexOf(s)*2,["KING","JACK","QUEEN","ACE","JOKER","TWO"].indexOf(s)*2+2).join("")+" "+s+"</button>";}).join("");var pool=pCards.filter(function(c){return c.type===pStrat&&(c.stars||0)>=3;});var cols=COLS[pStrat];var sorted;var labels={KING:"dividend yield",JACK:"EPS growth",QUEEN:"ROIC",ACE:"F-Score",JOKER:"EPS growth",TWO:"1Y performance"};var sortLabel;if(pSortKey){sorted=pool.slice().sort(function(a,b){var va=sortVal(a,pSortKey),vb=sortVal(b,pSortKey);if(va<vb)return -1*pSortDir;if(va>vb)return 1*pSortDir;return 0;});var col=cols.find(function(c){return c.k===pSortKey;});sortLabel=(col?col.l:pSortKey)+" "+(pSortDir===1?"&uarr;":"&darr;");}else{sorted=pool.slice().sort(function(a,b){var ka=sScore(a,pStrat),kb=sScore(b,pStrat);for(var i=0;i<ka.length;i++){if(ka[i]<kb[i])return-1;if(ka[i]>kb[i])return 1;}return 0;});sortLabel=labels[pStrat];}var thead="<tr>"+cols.map(function(c){var arrow=(pSortKey===c.k)?(pSortDir===1?" &uarr;":" &darr;"):"";var clickable=(c.k!=="_r");return"<th"+(clickable?" style=\"cursor:pointer;user-select:none;\" onclick=\"sPoolCol('"+c.k+"')\"":"")+">"+c.l+arrow+"</th>";}).join("")+"</tr>";var tbody=sorted.map(function(card,idx){var isT=pToday.has(card.ticker);var isE=pExclude.has(card.ticker)&&!isT;var rc=isT?"ptd":isE?"pex":"";return"<tr class=\""+rc+"\">"+cols.map(function(col){return"<td>"+gV(card,col.k,idx)+"</td>";}).join("")+"</tr>";}).join("");document.getElementById("pl-table").innerHTML="<div style=\"font-size:0.72rem;color:var(--tm);margin-bottom:10px;\">"+sorted.length+" eligible &middot; sorted by "+sortLabel+"</div><table class=\"ptt\"><thead>"+thead+"</thead><tbody>"+tbody+"</tbody></table>";}
+function sPool(s){pStrat=s;pSortKey=null;pSortDir=1;rPool();}
 function bPool(cards,ts){pCards=cards;pExclude=gExclude(cards,ts);var r=gPicks(cards,ts);pToday=new Set([r.free&&r.free.ticker,r.pro&&r.pro.ticker].filter(Boolean));rPool();}
+
+// ── WEEKLY REVIEW TAB ───────────────────────────────────────────────────────
+// Holds the proposed weekly context signals (from the Sunday news scan).
+// Each entry: { id, proposed: 'BLOCK'|'NEUTRAL'|'BOOST', note: '...', approved: bool }
+// The proposals are pasted in by Claude as a JSON array (see WEEKLY_PROPOSALS below).
+// If empty, the tab shows the top 50 eligible cards as NEUTRAL placeholders.
+
+// REPLACED EACH SUNDAY: paste the new proposals here (or use the import button below).
+var WEEKLY_PROPOSALS = []; // example: [{ id: 250, signal: 'BLOCK', note: 'Regulatory investigation in NL.' }]
+
+var wrCards = [];      // reference to live cards array
+var wrRows = [];       // working proposals (signal, note, approved per card)
+
+function bWeekly(cards) {
+    wrCards = cards;
+    rebuildWeeklyRows();
+    renderWeekly();
+}
+
+function rebuildWeeklyRows() {
+    // Start from WEEKLY_PROPOSALS if present, otherwise auto-pick top 50 eligible by stars.
+    var byId = {};
+    WEEKLY_PROPOSALS.forEach(function(p){ byId[p.id] = p; });
+
+    var pool;
+    if (WEEKLY_PROPOSALS.length > 0) {
+        pool = WEEKLY_PROPOSALS.map(function(p){
+            var c = wrCards.find(function(x){ return x.id === p.id; });
+            return c ? { card: c, proposed: p } : null;
+        }).filter(Boolean);
+    } else {
+        // Auto-mode: top 50 eligible cards by stars
+        var eligible = wrCards.filter(function(c){
+            if (c.manualBlock === true) return false;
+            return (c.stars || 0) >= 3;
+        });
+        eligible.sort(function(a, b){ return (b.stars||0) - (a.stars||0); });
+        pool = eligible.slice(0, 50).map(function(c){
+            return { card: c, proposed: { id: c.id, signal: 'NEUTRAL', note: '' } };
+        });
+    }
+
+    wrRows = pool.map(function(item){
+        return {
+            id: item.card.id,
+            signal: item.proposed.signal || 'NEUTRAL',
+            note: item.proposed.note || '',
+            approved: false
+        };
+    });
+}
+
+function renderWeekly() {
+    var container = document.getElementById('wr-table');
+    if (!container) return;
+
+    var summary = {
+        BLOCK: wrRows.filter(function(r){ return r.signal === 'BLOCK'; }).length,
+        NEUTRAL: wrRows.filter(function(r){ return r.signal === 'NEUTRAL'; }).length,
+        BOOST: wrRows.filter(function(r){ return r.signal === 'BOOST'; }).length,
+        approved: wrRows.filter(function(r){ return r.approved; }).length
+    };
+
+    var headerNote = '<div style="font-size:0.72rem;color:var(--tm);margin-bottom:10px;">' +
+        wrRows.length + ' cards in review &middot; ' +
+        '<span style="color:#E08060;">' + summary.BLOCK + ' BLOCK</span> &middot; ' +
+        '<span style="color:var(--ts);">' + summary.NEUTRAL + ' NEUTRAL</span> &middot; ' +
+        '<span style="color:#9FE0BD;">' + summary.BOOST + ' BOOST</span> &middot; ' +
+        '<strong style="color:#E8D4A0;">' + summary.approved + ' approved</strong>' +
+        '</div>';
+
+    var thead = '<tr>' +
+        '<th style="width:30px;">★</th>' +
+        '<th>Company</th>' +
+        '<th>Ticker</th>' +
+        '<th>Type</th>' +
+        '<th style="width:140px;">Signal</th>' +
+        '<th>Note</th>' +
+        '<th style="width:80px;text-align:center;">Approve</th>' +
+        '</tr>';
+
+    var tbody = wrRows.map(function(r){
+        var c = wrCards.find(function(x){ return x.id === r.id; });
+        if (!c) return '';
+        var stars = '★'.repeat(c.stars || 0);
+        var signalColor = r.signal === 'BLOCK' ? '#E08060' : r.signal === 'BOOST' ? '#9FE0BD' : 'var(--ts)';
+        var rowBg = r.approved ? 'rgba(201,168,76,0.06)' : '';
+        return '<tr style="background:' + rowBg + ';">' +
+            '<td style="color:#E8D4A0;">' + stars + '</td>' +
+            '<td>' + escapeHtml(c.company || '') + '<div style="font-size:0.68rem;color:var(--tm);">' + escapeHtml(c.country || '') + '</div></td>' +
+            '<td style="font-family:monospace;font-size:0.78rem;">' + escapeHtml(c.ticker || '') + '</td>' +
+            '<td>' + (c.type || '') + '</td>' +
+            '<td>' +
+                '<select onchange="wrSetSignal(' + r.id + ', this.value)" style="background:rgba(255,255,255,0.06);border:1px solid var(--bd);border-radius:4px;padding:4px 8px;color:' + signalColor + ';font-family:\'Barlow Condensed\',sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:0.05em;outline:none;width:100%;">' +
+                    '<option value="BLOCK"' + (r.signal === 'BLOCK' ? ' selected' : '') + '>BLOCK</option>' +
+                    '<option value="NEUTRAL"' + (r.signal === 'NEUTRAL' ? ' selected' : '') + '>NEUTRAL</option>' +
+                    '<option value="BOOST"' + (r.signal === 'BOOST' ? ' selected' : '') + '>BOOST</option>' +
+                '</select>' +
+            '</td>' +
+            '<td>' +
+                '<input type="text" value="' + escapeHtml(r.note) + '" oninput="wrSetNote(' + r.id + ', this.value)" placeholder="(no note)" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--bd);border-radius:4px;padding:6px 10px;color:var(--tp);font-family:\'EB Garamond\',serif;font-style:italic;font-size:0.85rem;outline:none;">' +
+            '</td>' +
+            '<td style="text-align:center;">' +
+                '<input type="checkbox" ' + (r.approved ? 'checked' : '') + ' onchange="wrToggleApprove(' + r.id + ', this.checked)" style="width:18px;height:18px;cursor:pointer;accent-color:#C9A84C;">' +
+            '</td>' +
+        '</tr>';
+    }).join('');
+
+    container.innerHTML = headerNote +
+        '<table class="ptt"><thead>' + thead + '</thead><tbody>' + tbody + '</tbody></table>';
+}
+
+function wrSetSignal(id, signal) {
+    var r = wrRows.find(function(x){ return x.id === id; });
+    if (r) { r.signal = signal; renderWeekly(); }
+}
+
+function wrSetNote(id, note) {
+    var r = wrRows.find(function(x){ return x.id === id; });
+    if (r) { r.note = note; /* don't re-render — would lose input focus */ }
+}
+
+function wrToggleApprove(id, approved) {
+    var r = wrRows.find(function(x){ return x.id === id; });
+    if (r) { r.approved = approved; renderWeekly(); }
+}
+
+function wrApproveAll() {
+    wrRows.forEach(function(r){ r.approved = true; });
+    renderWeekly();
+}
+
+function wrApproveNone() {
+    wrRows.forEach(function(r){ r.approved = false; });
+    renderWeekly();
+}
+
+function wrSaveDownload() {
+    // Apply approved rows to wrCards (in memory) then trigger download.
+    var today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+    var appliedCount = 0;
+    wrRows.forEach(function(r){
+        if (!r.approved) return;
+        var c = wrCards.find(function(x){ return x.id === r.id; });
+        if (!c) return;
+        c.weeklyContext = r.signal;
+        c.weeklyNote = r.note;
+        c.weeklyDate = today;
+        appliedCount++;
+    });
+
+    // Reuse the existing serialiser + download from Manage tab
+    var lines = ["/* ValuJack Card Data — auto-generated, do not edit manually */", "window.CARDS_DATA = ["];
+    wrCards.forEach(function(c){
+        lines.push("    " + serialiseCard(c) + ",");
+    });
+    lines.push("];");
+    var content = lines.join("\n");
+
+    var blob = new Blob([content], { type: "text/javascript;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "cards.js";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+
+    var status = document.getElementById('wr-status');
+    if (status) {
+        status.innerHTML = '<span style="color:#9FE0BD;">✓ Applied ' + appliedCount + ' signals &middot; downloaded cards.js (dated ' + today + ')</span>';
+    }
+}
+
+function escapeHtml(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
 
 // ── MANAGE TAB ──────────────────────────────────────────────────────────────
 // Holds reference to the live cards array; mutations here are tracked and exported.

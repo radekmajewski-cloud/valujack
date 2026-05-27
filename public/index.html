@@ -615,6 +615,54 @@ function Home() {
             ...todayPro.map(c => Object.assign({}, c, { isPro: true }))
         ];
 
+        // ─── DRAW LOG (admin record only — localStorage) ─────────────────
+        // Writes one row per date with the final FREE + PRO cards and live prices.
+        // Idempotent: same date overwrites cleanly. Guarded to fire once per session.
+        try {
+            if (typeof window !== 'undefined' && todayFreeCard && todayProCard) {
+                window.__vjLogged = window.__vjLogged || {};
+                const _logDate = (function(){
+                    const d = new Date();
+                    const y = d.getFullYear();
+                    const m = String(d.getMonth()+1).padStart(2,'0');
+                    const dd = String(d.getDate()).padStart(2,'0');
+                    return y+'-'+m+'-'+dd;
+                })();
+                const _freeQ = effectivePrices[todayFreeCard.id];
+                const _proQ  = effectivePrices[todayProCard.id];
+                const _freePrice = _freeQ && _freeQ.price != null ? _freeQ.price : null;
+                const _proPrice  = _proQ  && _proQ.price  != null ? _proQ.price  : null;
+                // Only log when at least one price is available, or on first write of the day
+                const _sig = _logDate + '|' + (_freePrice||'') + '|' + (_proPrice||'');
+                if (window.__vjLogged[_logDate] !== _sig) {
+                    const _row = {
+                        date: _logDate,
+                        free_id: todayFreeCard.id,
+                        free_ticker: todayFreeCard.ticker,
+                        free_company: todayFreeCard.company,
+                        free_price: _freePrice,
+                        free_currency: todayFreeCard.currency || '',
+                        free_type: todayFreeCard.type,
+                        free_stars: todayFreeCard.stars || 0,
+                        pro_id: todayProCard.id,
+                        pro_ticker: todayProCard.ticker,
+                        pro_company: todayProCard.company,
+                        pro_price: _proPrice,
+                        pro_currency: todayProCard.currency || '',
+                        pro_type: todayProCard.type,
+                        pro_stars: todayProCard.stars || 0,
+                        ts: Date.now(),
+                    };
+                    const _raw = localStorage.getItem('vj_draw_log');
+                    const _arr = _raw ? JSON.parse(_raw) : [];
+                    const _ix = _arr.findIndex(r => r && r.date === _logDate);
+                    if (_ix >= 0) _arr[_ix] = _row; else _arr.push(_row);
+                    localStorage.setItem('vj_draw_log', JSON.stringify(_arr));
+                    window.__vjLogged[_logDate] = _sig;
+                }
+            }
+        } catch (_e) { /* log failures must never break the picker */ }
+
         const visibleCards = deckCards;
     const getMoS = (cardId) => {
         var _a;
