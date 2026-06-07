@@ -315,6 +315,9 @@ function Home() {
     const [priceAge, setPriceAge] = useState('');
     const [priceErr, setPriceErr] = useState(false);
     const [chartData, setChartData] = useState(null);   // { points:[{t,c}], loading, error }
+    // Shared 14-day draw history from the server (the "notebook").
+    // null = not loaded yet; array = loaded (possibly empty).
+    const [drawHistory, setDrawHistory] = useState(null);
     useEffect(() => {
         document.body.style.overflow = expanded ? 'hidden' : '';
         document.body.style.position = expanded ? 'fixed' : '';
@@ -384,6 +387,12 @@ function Home() {
         };
         fetchPrices();
         const priceInterval = setInterval(fetchPrices, 60 * 60 * 1000); // refresh every hour
+        // Fetch the shared 14-day draw history (the no-repeat notebook).
+        // On failure, set [] so the picker still works (just without exclusions).
+        fetch('/api/draw')
+            .then(r => r.ok ? r.json() : Promise.reject('fetch'))
+            .then(d => setDrawHistory(Array.isArray(d.draws) ? d.draws : []))
+            .catch(() => setDrawHistory([]));
         return () => {
             window.removeEventListener('resize', check);
             clearInterval(priceInterval);
@@ -557,36 +566,25 @@ function Home() {
         const todayFreeStrategy = freeStrategies[freeIdx];
         const todayProStrategy  = proStrategies[proIdx];
 
-        // Build 14-day exclusion set from the ACTUAL draw log (localStorage).
-        // We no longer reconstruct past picks: eligibility shifts daily as live
-        // prices cross fair value, and the live draw can take fallback/BOOST
-        // paths a reconstruction can't reproduce — both caused cards to reappear
-        // inside the 14-day window. Reading the recorded tickers is exact.
+        // Build 14-day exclusion set from the SHARED server draw log.
+        // drawHistory is fetched once on load from /api/draw. It already
+        // contains only the last 14 days (the server filters), and it is the
+        // SAME history for every visitor — so no card repeats within 14 days
+        // for anyone, surviving incognito and cache clears.
         const excludeTickers = new Set();
-        try {
-            if (typeof window !== 'undefined') {
-                const _logDate = (function(){
-                    const d = new Date();
-                    return d.getFullYear() + '-' +
-                        String(d.getMonth()+1).padStart(2,'0') + '-' +
-                        String(d.getDate()).padStart(2,'0');
-                })();
-                const _cutoff = Date.now() - 14 * 86400000;
-                const _raw = localStorage.getItem('vj_draw_log');
-                const _arr = _raw ? JSON.parse(_raw) : [];
-                _arr.forEach(function(r){
-                    if (!r) return;
-                    // Skip today's own row (it may already be written this session);
-                    // we only exclude PAST draws so today can still pick.
-                    if (r.date === _logDate) return;
-                    // Keep rows within the last 14 days. Prefer ts; fall back to date.
-                    var rowTime = r.ts != null ? r.ts : (r.date ? new Date(r.date).getTime() : 0);
-                    if (rowTime < _cutoff) return;
-                    if (r.free_ticker) excludeTickers.add(r.free_ticker);
-                    if (r.pro_ticker)  excludeTickers.add(r.pro_ticker);
-                });
-            }
-        } catch (_e) { /* exclusion read must never break the picker */ }
+        const _todayStr = (function(){
+            const d = new Date();
+            return d.getFullYear() + '-' +
+                String(d.getMonth()+1).padStart(2,'0') + '-' +
+                String(d.getDate()).padStart(2,'0');
+        })();
+        (drawHistory || []).forEach(function(r){
+            if (!r) return;
+            // Skip today's own row so today can still pick; exclude past draws.
+            if (r.date === _todayStr) return;
+            if (r.free_ticker) excludeTickers.add(r.free_ticker);
+            if (r.pro_ticker)  excludeTickers.add(r.pro_ticker);
+        });
 
         const usedSectors = new Set();
 
@@ -633,9 +631,11 @@ function Home() {
             ...todayPro.map(c => Object.assign({}, c, { isPro: true }))
         ];
 
-        // ─── DRAW LOG (admin record only — localStorage) ─────────────────
-        // Writes one row per date with the final FREE + PRO cards and live prices.
-        // Idempotent: same date overwrites cleanly. Guarded to fire once per session.
+        // ─── DRAW LOG (shared server record) ─────────────────────────────
+        // Sends one row per date with the final FREE + PRO cards and live
+        // prices to /api/draw. The server keeps the shared 14-day notebook
+        // AND the permanent track record. First-write-wins on the server, so
+        // re-sends are safe. Guarded to fire once per session per price-signature.
         try {
             if (typeof window !== 'undefined' && todayFreeCard && todayProCard) {
                 window.__vjLogged = window.__vjLogged || {};
@@ -650,9 +650,11 @@ function Home() {
                 const _proQ  = effectivePrices[todayProCard.id];
                 const _freePrice = _freeQ && _freeQ.price != null ? _freeQ.price : null;
                 const _proPrice  = _proQ  && _proQ.price  != null ? _proQ.price  : null;
-                // Only log when at least one price is available, or on first write of the day
                 const _sig = _logDate + '|' + (_freePrice||'') + '|' + (_proPrice||'');
-                if (window.__vjLogged[_logDate] !== _sig) {
+                // Only send once the history has loaded (so we don't post before
+                // we know today's pick is final), and only when the signature changes.
+                if (drawHistory !== null && window.__vjLogged[_logDate] !== _sig) {
+                    window.__vjLogged[_logDate] = _sig;
                     const _row = {
                         date: _logDate,
                         free_id: todayFreeCard.id,
@@ -669,19 +671,20 @@ function Home() {
                         pro_currency: todayProCard.currency || '',
                         pro_type: todayProCard.type,
                         pro_stars: todayProCard.stars || 0,
-                        ts: Date.now(),
                     };
-                    const _raw = localStorage.getItem('vj_draw_log');
-                    const _arr = _raw ? JSON.parse(_raw) : [];
-                    const _ix = _arr.findIndex(r => r && r.date === _logDate);
-                    if (_ix >= 0) _arr[_ix] = _row; else _arr.push(_row);
-                    localStorage.setItem('vj_draw_log', JSON.stringify(_arr));
-                    window.__vjLogged[_logDate] = _sig;
+                    fetch('/api/draw', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(_row),
+                    }).catch(function(){ /* network errors must never break the picker */ });
                 }
             }
         } catch (_e) { /* log failures must never break the picker */ }
 
-        const visibleCards = deckCards;
+        // Wait for the shared draw history before showing cards, so the
+        // 14-day exclusion is applied on first paint (no flicker / no card swap).
+        // If history fails to load it becomes [] (not null), so we still show cards.
+        const visibleCards = drawHistory === null ? [] : deckCards;
     const getMoS = (cardId) => {
         var _a;
         const price = (_a = prices[cardId]) === null || _a === void 0 ? void 0 : _a.price;
