@@ -557,18 +557,36 @@ function Home() {
         const todayFreeStrategy = freeStrategies[freeIdx];
         const todayProStrategy  = proStrategies[proIdx];
 
-        // Build 14-day exclusion set using the SAME strict rotation.
+        // Build 14-day exclusion set from the ACTUAL draw log (localStorage).
+        // We no longer reconstruct past picks: eligibility shifts daily as live
+        // prices cross fair value, and the live draw can take fallback/BOOST
+        // paths a reconstruction can't reproduce — both caused cards to reappear
+        // inside the 14-day window. Reading the recorded tickers is exact.
         const excludeTickers = new Set();
-        for (let i = 1; i <= 14; i++) {
-            const pastSeed = todaySeed - i;
-            const pastDayOfYear = pastSeed % 1000;
-            const pastFreeIdx = (pastDayOfYear + 1) % 3;
-            const pastProIdx  = pastDayOfYear % 3;
-            const pastFree = pickPool(freeStrategies[pastFreeIdx], pastSeed, 1)[0];
-            if (pastFree) excludeTickers.add(pastFree.ticker);
-            const pastPro  = pickPool(proStrategies[pastProIdx], pastSeed * 3, 1)[0];
-            if (pastPro)  excludeTickers.add(pastPro.ticker);
-        }
+        try {
+            if (typeof window !== 'undefined') {
+                const _logDate = (function(){
+                    const d = new Date();
+                    return d.getFullYear() + '-' +
+                        String(d.getMonth()+1).padStart(2,'0') + '-' +
+                        String(d.getDate()).padStart(2,'0');
+                })();
+                const _cutoff = Date.now() - 14 * 86400000;
+                const _raw = localStorage.getItem('vj_draw_log');
+                const _arr = _raw ? JSON.parse(_raw) : [];
+                _arr.forEach(function(r){
+                    if (!r) return;
+                    // Skip today's own row (it may already be written this session);
+                    // we only exclude PAST draws so today can still pick.
+                    if (r.date === _logDate) return;
+                    // Keep rows within the last 14 days. Prefer ts; fall back to date.
+                    var rowTime = r.ts != null ? r.ts : (r.date ? new Date(r.date).getTime() : 0);
+                    if (rowTime < _cutoff) return;
+                    if (r.free_ticker) excludeTickers.add(r.free_ticker);
+                    if (r.pro_ticker)  excludeTickers.add(r.pro_ticker);
+                });
+            }
+        } catch (_e) { /* exclusion read must never break the picker */ }
 
         const usedSectors = new Set();
 
