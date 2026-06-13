@@ -1,0 +1,8 @@
+# ValuJack — robots.txt
+# Allow all well-behaved crawlers to index everything
+
+User-agent: *
+Allow: /
+
+# Sitemap location for search engines
+Sitemap: https://www.valujack.com/sitemap.xml

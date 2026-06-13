@@ -17,7 +17,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ValuJack">
 <meta property="og:title" content="ValuJack — The Daily Investing Deck">
-<meta property="og:description" content="Six proven strategies. Six cards. One daily edge. Find undervalued stocks through serious, rules-based analysis.">
+<meta property="og:description" content="Flip a card. Discover a company. Invest with an edge. Two cards a day drawn from a deck of six proven investment strategies.">
 <meta property="og:url" content="https://www.valujack.com/">
 <meta property="og:image" content="https://www.valujack.com/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -28,16 +28,18 @@
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ValuJack — The Daily Investing Deck">
-<meta name="twitter:description" content="Six proven strategies. Six cards. One daily edge. Find undervalued stocks through serious, rules-based analysis.">
+<meta name="twitter:description" content="Flip a card. Discover a company. Invest with an edge. Two cards a day drawn from a deck of six proven investment strategies.">
 <meta name="twitter:image" content="https://www.valujack.com/og-image.png">
 <meta name="twitter:image:alt" content="ValuJack — Daily Stock Ideas · Six Proven Strategies">
 
 <!-- Mobile chrome theme color -->
 <meta name="theme-color" content="#0F4020">
 
-<!-- Favicon (uses OG image as fallback; you can add a dedicated favicon.ico/png later) -->
-<link rel="icon" type="image/png" href="/og-image.png">
-<link rel="apple-touch-icon" href="/og-image.png">
+<!-- Favicons & app icons -->
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 
 <!-- Structured data — tells Google this is a software application -->
 <script type="application/ld+json">
@@ -118,7 +120,7 @@ window.vjTrack = function(eventName, params){
 
 <!-- Cookie consent banner — shown only if no choice has been recorded yet -->
 <div id="vj-cookie-banner" role="dialog" aria-label="Cookie consent">
-  <p class="vj-cb-text">We use cookies to understand how the app is used and to improve it. See our <a href="/privacy.html">Privacy Policy</a>.</p>
+  <p class="vj-cb-text">We use cookies to understand how the app is used and to improve it. See our <a href="/privacy">Privacy Policy</a>.</p>
   <div class="vj-cb-buttons">
     <button class="vj-cb-decline" onclick="vjCookieChoice('declined')">DECLINE</button>
     <button class="vj-cb-accept" onclick="vjCookieChoice('accepted')">ACCEPT</button>
@@ -799,27 +801,20 @@ function Home() {
         React.createElement("main", { style: { minHeight: '100vh', background: '#0F4020', display: 'flex', justifyContent: 'center', alignItems: 'flex-start' } },
             React.createElement("div", { style: { width: '100%', maxWidth: isMobile ? '480px' : '1400px' } },
                 React.createElement("div", { style: { padding: isMobile ? '22px 20px 8px' : '28px 20px 10px', textAlign: 'center', position: 'relative' } },
+                    React.createElement("div", { style: { display: 'flex', justifyContent: 'center', marginBottom: 10 } },
+                            React.createElement("img", { src: "/logo-full.png", alt: "ValuJack", style: { height: isMobile ? '42px' : '56px', width: 'auto', maxWidth: '90%', display: 'block' } })),
                     React.createElement("p", { style: {
-                            color: '#6A9A7A',
-                            fontSize: '0.68rem',
+                            fontSize: '0.6rem',
                             fontFamily: 'Barlow Condensed,sans-serif',
-                            fontWeight: 600,
-                            letterSpacing: '0.22em',
+                            fontWeight: 700,
+                            letterSpacing: '0.16em',
                             textTransform: 'uppercase',
-                            marginBottom: 10,
-                        } }, today),
-                    React.createElement("p", { style: { color: priceErr ? 'rgba(255,120,80,0.8)' : priceAge ? 'rgba(100,220,140,0.8)' : 'rgba(255,255,255,0.35)', fontSize: '0.55rem', letterSpacing: '0.14em', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, marginBottom: 4, textAlign: 'center' } }, priceErr ? '⚠ LIVE PRICES UNAVAILABLE' : priceAge ? '● LIVE ' + priceAge : '○ LOADING...'),
-                    priceAge && React.createElement("p", { style: { color: 'rgba(100,220,140,0.7)', fontSize: '0.5rem', letterSpacing: '0.12em', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 600, marginBottom: 6, textAlign: 'center' } }, poolUndervalued + ' UNDERVALUED NOW'),
-                    React.createElement("div", { style: {
-                            display: 'inline-block',
-                            padding: '10px 36px',
-                            borderRadius: '999px',
-                            border: '2px solid rgba(255,255,255,0.7)',
-                            marginBottom: 2,
+                            marginBottom: 4,
+                            textAlign: 'center',
+                            color: priceErr ? 'rgba(255,120,80,0.85)' : priceAge ? 'rgba(100,220,140,0.85)' : 'rgba(255,255,255,0.4)',
                         } },
-                            React.createElement("h1", { style: { fontFamily: 'Playfair Display,serif', fontSize: isMobile ? '2.8rem' : '3.6rem', fontWeight: 700, letterSpacing: '0.04em', lineHeight: 1, margin: 0 } },
-                                React.createElement("span", { style: { background: SILVER, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, "Valu"),
-                                React.createElement("span", { style: { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, "Jack"))),
+                        priceErr ? 'PRICES UNAVAILABLE' : priceAge ? '● LIVE ' + priceAge : '○ LOADING',
+                        priceAge && React.createElement("span", { style: { color: 'rgba(100,220,140,0.7)' } }, " · " + poolUndervalued + " UNDERVALUED")),
                     React.createElement("p", { style: {
                             color: '#9ACAAA',
                             fontSize: isMobile ? '0.95rem' : '1.05rem',
@@ -829,9 +824,7 @@ function Home() {
                             letterSpacing: '0.02em',
                             lineHeight: 1.4,
                         } }, 
-                        "Flip a card. Discover a company. Invest with an edge.",
-                        React.createElement("br"),
-                        "Fresh opportunities every day."),
+                        "Flip a card. Discover a company. Invest with an edge."),
                     React.createElement("div", { style: {
                             width: 48, height: 1,
                             background: 'linear-gradient(to right,transparent,rgba(168,212,184,0.4),transparent)',
@@ -938,11 +931,11 @@ function Home() {
         React.createElement("div", { style: { maxWidth: isMobile ? '480px' : '1400px', margin: '0 auto', padding: '0 20px' } },
             React.createElement("div", { style: { margin: '32px 0 32px', padding: '20px 8px 0', borderTop: '1px solid rgba(90,138,106,0.18)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 } },
                 React.createElement("p", { style: { color: '#7A9A8A', fontSize: '0.78rem', textAlign: 'center', fontFamily: 'Barlow Condensed,sans-serif', letterSpacing: '0.18em', fontWeight: 700, margin: 0 } },
-                    React.createElement("a", { href: "/disclaimer.html", style: { color: '#7A9A8A', textDecoration: 'none' } }, "DISCLAIMER"),
+                    React.createElement("a", { href: "/disclaimer", style: { color: '#7A9A8A', textDecoration: 'none' } }, "DISCLAIMER"),
                     " \u00B7 ",
-                    React.createElement("a", { href: "/legal.html", style: { color: '#7A9A8A', textDecoration: 'none' } }, "LEGAL"),
+                    React.createElement("a", { href: "/legal", style: { color: '#7A9A8A', textDecoration: 'none' } }, "LEGAL"),
                     " \u00B7 ",
-                    React.createElement("a", { href: "/privacy.html", style: { color: '#7A9A8A', textDecoration: 'none' } }, "PRIVACY")),
+                    React.createElement("a", { href: "/privacy", style: { color: '#7A9A8A', textDecoration: 'none' } }, "PRIVACY")),
                 React.createElement("p", { style: { color: '#5A7A6A', fontFamily: 'EB Garamond,serif', fontSize: '0.82rem', fontStyle: 'italic', textAlign: 'center', margin: 0 } },
                     "\u00A9 2026 ValuJack\u2122 \u00B7 All rights reserved"))),
         expanded && ec && ect && (React.createElement("div", { className: "modal-overlay", onClick: () => setExpanded(null) },
@@ -1244,11 +1237,13 @@ function Home() {
         showInfo && (React.createElement("div", { className: "info-overlay" },
             React.createElement("div", { style: { maxWidth: 620, margin: '0 auto', padding: isMobile ? '24px 20px 48px' : '40px 36px 60px' } },
                 React.createElement("div", { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 36 } },
-                    React.createElement("div", null,
-                        React.createElement("h1", { style: { fontFamily: 'Playfair Display,serif', fontSize: isMobile ? '2.4rem' : '3.2rem', fontWeight: 700, lineHeight: 1, letterSpacing: '0.04em' } },
-                            React.createElement("span", { style: { background: SILVER, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, "Valu"),
-                            React.createElement("span", { style: { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, "Jack")),
-                        React.createElement("p", { style: { color: '#7AB898', fontSize: '1.1rem', fontStyle: 'italic', marginTop: 6, fontFamily: 'EB Garamond,serif' } }, "How it works")),
+                    React.createElement("div", { style: { width: '100%' } },
+                        React.createElement("div", { style: { display: 'flex', alignItems: 'center', gap: '14px', paddingBottom: 24, borderBottom: '1px solid rgba(90,138,106,0.2)' } },
+                            React.createElement("img", { src: "/icon-192.png", alt: "", style: { height: isMobile ? '56px' : '64px', width: isMobile ? '56px' : '64px', display: 'block', borderRadius: '10px', flexShrink: 0 } }),
+                            React.createElement("h1", { style: { fontFamily: 'Playfair Display,serif', fontSize: isMobile ? '2rem' : '2.6rem', fontWeight: 700, lineHeight: 1, letterSpacing: '0.04em', margin: 0 } },
+                                React.createElement("span", { style: { background: SILVER, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, "Valu"),
+                                React.createElement("span", { style: { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, "Jack"))),
+                        React.createElement("p", { style: { color: '#7AB898', fontSize: '1.5rem', fontStyle: 'italic', marginTop: 16, marginBottom: 36, fontFamily: 'EB Garamond,serif' } }, "How it works")),
                     React.createElement("button", { onClick: () => setShowInfo(false), style: { background: 'none', border: 'none', color: '#7AB898', fontSize: '1.8rem', cursor: 'pointer', lineHeight: 1, marginTop: 4 } }, "\u2715")),
                 React.createElement("div", { className: "info-section", style: { borderColor: 'transparent' } },
                     React.createElement("p", { style: { color: '#5A8A6A', fontSize: '0.72rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, letterSpacing: '0.2em', marginBottom: 8 } }, "WHAT IS VALUJACK"),
@@ -1458,11 +1453,11 @@ function Home() {
                         "ValuJack is not authorised by Finansinspektionen or any other financial regulator, and does not provide investment services within the meaning of MiFID II."),
                     // Legal page links — visible inside How It Works
                     React.createElement("p", { style: { textAlign: 'center', marginTop: 18, marginBottom: 0, fontFamily: 'Barlow Condensed,sans-serif', fontSize: '0.78rem', letterSpacing: '0.18em', fontWeight: 700 } },
-                        React.createElement("a", { href: "/disclaimer.html", style: { color: '#7AB898', textDecoration: 'none', borderBottom: '1px solid rgba(122,184,152,0.4)', paddingBottom: 2 } }, "DISCLAIMER"),
+                        React.createElement("a", { href: "/disclaimer", style: { color: '#7AB898', textDecoration: 'none', borderBottom: '1px solid rgba(122,184,152,0.4)', paddingBottom: 2 } }, "DISCLAIMER"),
                         React.createElement("span", { style: { color: '#5A7A6A', margin: '0 12px' } }, "\u00B7"),
-                        React.createElement("a", { href: "/legal.html", style: { color: '#C9A84C', textDecoration: 'none', borderBottom: '1px solid rgba(201,168,76,0.4)', paddingBottom: 2 } }, "LEGAL & IP"),
+                        React.createElement("a", { href: "/legal", style: { color: '#C9A84C', textDecoration: 'none', borderBottom: '1px solid rgba(201,168,76,0.4)', paddingBottom: 2 } }, "LEGAL & IP"),
                         React.createElement("span", { style: { color: '#5A7A6A', margin: '0 12px' } }, "\u00B7"),
-                        React.createElement("a", { href: "/privacy.html", style: { color: '#7AB898', textDecoration: 'none', borderBottom: '1px solid rgba(122,184,152,0.4)', paddingBottom: 2 } }, "PRIVACY")),
+                        React.createElement("a", { href: "/privacy", style: { color: '#7AB898', textDecoration: 'none', borderBottom: '1px solid rgba(122,184,152,0.4)', paddingBottom: 2 } }, "PRIVACY")),
                     React.createElement("p", { style: { color: '#5A8A6A', fontSize: '0.74rem', textAlign: 'center', fontFamily: 'EB Garamond,serif', lineHeight: 1.6, marginTop: 18, marginBottom: 0 } },
                         "\u00A9 2026 ValuJack. All rights reserved. ValuJack\u2122, the card system, scoring methodology, design, and source code are protected by copyright, database, and trademark law. Unauthorised reproduction, scraping, or commercial reuse is prohibited.")))))));
 }
@@ -1480,11 +1475,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(
     <div id="sl3" style="opacity:0;font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.4rem,5.5vw,2rem);letter-spacing:0.02em;line-height:1.4;margin-bottom:0;background:linear-gradient(135deg,#BFA882 0%,#DDBF88 22%,#A88A60 42%,#CAB07A 62%,#8C7858 80%,#C0AA75 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Invest with an edge.</div>
     <div id="sl4" style="opacity:0;height:1px;width:60px;background:rgba(191,168,130,0.3);margin:28px auto 28px;"></div>
     <div id="sl5" style="opacity:0;display:inline-block;">
-      <div style="padding:10px 36px;border-radius:999px;border:2px solid rgba(255,255,255,0.7);display:inline-flex;align-items:center;">
-        <span style="font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;letter-spacing:0.04em;line-height:1;margin:0;">
-          <span style="background:linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#E0DDDA 45%,#A9A9A9 65%,#D0CDCA 80%,#8A8A8A 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Valu</span><span style="background:linear-gradient(135deg,#BFA882 0%,#DDBF88 22%,#A88A60 42%,#CAB07A 62%,#8C7858 80%,#C0AA75 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Jack</span>
-        </span>
-      </div>
+      <img src="/logo-full.png" alt="ValuJack" style="display:block;width:auto;height:clamp(52px,9vw,84px);max-width:80vw;" />
     </div>
     <div id="splashBtn" style="opacity:0;display:block;margin-top:36px;">
       <span id="splashBtnInner" onclick="dismissSplash()" style="display:inline-block;border:1px solid rgba(191,168,130,0.55);border-radius:999px;padding:11px 36px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:0.72rem;letter-spacing:0.28em;text-transform:uppercase;color:rgba(201,168,76,0.95);cursor:pointer;">TAP TO ENTER</span>

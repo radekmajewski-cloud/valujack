@@ -1,7 +1,16 @@
+images/
+Company data/
+backups/
+Texts/
+Methodology/
+*.doc
+*.docx
+*.ods
+*.xls
+*.xlsx
+*.csv
+patch_*.py
+apply_*.py
 .DS_Store
-Earlier versions index/
-ValuJack_v*.html
-api_chart*.js
-bash
-test.txt
-node_modules
+node_modules/
+.vercel

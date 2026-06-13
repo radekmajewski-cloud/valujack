@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>ValuJack — Pro Preferences Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:#0F4020;
+    min-height:100vh;
+    font-family:'EB Garamond',serif;
+    padding:18px 0 80px;
+    color:#E8F5EE;
+  }
+  .frame{max-width:480px;margin:0 auto;padding:0 18px;}
+
+  /* HEADER */
+  .date-header{
+    color:#6A9A7A;
+    font-size:0.68rem;
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:600;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    text-align:center;
+    margin-bottom:10px;
+  }
+  .live-status{
+    color:rgba(100,220,140,0.8);
+    font-size:0.55rem;
+    letter-spacing:0.14em;
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;
+    text-align:center;
+    margin-bottom:6px;
+  }
+  .pool-meta{
+    color:rgba(100,220,140,0.7);
+    font-size:0.5rem;
+    letter-spacing:0.12em;
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:600;
+    text-align:center;
+    margin-bottom:14px;
+  }
+
+  /* PRO TOGGLE (demo only) */
+  .demo-toolbar{
+    background:rgba(0,0,0,0.25);
+    border:1px dashed rgba(255,255,255,0.18);
+    border-radius:10px;
+    padding:10px 12px;
+    margin-bottom:14px;
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    align-items:center;
+    font-size:0.75rem;
+  }
+  .demo-toolbar span{
+    color:#A8C4B4;
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    margin-right:4px;
+  }
+  .demo-btn{
+    padding:5px 10px;
+    border-radius:6px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.18);
+    color:#D8EAE0;
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    cursor:pointer;
+  }
+  .demo-btn.on{background:rgba(201,168,76,0.2);border-color:rgba(201,168,76,0.6);color:#E8D4A0;}
+
+  /* PREFS PANEL */
+  .prefs-container{
+    background:linear-gradient(135deg,rgba(0,0,0,0.25),rgba(0,0,0,0.10));
+    border:1px solid rgba(201,168,76,0.25);
+    border-radius:14px;
+    padding:14px 16px;
+    margin-bottom:18px;
+  }
+  .prefs-header{
+    display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;
+  }
+  .prefs-label{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:800;font-size:0.78rem;letter-spacing:0.18em;text-transform:uppercase;
+    background:linear-gradient(135deg,#BFA882 0%,#DDBF88 22%,#A88A60 42%,#CAB07A 62%,#8C7858 80%,#C0AA75 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+  .prefs-count{font-family:'EB Garamond',serif;font-style:italic;font-size:0.78rem;color:#A8C4B4;}
+  .prefs-count strong{color:#E8F5EE;font-weight:600;font-style:normal;}
+  .chip-row{display:flex;flex-wrap:wrap;gap:6px;}
+  .chip{
+    display:inline-flex;align-items:center;gap:6px;
+    border-radius:20px;padding:5px 11px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;font-size:0.82rem;letter-spacing:0.06em;
+    cursor:pointer;transition:all 0.15s;user-select:none;
+  }
+  .chip:active{transform:scale(0.97);}
+  .chip.active{background:rgba(201,168,76,0.16);border:1px solid rgba(201,168,76,0.55);color:#E8D4A0;}
+  .chip.inactive{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.14);color:#A8C4B4;}
+  .chip-label{color:#7A9A8A;font-weight:600;margin-right:2px;}
+  .chip.active .chip-label{color:#C8B080;}
+  .chip-edit{font-size:0.7rem;opacity:0.6;margin-left:2px;}
+
+  /* CARD */
+  .card-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:18px;}
+  .card{
+    background:#1A1A2E;
+    border-radius:14px;
+    padding:22px 22px 18px;
+    position:relative;
+    border:1px solid rgba(255,255,255,0.06);
+    overflow:hidden;
+  }
+  .card.pro-locked::after{
+    content:'';position:absolute;inset:0;background:rgba(0,0,0,0.55);backdrop-filter:blur(6px);border-radius:14px;
+  }
+  .pro-lock-msg{
+    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    z-index:2;gap:6px;text-align:center;padding:0 24px;
+  }
+  .pro-lock-msg .lock-icon{font-size:1.6rem;color:#C8B080;}
+  .pro-lock-msg .lock-text{
+    font-family:'Barlow Condensed',sans-serif;font-weight:800;
+    letter-spacing:0.12em;text-transform:uppercase;font-size:0.85rem;color:#E8D4A0;
+  }
+  .pro-lock-msg .lock-sub{
+    font-family:'EB Garamond',serif;font-style:italic;font-size:0.85rem;color:#A8C4B4;
+  }
+  .card-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
+  .card-tier{
+    font-family:'Barlow Condensed',sans-serif;font-weight:800;
+    font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;
+  }
+  .tier-free{color:#A8C4B4;}
+  .tier-pro{
+    background:linear-gradient(135deg,#BFA882,#DDBF88,#A88A60,#CAB07A,#8C7858,#C0AA75);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+  .card-strategy{
+    font-family:'Barlow Condensed',sans-serif;font-weight:900;
+    letter-spacing:0.1em;font-size:1rem;text-transform:uppercase;
+  }
+  .card-name{
+    font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;
+    margin-bottom:2px;color:#F0E8D8;line-height:1.1;
+  }
+  .card-meta{
+    font-family:'Barlow Condensed',sans-serif;font-weight:600;
+    font-size:0.78rem;letter-spacing:0.1em;color:#A8C4B4;margin-bottom:14px;
+  }
+  .card-tag{
+    font-family:'EB Garamond',serif;font-style:italic;
+    font-size:0.95rem;color:#D8EAE0;line-height:1.45;margin-bottom:14px;
+  }
+  .card-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;}
+  .stars{color:#DDBF88;font-size:0.95rem;letter-spacing:1px;}
+  .mos{
+    font-family:'Barlow Condensed',sans-serif;font-weight:800;
+    font-size:0.78rem;letter-spacing:0.08em;color:#7DD49A;
+  }
+  .mos-low{color:#D4A87A;}
+
+  /* NO MATCH BANNER */
+  .no-match{
+    background:linear-gradient(135deg,rgba(212,136,74,0.12),rgba(212,136,74,0.04));
+    border:1px solid rgba(212,136,74,0.4);
+    border-radius:14px;
+    padding:22px 20px;
+    text-align:center;
+    margin-bottom:18px;
+  }
+  .no-match-title{
+    font-family:'Barlow Condensed',sans-serif;font-weight:800;
+    font-size:0.95rem;letter-spacing:0.14em;text-transform:uppercase;color:#E8D4A0;margin-bottom:8px;
+  }
+  .no-match-sub{
+    font-family:'EB Garamond',serif;font-style:italic;font-size:0.95rem;
+    color:#D4A87A;margin-bottom:16px;line-height:1.5;
+  }
+  .no-match-btn{
+    padding:11px 22px;border-radius:10px;
+    background:linear-gradient(135deg,#BFA882,#DDBF88,#A88A60,#CAB07A,#8C7858,#C0AA75);
+    border:none;color:#0A1A0A;
+    font-family:'Barlow Condensed',sans-serif;font-weight:800;
+    font-size:0.85rem;letter-spacing:0.1em;cursor:pointer;
+  }
+  .no-match-foot{
+    font-family:'EB Garamond',serif;font-style:italic;font-size:0.78rem;color:#A8C4B4;margin-top:12px;
+  }
+
+  /* MODAL */
+  .modal-overlay{
+    position:fixed;inset:0;z-index:50;
+    background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);
+    display:none;align-items:flex-end;justify-content:center;animation:fadeIn 0.2s ease;
+  }
+  .modal-overlay.show{display:flex;}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes sheetUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+  .modal-sheet{
+    width:100%;max-width:480px;background:#1A1A2E;
+    border-top-left-radius:20px;border-top-right-radius:20px;
+    padding:24px 22px 28px;border-top:1px solid rgba(201,168,76,0.3);
+    animation:sheetUp 0.28s cubic-bezier(0.22,1,0.36,1);
+    max-height:82vh;overflow-y:auto;
+  }
+  .modal-title{
+    font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.05rem;
+    letter-spacing:0.12em;text-transform:uppercase;
+    background:linear-gradient(135deg,#BFA882,#DDBF88,#A88A60,#CAB07A,#8C7858,#C0AA75);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    margin-bottom:6px;text-align:center;
+  }
+  .modal-sub{
+    font-family:'EB Garamond',serif;font-style:italic;font-size:0.9rem;color:#A8C4B4;
+    text-align:center;margin-bottom:20px;line-height:1.5;
+  }
+  .opt-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;}
+  .opt{
+    flex:1 1 auto;min-width:calc(50% - 4px);
+    padding:11px 14px;border-radius:10px;
+    font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.92rem;
+    letter-spacing:0.06em;cursor:pointer;text-align:center;transition:all 0.15s;
+  }
+  .opt.selected{background:rgba(201,168,76,0.18);border:1px solid rgba(201,168,76,0.6);color:#E8D4A0;}
+  .opt:not(.selected){background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.14);color:#D8EAE0;}
+  .opt-sub{
+    display:block;font-family:'EB Garamond',serif;font-style:italic;font-weight:400;
+    font-size:0.72rem;letter-spacing:0;margin-top:3px;color:#A8C4B4;text-transform:none;
+  }
+  .opt.selected .opt-sub{color:#C8B080;}
+  .star-row{display:flex;justify-content:center;gap:10px;margin-bottom:18px;}
+  .star-btn{
+    width:46px;height:46px;border-radius:50%;
+    border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.04);
+    color:#A8C4B4;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.1rem;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.15s;
+  }
+  .star-btn.selected{background:rgba(201,168,76,0.18);border:1px solid rgba(201,168,76,0.6);color:#E8D4A0;}
+  .star-hint{text-align:center;font-family:'EB Garamond',serif;font-style:italic;font-size:0.85rem;color:#A8C4B4;margin-bottom:20px;}
+  .modal-actions{display:flex;gap:10px;margin-top:8px;}
+  .btn-secondary{
+    flex:1;padding:12px;border-radius:10px;
+    background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.14);color:#D8EAE0;
+    font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.9rem;letter-spacing:0.08em;cursor:pointer;
+  }
+  .btn-primary{
+    flex:1;padding:12px;border-radius:10px;
+    background:linear-gradient(135deg,#BFA882,#DDBF88,#A88A60,#CAB07A,#8C7858,#C0AA75);
+    border:none;color:#0A1A0A;
+    font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:0.9rem;letter-spacing:0.08em;cursor:pointer;
+  }
+
+  /* DEBUG PANEL */
+  .debug-toggle{
+    text-align:center;margin-top:20px;
+    font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;letter-spacing:0.1em;
+    color:#6A9A7A;cursor:pointer;text-transform:uppercase;
+  }
+  .debug-panel{
+    display:none;margin-top:10px;padding:12px;border-radius:8px;
+    background:rgba(0,0,0,0.3);border:1px dashed rgba(255,255,255,0.12);
+    font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;color:#A8C4B4;line-height:1.6;
+  }
+  .debug-panel.show{display:block;}
+  .debug-panel code{color:#DDBF88;}
+</style>
+</head>
+<body>
+<div class="frame">
+  <p class="date-header" id="dateHeader">Tuesday · 12 May 2026</p>
+  <p class="live-status">● LIVE 09:31</p>
+  <p class="pool-meta" id="poolMeta">WEEK 19 · 100-CARD POOL</p>
+
+  <div class="demo-toolbar">
+    <span>Demo:</span>
+    <button class="demo-btn on" id="proToggle" onclick="togglePro()">Pro mode: ON</button>
+    <button class="demo-btn" onclick="nextDay()">Next day →</button>
+    <button class="demo-btn" onclick="resetSeen()">Reset history</button>
+  </div>
+
+  <!-- PREFS -->
+  <div class="prefs-container" id="prefsPanel">
+    <div class="prefs-header">
+      <span class="prefs-label">Your Hand</span>
+      <span class="prefs-count">Matching <strong id="matchCount">100</strong> of 100</span>
+    </div>
+    <div class="chip-row" id="chipRow"></div>
+  </div>
+
+  <!-- CARDS -->
+  <div class="card-grid" id="cardGrid"></div>
+
+  <!-- Debug -->
+  <div class="debug-toggle" onclick="document.getElementById('debugPanel').classList.toggle('show')">Show debug ▾</div>
+  <div class="debug-panel" id="debugPanel"></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-sheet" id="modalSheet"></div>
+</div>
+
+<script>
+// ── SIMULATED 100-CARD WEEKLY POOL ────────────────────────────────────────
+// Each card: { id, name, ticker, strategy, country, region, sector, stars, mos }
+const COUNTRY_REGION = {
+  GB:'UK/IE', IE:'UK/IE',
+  SE:'Nordics', NO:'Nordics', FI:'Nordics', DK:'Nordics',
+  DE:'DACH', AT:'DACH', CH:'DACH',
+  NL:'BeNeLux', BE:'BeNeLux', LU:'BeNeLux',
+  FR:'S.Europe', IT:'S.Europe', ES:'S.Europe',
+  US:'US'
+};
+const STRATEGIES = ['KING','QUEEN','ACE','JACK','JOKER','TWO'];
+const SECTORS = ['Tech','Healthcare','Financials','Consumer','Industrials','Energy','Materials','Utilities','Communication'];
+const SPECIAL_SECTORS = ['tobacco','gambling','defence','oilgas','alcohol','crypto'];
+
+const NAMES = [
+  ['Aviva','AV.L','GB','Financials'],['Diageo','DGE.L','GB','alcohol'],['BAE Systems','BA.L','GB','defence'],
+  ['Shell','SHEL.L','GB','oilgas'],['Unilever','ULVR.L','GB','Consumer'],['AstraZeneca','AZN.L','GB','Healthcare'],
+  ['Tesco','TSCO.L','GB','Consumer'],['Lloyds','LLOY.L','GB','Financials'],['BT Group','BT.L','GB','Communication'],
+  ['Vodafone','VOD.L','GB','Communication'],['CRH','CRH.L','IE','Materials'],['Kerry Group','KYGA.L','IE','Consumer'],
+  ['Volvo','VOLV-B.ST','SE','Industrials'],['Atlas Copco','ATCO-A.ST','SE','Industrials'],
+  ['Hexagon','HEXA-B.ST','SE','Tech'],['Investor AB','INVE-B.ST','SE','Financials'],
+  ['Evolution','EVO.ST','SE','gambling'],['Swedbank','SWED-A.ST','SE','Financials'],
+  ['SSAB','SSAB-A.ST','SE','Materials'],['Boliden','BOL.ST','SE','Materials'],
+  ['Equinor','EQNR.OL','NO','oilgas'],['DNB','DNB.OL','NO','Financials'],
+  ['Mowi','MOWI.OL','NO','Consumer'],['Aker BP','AKRBP.OL','NO','oilgas'],
+  ['Nokia','NOKIA.HE','FI','Tech'],['Kone','KNEBV.HE','FI','Industrials'],
+  ['Sampo','SAMPO.HE','FI','Financials'],['Stora Enso','STERV.HE','FI','Materials'],
+  ['Novo Nordisk','NOVO-B.CO','DK','Healthcare'],['Maersk','MAERSK-B.CO','DK','Industrials'],
+  ['Carlsberg','CARL-B.CO','DK','alcohol'],['Orsted','ORSTED.CO','DK','Utilities'],
+  ['SAP','SAP.DE','DE','Tech'],['Siemens','SIE.DE','DE','Industrials'],
+  ['BMW','BMW.DE','DE','Consumer'],['Allianz','ALV.DE','DE','Financials'],
+  ['Bayer','BAYN.DE','DE','Healthcare'],['Deutsche Telekom','DTE.DE','DE','Communication'],
+  ['Rheinmetall','RHM.DE','DE','defence'],['BASF','BAS.DE','DE','Materials'],
+  ['Nestle','NESN.SW','CH','Consumer'],['Novartis','NOVN.SW','CH','Healthcare'],
+  ['Roche','ROG.SW','CH','Healthcare'],['UBS','UBSG.SW','CH','Financials'],
+  ['ASML','ASML.AS','NL','Tech'],['ING','INGA.AS','NL','Financials'],
+  ['Heineken','HEIA.AS','NL','alcohol'],['Philips','PHIA.AS','NL','Healthcare'],
+  ['KBC','KBC.BR','BE','Financials'],['Solvay','SOLB.BR','BE','Materials'],
+  ['LVMH','MC.PA','FR','Consumer'],['TotalEnergies','TTE.PA','FR','oilgas'],
+  ['Sanofi','SAN.PA','FR','Healthcare'],['BNP Paribas','BNP.PA','FR','Financials'],
+  ['Airbus','AIR.PA','FR','defence'],['Schneider','SU.PA','FR','Industrials'],
+  ['ENI','ENI.MI','IT','oilgas'],['Ferrari','RACE.MI','IT','Consumer'],
+  ['Intesa','ISP.MI','IT','Financials'],['Stellantis','STLA.MI','IT','Consumer'],
+  ['Iberdrola','IBE.MC','ES','Utilities'],['Inditex','ITX.MC','ES','Consumer'],
+  ['Santander','SAN.MC','ES','Financials'],['Repsol','REP.MC','ES','oilgas'],
+  ['Apple','AAPL','US','Tech'],['Microsoft','MSFT','US','Tech'],
+  ['Alphabet','GOOGL','US','Tech'],['Johnson & Johnson','JNJ','US','Healthcare'],
+  ['Procter & Gamble','PG','US','Consumer'],['Coca-Cola','KO','US','Consumer'],
+  ['Visa','V','US','Financials'],['Mastercard','MA','US','Financials'],
+  ['JPMorgan','JPM','US','Financials'],['ExxonMobil','XOM','US','oilgas'],
+  ['Chevron','CVX','US','oilgas'],['Lockheed Martin','LMT','US','defence'],
+  ['Philip Morris','PM','US','tobacco'],['Altria','MO','US','tobacco'],
+  ['Pfizer','PFE','US','Healthcare'],['UnitedHealth','UNH','US','Healthcare'],
+  ['Home Depot','HD','US','Consumer'],['Walmart','WMT','US','Consumer'],
+  ['McDonalds','MCD','US','Consumer'],['Costco','COST','US','Consumer'],
+  ['Caterpillar','CAT','US','Industrials'],['3M','MMM','US','Industrials'],
+  ['Honeywell','HON','US','Industrials'],['Boeing','BA','US','defence'],
+  ['Nvidia','NVDA','US','Tech'],['Meta','META','US','Tech'],
+  ['Amazon','AMZN','US','Consumer'],['Berkshire','BRK.B','US','Financials'],
+  ['Texas Instruments','TXN','US','Tech'],['IBM','IBM','US','Tech'],
+  ['Cisco','CSCO','US','Tech'],['Oracle','ORCL','US','Tech'],
+  ['Coinbase','COIN','US','crypto'],['MicroStrategy','MSTR','US','crypto'],
+  ['NextEra','NEE','US','Utilities'],['Duke Energy','DUK','US','Utilities']
+];
+
+const TAGS = {
+  KING:'A dividend aristocrat trading below intrinsic value — quality income at a discount.',
+  QUEEN:'High return on capital meets a value price — the magic formula in action.',
+  ACE:'Strong fundamentals across nine Piotroski signals. Financial health, sharply priced.',
+  JACK:'Momentum aligns with earnings strength. The trend is your friend, with substance.',
+  JOKER:'Accelerating earnings, strong growth metrics — a CAN-SLIM candidate in motion.',
+  TWO:'Beaten down but turning. Contrarian setup with phoenix potential.'
+};
+
+// Seeded RNG for determinism
+function mulberry32(seed){
+  return function(){
+    seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+    let t = seed;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+// Build the 100-card weekly pool
+function buildPool(weekSeed){
+  const rng = mulberry32(weekSeed);
+  const shuffled = [...NAMES].sort(() => rng() - 0.5).slice(0, 100);
+  return shuffled.map((row, i) => {
+    const [name, ticker, country, sector] = row;
+    const strategy = STRATEGIES[Math.floor(rng() * STRATEGIES.length)];
+    const stars = Math.max(1, Math.min(5, Math.round(2 + rng() * 3)));
+    const mos = Math.round(5 + rng() * 50);
+    return {
+      id: 'card_' + i,
+      name, ticker, country, sector, strategy, stars, mos,
+      region: COUNTRY_REGION[country] || 'Other'
+    };
+  });
+}
+
+// ── STATE ─────────────────────────────────────────────────────────────────
+const state = {
+  isPro: true,
+  dayOffset: 0,
+  prefs: {
+    geo:      ['UK/IE','Nordics','DACH','BeNeLux','S.Europe','US','Other'],
+    strategy: [...STRATEGIES],
+    stars:    3,
+    exclude:  []
+  },
+  seenIds: new Set()
+};
+
+const GEO_OPTS = [
+  { id:'UK/IE',    label:'UK & Ireland',   sub:'GBP · ISA friendly' },
+  { id:'Nordics',  label:'Nordics',        sub:'SE · NO · FI · DK' },
+  { id:'DACH',     label:'DACH',           sub:'DE · AT · CH' },
+  { id:'BeNeLux',  label:'BeNeLux',        sub:'NL · BE · LU' },
+  { id:'S.Europe', label:'S. Europe',      sub:'FR · IT · ES' },
+  { id:'US',       label:'United States',  sub:'USD' },
+  { id:'Other',    label:'Other',          sub:'Worldwide' }
+];
+const STRAT_OPTS = [
+  { id:'KING',  label:'♚ KING',   sub:'Dividend Aristocrats' },
+  { id:'QUEEN', label:'♛ QUEEN',  sub:'Magic Formula' },
+  { id:'ACE',   label:'♠ ACE',    sub:'Piotroski F-Score' },
+  { id:'JACK',  label:'♞ JACK',   sub:'Minervini Momentum' },
+  { id:'JOKER', label:'★ JOKER',  sub:'CAN-SLIM Growth' },
+  { id:'TWO',   label:'2 TWO',    sub:'Contrarian Phoenix' }
+];
+const EXCL_OPTS = [
+  { id:'tobacco',  label:'Tobacco',      sub:'BAT · MO · PM' },
+  { id:'gambling', label:'Gambling',     sub:'Casinos · betting' },
+  { id:'defence',  label:'Defence',      sub:'Weapons · arms' },
+  { id:'oilgas',   label:'Oil & Gas',    sub:'Fossil fuels' },
+  { id:'alcohol',  label:'Alcohol',      sub:'Spirits · brewers' },
+  { id:'crypto',   label:'Crypto',       sub:'Digital assets' }
+];
+
+// Week 19 of 2026 starts Mon May 11
+const WEEK_SEED = 20261912;
+const POOL = buildPool(WEEK_SEED);
+
+// ── PICKER ─────────────────────────────────────────────────────────────────
+function applyFilters(pool, prefs){
+  return pool.filter(c => {
+    if (!prefs.geo.includes(c.region)) return false;
+    if (!prefs.strategy.includes(c.strategy)) return false;
+    if (c.stars < prefs.stars) return false;
+    if (prefs.exclude.includes(c.sector)) return false;
+    return true;
+  });
+}
+
+function pickToday(){
+  const unseen = POOL.filter(c => !state.seenIds.has(c.id));
+  const daySeed = WEEK_SEED + state.dayOffset * 17;
+  const rng = mulberry32(daySeed);
+  const shuffle = (arr) => [...arr].sort(() => rng() - 0.5);
+
+  // FREE pick (any unseen card)
+  const freePick = shuffle(unseen)[0] || null;
+
+  // PRO pick
+  let proPick = null;
+  let noMatch = false;
+  let appliedPrefs = state.prefs;
+  if (state.isPro){
+    const filtered = applyFilters(unseen.filter(c => c.id !== freePick?.id), state.prefs);
+    if (filtered.length > 0){
+      proPick = shuffle(filtered)[0];
+    } else {
+      noMatch = true;
+    }
+  } else {
+    // For FREE users, lock a second random card
+    proPick = shuffle(unseen.filter(c => c.id !== freePick?.id))[0] || null;
+  }
+
+  return { freePick, proPick, noMatch, appliedPrefs };
+}
+
+// ── RENDER ─────────────────────────────────────────────────────────────────
+function dayLabel(){
+  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const d = new Date(2026, 4, 11 + state.dayOffset); // start Mon May 11
+  return days[d.getDay()] + ' · ' + d.getDate() + ' ' + months[d.getMonth()] + ' 2026';
+}
+
+function render(){
+  document.getElementById('dateHeader').textContent = dayLabel();
+  document.getElementById('proToggle').textContent = 'Pro mode: ' + (state.isPro ? 'ON' : 'OFF');
+  document.getElementById('proToggle').classList.toggle('on', state.isPro);
+  document.getElementById('prefsPanel').style.display = state.isPro ? 'block' : 'none';
+
+  renderChips();
+  renderCards();
+  renderDebug();
+}
+
+function renderChips(){
+  const row = document.getElementById('chipRow');
+  row.innerHTML = '';
+  chip(row, 'GEO', geoSummary(),     'geo');
+  chip(row, 'STR', strategySummary(),'strategy');
+  chip(row, '★',   state.prefs.stars + '+', 'stars');
+  chip(row, 'OUT', excludeSummary(), 'exclude');
+
+  const matching = applyFilters(POOL, state.prefs).length;
+  document.getElementById('matchCount').textContent = matching;
+}
+
+function chip(parent, label, value, key){
+  const active = isFilterActive(key);
+  const el = document.createElement('div');
+  el.className = 'chip ' + (active ? 'active' : 'inactive');
+  el.innerHTML = '<span class="chip-label">'+label+'</span><span>'+value+'</span><span class="chip-edit">✎</span>';
+  el.onclick = () => openModal(key);
+  parent.appendChild(el);
+}
+
+function isFilterActive(key){
+  if (key === 'geo')      return state.prefs.geo.length < GEO_OPTS.length;
+  if (key === 'strategy') return state.prefs.strategy.length < STRAT_OPTS.length;
+  if (key === 'stars')    return state.prefs.stars > 1;
+  if (key === 'exclude')  return state.prefs.exclude.length > 0;
+}
+function geoSummary(){
+  const n = state.prefs.geo.length;
+  if (n === GEO_OPTS.length) return 'All';
+  if (n === 0) return 'None';
+  if (n === 1) return state.prefs.geo[0];
+  return n + ' regions';
+}
+function strategySummary(){
+  const n = state.prefs.strategy.length;
+  if (n === STRAT_OPTS.length) return 'All 6';
+  if (n === 0) return 'None';
+  if (n <= 3) return state.prefs.strategy.join(' ');
+  return n + ' of 6';
+}
+function excludeSummary(){
+  const n = state.prefs.exclude.length;
+  if (n === 0) return 'None';
+  if (n === 1) return EXCL_OPTS.find(o => o.id === state.prefs.exclude[0]).label;
+  return n + ' sectors';
+}
+
+function renderCards(){
+  const grid = document.getElementById('cardGrid');
+  const result = pickToday();
+  grid.innerHTML = '';
+
+  if (result.freePick){
+    grid.appendChild(cardEl(result.freePick, false));
+    state.seenIds.add(result.freePick.id);
+  }
+
+  if (state.isPro && result.noMatch){
+    grid.appendChild(noMatchEl());
+  } else if (result.proPick){
+    grid.appendChild(cardEl(result.proPick, !state.isPro));
+    if (state.isPro) state.seenIds.add(result.proPick.id);
+  }
+}
+
+function cardEl(c, locked){
+  const el = document.createElement('div');
+  el.className = 'card' + (locked ? ' pro-locked' : '');
+  const tier = locked ? 'tier-pro' : 'tier-free';
+  const tierLabel = locked ? 'PRO · LOCKED' : (c.stars >= 4 ? 'PRO' : 'FREE');
+  // Force first card to FREE tier badge regardless, second to PRO
+  el.innerHTML = `
+    <div class="card-head">
+      <span class="card-tier ${tier}">${tierLabel}</span>
+      <span class="card-strategy">${c.strategy}</span>
+    </div>
+    <div class="card-name">${c.name}</div>
+    <div class="card-meta">${c.ticker} · ${c.country} · ${c.sector === 'tobacco' || c.sector === 'gambling' || c.sector === 'defence' || c.sector === 'oilgas' || c.sector === 'alcohol' || c.sector === 'crypto' ? c.sector.toUpperCase() : c.sector}</div>
+    <div class="card-tag">${TAGS[c.strategy]}</div>
+    <div class="card-footer">
+      <span class="stars">${'★'.repeat(c.stars)}${'☆'.repeat(5-c.stars)}</span>
+      <span class="mos ${c.mos < 15 ? 'mos-low' : ''}">MoS ${c.mos}%</span>
+    </div>
+    ${locked ? '<div class="pro-lock-msg"><div class="lock-icon">🔒</div><div class="lock-text">Pro card</div><div class="lock-sub">Upgrade to unlock today\'s gold pick</div></div>' : ''}
+  `;
+  return el;
+}
+
+function noMatchEl(){
+  const newStars = Math.max(1, state.prefs.stars - 1);
+  const el = document.createElement('div');
+  el.className = 'no-match';
+  el.innerHTML = `
+    <div class="no-match-title">No match today</div>
+    <div class="no-match-sub">Your filters are tight enough that no card in this week's pool matches. The closest available has fewer stars.</div>
+    <button class="no-match-btn" onclick="loosenStars()">Loosen stars to ${newStars}★</button>
+    <div class="no-match-foot">Or check back tomorrow — new draw daily.</div>
+  `;
+  return el;
+}
+
+function loosenStars(){
+  state.prefs.stars = Math.max(1, state.prefs.stars - 1);
+  render();
+}
+
+function renderDebug(){
+  const p = document.getElementById('debugPanel');
+  const m = applyFilters(POOL, state.prefs);
+  const byStrategy = {};
+  POOL.forEach(c => byStrategy[c.strategy] = (byStrategy[c.strategy]||0) + 1);
+  p.innerHTML = `
+    <div>Pool size: <code>${POOL.length}</code> · Matching prefs: <code>${m.length}</code> · Seen this week: <code>${state.seenIds.size}</code></div>
+    <div>By strategy in pool: ${Object.entries(byStrategy).map(([k,v]) => k+':<code>'+v+'</code>').join(' · ')}</div>
+    <div>Day offset: <code>${state.dayOffset}</code> (Mon=0)</div>
+  `;
+}
+
+// ── MODAL ──────────────────────────────────────────────────────────────────
+let editingKey = null, draft = null;
+function openModal(key){
+  editingKey = key;
+  draft = key === 'stars' ? state.prefs.stars : JSON.parse(JSON.stringify(state.prefs[key]));
+  renderModal();
+  document.getElementById('modal').classList.add('show');
+}
+function closeModal(){ document.getElementById('modal').classList.remove('show'); editingKey = null; }
+function saveModal(){
+  if (editingKey === 'stars') state.prefs.stars = draft;
+  else state.prefs[editingKey] = draft;
+  closeModal();
+  render();
+}
+function renderModal(){
+  const sheet = document.getElementById('modalSheet');
+  if (editingKey === 'geo')      sheet.innerHTML = modalMulti('Geography','Which markets do you want to see?', GEO_OPTS, draft);
+  if (editingKey === 'strategy') sheet.innerHTML = modalMulti('Strategy Mix','Card types in your daily draw.', STRAT_OPTS, draft);
+  if (editingKey === 'exclude')  sheet.innerHTML = modalMulti('Sector Exclusions','Industries you never want to see.', EXCL_OPTS, draft);
+  if (editingKey === 'stars')    sheet.innerHTML = modalStars();
+
+  sheet.querySelectorAll('.opt[data-id]').forEach(el => {
+    el.onclick = () => {
+      const id = el.getAttribute('data-id');
+      const i = draft.indexOf(id);
+      if (i >= 0) draft.splice(i,1); else draft.push(id);
+      renderModal();
+    };
+  });
+  sheet.querySelectorAll('.star-btn').forEach(el => {
+    el.onclick = () => { draft = parseInt(el.getAttribute('data-stars'),10); renderModal(); };
+  });
+  sheet.querySelector('[data-act="cancel"]').onclick = closeModal;
+  sheet.querySelector('[data-act="save"]').onclick = saveModal;
+}
+function modalMulti(title, sub, opts, selected){
+  return `
+    <div class="modal-title">${title}</div>
+    <div class="modal-sub">${sub}</div>
+    <div class="opt-grid">
+      ${opts.map(o => `
+        <div class="opt ${selected.includes(o.id) ? 'selected' : ''}" data-id="${o.id}">
+          ${o.label}<span class="opt-sub">${o.sub}</span>
+        </div>
+      `).join('')}
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" data-act="cancel">Cancel</button>
+      <button class="btn-primary"   data-act="save">Save</button>
+    </div>
+  `;
+}
+function modalStars(){
+  return `
+    <div class="modal-title">Minimum Quality</div>
+    <div class="modal-sub">Only show cards at this many ValuJack stars or higher.</div>
+    <div class="star-row">
+      ${[1,2,3,4,5].map(n => `<button class="star-btn ${draft === n ? 'selected' : ''}" data-stars="${n}">${n}★</button>`).join('')}
+    </div>
+    <p class="star-hint">${
+      draft === 1 ? 'Showing every card — broadest selection.' :
+      draft === 2 ? 'Excluding the weakest only.' :
+      draft === 3 ? 'Solid quality floor. Recommended.' :
+      draft === 4 ? 'Strong businesses only.' :
+                    'Elite tier — may show very few cards.'
+    }</p>
+    <div class="modal-actions">
+      <button class="btn-secondary" data-act="cancel">Cancel</button>
+      <button class="btn-primary"   data-act="save">Save</button>
+    </div>
+  `;
+}
+document.getElementById('modal').addEventListener('click', e => { if (e.target.id === 'modal') closeModal(); });
+
+// ── DEMO CONTROLS ─────────────────────────────────────────────────────────
+function togglePro(){ state.isPro = !state.isPro; render(); }
+function nextDay(){ state.dayOffset = (state.dayOffset + 1) % 7; render(); }
+function resetSeen(){ state.seenIds.clear(); render(); }
+
+render();
+</script>
+</body>
+</html>
