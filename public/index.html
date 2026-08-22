@@ -1179,7 +1179,7 @@ function Home() {
                         } }, priceErr ? '● PRICES UNAVAILABLE' : priceAge ? '● LIVE ' + priceAge : '○ LOADING'),
                     React.createElement("div", { style: { display: 'flex', justifyContent: 'center', marginBottom: 10 } },
                             React.createElement("img", { src: "/logo-full.png", alt: "ValuJack", style: { height: isMobile ? '42px' : '56px', width: 'auto', maxWidth: '90%', display: 'block' } })),
-                    React.createElement("p", { style: {
+                    view === 'home' && React.createElement("p", { style: {
                             color: '#9ACAAA',
                             fontSize: isMobile ? '0.95rem' : '1.05rem',
                             fontStyle: 'italic',
@@ -1196,7 +1196,7 @@ function Home() {
                         } })),
 
                 // ─── TRUST BLOCK ─ full on a first visit, one quiet line afterwards ───
-                React.createElement("section", { style: { maxWidth: 640, margin: '0 auto', padding: isMobile ? '0 28px' : '0 28px' } },
+                view === 'home' && React.createElement("section", { style: { maxWidth: 640, margin: '0 auto', padding: isMobile ? '0 28px' : '0 28px' } },
                     firstVisit
                         ? React.createElement("div", null,
                             [['Who we are:', 'An independent stock research company. We analyse companies and present the results as playing cards.'],
@@ -1215,7 +1215,7 @@ function Home() {
                                 fontSize: '0.86rem', lineHeight: 1.5, margin: '0 0 9px', textAlign: 'center' } },
                             "Independent stock research company. Not a broker.")),
 
-                React.createElement("div", { style: { maxWidth: 640, margin: '0 auto', padding: '0 28px' } },
+                view === 'home' && React.createElement("div", { style: { maxWidth: 640, margin: '0 auto', padding: '0 28px' } },
                     React.createElement("p", { style: {
                             fontSize: '0.6rem',
                             fontFamily: 'Barlow Condensed,sans-serif',
