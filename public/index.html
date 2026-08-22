@@ -55,7 +55,7 @@
     "@type": "Offer",
     "price": "0",
     "priceCurrency": "USD",
-    "description": "Free tier with 3 strategies. Pro tier $9.99/month after 7-day trial."
+    "description": "Free tier with 3 strategies. Pro tier $9.99/month."
   },
   "publisher": {
     "@type": "Organization",
@@ -1647,14 +1647,14 @@ function Home() {
                         React.createElement("li", null, "More ideas"),
                         React.createElement("li", null, "More strategies"),
                         React.createElement("li", null, "Better diversification")),
-                    React.createElement("p", { style: { color: '#A8C4B4', fontSize: '1.05rem', lineHeight: 1.75, fontFamily: 'EB Garamond,serif', marginBottom: 14 } }, "Two new cards every morning. Start your 7-day Pro trial at no cost \u2014 cancel anytime. After that, $9.99/month."),
+                    React.createElement("p", { style: { color: '#A8C4B4', fontSize: '1.05rem', lineHeight: 1.75, fontFamily: 'EB Garamond,serif', marginBottom: 14 } }, "Two new cards every morning \u2014 one free, one Pro. Pro is $9.99/month, cancel anytime."),
                     React.createElement("button", { onClick: function(){ window.vjTrack && window.vjTrack('pro_trial_clicked', { source: 'how_it_works_modal' }); var o=document.querySelector('.info-overlay'); if(o) o.style.display='none'; setShowInfo(false); window.showProLoader(); window.VJ_proUnlocked = true; setFlipped(function(f){ return f.slice(); }); }, style: {
                             background: GOLD, border: 'none', borderRadius: 8,
                             padding: '12px 28px', cursor: 'pointer',
                             fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 800,
                             fontSize: '1.05rem', letterSpacing: '0.1em', color: '#0A1A0A',
                             width: '100%',
-                        } }, "START 7-DAY PRO TRIAL")),
+                        } }, "UNLOCK PRO \u2014 $9.99/MONTH")),
                 React.createElement("div", { className: "info-section", style: { borderColor: 'transparent' } },
                     React.createElement("p", { style: { color: '#5A8A6A', fontSize: '0.72rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, letterSpacing: '0.2em', marginBottom: 8 } }, "CONTACT"),
                     React.createElement("h2", { style: { fontFamily: 'Playfair Display,serif', fontSize: '1.7rem', color: '#E8F5EE', lineHeight: 1.2, marginBottom: 12 } }, "Get in touch."),
