@@ -312,11 +312,14 @@ function Home() {
     // First-visit flag: read once on mount, then mark the visitor as seen.
     // A functional UI preference, not tracking — no personal data stored.
     const [firstVisit] = useState(function () {
-        try {
-            if (window.localStorage.getItem('vj_seen')) return false;
-            window.localStorage.setItem('vj_seen', '1');
-            return true;
-        } catch (e) { return false; }
+        // Read and write are separated on purpose. If storage is blocked (Safari
+        // private mode, strict privacy settings, some in-app browsers) the write
+        // throws — and someone we cannot remember is a stranger, so the correct
+        // fallback is the first-visit view, not the returning one.
+        var seen = false;
+        try { seen = !!window.localStorage.getItem('vj_seen'); } catch (e) { seen = false; }
+        if (!seen) { try { window.localStorage.setItem('vj_seen', '1'); } catch (e) {} }
+        return !seen;
     });
     const [expanded, setExpanded] = useState(null);
     const [today, setToday] = useState('');
@@ -537,6 +540,7 @@ function Home() {
           });
 
         // Whole-pool undervalued count — header badge only (ignores approved/block/stars gates)
+        const poolScored = cards.filter(c => c.fairValue && !c.manualBlock).length;
         const poolUndervalued = cards.filter(c => {
               if (c.manualBlock) return false;
               const quote = effectivePrices[c.id];
@@ -838,22 +842,36 @@ function Home() {
                     const isDealt = card.type === 'TWO' ? true : dealt.includes(card.id);
                     const ct = CARD_TYPES[card.type];
                     const frame = ct.isGold ? GOLD : SILVER;
+                    const peekOn = card.isPro && !window.VJ_proUnlocked && !!vjFreeId && flipped.indexOf(vjFreeId) !== -1;
                     return (React.createElement("div", { key: card.id, className: `card-wrap${isDealt ? ' dealt' : ''}`, style: { aspectRatio: '5/8', cursor: 'pointer', transform: isDealt ? 'none' : DEAL_ORIGINS[idx] }, onClick: () => handleCardClick(card) },
                         React.createElement("div", { className: `card-inner${isFlipped ? ' flipped' : ''}` },
                             React.createElement("div", { className: "cface", style: { background: frame } },
                                 React.createElement("div", { className: "cinset", style: { background: 'linear-gradient(145deg,#0D1826,#152238,#0D1826)' } },
                                     React.createElement("div", { style: { position: 'absolute', inset: 4, border: ct.isGold ? '1.5px solid rgba(212,175,55,0.6)' : '1.5px solid rgba(192,192,192,0.55)', borderRadius: 3, zIndex: 1, pointerEvents: 'none' } }),
+                                    peekOn && React.createElement("div", { className: "vj-peek-stage", style: { position: 'absolute', top: 7, left: 7, right: 7, bottom: 7, zIndex: 5, display: 'flex', flexDirection: 'column' } },
+                                            React.createElement("div", { className: "vj-peek", style: { position: 'relative', flexShrink: 0, height: 'calc(5rem + 6px)', overflow: 'hidden', borderRadius: '2px 2px 0 0', background: 'linear-gradient(160deg,#FEFDF8 0%,#F8F0DC 100%)' } },
+                                                React.createElement("div", { style: { position: 'absolute', top: '7px', right: '8px', fontSize: '1.05rem', fontWeight: 700, fontFamily: 'Palatino Linotype, Palatino, Book Antiqua, serif', fontStyle: 'italic', letterSpacing: '0.04em', color: ct.color } }, { KING: 'Dividends', JACK: 'Momentum', QUEEN: 'Magic Formula', ACE: 'F-Score', JOKER: 'Growth', TWO: 'Contrarian' }[card.type] || ''),
+                                                React.createElement("div", { style: { position: 'absolute', top: '3px', left: '8px' } },
+                                                    React.createElement("div", { style: Object.assign({ fontSize: '3.2rem', fontWeight: 900, fontFamily: 'Playfair Display,serif', lineHeight: 0.9 }, (ct.cornerColor ? { color: ct.cornerColor } : ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.corner)),
+                                                React.createElement("div", { style: { position: 'absolute', top: '3px', left: 0, right: 0, textAlign: 'center' } },
+                                                    React.createElement("div", { style: Object.assign({ fontSize: ct.symbolSize || '4.2rem', lineHeight: 1, marginTop: ct.symbolSize ? '0.5rem' : '0' }, (ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : ct.symbolColor === 'WHITE' ? { color: '#FFFFFF' } : ct.symbolColor === 'SILVER' ? { background: 'linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#E0DDDA 45%,#A9A9A9 65%,#D0CDCA 80%,#8A8A8A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.symbol))),
+                                            React.createElement("div", { style: { flexShrink: 0, paddingTop: 13, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' } },
+                                                React.createElement("span", { style: { fontSize: '0.85rem', lineHeight: 1 } }, "\uD83D\uDD12"),
+                                                React.createElement("span", { style: { fontSize: '0.62rem', letterSpacing: '0.13em', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 800, textTransform: 'uppercase', color: 'rgba(214,186,120,0.95)' } }, "Unlock Pro for $9.99/month")),
+                                            React.createElement("div", { style: { flex: 1, minHeight: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' } },
+                                                React.createElement("div", { style: { display: 'inline-flex', padding: 10, borderRadius: 14, border: '1px solid rgba(212,175,55,0.55)', background: '#0e1a2c', boxShadow: '0 2px 12px rgba(0,0,0,0.35)' } },
+                                                    React.createElement("img", { src: "/valujack-logo-pro-gold.svg", alt: "ValuJack Pro", style: { width: '3.1rem', height: '3.1rem', display: 'block', opacity: 0.85 } })))),
                                     React.createElement("div", { style: { position: 'absolute', inset: 7, overflow: 'hidden', zIndex: 0, borderRadius: 2 } }, Array.from({ length: 140 }).map((_, i) => { const suits = ['♠︎', '♥︎', '♦︎', '♣︎']; const col = i % 10; const row = Math.floor(i / 10); const suit = suits[(col + row) % 4]; return React.createElement("div", { key: i, style: { position: 'absolute', left: `${col * 10.5 - 1}%`, top: `${row * 6.6 - 1}%`, color: 'rgba(192,192,192,0.30)', fontSize: '0.52rem', userSelect: 'none', lineHeight: 1 } }, suit); })),
                                     React.createElement("div", { style: { position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 2 } },
-                                        React.createElement("div", { style: { padding: 12, borderRadius: 16, border: card.isPro ? '1px solid rgba(212,175,55,0.55)' : '1px solid rgba(192,192,192,0.5)', background: '#0e1a2c', boxShadow: '0 2px 12px rgba(0,0,0,0.35)', display: 'flex', alignItems: 'center', justifyContent: 'center' } }, React.createElement("img", { src: card.isPro ? "/valujack-logo-pro-gold.svg" : "/valujack-logo-free-silver.svg", alt: "ValuJack", style: { width: '4.4rem', height: '4.4rem', display: 'block', opacity: 0.5 } })),
-                                        React.createElement("span", { style: { fontSize: '0.6rem', letterSpacing: '0.25em', marginTop: 8, fontWeight: 900, fontFamily: 'Barlow Condensed,sans-serif' } },
+                                        !peekOn && React.createElement("div", { style: { padding: 12, borderRadius: 16, border: card.isPro ? '1px solid rgba(212,175,55,0.55)' : '1px solid rgba(192,192,192,0.5)', background: '#0e1a2c', boxShadow: '0 2px 12px rgba(0,0,0,0.35)', display: 'flex', alignItems: 'center', justifyContent: 'center' } }, React.createElement("img", { src: card.isPro ? "/valujack-logo-pro-gold.svg" : "/valujack-logo-free-silver.svg", alt: "ValuJack", style: { width: '4.4rem', height: '4.4rem', display: 'block', opacity: 0.5 } })),
+                                        !peekOn && React.createElement("span", { style: { fontSize: '0.6rem', letterSpacing: '0.25em', marginTop: 8, fontWeight: 900, fontFamily: 'Barlow Condensed,sans-serif' } },
                                         React.createElement("span", { style: { background: card.isPro ? 'linear-gradient(135deg,#BFA882 0%,#DDBF88 22%,#A88A60 42%,#CAB07A 62%,#8C7858 80%,#C0AA75 100%)' : 'linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#A9A9A9 65%,#8A8A8A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' } }, "VALU"),
                                         React.createElement("span", { style: { background: card.isPro ? 'linear-gradient(135deg,#BFA882 0%,#DDBF88 22%,#A88A60 42%,#CAB07A 62%,#8C7858 80%,#C0AA75 100%)' : 'linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#A9A9A9 65%,#8A8A8A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' } }, "JACK")),
-                                        card.isPro && !window.VJ_proUnlocked && React.createElement("div", { style: { position: 'absolute', bottom: 24, left: 0, right: 0, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: '5px', zIndex: 10 } },
-                                          React.createElement("div", { style: { fontSize: '0.72rem' } }, "🔒"),
-                                          React.createElement("div", { style: { fontSize: '0.55rem', letterSpacing: '0.2em', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 800, color: 'rgba(201,168,76,0.9)' } }, "PRO"))),
-                                    React.createElement("div", { style: { position: 'absolute', bottom: 8, left: 0, right: 0, textAlign: 'center', zIndex: 3 } },
-                                        React.createElement("span", { style: { fontSize: '0.62rem', opacity: 0.85, letterSpacing: '0.18em', fontFamily: 'Barlow Condensed,sans-serif', background: frame, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, "☝ TAP TO REVEAL")))),
+                                        card.isPro && !window.VJ_proUnlocked && !peekOn && React.createElement("div", { style: { position: 'absolute', bottom: 26, left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '3px', zIndex: 10 } },
+                                          React.createElement("div", { style: { fontSize: '1.45rem', lineHeight: 1 } }, "🔒"),
+                                          React.createElement("div", { style: { fontSize: '0.58rem', letterSpacing: '0.22em', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 800, color: 'rgba(201,168,76,0.9)' } }, "PRO"))),
+                                    !peekOn && React.createElement("div", { style: { position: 'absolute', bottom: 8, left: 0, right: 0, textAlign: 'center', zIndex: 3 } },
+                                        React.createElement("span", { style: { fontSize: '0.62rem', opacity: 0.85, letterSpacing: '0.18em', fontFamily: 'Barlow Condensed,sans-serif', background: frame, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, card.isPro && !window.VJ_proUnlocked ? "UNLOCK PRO \u2014 $9.99/MONTH" : "☝ TAP TO REVEAL")))),
                             React.createElement("div", { className: "cface cface-front", style: { background: frame } },
                                 weekNo && React.createElement("div", { style: { position: 'absolute', left: 10, right: 10, bottom: 10, height: 'calc(5rem + 3px)', background: frame, borderRadius: '0 0 5px 5px', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 4, pointerEvents: 'none' } }, React.createElement("span", { style: { fontFamily: 'Playfair Display,serif', fontWeight: 700, fontSize: 'clamp(0.95rem,2.6vw,1.35rem)', color: '#0D1826', letterSpacing: '0.01em', textShadow: '0 1px 0 rgba(255,255,255,0.30)' } }, "Card of the week " + weekNo)), 
                                 React.createElement("div", { className: "cinset", style: { background: 'linear-gradient(160deg,#FEFDF8 0%,#F8F0DC 100%)', display: 'flex', flexDirection: 'column' } }, React.createElement("div", { style: { flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 } },
@@ -973,6 +991,11 @@ function Home() {
           transition:transform 0.65s cubic-bezier(0.4,0,0.2,1);
         }
         .card-inner.flipped{ transform:rotateY(180deg); }
+        @keyframes peekFlip{ from{ transform:rotateY(-180deg); } to{ transform:rotateY(0deg); } }
+        .vj-peek-stage{ perspective:1400px; }
+        .vj-peek{ transform-origin:center center; backface-visibility:hidden;
+          animation:peekFlip 0.65s cubic-bezier(0.4,0,0.2,1) both; }
+        @media (prefers-reduced-motion:reduce){ .vj-peek{ animation:none; } }
 
         .cface{
           position:absolute; inset:0;
@@ -1033,20 +1056,14 @@ function Home() {
         React.createElement("main", { style: { minHeight: '100vh', background: '#0F4020', display: 'flex', justifyContent: 'center', alignItems: 'flex-start' } },
             React.createElement("div", { style: { width: '100%', maxWidth: isMobile ? '480px' : '1400px' } },
                 React.createElement("div", { style: { padding: isMobile ? '22px 20px 8px' : '28px 20px 10px', textAlign: 'center', position: 'relative' } },
+                    React.createElement("div", { style: {
+                            position: 'absolute', top: isMobile ? 8 : 12, right: isMobile ? 14 : 22,
+                            fontSize: '0.58rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700,
+                            letterSpacing: '0.14em', textTransform: 'uppercase', whiteSpace: 'nowrap',
+                            color: priceErr ? 'rgba(255,120,80,0.8)' : priceAge ? 'rgba(100,220,140,0.75)' : 'rgba(255,255,255,0.35)',
+                        } }, priceErr ? '● PRICES UNAVAILABLE' : priceAge ? '● LIVE ' + priceAge : '○ LOADING'),
                     React.createElement("div", { style: { display: 'flex', justifyContent: 'center', marginBottom: 10 } },
                             React.createElement("img", { src: "/logo-full.png", alt: "ValuJack", style: { height: isMobile ? '42px' : '56px', width: 'auto', maxWidth: '90%', display: 'block' } })),
-                    React.createElement("p", { style: {
-                            fontSize: '0.6rem',
-                            fontFamily: 'Barlow Condensed,sans-serif',
-                            fontWeight: 700,
-                            letterSpacing: '0.16em',
-                            textTransform: 'uppercase',
-                            marginBottom: 4,
-                            textAlign: 'center',
-                            color: priceErr ? 'rgba(255,120,80,0.85)' : priceAge ? 'rgba(100,220,140,0.85)' : 'rgba(255,255,255,0.4)',
-                        } },
-                        priceErr ? 'PRICES UNAVAILABLE' : priceAge ? '● LIVE ' + priceAge : '○ LOADING',
-                        priceAge && React.createElement("span", { style: { color: 'rgba(100,220,140,0.7)' } }, " · " + poolUndervalued + " UNDERVALUED")),
                     React.createElement("p", { style: {
                             color: '#9ACAAA',
                             fontSize: isMobile ? '0.95rem' : '1.05rem',
@@ -1060,23 +1077,11 @@ function Home() {
                     React.createElement("div", { style: {
                             width: 48, height: 1,
                             background: 'linear-gradient(to right,transparent,rgba(168,212,184,0.4),transparent)',
-                            margin: '12px auto',
-                        } }),
-                    React.createElement("button", { onClick: () => { window.vjTrack && window.vjTrack('how_it_works_opened'); setShowInfo(true); }, style: {
-                            background: 'rgba(90,138,106,0.12)', border: '1px solid rgba(90,138,106,0.5)', cursor: 'pointer',
-                            color: '#A8D4B8',
-                            fontSize: '0.72rem',
-                            fontFamily: 'Barlow Condensed,sans-serif',
-                            fontWeight: 700,
-                            letterSpacing: '0.28em',
-                            textTransform: 'uppercase',
-                            padding: '7px 18px',
-                            borderRadius: '20px',
-                            transition: 'all 0.2s',
-                        }, onMouseEnter: e => { e.currentTarget.style.background = 'rgba(90,138,106,0.25)'; e.currentTarget.style.borderColor = '#A8D4B8'; }, onMouseLeave: e => { e.currentTarget.style.background = 'rgba(90,138,106,0.12)'; e.currentTarget.style.borderColor = 'rgba(90,138,106,0.5)'; } }, "HOW IT WORKS")),
+                            margin: '10px auto 4px',
+                        } })),
 
                 // ─── TRUST BLOCK ─ full on a first visit, one quiet line afterwards ───
-                React.createElement("section", { style: { maxWidth: 640, margin: '0 auto', padding: isMobile ? '8px 28px 0' : '12px 28px 0' } },
+                React.createElement("section", { style: { maxWidth: 640, margin: '0 auto', padding: isMobile ? '0 28px' : '0 28px' } },
                     firstVisit
                         ? React.createElement("div", null,
                             [['Who we are:', 'An independent stock research company. We analyse companies and present the results as playing cards.'],
@@ -1092,22 +1097,39 @@ function Home() {
                             }))
                         : React.createElement("p", { style: {
                                 color: '#7A9A8A', fontFamily: 'EB Garamond,serif', fontStyle: 'italic',
-                                fontSize: '0.86rem', lineHeight: 1.5, margin: 0, textAlign: 'center' } },
+                                fontSize: '0.86rem', lineHeight: 1.5, margin: '0 0 9px', textAlign: 'center' } },
                             "Independent stock research company. Not a broker.")),
 
-                // ─── COUNTER ─ always visible ───
-                React.createElement("div", { style: { maxWidth: 640, margin: '14px auto 2px', padding: '0 28px' } },
-                    React.createElement("div", { style: { height: 1, background: 'linear-gradient(to right,transparent,rgba(168,212,184,0.28),transparent)', marginBottom: 10 } }),
+                React.createElement("div", { style: { maxWidth: 640, margin: '0 auto', padding: '0 28px' } },
                     React.createElement("p", { style: {
-                            textAlign: 'center', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700,
-                            fontSize: '0.72rem', letterSpacing: '0.16em', textTransform: 'uppercase',
-                            color: '#7A9A8A', margin: 0 } },
-                        React.createElement("span", { style: { color: '#BFA882' } }, VJ_SCREENED.toLocaleString('en-US')),
-                        " companies screened \u00B7 two shown today")),
-                React.createElement("div", { style: { display: 'flex', justifyContent: 'space-between', padding: '6px 28px 6px' } },
+                            fontSize: '0.6rem',
+                            fontFamily: 'Barlow Condensed,sans-serif',
+                            fontWeight: 700,
+                            letterSpacing: '0.16em',
+                            textTransform: 'uppercase',
+                            marginBottom: 4,
+                            marginTop: 0,
+                            textAlign: 'center',
+                            color: 'rgba(100,220,140,0.7)',
+                        } },
+                        priceAge && React.createElement("span", { style: { display: 'block', color: 'rgba(100,220,140,0.7)', lineHeight: 1.6 } },
+                            React.createElement("span", { style: { display: 'block' } }, VJ_SCREENED.toLocaleString('en-US') + " STOCKS SCREENED \u00B7 " + poolScored.toLocaleString('en-US') + " SCORED \u00B7 " + poolUndervalued + " UNDERVALUED")))),
+                React.createElement("div", { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 28px 18px' } },
                     React.createElement("div", { style: { display: 'flex', alignItems: 'center', gap: 6 } },
                         React.createElement("div", { style: { width: 36, height: 1.5, background: SILVER } }),
                         React.createElement("span", { style: { fontSize: '0.85rem', letterSpacing: '0.2em', fontWeight: 800, fontFamily: 'Barlow Condensed,sans-serif', background: SILVER, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, "FREE")),
+                    React.createElement("button", { onClick: () => { window.vjTrack && window.vjTrack('how_it_works_opened'); setShowInfo(true); }, style: {
+                            background: 'rgba(90,138,106,0.12)', border: '1px solid rgba(90,138,106,0.5)', cursor: 'pointer',
+                            color: '#A8D4B8',
+                            fontSize: '0.72rem',
+                            fontFamily: 'Barlow Condensed,sans-serif',
+                            fontWeight: 700,
+                            letterSpacing: '0.28em',
+                            textTransform: 'uppercase',
+                            padding: '7px 18px',
+                            borderRadius: '20px',
+                            transition: 'all 0.2s',
+                        }, onMouseEnter: e => { e.currentTarget.style.background = 'rgba(90,138,106,0.25)'; e.currentTarget.style.borderColor = '#A8D4B8'; }, onMouseLeave: e => { e.currentTarget.style.background = 'rgba(90,138,106,0.12)'; e.currentTarget.style.borderColor = 'rgba(90,138,106,0.5)'; } }, "HOW IT WORKS"),
                     React.createElement("div", { style: { display: 'flex', alignItems: 'center', gap: 6 } },
                         React.createElement("span", { style: { fontSize: '0.85rem', letterSpacing: '0.2em', fontWeight: 800, fontFamily: 'Barlow Condensed,sans-serif', background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, "PRO"),
                         React.createElement("div", { style: { width: 36, height: 1.5, background: GOLD } }))),
@@ -1680,7 +1702,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(
     <div id="sl5" style="opacity:0;display:inline-block;">
       <img src="/logo-full.png" alt="ValuJack" style="display:block;width:auto;height:clamp(52px,9vw,84px);max-width:80vw;" />
     </div>
-    <div id="splashBtn" style="opacity:0;display:block;margin-top:36px;">
+    <div id="sl6" style="opacity:0;margin-top:14px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.72rem;letter-spacing:0.26em;text-transform:uppercase;color:rgba(191,168,130,0.75);">Independent stock research</div>
+    <div id="splashBtn" style="opacity:0;display:block;margin-top:30px;">
       <span id="splashBtnInner" onclick="dismissSplash()" style="display:inline-block;border:1px solid rgba(191,168,130,0.55);border-radius:999px;padding:11px 36px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:0.72rem;letter-spacing:0.28em;text-transform:uppercase;color:rgba(201,168,76,0.95);cursor:pointer;">TAP TO ENTER</span>
     </div>
   </div>
@@ -1710,6 +1733,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(
   anim('sl3', 4600);
   anim('sl4', 5800, 'fadeIn', '0.7s');
   anim('sl5', 6300, 'scaleUp', '1s');
+  anim('sl6', 7000, 'fadeIn', '0.8s');
   setTimeout(function(){
     var btn = document.getElementById('splashBtn');
     if(btn){ btn.style.animation = 'fadeIn 0.8s ease forwards'; btnShown = true; }
