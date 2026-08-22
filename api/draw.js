@@ -54,7 +54,14 @@ export default async function handler(req, res) {
   if (req.method === 'GET') {
     try {
       const log = await readLog();
-      const cutoff = Date.now() - WINDOW_DAYS * ONE_DAY_MS;
+      // The picker only needs a fortnight; the weekly-cards page asks for more.
+      // ?all=1 returns the whole log, ?days=N a custom window.
+      if (req.query && req.query.all === '1') {
+        return res.status(200).json({ draws: log });
+      }
+      const reqDays = req.query && req.query.days ? parseInt(req.query.days, 10) : NaN;
+      const windowDays = Number.isFinite(reqDays) && reqDays > 0 ? Math.min(reqDays, 3650) : WINDOW_DAYS;
+      const cutoff = Date.now() - windowDays * ONE_DAY_MS;
       const recent = log.filter(r => {
         if (!r) return false;
         const t = r.ts != null ? r.ts : (r.date ? new Date(r.date).getTime() : 0);
