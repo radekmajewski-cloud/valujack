@@ -795,6 +795,82 @@ function Home() {
             return Math.ceil((((t - ys) / 86400000) + 1) / 7);
         }
 
+        // ISO year AND week from one shifted date (the Thursday rule).
+        function vjIsoParts(d) {
+            const t = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+            t.setUTCDate(t.getUTCDate() + 4 - (t.getUTCDay() || 7));
+            const ys = new Date(Date.UTC(t.getUTCFullYear(), 0, 1));
+            return { year: t.getUTCFullYear(), week: Math.ceil((((t - ys) / 86400000) + 1) / 7) };
+        }
+        function vjParseDate(s) {
+            const p = String(s).split('-');
+            return new Date(parseInt(p[0], 10), parseInt(p[1], 10) - 1, parseInt(p[2], 10));
+        }
+        const VJ_MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        function vjRange(a, b) {
+            if (!a || !b) return '';
+            const sa = vjParseDate(a), sb = vjParseDate(b);
+            if (sa.getMonth() === sb.getMonth())
+                return sa.getDate() + '\u2013' + sb.getDate() + ' ' + VJ_MON[sb.getMonth()];
+            return sa.getDate() + ' ' + VJ_MON[sa.getMonth()] + ' \u2013 ' + sb.getDate() + ' ' + VJ_MON[sb.getMonth()];
+        }
+
+        // Group the whole draw log into ISO weeks and pick each week's two
+        // winners with the same rule the front page uses: highest stars, then
+        // largest margin of safety against the price served that day, then
+        // most recent. Because the ranges are fixed calendar weeks, a past
+        // week's winner does not drift as new draws arrive.
+        function vjWeeklyAll(rows) {
+            const byId = {}, byTicker = {};
+            (window.CARDS_DATA || []).forEach(function (c) {
+                byId[c.id] = c;
+                if (c.ticker) {
+                    byTicker[c.ticker + '|' + c.type] = c;
+                    if (!byTicker[c.ticker]) byTicker[c.ticker] = c;
+                }
+            });
+            const groups = {};
+            (rows || []).forEach(function (r) {
+                if (!r || !r.date) return;
+                const ip = vjIsoParts(vjParseDate(r.date));
+                const key = ip.year + '-' + String(ip.week).padStart(2, '0');
+                if (!groups[key]) groups[key] = { key: key, year: ip.year, week: ip.week, rows: [] };
+                groups[key].rows.push(r);
+            });
+            function best(rows, side) {
+                let w = null;
+                rows.forEach(function (r) {
+                    const tk = r[side + '_ticker'], ty = r[side + '_type'];
+                    const c = (tk && (byTicker[tk + '|' + ty] || byTicker[tk])) || byId[r[side + '_id']];
+                    if (!c || c.manualBlock === true) return;
+                    const served = r[side + '_price'];
+                    const mos = (c.fairValue && served) ? ((c.fairValue - served) / c.fairValue) * 100 : null;
+                    const dealtCard = ty && ty !== c.type ? Object.assign({}, c, { type: ty }) : c;
+                    const cand = { card: dealtCard, date: r.date, stars: r[side + '_stars'] || c.stars || 0, mos: mos,
+                                   ticker: r[side + '_ticker'], company: r[side + '_company'] };
+                    if (!w) { w = cand; return; }
+                    if (cand.stars !== w.stars) { if (cand.stars > w.stars) w = cand; return; }
+                    const a = cand.mos == null ? -9999 : cand.mos, b = w.mos == null ? -9999 : w.mos;
+                    if (a !== b) { if (a > b) w = cand; return; }
+                    if (cand.date > w.date) w = cand;
+                });
+                return w;
+            }
+            return Object.keys(groups).sort().reverse().map(function (k) {
+                const g = groups[k];
+                const dates = g.rows.map(function (r) { return r.date; }).sort();
+                return {
+                    key: g.key, year: g.year, week: g.week,
+                    from: dates[0], to: dates[dates.length - 1],
+                    free: best(g.rows, 'free'), pro: best(g.rows, 'pro')
+                };
+            }).filter(function (g) { return g.free || g.pro; })
+              .filter(function (g) {
+                  const nowP = vjIsoParts(new Date());
+                  return !(g.year === nowP.year && g.week === nowP.week);
+              });
+        }
+
         const weekCards = React.useMemo(function () {
             if (!drawHistory || !drawHistory.length) return null;
             const now = new Date(), todayNo = vjDayNo(now);
@@ -836,13 +912,55 @@ function Home() {
             if (weekCards && weekCards.isSunday) setShowWeek(true);
         }, [weekCards]);
 
+        // ── /weekly-cards ────────────────────────────────────────────────
+        function vjPathView() {
+            const p = String(window.location.pathname || '').replace(/\/+$/, '');
+            return p === '/weekly-cards' ? 'weekly' : 'home';
+        }
+        const [view, setView] = useState(vjPathView());
+        const [fullLog, setFullLog] = useState(null);
+        const [selWeek, setSelWeek] = useState(null);
+
+        React.useEffect(function () {
+            function onPop() { setView(vjPathView()); }
+            window.addEventListener('popstate', onPop);
+            return function () { window.removeEventListener('popstate', onPop); };
+        }, []);
+
+        function vjGo(v) {
+            window.history.pushState({}, '', v === 'weekly' ? '/weekly-cards' : '/');
+            setView(v);
+            window.scrollTo(0, 0);
+            if (v === 'weekly') window.vjTrack && window.vjTrack('weekly_cards_opened');
+        }
+
+        // The whole log, fetched once, only when the page is actually needed.
+        React.useEffect(function () {
+            if (view !== 'weekly' || fullLog !== null) return;
+            fetch('/api/draw?all=1')
+                .then(function (r) { return r.json(); })
+                .then(function (d) { setFullLog(Array.isArray(d.draws) ? d.draws : []); })
+                .catch(function () { setFullLog([]); });
+        }, [view, fullLog]);
+
+        const weeklyAll = React.useMemo(function () {
+            return fullLog ? vjWeeklyAll(fullLog) : null;
+        }, [fullLog]);
+
+        const shownWeek = React.useMemo(function () {
+            if (!weeklyAll || !weeklyAll.length) return null;
+            if (!selWeek) return weeklyAll[0];
+            return weeklyAll.filter(function (g) { return g.key === selWeek; })[0] || weeklyAll[0];
+        }, [weeklyAll, selWeek]);
+
         function vjRenderCard(card, idx, weekNo) {
                     var _a, _b, _c, _d;
-                    const isFlipped = flipped.includes(card.id);
-                    const isDealt = card.type === 'TWO' ? true : dealt.includes(card.id);
+                    const onWeekly = view === 'weekly';
+                    const isFlipped = onWeekly ? (!card.isPro || !!window.VJ_proUnlocked) : flipped.includes(card.id);
+                    const isDealt = onWeekly ? true : (card.type === 'TWO' ? true : dealt.includes(card.id));
                     const ct = CARD_TYPES[card.type];
                     const frame = ct.isGold ? GOLD : SILVER;
-                    const peekOn = card.isPro && !window.VJ_proUnlocked && !!vjFreeId && flipped.indexOf(vjFreeId) !== -1;
+                    const peekOn = card.isPro && !window.VJ_proUnlocked && view !== 'weekly' && !!vjFreeId && flipped.indexOf(vjFreeId) !== -1;
                     return (React.createElement("div", { key: card.id, className: `card-wrap${isDealt ? ' dealt' : ''}`, style: { aspectRatio: '5/8', cursor: 'pointer', transform: isDealt ? 'none' : DEAL_ORIGINS[idx] }, onClick: () => handleCardClick(card) },
                         React.createElement("div", { className: `card-inner${isFlipped ? ' flipped' : ''}` },
                             React.createElement("div", { className: "cface", style: { background: frame } },
@@ -870,7 +988,7 @@ function Home() {
                                     !peekOn && React.createElement("div", { style: { position: 'absolute', bottom: 8, left: 0, right: 0, textAlign: 'center', zIndex: 3 } },
                                         React.createElement("span", { style: { fontSize: '0.62rem', opacity: 0.85, letterSpacing: '0.18em', fontFamily: 'Barlow Condensed,sans-serif', background: frame, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, card.isPro && !window.VJ_proUnlocked ? "UNLOCK PRO \u2014 $9.99/MONTH" : "☝ TAP TO REVEAL")))),
                             React.createElement("div", { className: "cface cface-front", style: { background: frame } },
-                                weekNo && React.createElement("div", { style: { position: 'absolute', left: 10, right: 10, bottom: 10, height: 'calc(5rem + 3px)', background: frame, borderRadius: '0 0 5px 5px', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 4, pointerEvents: 'none' } }, React.createElement("span", { style: { fontFamily: 'Playfair Display,serif', fontWeight: 700, fontSize: 'clamp(0.95rem,2.6vw,1.35rem)', color: '#0D1826', letterSpacing: '0.01em', textShadow: '0 1px 0 rgba(255,255,255,0.30)' } }, "Card of the week " + weekNo)), 
+                                weekNo && React.createElement("div", { style: { position: 'absolute', left: 10, right: 10, bottom: 10, height: 'calc(5rem + 3px)', background: frame, borderRadius: '0 0 5px 5px', WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 12%, rgba(0,0,0,1) 30%)', maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 12%, rgba(0,0,0,1) 30%)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 4, pointerEvents: 'none' } }, React.createElement("span", { style: { fontFamily: 'Playfair Display,serif', fontWeight: 700, fontSize: 'clamp(0.95rem,2.6vw,1.35rem)', color: '#0D1826', letterSpacing: '0.01em', textShadow: '0 1px 0 rgba(255,255,255,0.30)' } }, "Card of the week " + weekNo)), 
                                 React.createElement("div", { className: "cinset", style: { background: 'linear-gradient(160deg,#FEFDF8 0%,#F8F0DC 100%)', display: 'flex', flexDirection: 'column' } }, React.createElement("div", { style: { flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 } },
                                     React.createElement("div", { style: { position: 'relative', flexShrink: 0, height: '5rem', marginTop: '3px', background: card.type === 'TWO' ? 'linear-gradient(180deg,#6B0E0E 0%,#3A0808 100%)' : 'transparent', borderRadius: card.type === 'TWO' ? '5px 5px 0 0' : 0 } },
                                         React.createElement("div", { style: { position: 'absolute', top: '4px', right: '8px', fontSize: '1.05rem', fontWeight: 700, fontFamily: 'Palatino Linotype, Palatino, Book Antiqua, serif', fontStyle: 'italic', letterSpacing: '0.04em', opacity: 1.0, color: card.type === 'TWO' ? '#C8C8C8' : ct.color } }, { KING: 'Dividends', JACK: 'Momentum', QUEEN: 'Magic Formula', ACE: 'F-Score', JOKER: 'Growth', TWO: 'Contrarian' }[card.type] || ''),
@@ -1111,7 +1229,7 @@ function Home() {
                         } },
                         priceAge && React.createElement("span", { style: { display: 'block', color: 'rgba(100,220,140,0.7)', lineHeight: 1.6 } },
                             React.createElement("span", { style: { display: 'block' } }, VJ_SCREENED.toLocaleString('en-US') + " STOCKS SCREENED \u00B7 " + poolScored.toLocaleString('en-US') + " SCORED \u00B7 " + poolUndervalued + " UNDERVALUED")))),
-                React.createElement("div", { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 28px 18px' } },
+                view === 'home' && React.createElement("div", { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 28px 18px' } },
                     React.createElement("div", { style: { display: 'flex', alignItems: 'center', gap: 6 } },
                         React.createElement("div", { style: { width: 36, height: 1.5, background: SILVER } }),
                         React.createElement("span", { style: { fontSize: '0.85rem', letterSpacing: '0.2em', fontWeight: 800, fontFamily: 'Barlow Condensed,sans-serif', background: SILVER, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, "FREE")),
@@ -1130,21 +1248,68 @@ function Home() {
                     React.createElement("div", { style: { display: 'flex', alignItems: 'center', gap: 6 } },
                         React.createElement("span", { style: { fontSize: '0.85rem', letterSpacing: '0.2em', fontWeight: 800, fontFamily: 'Barlow Condensed,sans-serif', background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, "PRO"),
                         React.createElement("div", { style: { width: 36, height: 1.5, background: GOLD } }))),
-                React.createElement("div", { className: "card-grid" }, visibleCards.map(function (card, idx) { return vjRenderCard(card, idx, null); })),
-                weekCards && React.createElement("div", { style: { padding: '0 28px 24px' } },
-                    !weekCards.isSunday && React.createElement("button", {
-                        onClick: function () { window.vjTrack && window.vjTrack('cards_of_week_opened'); setShowWeek(!showWeek); },
-                        style: { width: '100%', background: 'rgba(191,168,130,0.08)', border: '1px solid rgba(191,168,130,0.40)',
-                                 cursor: 'pointer', color: '#BFA882', fontSize: '0.72rem', fontFamily: 'Barlow Condensed,sans-serif',
-                                 fontWeight: 700, letterSpacing: '0.26em', textTransform: 'uppercase', padding: '11px 18px',
-                                 borderRadius: 20, marginBottom: 4 } },
-                        showWeek ? "HIDE CARDS OF WEEK " + weekCards.week : "CARDS OF WEEK " + weekCards.week),
-                    showWeek && React.createElement("p", { style: { color: '#7A9A8A', fontSize: '0.76rem', textAlign: 'center',
-                            fontStyle: 'italic', margin: '14px 0 16px', lineHeight: 1.5 } },
-                        "The strongest cards dealt last week. Chosen by star rating, then by margin of safety at the moment the card was dealt \u2014 never by price movement."),
-                    showWeek && React.createElement("div", { className: "card-grid", style: { padding: 0 } },
-                        [weekCards.free, weekCards.pro].filter(Boolean).map(function (h, i) {
-                            return vjRenderCard(h.card, i, weekCards.week);
+                view === 'home' && React.createElement("div", { className: "card-grid" }, visibleCards.map(function (card, idx) { return vjRenderCard(card, idx, null); })),
+                view === 'home' && React.createElement("div", { style: { padding: '0 28px 26px', textAlign: 'center' } },
+                    React.createElement("a", { href: "/weekly-cards", onClick: function (ev) { ev.preventDefault(); vjGo('weekly'); },
+                            style: { display: 'inline-block', color: '#D6BA78', fontSize: '0.82rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700,
+                                     letterSpacing: '0.24em', textTransform: 'uppercase', textDecoration: 'none',
+                                     border: '1px solid rgba(191,168,130,0.55)', background: 'rgba(191,168,130,0.10)', borderRadius: 22, padding: '12px 26px', cursor: 'pointer' } },
+                        "Cards of the Week \u2192")),
+
+                view === 'weekly' && React.createElement("div", { style: { padding: '0 24px 8px', marginTop: -6 } },
+                    React.createElement("a", { href: "/", onClick: function (ev) { ev.preventDefault(); vjGo('home'); },
+                            style: { color: '#7A9A8A', fontSize: '0.68rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700,
+                                     letterSpacing: '0.2em', textTransform: 'uppercase', textDecoration: 'none', cursor: 'pointer' } },
+                        "\u2190 Today's cards"),
+                    React.createElement("h1", { style: { color: '#E8E4DC', fontFamily: 'Playfair Display,serif', fontSize: isMobile ? '1.5rem' : '1.9rem',
+                            fontWeight: 700, margin: '18px 0 12px', textAlign: 'center', letterSpacing: '-0.01em' } }, "Cards of the Week"),
+                    React.createElement("p", { style: { color: '#A8C4B4', fontFamily: 'EB Garamond,serif', fontSize: isMobile ? '0.92rem' : '0.98rem',
+                            lineHeight: 1.55, margin: '0 auto', maxWidth: 560, textAlign: 'center' } },
+                        "Every Monday we publish the two strongest cards from the week just finished \u2014 one free, one Pro. The winner is the card with the highest star rating; ties go to the larger margin of safety at the moment it was dealt, never to how the price moved afterwards."),
+                    !weeklyAll && React.createElement("p", { style: { color: '#7A9A8A', textAlign: 'center', fontFamily: 'Barlow Condensed,sans-serif',
+                            letterSpacing: '0.2em', fontSize: '0.72rem', padding: '30px 0' } }, "\u25CB LOADING"),
+                    weeklyAll && !weeklyAll.length && React.createElement("p", { style: { color: '#7A9A8A', textAlign: 'center',
+                            fontFamily: 'EB Garamond,serif', fontStyle: 'italic', padding: '30px 0' } }, "No weeks recorded yet."),
+                    shownWeek && React.createElement("div", { style: { textAlign: 'center', margin: '24px 0 20px' } },
+                        React.createElement("span", { style: { display: 'inline-block', color: '#D6BA78',
+                                fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, fontSize: '0.82rem',
+                                letterSpacing: '0.24em', textTransform: 'uppercase',
+                                border: '1px solid rgba(191,168,130,0.55)', background: 'rgba(191,168,130,0.10)',
+                                borderRadius: 22, padding: '12px 26px' } },
+                            "Week " + shownWeek.week + " \u00B7 " + vjRange(shownWeek.from, shownWeek.to))),
+                    shownWeek && React.createElement("div", { className: "card-grid", style: { padding: 0 } },
+                        [shownWeek.free && Object.assign({}, shownWeek.free.card, { isPro: false }),
+                         shownWeek.pro && Object.assign({}, shownWeek.pro.card, { isPro: true })]
+                        .filter(Boolean).map(function (c, i) { return vjRenderCard(c, i, shownWeek.week); })),
+                                    weeklyAll && weeklyAll.length > 1 && React.createElement("div", { style: { maxWidth: 640, margin: '34px auto 0' } },
+                        React.createElement("div", { style: { display: 'flex', gap: 12, alignItems: 'baseline', padding: '0 10px 8px',
+                                borderBottom: '1px solid rgba(90,138,106,0.18)', color: '#7A9A8A',
+                                fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, fontSize: '0.66rem', letterSpacing: '0.2em', textTransform: 'uppercase' } },
+                            React.createElement("span", { style: { minWidth: 52 } }, "Week"),
+                            React.createElement("span", { style: { minWidth: 88 } }, ""),
+                            React.createElement("span", { style: { flex: 1, minWidth: 0 } }, "Free"),
+                            React.createElement("span", { style: { flex: 1, minWidth: 0 } }, "Pro")),
+                        weeklyAll.map(function (g) {
+                            const on = shownWeek && g.key === shownWeek.key;
+                            function cell(w, locked) {
+                                if (!w) return React.createElement("span", { style: { flex: 1, minWidth: 0, color: '#5A7A6A' } }, "\u2014");
+                                const name = locked ? "\uD83D\uDD12 Pro" : (w.company || w.card.company || w.ticker || '');
+                                return React.createElement("span", { style: { flex: 1, minWidth: 0, display: 'flex', gap: 7, alignItems: 'baseline', overflow: 'hidden' } },
+                                    React.createElement("span", { style: { color: locked ? '#8A7A5A' : '#BFA882', fontFamily: 'Barlow Condensed,sans-serif',
+                                            fontWeight: 700, fontSize: '0.68rem', letterSpacing: '0.14em', minWidth: 46 } }, w.card.type),
+                                    React.createElement("span", { style: { color: locked ? '#7C8E82' : '#C4D8CC', fontFamily: 'EB Garamond,serif',
+                                            fontSize: '0.9rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' } }, name));
+                            }
+                            return React.createElement("div", { key: g.key, onClick: function () { setSelWeek(g.key); window.scrollTo(0, 0); },
+                                    style: { display: 'flex', gap: 12, alignItems: 'baseline', cursor: 'pointer',
+                                             padding: '10px', borderRadius: 8, marginTop: 2,
+                                             background: on ? 'rgba(191,168,130,0.10)' : 'transparent' } },
+                                React.createElement("span", { style: { color: on ? '#BFA882' : '#8FA89A', fontFamily: 'Barlow Condensed,sans-serif',
+                                        fontWeight: 700, fontSize: '0.72rem', letterSpacing: '0.14em', minWidth: 52 } }, "WK " + g.week),
+                                React.createElement("span", { style: { color: '#6B8578', fontFamily: 'Barlow Condensed,sans-serif',
+                                        fontSize: '0.7rem', letterSpacing: '0.06em', minWidth: 88 } }, vjRange(g.from, g.to)),
+                                cell(g.free, false),
+                                cell(g.pro, !window.VJ_proUnlocked));
                         }))),
                 React.createElement("div", { onClick: function(){ window.vjTrack && window.vjTrack('pro_trial_clicked', { source: 'main_page_banner' }); var o=document.querySelector('.info-overlay'); if(o) o.style.display='none'; setShowInfo(false); window.showProLoader(); window.VJ_proUnlocked = true; setFlipped(function(f){ var n = f.slice(); visibleCards.forEach(function(c){ if (c.isPro && n.indexOf(c.id) === -1) n.push(c.id); }); return n; }); }, style: { margin: '0 28px 28px', padding: '16px 20px', borderRadius: 12, background: 'linear-gradient(135deg,rgba(139,105,20,0.15),rgba(201,168,76,0.06))', border: '1px solid rgba(139,105,20,0.4)', textAlign: 'center', cursor: 'pointer' } },
                     React.createElement("p", { style: { fontWeight: 800, fontSize: '1.15rem', fontFamily: 'Barlow Condensed,sans-serif', letterSpacing: '0.08em', background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, "UNLOCK PRO \u2014 $9.99/MONTH"),
