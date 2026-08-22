@@ -220,6 +220,10 @@ const GOLD = 'linear-gradient(135deg,#BFA882 0%,#DDBF88 22%,#A88A60 42%,#CAB07A 
 
 const cards = window.CARDS_DATA || [];
 
+// Screener universe size, shown in the trust line above the deck.
+// UPDATE THIS AT EACH MONTHLY REFRESH (Section 4.2, Stage 1 screening).
+const VJ_SCREENED = 15142;
+
 // ── METHODOLOGY: STRATEGY WEIGHTS (Phase 2A) ────────────────────────────────
 // Each strategy weights Fundamentals / Context / Price differently.
 // Combined weight = (Fundamentals × W_fund) + (Context × W_context) + (Price × W_price)
@@ -305,6 +309,15 @@ const DEAL_ORIGINS = [
 function Home() {
     var _a;
     const [flipped, setFlipped] = useState([]);
+    // First-visit flag: read once on mount, then mark the visitor as seen.
+    // A functional UI preference, not tracking — no personal data stored.
+    const [firstVisit] = useState(function () {
+        try {
+            if (window.localStorage.getItem('vj_seen')) return false;
+            window.localStorage.setItem('vj_seen', '1');
+            return true;
+        } catch (e) { return false; }
+    });
     const [expanded, setExpanded] = useState(null);
     const [today, setToday] = useState('');
     const [isMobile, setIsMobile] = useState(false);
@@ -360,28 +373,46 @@ function Home() {
                 const eligibleCards = cards.filter(c => c.stars >= 3);
                 const BATCH_SIZE = 50;
                 const allPrices = {};
-                
-                // Fetch in batches of 50
+
+                // Build the list of batches.
+                const batches = [];
                 for (let i = 0; i < eligibleCards.length; i += BATCH_SIZE) {
-                    const batch = eligibleCards.slice(i, i + BATCH_SIZE);
-                    const tickers = batch.map(c => c.yahooTicker).join(",");
-                    const res = await fetch('/api/prices?tickers=' + tickers);
-                    if (res.ok) {
-                        const data = await res.json();
-                        Object.assign(allPrices, data);
-                    }
+                    batches.push(eligibleCards.slice(i, i + BATCH_SIZE));
                 }
-                
-                // Map yahooTicker -> card id -> price
-                const priceMap = {};
-                cards.forEach(c => {
-                    const yticker = c.yahooTicker;
-                    if (allPrices[yticker])
-                        priceMap[c.id] = allPrices[yticker];
-                });
-                setPrices(priceMap);
-                setPriceAge(new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }));
-                setPriceErr(false);
+
+                // Helper: turn the accumulated yahooTicker->quote map into an
+                // id->quote map and push it to React. Called after EACH batch so
+                // cards fill in progressively instead of waiting for the slowest.
+                const publish = () => {
+                    const priceMap = {};
+                    cards.forEach(c => {
+                        const yticker = c.yahooTicker;
+                        if (allPrices[yticker]) priceMap[c.id] = allPrices[yticker];
+                    });
+                    setPrices(priceMap);
+                    setPriceAge(new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }));
+                    setPriceErr(false);
+                };
+
+                // Fire ALL batches in parallel (not sequentially). Each batch, as
+                // soon as it returns, merges its quotes and republishes — so the
+                // first quotes appear within a second or two rather than after the
+                // whole ~14-batch chain finishes (~1 min before this change).
+                let anyOk = false;
+                await Promise.all(batches.map(async (batch) => {
+                    const tickers = batch.map(c => c.yahooTicker).join(",");
+                    try {
+                        const res = await fetch('/api/prices?tickers=' + tickers);
+                        if (res.ok) {
+                            const data = await res.json();
+                            Object.assign(allPrices, data);
+                            anyOk = true;
+                            publish();
+                        }
+                    } catch (_b) { /* one batch failing must not sink the rest */ }
+                }));
+
+                if (!anyOk) setPriceErr(true);
             }
             catch (_a) {
                 setPriceErr(true);
@@ -425,11 +456,15 @@ function Home() {
         // Seed based on date so same cards show all day
         const todaySeed = (function(){
           var d = new Date();
-          // Use day-of-year as seed so it changes daily and keeper math works
-          var start = new Date(d.getFullYear(), 0, 0);
-          var diff = d - start;
-          var oneDay = 86400000;
-          var dayOfYear = Math.floor(diff / oneDay);
+          // Day-of-year from the LOCAL calendar date using UTC arithmetic.
+          // Subtracting two local Date objects crosses the CET/CEST boundary
+          // and loses an hour, which made this read one day low between
+          // 00:00 and 00:59 every day during summer time - so the site dealt
+          // yesterday's rotation for the first hour of each day.
+          var dayOfYear = Math.floor(
+            (Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())
+             - Date.UTC(d.getFullYear(), 0, 0)) / 86400000
+          );
           return d.getFullYear() * 1000 + dayOfYear;
         })();
         function seededRand(seed, n) {
@@ -469,6 +504,12 @@ function Home() {
               const fairValue = c.fairValue;
               // TEMP DISABLED:               if (!currentPrice || !fairValue) return false;
 
+              // SLOW-PRICE SEATBELT: if the live price hasn't loaded yet (null/undefined),
+              // don't apply the price-based valuation gate below — otherwise (null < x)
+              // is false and EVERY price-gated card (QUEEN/ACE/KING/JACK/JOKER) is silently
+              // rejected, emptying the PRO pool on slow price loads. Star gate still applies.
+              const priceReady = (currentPrice != null && !isNaN(currentPrice));
+
               // Minimum 3 stars to appear in rotation (TWO cards use lower threshold — contrarian strategy)
               if (c.type === 'TWO') {
                   if ((c.stars || 0) < 2) return false;
@@ -478,12 +519,12 @@ function Home() {
 
               // KING: undervalued only (strict — dividend thesis requires price discount)
               if (c.type === 'KING') {
-                  return currentPrice < fairValue;
+                  return !priceReady || currentPrice < fairValue;
               }
 
               // JACK / JOKER: momentum & growth strategies — allow up to 20% overvalued
               if (c.type === 'JACK' || c.type === 'JOKER') {
-                  return currentPrice < fairValue * 1.20;
+                  return !priceReady || currentPrice < fairValue * 1.20;
               }
 
               // TWO: contrarian recovery — always eligible if showing recovery signal
@@ -492,11 +533,12 @@ function Home() {
               }
 
               // QUEEN / ACE (including mega caps): undervalued + fairly valued (up to 5% over)
-              return currentPrice < fairValue * 1.05;
+              return !priceReady || currentPrice < fairValue * 1.05;
           });
 
         // Whole-pool undervalued count — header badge only (ignores approved/block/stars gates)
         const poolUndervalued = cards.filter(c => {
+              if (c.manualBlock) return false;
               const quote = effectivePrices[c.id];
               const currentPrice = normalizePrice(quote?.price, c);
               const fairValue = c.fairValue;
@@ -519,16 +561,27 @@ function Home() {
         const freePool = dedupedCards.filter(c => c.type === 'KING' || c.type === 'JACK' || c.type === 'TWO');
         const proPool  = dedupedCards.filter(c => c.type === 'QUEEN' || c.type === 'ACE' || c.type === 'JOKER');
 
-        // STEP 4: Quality-tiered shuffle with sector cap (max 2 per sector)
-        function pickPool(pool, seed, count) {
-            const tier5 = pool.filter(c => c.stars === 5);
-            const tier4 = pool.filter(c => c.stars === 4);
-            const tier3 = pool.filter(c => (c.stars || 3) <= 3);
-            const ordered = [
-                ...seededRand(seed,     tier5.length).map(i => tier5[i]),
-                ...seededRand(seed + 1, tier4.length).map(i => tier4[i]),
-                ...seededRand(seed + 2, tier3.length).map(i => tier3[i]),
-            ];
+        // STEP 4: Star-WEIGHTED shuffle across the whole pool, with sector cap.
+        // FIXED (v124): the previous version concatenated star tiers 5->4->3 and,
+        // because it is always called with count=1, returned ordered[0] — always a
+        // 5-star card. 4- and 3-star cards were unreachable unless the 5-star tier
+        // was empty, making 56% of the approved pool undealable (ACE was reduced to
+        // 4 shipping/energy names). Now every card gets a random rank divided by a
+        // star weight: 5-star cards win roughly twice as often as 3-star cards, but
+        // nothing is excluded. Quality is a bias, not a gate.
+        function pickPool(pool, seed, count, penaltyFn) {
+            const STAR_WEIGHT = { 5: 2.0, 4: 1.5, 3: 1.0 };
+            const order = seededRand(seed, pool.length);
+            const ranked = order.map(function (poolIdx, rank) {
+                const card = pool[poolIdx];
+                const w = STAR_WEIGHT[card.stars] || 1.0;
+                // penaltyFn multiplies the sort key: higher = less likely to win.
+                // Used for soft commodity-cyclical de-prioritisation (see below).
+                const pen = penaltyFn ? penaltyFn(card) : 1;
+                return { card: card, key: (rank + 1) / w * pen };
+            });
+            ranked.sort(function (a, b) { return a.key - b.key; });
+            const ordered = ranked.map(function (r) { return r.card; });
             const picked = [];
             const sectorCount = {};
             for (const card of ordered) {
@@ -588,6 +641,40 @@ function Home() {
             if (r.pro_ticker)  excludeTickers.add(r.pro_ticker);
         });
 
+        // ── SOFT COMMODITY-CYCLICAL DE-PRIORITISATION ───────────────────────
+        // Shipping, oil & gas, mining, chemicals, farming and homebuilding all
+        // share one macro driver but sit under FOUR different screener sectors,
+        // so the sector cap can never see them as one group. cycleBucket can.
+        // The first two commodity cards in a rolling 7 days are unpenalised;
+        // beyond that they are pushed down the draw, never blocked.
+        const COMMODITY_FREE_ALLOWANCE = 2;   // unpenalised cards per 7 days
+        const COMMODITY_PENALTY_STEP   = 2;   // escalation per extra card
+
+        const _bucketByTicker = {};
+        cards.forEach(function (c) {
+            if (c && c.ticker && c.cycleBucket) _bucketByTicker[c.ticker] = c.cycleBucket;
+        });
+
+        let commodityRecent = (function () {
+            const cutoff = Date.now() - 7 * 24 * 60 * 60 * 1000;
+            let n = 0;
+            (drawHistory || []).forEach(function (r) {
+                if (!r || !r.date) return;
+                if (new Date(r.date).getTime() < cutoff) return;
+                if (r.date === _todayStr) return;
+                [r.free_ticker, r.pro_ticker].forEach(function (t) {
+                    if (t && _bucketByTicker[t] === 'commodity-cyclical') n++;
+                });
+            });
+            return n;
+        })();
+
+        function commodityPenalty(card) {
+            if (!card || card.cycleBucket !== 'commodity-cyclical') return 1;
+            if (commodityRecent < COMMODITY_FREE_ALLOWANCE) return 1;
+            return 1 + (commodityRecent - COMMODITY_FREE_ALLOWANCE + 1) * COMMODITY_PENALTY_STEP;
+        }
+
         const usedSectors = new Set();
 
         // Helper: pick from strategy-of-the-day. If exhausted by 14-day rule,
@@ -605,23 +692,28 @@ function Home() {
                     const daysSince = (Date.now() - boostDate.getTime()) / (1000 * 60 * 60 * 24);
                     return daysSince <= 14;
                 });
-                if (boosted.length > 0) return pickPool(boosted, seed, 1)[0];
-                return pickPool(avail, seed, 1)[0];
+                if (boosted.length > 0) return pickPool(boosted, seed, 1, commodityPenalty)[0];
+                return pickPool(avail, seed, 1, commodityPenalty)[0];
             }
 
             // Strategy exhausted — try all strategies in this tier
             const allUnseen = [].concat(...allTierPools)
                 .filter(c => !excludeTickers.has(c.ticker) && !usedSectors.has(c.sector));
-            if (allUnseen.length > 0) return pickPool(allUnseen, seed, 1)[0];
+            if (allUnseen.length > 0) return pickPool(allUnseen, seed, 1, commodityPenalty)[0];
 
             // Still nothing — fall back to any card in the tier (ignore exclusions)
             const anyCard = [].concat(...allTierPools)
                 .filter(c => !usedSectors.has(c.sector));
-            return pickPool(anyCard.length ? anyCard : [].concat(...allTierPools), seed, 1)[0];
+            return pickPool(anyCard.length ? anyCard : [].concat(...allTierPools), seed, 1, commodityPenalty)[0];
         }
 
         const todayFreeCard = pickWithFallback(todayFreeStrategy, freeStrategies, todaySeed);
-        if (todayFreeCard) usedSectors.add(todayFreeCard.sector);
+        if (todayFreeCard) {
+            usedSectors.add(todayFreeCard.sector);
+            // Today's own FREE pick counts, so a commodity FREE card immediately
+            // makes a commodity PRO card less likely on the same day.
+            if (todayFreeCard.cycleBucket === 'commodity-cyclical') commodityRecent++;
+        }
         const todayProCard  = pickWithFallback(todayProStrategy, proStrategies, todaySeed * 3);
 
         const todayFree = [todayFreeCard].filter(Boolean);
@@ -686,7 +778,147 @@ function Home() {
         // Wait for the shared draw history before showing cards, so the
         // 14-day exclusion is applied on first paint (no flicker / no card swap).
         // If history fails to load it becomes [] (not null), so we still show cards.
+
+        // ── Card of the Week (Business Plan 4.14.1) ────────────────────────
+        function vjDayNo(d) {
+            return Math.floor((Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())
+                               - Date.UTC(d.getFullYear(), 0, 0)) / 86400000);
+        }
+        function vjIsoWeek(d) {
+            const t = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+            t.setUTCDate(t.getUTCDate() + 4 - (t.getUTCDay() || 7));
+            const ys = new Date(Date.UTC(t.getUTCFullYear(), 0, 1));
+            return Math.ceil((((t - ys) / 86400000) + 1) / 7);
+        }
+
+        const weekCards = React.useMemo(function () {
+            if (!drawHistory || !drawHistory.length) return null;
+            const now = new Date(), todayNo = vjDayNo(now);
+            const rows = drawHistory.filter(function (r) {
+                if (!r || !r.date) return false;
+                const p = String(r.date).split('-');
+                const d = new Date(parseInt(p[0], 10), parseInt(p[1], 10) - 1, parseInt(p[2], 10));
+                const age = todayNo - vjDayNo(d);
+                return age >= 1 && age <= 7;
+            });
+            if (!rows.length) return null;
+            const byId = {};
+            (window.CARDS_DATA || []).forEach(function (c) { byId[c.id] = c; });
+
+            function best(side) {
+                let w = null;
+                rows.forEach(function (r) {
+                    const id = r[side + '_id'], c = byId[id];
+                    if (!id || !c || c.manualBlock === true) return;
+                    const served = r[side + '_price'];
+                    const mos = (c.fairValue && served) ? ((c.fairValue - served) / c.fairValue) * 100 : null;
+                    const cand = { card: c, date: r.date, stars: r[side + '_stars'] || c.stars || 0, mos: mos };
+                    if (!w) { w = cand; return; }
+                    if (cand.stars !== w.stars) { if (cand.stars > w.stars) w = cand; return; }
+                    const a = cand.mos == null ? -9999 : cand.mos, b = w.mos == null ? -9999 : w.mos;
+                    if (a !== b) { if (a > b) w = cand; return; }
+                    if (cand.date > w.date) w = cand;
+                });
+                return w;
+            }
+            const free = best('free'), pro = best('pro');
+            if (!free && !pro) return null;
+            const lastWeek = new Date(now); lastWeek.setDate(lastWeek.getDate() - 7);
+            return { free: free, pro: pro, week: vjIsoWeek(lastWeek), isSunday: now.getDay() === 0 };
+        }, [drawHistory]);
+
+        const [showWeek, setShowWeek] = useState(false);
+        React.useEffect(function () {
+            if (weekCards && weekCards.isSunday) setShowWeek(true);
+        }, [weekCards]);
+
+        function vjRenderCard(card, idx, weekNo) {
+                    var _a, _b, _c, _d;
+                    const isFlipped = flipped.includes(card.id);
+                    const isDealt = card.type === 'TWO' ? true : dealt.includes(card.id);
+                    const ct = CARD_TYPES[card.type];
+                    const frame = ct.isGold ? GOLD : SILVER;
+                    return (React.createElement("div", { key: card.id, className: `card-wrap${isDealt ? ' dealt' : ''}`, style: { aspectRatio: '5/8', cursor: 'pointer', transform: isDealt ? 'none' : DEAL_ORIGINS[idx] }, onClick: () => handleCardClick(card) },
+                        React.createElement("div", { className: `card-inner${isFlipped ? ' flipped' : ''}` },
+                            React.createElement("div", { className: "cface", style: { background: frame } },
+                                React.createElement("div", { className: "cinset", style: { background: 'linear-gradient(145deg,#0D1826,#152238,#0D1826)' } },
+                                    React.createElement("div", { style: { position: 'absolute', inset: 4, border: ct.isGold ? '1.5px solid rgba(212,175,55,0.6)' : '1.5px solid rgba(192,192,192,0.55)', borderRadius: 3, zIndex: 1, pointerEvents: 'none' } }),
+                                    React.createElement("div", { style: { position: 'absolute', inset: 7, overflow: 'hidden', zIndex: 0, borderRadius: 2 } }, Array.from({ length: 140 }).map((_, i) => { const suits = ['♠︎', '♥︎', '♦︎', '♣︎']; const col = i % 10; const row = Math.floor(i / 10); const suit = suits[(col + row) % 4]; return React.createElement("div", { key: i, style: { position: 'absolute', left: `${col * 10.5 - 1}%`, top: `${row * 6.6 - 1}%`, color: 'rgba(192,192,192,0.30)', fontSize: '0.52rem', userSelect: 'none', lineHeight: 1 } }, suit); })),
+                                    React.createElement("div", { style: { position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 2 } },
+                                        React.createElement("div", { style: { padding: 12, borderRadius: 16, border: card.isPro ? '1px solid rgba(212,175,55,0.55)' : '1px solid rgba(192,192,192,0.5)', background: '#0e1a2c', boxShadow: '0 2px 12px rgba(0,0,0,0.35)', display: 'flex', alignItems: 'center', justifyContent: 'center' } }, React.createElement("img", { src: card.isPro ? "/valujack-logo-pro-gold.svg" : "/valujack-logo-free-silver.svg", alt: "ValuJack", style: { width: '4.4rem', height: '4.4rem', display: 'block', opacity: 0.5 } })),
+                                        React.createElement("span", { style: { fontSize: '0.6rem', letterSpacing: '0.25em', marginTop: 8, fontWeight: 900, fontFamily: 'Barlow Condensed,sans-serif' } },
+                                        React.createElement("span", { style: { background: card.isPro ? 'linear-gradient(135deg,#BFA882 0%,#DDBF88 22%,#A88A60 42%,#CAB07A 62%,#8C7858 80%,#C0AA75 100%)' : 'linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#A9A9A9 65%,#8A8A8A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' } }, "VALU"),
+                                        React.createElement("span", { style: { background: card.isPro ? 'linear-gradient(135deg,#BFA882 0%,#DDBF88 22%,#A88A60 42%,#CAB07A 62%,#8C7858 80%,#C0AA75 100%)' : 'linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#A9A9A9 65%,#8A8A8A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' } }, "JACK")),
+                                        card.isPro && !window.VJ_proUnlocked && React.createElement("div", { style: { position: 'absolute', bottom: 24, left: 0, right: 0, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: '5px', zIndex: 10 } },
+                                          React.createElement("div", { style: { fontSize: '0.72rem' } }, "🔒"),
+                                          React.createElement("div", { style: { fontSize: '0.55rem', letterSpacing: '0.2em', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 800, color: 'rgba(201,168,76,0.9)' } }, "PRO"))),
+                                    React.createElement("div", { style: { position: 'absolute', bottom: 8, left: 0, right: 0, textAlign: 'center', zIndex: 3 } },
+                                        React.createElement("span", { style: { fontSize: '0.62rem', opacity: 0.85, letterSpacing: '0.18em', fontFamily: 'Barlow Condensed,sans-serif', background: frame, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, "☝ TAP TO REVEAL")))),
+                            React.createElement("div", { className: "cface cface-front", style: { background: frame } },
+                                weekNo && React.createElement("div", { style: { position: 'absolute', left: 10, right: 10, bottom: 10, height: 'calc(5rem + 3px)', background: frame, borderRadius: '0 0 5px 5px', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 4, pointerEvents: 'none' } }, React.createElement("span", { style: { fontFamily: 'Playfair Display,serif', fontWeight: 700, fontSize: 'clamp(0.95rem,2.6vw,1.35rem)', color: '#0D1826', letterSpacing: '0.01em', textShadow: '0 1px 0 rgba(255,255,255,0.30)' } }, "Card of the week " + weekNo)), 
+                                React.createElement("div", { className: "cinset", style: { background: 'linear-gradient(160deg,#FEFDF8 0%,#F8F0DC 100%)', display: 'flex', flexDirection: 'column' } }, React.createElement("div", { style: { flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 } },
+                                    React.createElement("div", { style: { position: 'relative', flexShrink: 0, height: '5rem', marginTop: '3px', background: card.type === 'TWO' ? 'linear-gradient(180deg,#6B0E0E 0%,#3A0808 100%)' : 'transparent', borderRadius: card.type === 'TWO' ? '5px 5px 0 0' : 0 } },
+                                        React.createElement("div", { style: { position: 'absolute', top: '4px', right: '8px', fontSize: '1.05rem', fontWeight: 700, fontFamily: 'Palatino Linotype, Palatino, Book Antiqua, serif', fontStyle: 'italic', letterSpacing: '0.04em', opacity: 1.0, color: card.type === 'TWO' ? '#C8C8C8' : ct.color } }, { KING: 'Dividends', JACK: 'Momentum', QUEEN: 'Magic Formula', ACE: 'F-Score', JOKER: 'Growth', TWO: 'Contrarian' }[card.type] || ''),
+                                        React.createElement("div", { style: { position: 'absolute', top: 0, left: '8px' } },
+                                            React.createElement("div", { style: Object.assign({ fontSize: '3.2rem', fontWeight: 900, fontFamily: 'Playfair Display,serif', lineHeight: 0.9 }, (ct.cornerColor ? { color: ct.cornerColor } : ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.corner)),
+                                        React.createElement("div", { style: { position: 'absolute', top: 0, left: 0, right: 0, textAlign: 'center' } },
+                                            React.createElement("div", { style: Object.assign({ fontSize: ct.symbolSize || '4.2rem', lineHeight: 1, marginTop: ct.symbolSize ? '0.5rem' : '0' }, (ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : ct.symbolColor === 'WHITE' ? { color: '#FFFFFF' } : ct.symbolColor === 'SILVER' ? { background: 'linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#E0DDDA 45%,#A9A9A9 65%,#D0CDCA 80%,#8A8A8A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.symbol))),
+                                    React.createElement("div", { style: { flex: 0.15, flexShrink: 0 } }),
+                                    React.createElement("div", { style: { textAlign: 'center', flexShrink: 0, padding: '0 6px' } },
+                                        React.createElement("p", { style: { textAlign: 'center', fontSize: '0.82rem', fontFamily: 'Barlow Condensed,sans-serif', letterSpacing: '0.15em', color: '#888', marginBottom: '2px', marginTop: '2px' } }, card.country || ''),
+                                    React.createElement("p", { style: { color: '#1A1A2E', fontWeight: 700, fontSize: '1.58rem', lineHeight: 1.15, fontFamily: 'Playfair Display,serif' } }, card.company)),
+                                    React.createElement("div", { style: { height: 1, background: `linear-gradient(to right,transparent,${ct.color},transparent)`, margin: '4px 6%', flexShrink: 0 } }),
+                                    React.createElement("div", { style: { textAlign: 'center', flexShrink: 0 } },
+                                        React.createElement("span", { style: { color: '#1A1A2E', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 900, fontSize: '3.75rem', letterSpacing: '0.03em', display: 'block', width: '82%', margin: '0 auto', lineHeight: 1 } }, card.ticker)),
+                                    
+                                    React.createElement("div", { style: { height: 1, background: `linear-gradient(to right,transparent,${ct.color},transparent)`, margin: '4px 6%', flexShrink: 0 } }),
+                                    React.createElement("p", { style: { color: '#444', fontSize: '1.28rem', fontStyle: 'italic', lineHeight: 1.2, textAlign: 'center', flexShrink: 0, padding: '0 6px' } }, card.tag),
+                                    React.createElement("p", { style: { color: ct.color, fontWeight: 700, fontSize: '1.32rem', lineHeight: 1.2, textAlign: 'center', marginTop: 4, flexShrink: 0, padding: '0 6px' } }, card.pick),
+                                    React.createElement("div", { style: { flex: 1, minHeight: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' } },
+                                        React.createElement("span", { style: {
+                                                fontSize: '5.5rem',
+                                                lineHeight: 1,
+                                                userSelect: 'none',
+                                                opacity: 0.72,
+                                                display: 'block',
+                                                color: card.sectorIcon === '♠' ? '#000000' : undefined,
+                                            } }, card.sectorIcon)),
+                                    React.createElement("div", { style: { flexShrink: 0, marginBottom: 4, padding: '0 6px' } },
+                                        React.createElement("div", { style: { height: 1, background: `linear-gradient(to right,transparent,${ct.color},transparent)`, marginBottom: 5 } }),
+                                        React.createElement("div", { style: { textAlign: 'center', marginBottom: 3 } }, React.createElement("span", { style: { fontSize: '1.1rem', letterSpacing: '0.08em', color: ct.color } }, (function(){ var s=card.stars||3; return '★'.repeat(s)+'☆'.repeat(5-s); })() )),React.createElement("div", { style: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4 } },
+                                            React.createElement("div", { style: { textAlign: 'center' } },
+                                                React.createElement("p", { style: { color: '#AAA', fontSize: '0.75rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 400, letterSpacing: '0.05em', marginBottom: 1 } },
+                                                    card.ind1l,
+                                                    ((_a = prices[card.id]) === null || _a === void 0 ? void 0 : _a.divYield) && card.ind1l === 'DIVIDEND %' ? ' ●' : ''),
+                                                React.createElement("p", { style: { color: ct.color, fontWeight: 500, fontSize: '1.55rem', fontFamily: 'Barlow Condensed,sans-serif' } }, card.ind1l === 'DIVIDEND %' && ((_b = prices[card.id]) === null || _b === void 0 ? void 0 : _b.divYield)
+                                                    ? (prices[card.id].divYield * 100).toFixed(1) + '%'
+                                                    : card.ind1v)),
+                                            React.createElement("div", { style: { textAlign: 'center' } },
+                                                React.createElement("p", { style: { color: '#AAA', fontSize: '0.75rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 400, letterSpacing: '0.05em', marginBottom: 1 } },
+                                                    card.ind2l,
+                                                    ((_c = prices[card.id]) === null || _c === void 0 ? void 0 : _c.pe) && card.ind2l === 'P/E' ? ' ●' : ''),
+                                                React.createElement("p", { style: { color: ct.color, fontWeight: 500, fontSize: '1.55rem', fontFamily: 'Barlow Condensed,sans-serif' } }, card.ind2l === 'P/E' && ((_d = prices[card.id]) === null || _d === void 0 ? void 0 : _d.pe)
+                                                    ? prices[card.id].pe.toFixed(1)
+                                                    : card.ind2l === 'UNDERVALUED BY' && prices[card.id] && card.fairValue
+                                                        ? (function(){ var p = normalizePrice(prices[card.id].price, card); return Math.round((card.fairValue - p) / card.fairValue * 100) + '%'; })()
+                                                        : card.ind2v)))),
+                                    React.createElement("div", { style: { position: 'relative', flexShrink: 0, height: '5rem', marginBottom: '3px' } },
+                                        React.createElement("div", { style: { position: 'absolute', bottom: 0, left: 0, right: 0, textAlign: 'center' } },
+                                            React.createElement("div", { style: Object.assign({ fontSize: ct.symbolSize || '4.2rem', lineHeight: 1, transform: 'rotate(180deg)', display: 'inline-block', marginBottom: ct.symbolSize ? '0.5rem' : '0' }, (ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : ct.symbolColor === 'WHITE' ? { color: '#FFFFFF' } : ct.symbolColor === 'SILVER' ? { background: 'linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#E0DDDA 45%,#A9A9A9 65%,#D0CDCA 80%,#8A8A8A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.symbol)),
+                                        React.createElement("div", { style: { position: 'absolute', bottom: 0, right: '8px', transform: 'rotate(180deg)', transformOrigin: 'center center' } },
+                                            React.createElement("div", { style: Object.assign({ fontSize: '3.2rem', fontWeight: 900, fontFamily: 'Playfair Display,serif', lineHeight: 0.9 }, (ct.cornerColor ? { color: ct.cornerColor } : ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.corner)))))))));
+                }
+
         const visibleCards = drawHistory === null ? [] : deckCards;
+
+        // First visit only: deal the FREE card already face up, so a stranger meets a
+        // real company instead of an unexplained face-down card. Returning visitors
+        // get the normal face-down ritual.
+        const vjFreeId = (visibleCards.filter(function (c) { return !c.isPro; })[0] || {}).id;
+        useEffect(function () {
+            if (!firstVisit || !vjFreeId) return;
+            setFlipped(function (f) { return f.indexOf(vjFreeId) === -1 ? f.concat([vjFreeId]) : f; });
+        }, [firstVisit, vjFreeId]);
     const getMoS = (cardId) => {
         var _a;
         const price = (_a = prices[cardId]) === null || _a === void 0 ? void 0 : _a.price;
@@ -842,6 +1074,36 @@ function Home() {
                             borderRadius: '20px',
                             transition: 'all 0.2s',
                         }, onMouseEnter: e => { e.currentTarget.style.background = 'rgba(90,138,106,0.25)'; e.currentTarget.style.borderColor = '#A8D4B8'; }, onMouseLeave: e => { e.currentTarget.style.background = 'rgba(90,138,106,0.12)'; e.currentTarget.style.borderColor = 'rgba(90,138,106,0.5)'; } }, "HOW IT WORKS")),
+
+                // ─── TRUST BLOCK ─ full on a first visit, one quiet line afterwards ───
+                React.createElement("section", { style: { maxWidth: 640, margin: '0 auto', padding: isMobile ? '8px 28px 0' : '12px 28px 0' } },
+                    firstVisit
+                        ? React.createElement("div", null,
+                            [['Who we are:', 'An independent stock research company. We analyse companies and present the results as playing cards.'],
+                             ['What we do:', 'Every day, ValuJack finds and publishes two stock ideas \u2014 each selected by one of six proven investment strategies, with a clear explanation of why it was chosen.'],
+                             ['What we are not:', "Not a broker. We don't place trades or manage your portfolio. No ads, no affiliate links \u2014 nobody pays us to show you a company."]
+                            ].map(function (row, i) {
+                                return React.createElement("p", { key: i, style: {
+                                        color: '#C4D8CC', fontFamily: 'EB Garamond,serif',
+                                        fontSize: isMobile ? '0.92rem' : '0.98rem',
+                                        lineHeight: 1.6, margin: '0 0 9px', textAlign: 'left' } },
+                                    React.createElement("span", { style: { color: '#BFA882' } }, row[0] + ' '),
+                                    row[1]);
+                            }))
+                        : React.createElement("p", { style: {
+                                color: '#7A9A8A', fontFamily: 'EB Garamond,serif', fontStyle: 'italic',
+                                fontSize: '0.86rem', lineHeight: 1.5, margin: 0, textAlign: 'center' } },
+                            "Independent stock research company. Not a broker.")),
+
+                // ─── COUNTER ─ always visible ───
+                React.createElement("div", { style: { maxWidth: 640, margin: '14px auto 2px', padding: '0 28px' } },
+                    React.createElement("div", { style: { height: 1, background: 'linear-gradient(to right,transparent,rgba(168,212,184,0.28),transparent)', marginBottom: 10 } }),
+                    React.createElement("p", { style: {
+                            textAlign: 'center', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700,
+                            fontSize: '0.72rem', letterSpacing: '0.16em', textTransform: 'uppercase',
+                            color: '#7A9A8A', margin: 0 } },
+                        React.createElement("span", { style: { color: '#BFA882' } }, VJ_SCREENED.toLocaleString('en-US')),
+                        " companies screened \u00B7 two shown today")),
                 React.createElement("div", { style: { display: 'flex', justifyContent: 'space-between', padding: '6px 28px 6px' } },
                     React.createElement("div", { style: { display: 'flex', alignItems: 'center', gap: 6 } },
                         React.createElement("div", { style: { width: 36, height: 1.5, background: SILVER } }),
@@ -849,81 +1111,22 @@ function Home() {
                     React.createElement("div", { style: { display: 'flex', alignItems: 'center', gap: 6 } },
                         React.createElement("span", { style: { fontSize: '0.85rem', letterSpacing: '0.2em', fontWeight: 800, fontFamily: 'Barlow Condensed,sans-serif', background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, "PRO"),
                         React.createElement("div", { style: { width: 36, height: 1.5, background: GOLD } }))),
-                React.createElement("div", { className: "card-grid" }, visibleCards.map((card, idx) => {
-                    var _a, _b, _c, _d;
-                    const isFlipped = flipped.includes(card.id);
-                    const isDealt = card.type === 'TWO' ? true : dealt.includes(card.id);
-                    const ct = CARD_TYPES[card.type];
-                    const frame = ct.isGold ? GOLD : SILVER;
-                    return (React.createElement("div", { key: card.id, className: `card-wrap${isDealt ? ' dealt' : ''}`, style: { aspectRatio: '5/8', cursor: 'pointer', transform: isDealt ? 'none' : DEAL_ORIGINS[idx] }, onClick: () => handleCardClick(card) },
-                        React.createElement("div", { className: `card-inner${isFlipped ? ' flipped' : ''}` },
-                            React.createElement("div", { className: "cface", style: { background: frame } },
-                                React.createElement("div", { className: "cinset", style: { background: 'linear-gradient(145deg,#0D1826,#152238,#0D1826)' } },
-                                    React.createElement("div", { style: { position: 'absolute', inset: 4, border: ct.isGold ? '1.5px solid rgba(212,175,55,0.6)' : '1.5px solid rgba(192,192,192,0.55)', borderRadius: 3, zIndex: 1, pointerEvents: 'none' } }),
-                                    React.createElement("div", { style: { position: 'absolute', inset: 7, overflow: 'hidden', zIndex: 0, borderRadius: 2 } }, Array.from({ length: 140 }).map((_, i) => { const suits = ['♠︎', '♥︎', '♦︎', '♣︎']; const col = i % 10; const row = Math.floor(i / 10); const suit = suits[(col + row) % 4]; return React.createElement("div", { key: i, style: { position: 'absolute', left: `${col * 10.5 - 1}%`, top: `${row * 6.6 - 1}%`, color: 'rgba(192,192,192,0.30)', fontSize: '0.52rem', userSelect: 'none', lineHeight: 1 } }, suit); })),
-                                    React.createElement("div", { style: { position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 2 } },
-                                        React.createElement("span", { style: { fontSize: '4.5rem', lineHeight: 1, background: frame, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, "\u2660"),
-                                        React.createElement("span", { style: { fontSize: '0.6rem', letterSpacing: '0.25em', marginTop: 8, fontWeight: 900, fontFamily: 'Barlow Condensed,sans-serif' } },
-                                        React.createElement("span", { style: { background: 'linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#A9A9A9 65%,#8A8A8A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' } }, "VALU"),
-                                        React.createElement("span", { style: { background: 'linear-gradient(135deg,#BFA882 0%,#DDBF88 22%,#A88A60 42%,#CAB07A 62%,#8C7858 80%,#C0AA75 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' } }, "JACK")),
-                                        card.isPro && !window.VJ_proUnlocked && React.createElement("div", { style: { position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.55)', borderRadius: 12, zIndex: 10 } },
-                                          React.createElement("div", { style: { fontSize: '2rem', marginBottom: 4 } }, "🔒"),
-                                          React.createElement("div", { style: { fontSize: '0.55rem', letterSpacing: '0.2em', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 800, color: 'rgba(201,168,76,0.9)' } }, "PRO"))),
-                                    !card.isPro && React.createElement("div", { style: { position: 'absolute', bottom: 8, left: 0, right: 0, textAlign: 'center', zIndex: 3 } },
-                                        React.createElement("span", { style: { fontSize: '0.62rem', opacity: 0.85, letterSpacing: '0.18em', fontFamily: 'Barlow Condensed,sans-serif', background: frame, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, "☝ TAP TO REVEAL")))),
-                            React.createElement("div", { className: "cface cface-front", style: { background: frame } },
-                                React.createElement("div", { className: "cinset", style: { background: 'linear-gradient(160deg,#FEFDF8 0%,#F8F0DC 100%)', display: 'flex', flexDirection: 'column' } }, React.createElement("div", { style: { flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 } },
-                                    React.createElement("div", { style: { position: 'relative', flexShrink: 0, height: '5rem', marginTop: '3px', background: card.type === 'TWO' ? 'linear-gradient(180deg,#6B0E0E 0%,#3A0808 100%)' : 'transparent', borderRadius: card.type === 'TWO' ? '5px 5px 0 0' : 0 } },
-                                        React.createElement("div", { style: { position: 'absolute', top: '4px', right: '8px', fontSize: '1.05rem', fontWeight: 700, fontFamily: 'Palatino Linotype, Palatino, Book Antiqua, serif', fontStyle: 'italic', letterSpacing: '0.04em', opacity: 1.0, color: card.type === 'TWO' ? '#C8C8C8' : ct.color } }, { KING: 'Dividends', JACK: 'Momentum', QUEEN: 'Magic Formula', ACE: 'F-Score', JOKER: 'Growth', TWO: 'Contrarian' }[card.type] || ''),
-                                        React.createElement("div", { style: { position: 'absolute', top: 0, left: '8px' } },
-                                            React.createElement("div", { style: Object.assign({ fontSize: '3.2rem', fontWeight: 900, fontFamily: 'Playfair Display,serif', lineHeight: 0.9 }, (ct.cornerColor ? { color: ct.cornerColor } : ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.corner)),
-                                        React.createElement("div", { style: { position: 'absolute', top: 0, left: 0, right: 0, textAlign: 'center' } },
-                                            React.createElement("div", { style: Object.assign({ fontSize: ct.symbolSize || '4.2rem', lineHeight: 1, marginTop: ct.symbolSize ? '0.5rem' : '0' }, (ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : ct.symbolColor === 'WHITE' ? { color: '#FFFFFF' } : ct.symbolColor === 'SILVER' ? { background: 'linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#E0DDDA 45%,#A9A9A9 65%,#D0CDCA 80%,#8A8A8A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.symbol))),
-                                    React.createElement("div", { style: { flex: 0.15, flexShrink: 0 } }),
-                                    React.createElement("div", { style: { textAlign: 'center', flexShrink: 0, padding: '0 6px' } },
-                                        React.createElement("p", { style: { textAlign: 'center', fontSize: '0.82rem', fontFamily: 'Barlow Condensed,sans-serif', letterSpacing: '0.15em', color: '#888', marginBottom: '2px', marginTop: '2px' } }, card.country || ''),
-                                    React.createElement("p", { style: { color: '#1A1A2E', fontWeight: 700, fontSize: '1.58rem', lineHeight: 1.15, fontFamily: 'Playfair Display,serif' } }, card.company)),
-                                    React.createElement("div", { style: { height: 1, background: `linear-gradient(to right,transparent,${ct.color},transparent)`, margin: '4px 6%', flexShrink: 0 } }),
-                                    React.createElement("div", { style: { textAlign: 'center', flexShrink: 0 } },
-                                        React.createElement("span", { style: { color: '#1A1A2E', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 900, fontSize: '3.75rem', letterSpacing: '0.03em', display: 'block', width: '82%', margin: '0 auto', lineHeight: 1 } }, card.ticker)),
-                                    
-                                    React.createElement("div", { style: { height: 1, background: `linear-gradient(to right,transparent,${ct.color},transparent)`, margin: '4px 6%', flexShrink: 0 } }),
-                                    React.createElement("p", { style: { color: '#444', fontSize: '1.28rem', fontStyle: 'italic', lineHeight: 1.2, textAlign: 'center', flexShrink: 0, padding: '0 6px' } }, card.tag),
-                                    React.createElement("p", { style: { color: ct.color, fontWeight: 700, fontSize: '1.32rem', lineHeight: 1.2, textAlign: 'center', marginTop: 4, flexShrink: 0, padding: '0 6px' } }, card.pick),
-                                    React.createElement("div", { style: { flex: 1, minHeight: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' } },
-                                        React.createElement("span", { style: {
-                                                fontSize: '5.5rem',
-                                                lineHeight: 1,
-                                                userSelect: 'none',
-                                                opacity: 0.72,
-                                                display: 'block',
-                                                color: card.sectorIcon === '♠' ? '#000000' : undefined,
-                                            } }, card.sectorIcon)),
-                                    React.createElement("div", { style: { flexShrink: 0, marginBottom: 4, padding: '0 6px' } },
-                                        React.createElement("div", { style: { height: 1, background: `linear-gradient(to right,transparent,${ct.color},transparent)`, marginBottom: 5 } }),
-                                        React.createElement("div", { style: { textAlign: 'center', marginBottom: 3 } }, React.createElement("span", { style: { fontSize: '1.1rem', letterSpacing: '0.08em', color: ct.color } }, (function(){ var s=card.stars||3; return '★'.repeat(s)+'☆'.repeat(5-s); })() )),React.createElement("div", { style: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4 } },
-                                            React.createElement("div", { style: { textAlign: 'center' } },
-                                                React.createElement("p", { style: { color: '#AAA', fontSize: '0.75rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 400, letterSpacing: '0.05em', marginBottom: 1 } },
-                                                    card.ind1l,
-                                                    ((_a = prices[card.id]) === null || _a === void 0 ? void 0 : _a.divYield) && card.ind1l === 'DIVIDEND %' ? ' ●' : ''),
-                                                React.createElement("p", { style: { color: ct.color, fontWeight: 500, fontSize: '1.55rem', fontFamily: 'Barlow Condensed,sans-serif' } }, card.ind1l === 'DIVIDEND %' && ((_b = prices[card.id]) === null || _b === void 0 ? void 0 : _b.divYield)
-                                                    ? (prices[card.id].divYield * 100).toFixed(1) + '%'
-                                                    : card.ind1v)),
-                                            React.createElement("div", { style: { textAlign: 'center' } },
-                                                React.createElement("p", { style: { color: '#AAA', fontSize: '0.75rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 400, letterSpacing: '0.05em', marginBottom: 1 } },
-                                                    card.ind2l,
-                                                    ((_c = prices[card.id]) === null || _c === void 0 ? void 0 : _c.pe) && card.ind2l === 'P/E' ? ' ●' : ''),
-                                                React.createElement("p", { style: { color: ct.color, fontWeight: 500, fontSize: '1.55rem', fontFamily: 'Barlow Condensed,sans-serif' } }, card.ind2l === 'P/E' && ((_d = prices[card.id]) === null || _d === void 0 ? void 0 : _d.pe)
-                                                    ? prices[card.id].pe.toFixed(1)
-                                                    : card.ind2l === 'UNDERVALUED BY' && prices[card.id] && card.fairValue
-                                                        ? (function(){ var p = normalizePrice(prices[card.id].price, card); return Math.round((card.fairValue - p) / card.fairValue * 100) + '%'; })()
-                                                        : card.ind2v)))),
-                                    React.createElement("div", { style: { position: 'relative', flexShrink: 0, height: '5rem', marginBottom: '3px' } },
-                                        React.createElement("div", { style: { position: 'absolute', bottom: 0, left: 0, right: 0, textAlign: 'center' } },
-                                            React.createElement("div", { style: Object.assign({ fontSize: ct.symbolSize || '4.2rem', lineHeight: 1, transform: 'rotate(180deg)', display: 'inline-block', marginBottom: ct.symbolSize ? '0.5rem' : '0' }, (ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : ct.symbolColor === 'WHITE' ? { color: '#FFFFFF' } : ct.symbolColor === 'SILVER' ? { background: 'linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#E0DDDA 45%,#A9A9A9 65%,#D0CDCA 80%,#8A8A8A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.symbol)),
-                                        React.createElement("div", { style: { position: 'absolute', bottom: 0, right: '8px', transform: 'rotate(180deg)', transformOrigin: 'center center' } },
-                                            React.createElement("div", { style: Object.assign({ fontSize: '3.2rem', fontWeight: 900, fontFamily: 'Playfair Display,serif', lineHeight: 0.9 }, (ct.cornerColor ? { color: ct.cornerColor } : ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.corner)))))))));
-                })),
+                React.createElement("div", { className: "card-grid" }, visibleCards.map(function (card, idx) { return vjRenderCard(card, idx, null); })),
+                weekCards && React.createElement("div", { style: { padding: '0 28px 24px' } },
+                    !weekCards.isSunday && React.createElement("button", {
+                        onClick: function () { window.vjTrack && window.vjTrack('cards_of_week_opened'); setShowWeek(!showWeek); },
+                        style: { width: '100%', background: 'rgba(191,168,130,0.08)', border: '1px solid rgba(191,168,130,0.40)',
+                                 cursor: 'pointer', color: '#BFA882', fontSize: '0.72rem', fontFamily: 'Barlow Condensed,sans-serif',
+                                 fontWeight: 700, letterSpacing: '0.26em', textTransform: 'uppercase', padding: '11px 18px',
+                                 borderRadius: 20, marginBottom: 4 } },
+                        showWeek ? "HIDE CARDS OF WEEK " + weekCards.week : "CARDS OF WEEK " + weekCards.week),
+                    showWeek && React.createElement("p", { style: { color: '#7A9A8A', fontSize: '0.76rem', textAlign: 'center',
+                            fontStyle: 'italic', margin: '14px 0 16px', lineHeight: 1.5 } },
+                        "The strongest cards dealt last week. Chosen by star rating, then by margin of safety at the moment the card was dealt \u2014 never by price movement."),
+                    showWeek && React.createElement("div", { className: "card-grid", style: { padding: 0 } },
+                        [weekCards.free, weekCards.pro].filter(Boolean).map(function (h, i) {
+                            return vjRenderCard(h.card, i, weekCards.week);
+                        }))),
                 React.createElement("div", { onClick: function(){ window.vjTrack && window.vjTrack('pro_trial_clicked', { source: 'main_page_banner' }); var o=document.querySelector('.info-overlay'); if(o) o.style.display='none'; setShowInfo(false); window.showProLoader(); window.VJ_proUnlocked = true; setFlipped(function(f){ return f.slice(); }); }, style: { margin: '0 28px 28px', padding: '16px 20px', borderRadius: 12, background: 'linear-gradient(135deg,rgba(139,105,20,0.15),rgba(201,168,76,0.06))', border: '1px solid rgba(139,105,20,0.4)', textAlign: 'center', cursor: 'pointer' } },
                     React.createElement("p", { style: { fontWeight: 800, fontSize: '1.15rem', fontFamily: 'Barlow Condensed,sans-serif', letterSpacing: '0.08em', background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, "UNLOCK PRO \u2014 $9.99/MONTH"),
                     React.createElement("p", { style: { color: '#6B7A8D', fontSize: '0.88rem', marginTop: 5, fontStyle: 'italic' } }, "QUEEN \u00B7 ACE \u00B7 JOKER cards every morning")))),
@@ -999,7 +1202,7 @@ function Home() {
                                 const frac = s.v / s.max;
                                 return [(CX + Math.cos(angle) * R * frac).toFixed(2), (CY + Math.sin(angle) * R * frac).toFixed(2)];
                             });
-                            const labelR = R + 18;
+                            const labelR = R + 13;
                             const labels = scores.map((s, i) => {
                                 const angle = (Math.PI * 2 * i / N) - Math.PI / 2;
                                 const x = CX + Math.cos(angle) * labelR;
@@ -1037,7 +1240,7 @@ function Home() {
                             return React.createElement("div", { style: { padding: '10px 10px 4px' } },
                                 React.createElement("div", { style: { height: 1, background: 'linear-gradient(to right,transparent,' + ect.color + ',transparent)', marginBottom: 8 } }),
                                 React.createElement("div", { style: { textAlign: 'center', marginBottom: 5 } }, React.createElement("span", { style: { fontSize: '1.3rem', letterSpacing: '0.1em', color: ect.color } }, (function(){ var s=ec.stars||3; return '★'.repeat(s)+'☆'.repeat(5-s); })() )),
-                                React.createElement("svg", { viewBox: '0 0 248 220', style: { width: '100%', display: 'block' } },
+                                React.createElement("svg", { viewBox: '-58 -18 360 258', style: { width: '100%', display: 'block', overflow: 'visible' } },
                                     React.createElement("defs", null, ...gradDefs),
                                     rings.map((frac, ri) =>
                                         React.createElement("polygon", { key: 'ring'+ri, points: polyStr(poly(frac)), fill: 'none', stroke: 'rgba(0,0,0,0.18)', strokeWidth: '0.6' })
@@ -1051,11 +1254,11 @@ function Home() {
                                         React.createElement("circle", { key: 'dot'+i, cx: p[0], cy: p[1], r: '3.5', fill: scores[i].color, stroke: '#fff', strokeWidth: '1.2' })
                                     ),
                                     labels.map((lb, i) =>
-                                        lb.words.length > 1
-                                            ? React.createElement("text", { key: 'lbl'+i, x: lb.x, y: lb.y, textAnchor: lb.anchor, fill: scores[i].color, fontSize: '9', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: '700', letterSpacing: '0.05em' },
+                                        (lb.words.length > 1 && lb.anchor !== 'middle')
+                                            ? React.createElement("text", { key: 'lbl'+i, x: lb.x, y: lb.y, textAnchor: lb.anchor, fill: scores[i].color, fontSize: '10.5', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: '700', letterSpacing: '0.05em' },
                                                 React.createElement("tspan", { x: lb.x, dy: '-5' }, lb.words[0]),
-                                                React.createElement("tspan", { x: lb.x, dy: '11' }, lb.words[1]))
-                                            : React.createElement("text", { key: 'lbl'+i, x: lb.x, y: lb.y, textAnchor: lb.anchor, dominantBaseline: 'middle', fill: scores[i].color, fontSize: '9', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: '700', letterSpacing: '0.05em' }, lb.words[0])
+                                                React.createElement("tspan", { x: lb.x, dy: '11' }, lb.words.slice(1).join(' ')))
+                                            : React.createElement("text", { key: 'lbl'+i, x: lb.x, y: lb.y, textAnchor: lb.anchor, dominantBaseline: 'middle', fill: scores[i].color, fontSize: '10.5', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: '700', letterSpacing: '0.05em' }, lb.words.join(' '))
                                     )
                                 ));
                         })(),(() => {
