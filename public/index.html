@@ -55,7 +55,7 @@
     "@type": "Offer",
     "price": "0",
     "priceCurrency": "USD",
-    "description": "Free tier with 3 strategies. Pro tier $9.99/month."
+    "description": "Free tier with 3 strategies. Pro tier from €9.99/month."
   },
   "publisher": {
     "@type": "Organization",
@@ -94,6 +94,49 @@
 window.vjTrack = function(eventName, params){
   try { if (typeof gtag === 'function') gtag('event', eventName, params || {}); } catch(e){}
 };
+
+// ── Local pricing (VAT-inclusive display prices) ─────────────────────────
+// One entry per Stripe currency. Test any currency with ?ccy=GBP etc.
+// linkMonthly / linkAnnual stay empty until the Stripe Payment Links exist.
+(function(){
+  var TABLE = {
+    GBP: { code:'GBP', monthly:'\u00A38.99', monthlyUC:'\u00A38.99', annual:'\u00A36.99', annualTotal:'\u00A383.88', linkMonthly:'', linkAnnual:'' },
+    EUR: { code:'EUR', monthly:'\u20AC9.99', monthlyUC:'\u20AC9.99', annual:'\u20AC7.99', annualTotal:'\u20AC95.88', linkMonthly:'', linkAnnual:'' },
+    SEK: { code:'SEK', monthly:'99 kr',      monthlyUC:'99 KR',      annual:'79 kr',      annualTotal:'948 kr',      linkMonthly:'', linkAnnual:'' },
+    NOK: { code:'NOK', monthly:'99 kr',      monthlyUC:'99 KR',      annual:'79 kr',      annualTotal:'948 kr',      linkMonthly:'', linkAnnual:'' },
+    DKK: { code:'DKK', monthly:'79 kr',      monthlyUC:'79 KR',      annual:'63 kr',      annualTotal:'756 kr',      linkMonthly:'', linkAnnual:'' },
+    CAD: { code:'CAD', monthly:'CA$12.99',   monthlyUC:'CA$12.99',   annual:'CA$10.49',   annualTotal:'CA$125.88',   linkMonthly:'', linkAnnual:'' },
+    USD: { code:'USD', monthly:'$9.99',      monthlyUC:'$9.99',      annual:'$7.99',      annualTotal:'$95.88',      linkMonthly:'', linkAnnual:'' }
+  };
+  function pick(){
+    try {
+      var q = new URLSearchParams(window.location.search).get('ccy');
+      if (q && TABLE[q.toUpperCase()]) return TABLE[q.toUpperCase()];
+    } catch(e){}
+    var tz = '';
+    try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch(e){}
+    if (tz === 'Europe/Stockholm') return TABLE.SEK;
+    if (tz === 'Europe/Oslo') return TABLE.NOK;
+    if (tz === 'Europe/Copenhagen') return TABLE.DKK;
+    if (tz === 'Europe/London' || tz === 'Europe/Belfast' || tz === 'Europe/Guernsey'
+        || tz === 'Europe/Jersey' || tz === 'Europe/Isle_of_Man') return TABLE.GBP;
+    if (tz.indexOf('Europe/') === 0 || tz === 'Atlantic/Canary' || tz === 'Atlantic/Madeira') return TABLE.EUR;
+    if (tz.indexOf('America/') === 0 && /\/(Toronto|Vancouver|Edmonton|Winnipeg|Halifax|Montreal|St_Johns|Regina|Moncton|Whitehorse|Yellowknife|Iqaluit|Cambridge_Bay|Inuvik|Dawson|Dawson_Creek|Fort_Nelson|Rankin_Inlet|Resolute|Swift_Current|Glace_Bay|Goose_Bay|Blanc-Sablon|Atikokan|Creston|Nipigon|Thunder_Bay|Rainy_River|Pangnirtung|Coral_Harbour)$/.test(tz)) return TABLE.CAD;
+    if (!tz) {
+      var lang = (navigator.language || '').toLowerCase();
+      if (lang.indexOf('-gb') > -1) return TABLE.GBP;
+      if (lang.indexOf('-se') > -1) return TABLE.SEK;
+      if (lang.indexOf('-no') > -1) return TABLE.NOK;
+      if (lang.indexOf('-dk') > -1) return TABLE.DKK;
+      if (lang.indexOf('-ca') > -1) return TABLE.CAD;
+      if (/-(ie|nl|de|fr|es|it|fi|be|pt|at|lu|ch)$/.test(lang)) return TABLE.EUR;
+    }
+    return TABLE.USD;
+  }
+  window.VJ_PRICE = pick();
+  window.VJ_PRICE_TABLE = TABLE;
+})();
+
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
@@ -115,6 +158,7 @@ window.vjTrack = function(eventName, params){
   #vj-cookie-banner .vj-cb-buttons{width:100%;justify-content:center;}
 }
 </style>
+<script src="/faces.js"></script>
 </head>
 <body>
 
@@ -179,7 +223,7 @@ var VJ_PROIMGS_DESKTOP = [
   '/splash/pro_desktop_2.jpg',
   '/splash/pro_desktop_4.jpg'
 ];
-var VJ_PROTXTS = ['Your PRO table is loading...', 'Preparing your full hand...', 'Your PRO cards are being dealt...'];
+var VJ_PROTXTS = ['Your PRO table is loading...', 'Dealing the full hand...', 'The PRO cards are being dealt...'];
 
 // Pick the right image set for the current viewport (desktop >= 768px)
 function VJ_proImageSet() {
@@ -256,6 +300,175 @@ function priceScore(mosPercent) {
     return 10;
 }
 
+// ── Metric wedges ─────────────────────────────────────────────────────────
+// Screener-derived figures are shown as a five-step wedge rather than a
+// number. Five steps carry the shape of the value without republishing it.
+//
+// Each entry is the four cut points between bands 1..5: a value at or above
+// cut[0] is band 2, at or above cut[3] is band 5.
+const METRIC_SCORE_CUTS = {
+    'CANSLIM Leadership':   [6.5, 7.4, 8.2, 9.4],
+    'Return on Capital':    [6.4, 7.9, 9.5, 10],
+    'Financial Health':     [5.9, 6, 7.8, 8.9],
+    'Earnings Growth':      [5, 9.2, 9.7, 10],
+    'Cash Generation':      [5.6, 9, 9.5, 10],
+    'Profit Quality':       [4.3, 6.1, 9.5, 10],
+    'Profitability':        [3.7, 5.1, 8.5, 10],
+    'Market Leader':        [8.3, 8.7, 8.9, 9.4],
+    'Out of Favour':        [6, 7.4, 8.5, 10],
+    'Payout ratio':         [7.8, 7.9, 8, 10],
+    'Cash Flow':            [5.4, 8.5, 9.4, 10],
+    'Low Debt':             [7.2, 7.8, 8.4, 8.9],
+    'Dividend':             [5.3, 5.9, 6.7, 9.1],
+    'Strength':             [4, 5.6, 7.6, 10],
+    'Quality':              [5.5, 7.2, 8.1, 10],
+    'Uptrend':              [5.1, 5.9, 7.7, 9.7],
+    'Profit':               [3.4, 4.7, 6.3, 9.2],
+    'Value':                [1.8, 5.3, 6.1, 6.5],
+};
+
+// The few raw screener percentages still on live cards. Cut points are in the
+// metric's own units.
+const METRIC_CUTS = {
+    'Return on Capital': [10, 18, 28, 45],
+    'Profit':            [8, 16, 32, 60],
+    'Profitability':     [3, 6, 12, 19],
+    'Quality':           [5, 11, 22, 38],
+    'Sustained Growth':  [15, 28, 48, 70],
+    'Earnings Growth':   [6, 19, 43, 100],
+    'Improving Profits': [6, 13, 21, 33],
+    'Cash Flow':         [5, 11, 18, 30],
+    'Cash Generation':   [18, 23, 31, 48],
+    'Profit Quality':    [15, 20, 35, 47],
+    'Strength':          [12, 18, 24, 30],
+    'Uptrend':           [-8, 2, 12, 25],
+    'Dividend':          [2, 3, 6, 10],
+    'Dividend Yield':    [2, 3, 6, 10],
+    'ROIC':              [10, 18, 28, 45],
+    'Payout ratio':      [20, 40, 60, 80],
+};
+
+// Metrics where a lower or more negative value earns a fuller wedge.
+const METRIC_DESC = {
+    // One-year performance, screened at -20% or worse. A deeper fall is more
+    // qualifying for a contrarian card, not less.
+    'Out of Favour': [-22, -32, -45, -60],
+};
+
+// Text-valued metrics, mapped to a band directly.
+const METRIC_WORDS = {
+    'Price to Book': { Low: 5, Middle: 3, High: 1 },
+    'Value':         { Low: 5, Middle: 3, High: 1 },
+};
+
+// Labels corrected at display time. cards.js keeps the original values.
+const METRIC_RELABEL = {
+    'Bottom Reached': 'Uptrend',
+    'Dividend Strength': 'Payout ratio',
+};
+
+// Dropped at display time: duplicates Earnings Growth and its arithmetic
+// penalises companies whose past growth was exceptional.
+const METRIC_DROP = { 'Earnings Accelerating': true };
+
+function metricBand(label, raw) {
+    if (raw == null) return null;
+    const v = String(raw).trim();
+    if (!v || v === '\u2014' || v.toUpperCase() === 'N/A') return null;
+
+    const words = METRIC_WORDS[label];
+    if (words && words[v] != null) return words[v];
+
+    const frac = v.match(/^(-?[\d.]+)\s*\/\s*(\d+)$/);
+    if (frac) {
+        let n = parseFloat(frac[1]);
+        const d = parseFloat(frac[2]);
+        // A "/10" score above 10 is a 0-100 percentile that was mislabelled.
+        if (d === 10 && n > 10) n = n / 10; else if (d !== 10) n = n * 10 / d;
+        const sc = METRIC_SCORE_CUTS[label];
+        if (!sc) return Math.max(1, Math.min(5, Math.ceil(n / 2)));
+        let b = 1;
+        for (let i = 0; i < sc.length; i++) if (n >= sc[i]) b = i + 2;
+        return b;
+    }
+
+    const num = v.match(/^([+-]?[\d.]+)\s*%?$/);
+    if (!num) return null;
+    const n = parseFloat(num[1]);
+    if (isNaN(n)) return null;
+
+    const desc = METRIC_DESC[label];
+    if (desc) {
+        let b = 1;
+        for (let i = 0; i < desc.length; i++) if (n <= desc[i]) b = i + 2;
+        return b;
+    }
+    const cuts = METRIC_CUTS[label];
+    if (!cuts) return null;
+    let b = 1;
+    for (let i = 0; i < cuts.length; i++) if (n >= cuts[i]) b = i + 2;
+    return b;
+}
+
+// Five-step wedge. Band 5 is a filled disc; band 0 never renders.
+function wedgePath(cx, cy, r, band) {
+    const f = band / 5;
+    const a = (-90 + 360 * f) * Math.PI / 180;
+    const x = cx + r * Math.cos(a), y = cy + r * Math.sin(a);
+    return 'M' + cx + ' ' + cy + ' L' + cx + ' ' + (cy - r) +
+           ' A' + r + ' ' + r + ' 0 ' + (f > 0.5 ? 1 : 0) + ' 1 ' +
+           x.toFixed(2) + ' ' + y.toFixed(2) + ' Z';
+}
+
+function faceBand(label, value) {
+    if (!label || value == null) return null;
+    const key = String(label).toLowerCase().replace(/\bf-score\b/, 'financial health');
+    const match = Object.keys(METRIC_SCORE_CUTS).concat(Object.keys(METRIC_CUTS))
+        .find(k => k.toLowerCase() === key);
+    if (!match) return null;
+    let v = String(value).trim();
+    const bare = v.match(/^(-?[\d.]+)$/);
+    if (bare && parseFloat(bare[1]) > 10) v = (parseFloat(bare[1]) / 10).toFixed(1) + ' / 10';
+    else if (bare) v = bare[1] + ' / 10';
+    return metricBand(match, v);
+}
+
+function MetricWedge(band, label) {
+    if (band == null) {
+        return React.createElement("span", { style: { color: '#B9B4A4', fontSize: '1.05rem', fontFamily: 'Barlow Condensed,sans-serif' } }, '\u2014');
+    }
+    const r = 14, s = 32, c = s / 2;
+    return React.createElement("svg", {
+            width: s, height: s, viewBox: '0 0 ' + s + ' ' + s,
+            style: { display: 'block', marginTop: 1 },
+            role: 'img', 'aria-label': label + ': ' + band + ' of 5'
+        },
+        React.createElement("title", null, label + ': ' + band + ' of 5'),
+        React.createElement("circle", { cx: c, cy: c, r: r, fill: '#E3DFD2', stroke: 'rgba(26,42,30,0.35)', strokeWidth: 1.2 }),
+        band >= 5
+            ? React.createElement("circle", { cx: c, cy: c, r: r, fill: '#1A2A1E' })
+            : React.createElement("path", { d: wedgePath(c, c, r, band), fill: '#1A2A1E' })
+    );
+}
+
+// Five hues spaced to stay distinct on cream. Shared by the radar and the
+// card-face score stars so the two always agree.
+const AXIS_COLORS = ['#2E7D5A', '#1F7A8C', '#3A5BA8', '#B03A2E', '#A8841C'];
+
+// Score stars coloured by axis, strongest first, so the row reads as a legend
+// for the radar: a filled star is a criterion carrying the score.
+function scoreStars(card, size) {
+    const sc = card.scores || [];
+    const lit = Math.max(0, Math.min(sc.length || 5, card.stars || 3));
+    const order = sc.map((x, k) => ({ k, f: x.max ? x.v / x.max : 0 }))
+        .sort((a, b) => b.f - a.f);
+    if (!order.length) return null;
+    return React.createElement("span", { style: { fontSize: size, letterSpacing: '0.1em' } },
+        order.map((o, j) => React.createElement("span",
+            { key: 'ss' + j, style: { color: AXIS_COLORS[o.k % AXIS_COLORS.length] } },
+            j < lit ? '\u2605' : '\u2606')));
+}
+
 // Normalize live price for unit mismatches.
 // LSE (.L) stocks are quoted in pence (GBX). When Yahoo returns 356 for a £3.56 stock,
 // the price needs to be divided by 100. We only correct when the ratio is clearly wrong
@@ -327,13 +540,58 @@ function Home() {
     const [dealt, setDealt] = useState([]);
     const [showInfo, setShowInfo] = useState(false);
     const [selectedStrategyTab, setSelectedStrategyTab] = useState('KING');
-    const initPrices = {};
-    (window.CARDS_DATA || []).forEach(c => { if (c.type === 'TWO') initPrices[c.id] = { price: c.fairValue * 0.8, currency: 'USD' }; });
-    const [prices, setPrices] = useState(initPrices);
+    // Prices start empty. Seeding TWO cards with fairValue * 0.8 published a
+    // ValuJack estimate as if it were a market price, in the wrong currency,
+    // and made every TWO card show exactly a 20% margin of safety.
+    const [prices, setPrices] = useState({});
+    // True only once EVERY price batch has settled. The picker and the
+    // draw-log POST both wait for it: a pick made against a partial price
+    // set collapses the pool, fires the tier-3 fallback and writes a
+    // repeated card into the shared log, where first-write-wins pins it
+    // for the rest of the day. That was the repeating-cards bug.
+    const [pricesReady, setPricesReady] = useState(false);
+    // Stricter than pricesReady: true only when EVERY batch returned OK.
+    // pricesReady releases the display (a thin deck beats no deck); this
+    // releases the draw-log POST, which is permanent and shared and must
+    // never be written from an incomplete price set.
+    const [priceComplete, setPriceComplete] = useState(false);
+
+    // PRO comes from the server, not from a click. window.VJ_proUnlocked stays
+    // the flag the rest of the app reads; this is what fills it.
+    const [auth, setAuth] = useState(null);
+    const [showSignIn, setShowSignIn] = useState(false);
+    const [signInEmail, setSignInEmail] = useState('');
+    const [signInState, setSignInState] = useState('idle');
+    useEffect(() => {
+        fetch('/api/auth?action=me', { credentials: 'same-origin' })
+            .then(r => r.json())
+            .then(d => { window.VJ_proUnlocked = !!d.pro; setAuth(d); })
+            .catch(() => { window.VJ_proUnlocked = false; setAuth({ signedIn: false, pro: false }); });
+    }, []);
+
+    const requestLink = () => {
+        const e = (signInEmail || '').trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e)) { setSignInState('bad'); return; }
+        setSignInState('sending');
+        fetch('/api/auth', { method: 'POST', credentials: 'same-origin',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: e }) })
+            .then(r => r.json())
+            .then(d => {
+                if (d && d.link) { window.location.href = d.link; return; }
+                setSignInState(d && d.ok ? 'sent' : 'error');
+            })
+            .catch(() => setSignInState('error'));
+    };
+
+    const signOut = () => {
+        fetch('/api/auth?action=out', { method: 'POST', credentials: 'same-origin' })
+            .then(() => window.location.reload());
+    };
     const [priceAge, setPriceAge] = useState('');
     const [priceErr, setPriceErr] = useState(false);
     const [chartData, setChartData] = useState(null);   // { points:[{t,c}], loading, error }
-    // Shared 14-day draw history from the server (the "notebook").
+    // Shared 10-day draw history from the server (the "notebook").
     // null = not loaded yet; array = loaded (possibly empty).
     const [drawHistory, setDrawHistory] = useState(null);
     useEffect(() => {
@@ -402,6 +660,7 @@ function Home() {
                 // first quotes appear within a second or two rather than after the
                 // whole ~14-batch chain finishes (~1 min before this change).
                 let anyOk = false;
+                let okCount = 0;
                 await Promise.all(batches.map(async (batch) => {
                     const tickers = batch.map(c => c.yahooTicker).join(",");
                     try {
@@ -410,20 +669,29 @@ function Home() {
                             const data = await res.json();
                             Object.assign(allPrices, data);
                             anyOk = true;
+                            okCount++;
                             publish();
                         }
                     } catch (_b) { /* one batch failing must not sink the rest */ }
                 }));
 
                 if (!anyOk) setPriceErr(true);
+                setPricesReady(true);
+                setPriceComplete(okCount === batches.length);
             }
             catch (_a) {
                 setPriceErr(true);
+                setPricesReady(true);
+                setPriceComplete(false);
             }
         };
         fetchPrices();
+        // Safety net: one hung batch must not leave the deck empty forever.
+        // A pick forced through by this timer is still protected by the
+        // tier-3 repeat guard below.
+        const priceFloor = setTimeout(function(){ setPricesReady(true); }, 20000);
         const priceInterval = setInterval(fetchPrices, 60 * 60 * 1000); // refresh every hour
-        // Fetch the shared 14-day draw history (the no-repeat notebook).
+        // Fetch the shared 10-day draw history (the no-repeat notebook).
         // On failure, set [] so the picker still works (just without exclusions).
         fetch('/api/draw')
             .then(r => r.ok ? r.json() : Promise.reject('fetch'))
@@ -432,6 +700,7 @@ function Home() {
         return () => {
             window.removeEventListener('resize', check);
             clearInterval(priceInterval);
+            clearTimeout(priceFloor);
         };
     }, []);
     const handleCardClick = (card) => {
@@ -488,7 +757,6 @@ function Home() {
         // Cards automatically appear/disappear as prices change
         
         const effectivePrices = { ...prices };
-        cards.forEach(c => { if (c.type === 'TWO' && !effectivePrices[c.id]) effectivePrices[c.id] = { price: c.fairValue * 0.8, currency: 'USD' }; });
         const eligibleCards = cards.filter(c => {
               // PHASE 0: Weekly approved pool — only cards approved on Sunday can appear
               if (c.approvedWeek !== true) return false;
@@ -507,10 +775,10 @@ function Home() {
               const fairValue = c.fairValue;
               // TEMP DISABLED:               if (!currentPrice || !fairValue) return false;
 
-              // SLOW-PRICE SEATBELT: if the live price hasn't loaded yet (null/undefined),
-              // don't apply the price-based valuation gate below — otherwise (null < x)
-              // is false and EVERY price-gated card (QUEEN/ACE/KING/JACK/JOKER) is silently
-              // rejected, emptying the PRO pool on slow price loads. Star gate still applies.
+              // SEATBELT: a card with no resolved price is skipped for this draw.
+              // The earlier version passed unpriced cards through every valuation
+              // gate, which is how a card once published 48% overvalued. A thin
+              // deck on a slow price load is the correct failure direction.
               const priceReady = (currentPrice != null && !isNaN(currentPrice));
 
               // Minimum 3 stars to appear in rotation (TWO cards use lower threshold — contrarian strategy)
@@ -522,21 +790,30 @@ function Home() {
 
               // KING: undervalued only (strict — dividend thesis requires price discount)
               if (c.type === 'KING') {
-                  return !priceReady || currentPrice < fairValue;
+                  return priceReady && currentPrice < fairValue;
               }
 
-              // JACK / JOKER: momentum & growth strategies — allow up to 20% overvalued
+              // JACK / JOKER: momentum and growth. These used to allow 20% over fair
+              // value, but the rating pill turns OVERVALUED below -5%, so the extra
+              // latitude only bought cards that contradicted their own verdict.
               if (c.type === 'JACK' || c.type === 'JOKER') {
-                  return !priceReady || currentPrice < fairValue * 1.20;
+                  return priceReady && currentPrice < fairValue * 1.05;
               }
 
-              // TWO: contrarian recovery — always eligible if showing recovery signal
+              // TWO: contrarian recovery. The premise IS a depressed price, so this
+              // gate is the loosest of the six — but it is no longer absent. With no
+              // gate at all, 59% of the approved TWO pool sat above ValuJack's own
+              // fair value, and a card could be dealt reading OVERVALUED on its own
+              // face (worst seen: price 3.90 against fair value 0.33). The TWO screen
+              // also admits high-multiple quality names that merely dipped, which an
+              // EPS-based DCF cannot price. 1.5x keeps the contrarian pool wide while
+              // refusing to publish a card that contradicts its own number.
               if (c.type === 'TWO') {
-                  return true;
+                  return priceReady && currentPrice < fairValue * 1.05;
               }
 
               // QUEEN / ACE (including mega caps): undervalued + fairly valued (up to 5% over)
-              return !priceReady || currentPrice < fairValue * 1.05;
+              return priceReady && currentPrice < fairValue * 1.05;
           });
 
         // Whole-pool undervalued count — header badge only (ignores approved/block/stars gates)
@@ -598,10 +875,10 @@ function Home() {
             return picked;
         }
 
-        // STEP 5: 14-day no-repeat rotation
+        // STEP 5: 10-day no-repeat rotation
         // No keeper system — every card rotates daily
         // No fixed strategy cycle — free pick from all strategies each day
-        // 14-day exclusion — no card repeats within 14 days
+        // 10-day exclusion — no card repeats within 10 days
 
         const kingPool  = dedupedCards.filter(c => c.type === 'KING');
         const jackPool  = dedupedCards.filter(c => c.type === 'JACK');
@@ -625,9 +902,9 @@ function Home() {
         const todayFreeStrategy = freeStrategies[freeIdx];
         const todayProStrategy  = proStrategies[proIdx];
 
-        // Build 14-day exclusion set from the SHARED server draw log.
+        // Build 10-day exclusion set from the SHARED server draw log.
         // drawHistory is fetched once on load from /api/draw. It already
-        // contains only the last 14 days (the server filters), and it is the
+        // contains only the last 10 days (the server filters), and it is the
         // SAME history for every visitor — so no card repeats within 14 days
         // for anyone, surviving incognito and cache clears.
         const excludeTickers = new Set();
@@ -681,7 +958,7 @@ function Home() {
 
         const usedSectors = new Set();
 
-        // Helper: pick from strategy-of-the-day. If exhausted by 14-day rule,
+        // Helper: pick from strategy-of-the-day. If exhausted by 10-day rule,
         // pull from the OTHER strategies in the same tier (FREE or PRO).
         // This is the key fix — no more silent fallback to the same top card.
         // BOOSTed cards (within 14 days) get priority within today's strategy.
@@ -705,10 +982,42 @@ function Home() {
                 .filter(c => !excludeTickers.has(c.ticker) && !usedSectors.has(c.sector));
             if (allUnseen.length > 0) return pickPool(allUnseen, seed, 1, commodityPenalty)[0];
 
-            // Still nothing — fall back to any card in the tier (ignore exclusions)
+            // Still nothing — the 10-day rule has exhausted the tier, which
+            // happens whenever the approved pool is smaller than ten
+            // cards. Something must repeat. Repeat the card dealt LONGEST ago
+            // rather than the highest-scoring one, which is how the same card
+            // came out two days running.
             const anyCard = [].concat(...allTierPools)
                 .filter(c => !usedSectors.has(c.sector));
-            return pickPool(anyCard.length ? anyCard : [].concat(...allTierPools), seed, 1, commodityPenalty)[0];
+            const lastPool = anyCard.length ? anyCard : [].concat(...allTierPools);
+            if (lastPool.length > 1) {
+                // Compare CALENDAR DATES, not timestamps. r.date parses as
+                // midnight UTC while Date.now() is the live clock, so the old
+                // timestamp comparison let a card dealt two days ago count as
+                // "not recent" every morning before about 02:00 local.
+                const lastSeen = {};
+                (drawHistory || []).forEach(function (r) {
+                    if (!r || !r.date || r.date === _todayStr) return;
+                    [r.free_ticker, r.pro_ticker].forEach(function (tk) {
+                        if (tk && (!lastSeen[tk] || r.date > lastSeen[tk])) lastSeen[tk] = r.date;
+                    });
+                });
+                const oldest = lastPool.slice().sort(function (a, b) {
+                    const av = lastSeen[a.ticker] || '';
+                    const bv = lastSeen[b.ticker] || '';
+                    if (av !== bv) return av < bv ? -1 : 1;  // never dealt first
+                    return (b.stars || 0) - (a.stars || 0);  // then by quality
+                });
+                // Never hand back a card dealt in the last two days, unless the
+                // pool is so small there is genuinely nothing else.
+                const _cut = new Date(Date.now() - 2 * 86400000);
+                const twoDaysAgo = _cut.getFullYear() + '-' +
+                    String(_cut.getMonth() + 1).padStart(2, '0') + '-' +
+                    String(_cut.getDate()).padStart(2, '0');
+                const notRecent = oldest.filter(c => (lastSeen[c.ticker] || '') < twoDaysAgo);
+                return (notRecent.length ? notRecent : oldest)[0];
+            }
+            return pickPool(lastPool, seed, 1, commodityPenalty)[0];
         }
 
         const todayFreeCard = pickWithFallback(todayFreeStrategy, freeStrategies, todaySeed);
@@ -720,8 +1029,47 @@ function Home() {
         }
         const todayProCard  = pickWithFallback(todayProStrategy, proStrategies, todaySeed * 3);
 
-        const todayFree = [todayFreeCard].filter(Boolean);
-        const todayPro  = [todayProCard].filter(Boolean);
+        // ─── LOCK TO THE LOG ────────────────────────────────────────────
+        // If the server already recorded a draw for today, show exactly those
+        // two cards. The pick above only stands when today has not been logged
+        // yet. Without this the browser re-picks on every load, so changing the
+        // approved pool mid-day swaps the displayed cards while the log keeps
+        // the first pair — which broke the 10-day exclusion and made the
+        // weekly-cards page disagree with what subscribers saw.
+        let lockedFreeCard = todayFreeCard;
+        let lockedProCard  = todayProCard;
+        try {
+            const _d = new Date();
+            const _todayKey = _d.getFullYear() + '-' +
+                String(_d.getMonth() + 1).padStart(2, '0') + '-' +
+                String(_d.getDate()).padStart(2, '0');
+            const _row = (drawHistory || []).find(function (r) {
+                return r && r.date === _todayKey;
+            });
+            if (_row) {
+                const _all = {};
+                (window.CARDS_DATA || []).forEach(function (c) { _all[c.id] = c; });
+                const _byTicker = {};
+                (window.CARDS_DATA || []).forEach(function (c) {
+                    if (c.ticker) {
+                        _byTicker[c.ticker + '|' + c.type] = c;
+                        if (!_byTicker[c.ticker]) _byTicker[c.ticker] = c;
+                    }
+                });
+                const _find = function (id, tk, ty) {
+                    return _all[id] ||
+                        (tk && (_byTicker[tk + '|' + ty] || _byTicker[tk])) || null;
+                };
+                const _f = _find(_row.free_id, _row.free_ticker, _row.free_type);
+                const _p = _find(_row.pro_id, _row.pro_ticker, _row.pro_type);
+                // Only lock when BOTH resolve, so a deleted card cannot empty
+                // the deck — in that case the fresh pick stands.
+                if (_f && _p) { lockedFreeCard = _f; lockedProCard = _p; }
+            }
+        } catch (_e) { /* any failure leaves the fresh pick in place */ }
+
+        const todayFree = [lockedFreeCard].filter(Boolean);
+        const todayPro  = [lockedProCard].filter(Boolean);
         
         // IMPORTANT: Show FREE cards first (silver), then PRO cards (gold)
         const deckCards = [
@@ -731,7 +1079,7 @@ function Home() {
 
         // ─── DRAW LOG (shared server record) ─────────────────────────────
         // Sends one row per date with the final FREE + PRO cards and live
-        // prices to /api/draw. The server keeps the shared 14-day notebook
+        // prices to /api/draw. The server keeps the shared 10-day notebook
         // AND the permanent track record. First-write-wins on the server, so
         // re-sends are safe. Guarded to fire once per session per price-signature.
         try {
@@ -751,14 +1099,28 @@ function Home() {
                 const _sig = _logDate + '|' + (_freePrice||'') + '|' + (_proPrice||'');
                 // Only send once the history has loaded (so we don't post before
                 // we know today's pick is final), and only when the signature changes.
-                if (drawHistory !== null && window.__vjLogged[_logDate] !== _sig) {
+                if (drawHistory !== null && priceComplete && window.__vjLogged[_logDate] !== _sig) {
                     window.__vjLogged[_logDate] = _sig;
+                    // Verdict at the moment of dealing. Same thresholds as the
+                    // card face — kept here so the log records what was claimed,
+                    // not what the current estimate would imply.
+                    const _ratingOf = function(fv, px){
+                        if (fv == null || px == null || !fv) return '';
+                        const m = (fv - px) / fv;
+                        return m >= 0.25 ? 'STRONGLY UNDERVALUED'
+                             : m >= 0.05 ? 'UNDERVALUED'
+                             : m >= -0.05 ? 'FAIRLY VALUED'
+                             : 'OVERVALUED';
+                    };
                     const _row = {
                         date: _logDate,
                         free_id: todayFreeCard.id,
                         free_ticker: todayFreeCard.ticker,
                         free_company: todayFreeCard.company,
                         free_price: _freePrice,
+                        free_fair_value: todayFreeCard.fairValue ?? null,
+                        free_rating: _ratingOf(todayFreeCard.fairValue, _freePrice),
+                        free_held: !!todayFreeCard.positionHeld,
                         free_currency: todayFreeCard.currency || '',
                         free_type: todayFreeCard.type,
                         free_stars: todayFreeCard.stars || 0,
@@ -766,9 +1128,13 @@ function Home() {
                         pro_ticker: todayProCard.ticker,
                         pro_company: todayProCard.company,
                         pro_price: _proPrice,
+                        pro_fair_value: todayProCard.fairValue ?? null,
+                        pro_rating: _ratingOf(todayProCard.fairValue, _proPrice),
+                        pro_held: !!todayProCard.positionHeld,
                         pro_currency: todayProCard.currency || '',
                         pro_type: todayProCard.type,
                         pro_stars: todayProCard.stars || 0,
+                        horizon: 'multi-year',
                     };
                     fetch('/api/draw', {
                         method: 'POST',
@@ -780,7 +1146,7 @@ function Home() {
         } catch (_e) { /* log failures must never break the picker */ }
 
         // Wait for the shared draw history before showing cards, so the
-        // 14-day exclusion is applied on first paint (no flicker / no card swap).
+        // 10-day exclusion is applied on first paint (no flicker / no card swap).
         // If history fails to load it becomes [] (not null), so we still show cards.
 
         // ── Card of the Week (Business Plan 4.14.1) ────────────────────────
@@ -967,35 +1333,45 @@ function Home() {
                                 React.createElement("div", { className: "cinset", style: { background: 'linear-gradient(145deg,#0D1826,#152238,#0D1826)' } },
                                     React.createElement("div", { style: { position: 'absolute', inset: 4, border: ct.isGold ? '1.5px solid rgba(212,175,55,0.6)' : '1.5px solid rgba(192,192,192,0.55)', borderRadius: 3, zIndex: 1, pointerEvents: 'none' } }),
                                     peekOn && React.createElement("div", { className: "vj-peek-stage", style: { position: 'absolute', top: 7, left: 7, right: 7, zIndex: 5 } },
-                                            React.createElement("div", { className: "vj-peek", style: { position: 'relative', flexShrink: 0, height: 'calc(5rem + 6px)', overflow: 'hidden', borderRadius: '2px 2px 0 0', background: 'linear-gradient(160deg,#FEFDF8 0%,#F8F0DC 100%)', WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.46) 42%, rgba(0,0,0,0.14) 76%, rgba(0,0,0,0) 100%)', maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.46) 42%, rgba(0,0,0,0.14) 76%, rgba(0,0,0,0) 100%)' } },
-                                                React.createElement("div", { style: { position: 'absolute', top: '7px', right: '8px', fontSize: '1.05rem', fontWeight: 700, fontFamily: 'Palatino Linotype, Palatino, Book Antiqua, serif', fontStyle: 'italic', letterSpacing: '0.04em', color: ct.color } }, { KING: 'Dividends', JACK: 'Momentum', QUEEN: 'Magic Formula', ACE: 'F-Score', JOKER: 'Growth', TWO: 'Contrarian' }[card.type] || ''),
+                                            React.createElement("div", { className: "vj-peek", style: { position: 'relative', flexShrink: 0, height: 'calc(7.2rem + 6px)', overflow: 'hidden', borderRadius: '2px 2px 0 0', background: 'linear-gradient(160deg,#FEFDF8 0%,#F8F0DC 100%)', WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.92) 58%, rgba(0,0,0,0.5) 84%, rgba(0,0,0,0) 100%)', maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.92) 58%, rgba(0,0,0,0.5) 84%, rgba(0,0,0,0) 100%)' } },
+                                                React.createElement("div", { style: { position: 'absolute', top: '7px', right: '8px', fontSize: '1.05rem', fontWeight: 700, fontFamily: 'Palatino Linotype, Palatino, Book Antiqua, serif', fontStyle: 'italic', letterSpacing: '0.04em', color: ct.color } }, { KING: 'Dividends', JACK: 'Momentum', QUEEN: 'Magic Formula', ACE: 'Financial Score', JOKER: 'Growth', TWO: 'Contrarian' }[card.type] || ''),
                                                 React.createElement("div", { style: { position: 'absolute', top: '3px', left: '8px' } },
                                                     React.createElement("div", { style: Object.assign({ fontSize: '3.2rem', fontWeight: 900, fontFamily: 'Playfair Display,serif', lineHeight: 0.9 }, (ct.cornerColor ? { color: ct.cornerColor } : ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.corner)),
                                                 React.createElement("div", { style: { position: 'absolute', top: '3px', left: 0, right: 0, textAlign: 'center' } },
-                                                    React.createElement("div", { style: Object.assign({ fontSize: ct.symbolSize || '4.2rem', lineHeight: 1, marginTop: ct.symbolSize ? '0.5rem' : '0' }, (ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : ct.symbolColor === 'WHITE' ? { color: '#FFFFFF' } : ct.symbolColor === 'SILVER' ? { background: 'linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#E0DDDA 45%,#A9A9A9 65%,#D0CDCA 80%,#8A8A8A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.symbol)),),
-                                            React.createElement("div", { style: { flexShrink: 0, paddingTop: 13, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' } },
-                                                React.createElement("span", { style: { fontSize: '0.85rem', lineHeight: 1 } }, "\uD83D\uDD12"),
-                                                React.createElement("span", { style: { fontSize: '0.62rem', letterSpacing: '0.13em', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 800, textTransform: 'uppercase', color: 'rgba(214,186,120,0.95)' } }, "Unlock Pro for $9.99/month"))),
+                                                    React.createElement("div", { style: Object.assign({ fontSize: ct.symbolSize || '4.2rem', lineHeight: 1, marginTop: ct.symbolSize ? '0.5rem' : '0' }, (ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : ct.symbolColor === 'WHITE' ? { color: '#FFFFFF' } : ct.symbolColor === 'SILVER' ? { background: 'linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#E0DDDA 45%,#A9A9A9 65%,#D0CDCA 80%,#8A8A8A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.symbol)),)),
                                     React.createElement("div", { style: { position: 'absolute', inset: 7, overflow: 'hidden', zIndex: 0, borderRadius: 2 } }, Array.from({ length: 140 }).map((_, i) => { const suits = ['♠︎', '♥︎', '♦︎', '♣︎']; const col = i % 10; const row = Math.floor(i / 10); const suit = suits[(col + row) % 4]; return React.createElement("div", { key: i, style: { position: 'absolute', left: `${col * 10.5 - 1}%`, top: `${row * 6.6 - 1}%`, color: 'rgba(192,192,192,0.30)', fontSize: '0.52rem', userSelect: 'none', lineHeight: 1 } }, suit); })),
                                     React.createElement("div", { style: { position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 2 } },
-                                        React.createElement("div", { style: { padding: 12, borderRadius: 16, border: card.isPro ? '1px solid rgba(212,175,55,0.55)' : '1px solid rgba(192,192,192,0.5)', background: '#0e1a2c', boxShadow: '0 2px 12px rgba(0,0,0,0.35)', display: 'flex', alignItems: 'center', justifyContent: 'center' } }, React.createElement("img", { src: card.isPro ? "/valujack-logo-pro-gold.svg" : "/valujack-logo-free-silver.svg", alt: "ValuJack", style: { width: '4.4rem', height: '4.4rem', display: 'block', opacity: 0.5 } })),
+                                        React.createElement("div", { style: { padding: 12, borderRadius: 16, border: card.isPro ? '1px solid rgba(212,175,55,0.55)' : '1px solid rgba(192,192,192,0.5)', background: '#0e1a2c', boxShadow: '0 2px 12px rgba(0,0,0,0.35)', display: 'flex', alignItems: 'center', justifyContent: 'center' } }, React.createElement("img", { src: card.isPro ? "/valujack-logo-pro-gold.svg" : "/valujack-logo-free-silver.svg", alt: "ValuJack", style: { width: '4.4rem', height: '4.4rem', display: 'block', opacity: 0.72 } })),
                                         React.createElement("span", { style: { fontSize: '0.6rem', letterSpacing: '0.25em', marginTop: 8, fontWeight: 900, fontFamily: 'Barlow Condensed,sans-serif' } },
                                         React.createElement("span", { style: { background: card.isPro ? 'linear-gradient(135deg,#BFA882 0%,#DDBF88 22%,#A88A60 42%,#CAB07A 62%,#8C7858 80%,#C0AA75 100%)' : 'linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#A9A9A9 65%,#8A8A8A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' } }, "VALU"),
                                         React.createElement("span", { style: { background: card.isPro ? 'linear-gradient(135deg,#BFA882 0%,#DDBF88 22%,#A88A60 42%,#CAB07A 62%,#8C7858 80%,#C0AA75 100%)' : 'linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#A9A9A9 65%,#8A8A8A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' } }, "JACK")),
-                                        card.isPro && !window.VJ_proUnlocked && !peekOn && React.createElement("div", { style: { position: 'absolute', bottom: 26, left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '3px', zIndex: 10 } },
-                                          React.createElement("div", { style: { fontSize: '1.45rem', lineHeight: 1 } }, "🔒"),
-                                          React.createElement("div", { style: { fontSize: '0.58rem', letterSpacing: '0.22em', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 800, color: 'rgba(201,168,76,0.9)' } }, "PRO"))),
+                                        card.isPro && !window.VJ_proUnlocked && React.createElement("div", { style: { position: 'absolute', top: peekOn ? '62%' : '11%', left: 14, right: 14, display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 10 } },
+                                          React.createElement("div", { style: { fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 800, fontSize: 'clamp(1.2rem,3.4vw,1.65rem)', letterSpacing: '0.14em', lineHeight: 1, background: 'linear-gradient(135deg,#BFA882 0%,#DDBF88 22%,#A88A60 42%,#CAB07A 62%,#8C7858 80%,#C0AA75 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' } }, "UNLOCK PRO"),
+                                          React.createElement("div", { style: { fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, fontSize: 'clamp(0.62rem,1.55vw,0.72rem)', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(201,168,76,0.8)', marginTop: 5 } }, (window.VJ_PRICE ? window.VJ_PRICE.monthlyUC : "99 kr") + " / month"),
+                                          React.createElement("div", { style: { width: 40, height: 1, background: 'rgba(201,168,76,0.3)', margin: '5px 0 5px' } }),
+                                          React.createElement("div", { style: { display: 'flex', flexDirection: 'column', gap: 4, alignItems: 'flex-start' } },
+                                            [["Queen", "Magic Formula"],
+                                             ["Ace", "Financial Score"],
+                                             ["Joker", "Growth companies"],
+                                             [null, "A second card every trading day"],
+                                             [null, "Every past PRO card"]].map(function (b, i) {
+                                                return React.createElement("div", { key: 'ben' + i, style: { display: 'flex', alignItems: 'baseline', gap: 8 } },
+                                                    React.createElement("span", { style: { color: 'rgba(201,168,76,0.5)', fontSize: '0.46rem', lineHeight: 1 } }, "\u25C6"),
+                                                    React.createElement("span", { style: { fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 400, fontSize: 'clamp(0.74rem,1.8vw,0.87rem)', letterSpacing: '0.05em', lineHeight: 1.25, color: 'rgba(228,216,190,0.88)' } },
+                                                        b[0] ? React.createElement("span", { style: { fontWeight: 700, color: 'rgba(201,168,76,0.95)', letterSpacing: '0.08em' } }, b[0] + " \u2014 ") : null,
+                                                        b[1]));
+                                            })))),
                                     !peekOn && React.createElement("div", { style: { position: 'absolute', bottom: 8, left: 0, right: 0, textAlign: 'center', zIndex: 3 } },
-                                        React.createElement("span", { style: { fontSize: '0.62rem', opacity: 0.85, letterSpacing: '0.18em', fontFamily: 'Barlow Condensed,sans-serif', background: frame, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, card.isPro && !window.VJ_proUnlocked ? "UNLOCK PRO \u2014 $9.99/MONTH" : "☝ TAP TO REVEAL")))),
+                                        React.createElement("span", { style: { fontSize: '0.62rem', opacity: 0.85, letterSpacing: '0.18em', fontFamily: 'Barlow Condensed,sans-serif', background: frame, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, card.isPro && !window.VJ_proUnlocked ? "☝ TAP TO SUBSCRIBE" : "☝ TAP TO REVEAL")))),
                             React.createElement("div", { className: "cface cface-front", style: { background: frame } },
                                 weekNo && React.createElement("div", { style: { position: 'absolute', left: 10, right: 10, bottom: 10, height: 'calc(5rem + 3px)', background: frame, borderRadius: '0 0 5px 5px', WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 12%, rgba(0,0,0,1) 30%)', maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 12%, rgba(0,0,0,1) 30%)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 4, pointerEvents: 'none' } }, React.createElement("span", { style: { fontFamily: 'Playfair Display,serif', fontWeight: 700, fontSize: 'clamp(0.95rem,2.6vw,1.35rem)', color: '#0D1826', letterSpacing: '0.01em', textShadow: '0 1px 0 rgba(255,255,255,0.30)' } }, "Card of the week " + weekNo)), 
                                 React.createElement("div", { className: "cinset", style: { background: 'linear-gradient(160deg,#FEFDF8 0%,#F8F0DC 100%)', display: 'flex', flexDirection: 'column' } }, React.createElement("div", { style: { flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 } },
-                                    React.createElement("div", { style: { position: 'relative', flexShrink: 0, height: '5rem', marginTop: '3px', background: card.type === 'TWO' ? 'linear-gradient(180deg,#6B0E0E 0%,#3A0808 100%)' : 'transparent', borderRadius: card.type === 'TWO' ? '5px 5px 0 0' : 0 } },
-                                        React.createElement("div", { style: { position: 'absolute', top: '4px', right: '8px', fontSize: '1.05rem', fontWeight: 700, fontFamily: 'Palatino Linotype, Palatino, Book Antiqua, serif', fontStyle: 'italic', letterSpacing: '0.04em', opacity: 1.0, color: card.type === 'TWO' ? '#C8C8C8' : ct.color } }, { KING: 'Dividends', JACK: 'Momentum', QUEEN: 'Magic Formula', ACE: 'F-Score', JOKER: 'Growth', TWO: 'Contrarian' }[card.type] || ''),
+                                    React.createElement("div", { style: { position: 'relative', flexShrink: 0, height: (window.VJ_FACES && window.VJ_FACES[String(card.type).toLowerCase()]) ? '7rem' : '5rem', marginTop: '3px', background: card.type === 'TWO' ? 'linear-gradient(180deg,#6B0E0E 0%,#3A0808 100%)' : 'transparent', borderRadius: card.type === 'TWO' ? '5px 5px 0 0' : 0 } },
+                                        React.createElement("div", { style: { position: 'absolute', top: '4px', right: '8px', fontSize: '1.05rem', fontWeight: 700, fontFamily: 'Palatino Linotype, Palatino, Book Antiqua, serif', fontStyle: 'italic', letterSpacing: '0.04em', opacity: 1.0, color: card.type === 'TWO' ? '#C8C8C8' : ct.color } }, { KING: 'Dividends', JACK: 'Momentum', QUEEN: 'Magic Formula', ACE: 'Financial Score', JOKER: 'Growth', TWO: 'Contrarian' }[card.type] || ''),
                                         React.createElement("div", { style: { position: 'absolute', top: 0, left: '8px' } },
                                             React.createElement("div", { style: Object.assign({ fontSize: '3.2rem', fontWeight: 900, fontFamily: 'Playfair Display,serif', lineHeight: 0.9 }, (ct.cornerColor ? { color: ct.cornerColor } : ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.corner)),
                                         React.createElement("div", { style: { position: 'absolute', top: 0, left: 0, right: 0, textAlign: 'center' } },
-                                            React.createElement("div", { style: Object.assign({ fontSize: ct.symbolSize || '4.2rem', lineHeight: 1, marginTop: ct.symbolSize ? '0.5rem' : '0' }, (ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : ct.symbolColor === 'WHITE' ? { color: '#FFFFFF' } : ct.symbolColor === 'SILVER' ? { background: 'linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#E0DDDA 45%,#A9A9A9 65%,#D0CDCA 80%,#8A8A8A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.symbol))),
+                                            (window.VJ_FACES && window.VJ_FACES[String(card.type).toLowerCase()]) ? React.createElement("div", { className: 'vjFaceRule' }, React.createElement("img", { src: window.VJ_FACES[String(card.type).toLowerCase()], alt: '', draggable: false, style: { height: '6rem', width: 'auto', display: 'block', margin: '0 auto', pointerEvents: 'none' } }), React.createElement("div", { style: { width: '55%', height: 1, margin: '6px auto 0', background: 'linear-gradient(90deg,transparent,' + (ct.color || '#999') + ',transparent)', opacity: 0.45 } })) : React.createElement("div", { style: Object.assign({ fontSize: ct.symbolSize || '4.2rem', lineHeight: 1, marginTop: ct.symbolSize ? '0.5rem' : '0' }, (ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : ct.symbolColor === 'WHITE' ? { color: '#FFFFFF' } : ct.symbolColor === 'SILVER' ? { background: 'linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#E0DDDA 45%,#A9A9A9 65%,#D0CDCA 80%,#8A8A8A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.symbol))),
                                     React.createElement("div", { style: { flex: 0.15, flexShrink: 0 } }),
                                     React.createElement("div", { style: { textAlign: 'center', flexShrink: 0, padding: '0 6px' } },
                                         React.createElement("p", { style: { textAlign: 'center', fontSize: '0.82rem', fontFamily: 'Barlow Condensed,sans-serif', letterSpacing: '0.15em', color: '#888', marginBottom: '2px', marginTop: '2px' } }, card.country || ''),
@@ -1018,31 +1394,37 @@ function Home() {
                                             } }, card.sectorIcon)),
                                     React.createElement("div", { style: { flexShrink: 0, marginBottom: 4, padding: '0 6px' } },
                                         React.createElement("div", { style: { height: 1, background: `linear-gradient(to right,transparent,${ct.color},transparent)`, marginBottom: 5 } }),
-                                        React.createElement("div", { style: { textAlign: 'center', marginBottom: 3 } }, React.createElement("span", { style: { fontSize: '1.1rem', letterSpacing: '0.08em', color: ct.color } }, (function(){ var s=card.stars||3; return '★'.repeat(s)+'☆'.repeat(5-s); })() )),React.createElement("div", { style: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4 } },
+                                        React.createElement("div", { style: { textAlign: 'center', marginBottom: 3 } },
+                                            React.createElement("p", { style: { color: '#AAA', fontSize: '0.75rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 400, letterSpacing: '0.05em', marginBottom: 1 } }, 'VALUJACK SCORE'),
+                                            scoreStars(card, '1.1rem') || React.createElement("span", { style: { fontSize: '1.1rem', letterSpacing: '0.08em', color: ct.color } }, (function(){ var s=card.stars||3; return '\u2605'.repeat(s)+'\u2606'.repeat(5-s); })())),React.createElement("div", { style: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4 } },
                                             React.createElement("div", { style: { textAlign: 'center' } },
                                                 React.createElement("p", { style: { color: '#AAA', fontSize: '0.75rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 400, letterSpacing: '0.05em', marginBottom: 1 } },
                                                     card.ind1l,
                                                     ((_a = prices[card.id]) === null || _a === void 0 ? void 0 : _a.divYield) && card.ind1l === 'DIVIDEND %' ? ' ●' : ''),
-                                                React.createElement("p", { style: { color: ct.color, fontWeight: 500, fontSize: '1.55rem', fontFamily: 'Barlow Condensed,sans-serif' } }, card.ind1l === 'DIVIDEND %' && ((_b = prices[card.id]) === null || _b === void 0 ? void 0 : _b.divYield)
-                                                    ? (prices[card.id].divYield * 100).toFixed(1) + '%'
-                                                    : card.ind1v)),
+                                                (function(){ var b = faceBand(card.ind1l, card.ind1v);
+                                                    return b === null
+                                                      ? React.createElement("p", { style: { color: ct.color, fontWeight: 500, fontSize: '1.55rem', fontFamily: 'Barlow Condensed,sans-serif' } }, card.ind1v)
+                                                      : React.createElement("div", { style: { display: 'flex', justifyContent: 'center', paddingTop: 2 } }, MetricWedge(b, card.ind1l)); })()),
                                             React.createElement("div", { style: { textAlign: 'center' } },
                                                 React.createElement("p", { style: { color: '#AAA', fontSize: '0.75rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 400, letterSpacing: '0.05em', marginBottom: 1 } },
-                                                    card.ind2l,
+                                                    card.ind2l === 'UNDERVALUED BY' ? 'EST. MARGIN OF SAFETY' : card.ind2l,
                                                     ((_c = prices[card.id]) === null || _c === void 0 ? void 0 : _c.pe) && card.ind2l === 'P/E' ? ' ●' : ''),
                                                 React.createElement("p", { style: { color: ct.color, fontWeight: 500, fontSize: '1.55rem', fontFamily: 'Barlow Condensed,sans-serif' } }, card.ind2l === 'P/E' && ((_d = prices[card.id]) === null || _d === void 0 ? void 0 : _d.pe)
                                                     ? prices[card.id].pe.toFixed(1)
                                                     : card.ind2l === 'UNDERVALUED BY' && prices[card.id] && card.fairValue
                                                         ? (function(){ var p = normalizePrice(prices[card.id].price, card); return Math.round((card.fairValue - p) / card.fairValue * 100) + '%'; })()
                                                         : card.ind2v)))),
-                                    React.createElement("div", { style: { position: 'relative', flexShrink: 0, height: '5rem', marginBottom: '3px' } },
+                                    React.createElement("div", { style: { position: 'relative', flexShrink: 0, height: (window.VJ_FACES && window.VJ_FACES[String(card.type).toLowerCase()]) ? '7rem' : '5rem', marginBottom: '3px' } },
                                         React.createElement("div", { style: { position: 'absolute', bottom: 0, left: 0, right: 0, textAlign: 'center' } },
-                                            React.createElement("div", { style: Object.assign({ fontSize: ct.symbolSize || '4.2rem', lineHeight: 1, transform: 'rotate(180deg)', display: 'inline-block', marginBottom: ct.symbolSize ? '0.5rem' : '0' }, (ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : ct.symbolColor === 'WHITE' ? { color: '#FFFFFF' } : ct.symbolColor === 'SILVER' ? { background: 'linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#E0DDDA 45%,#A9A9A9 65%,#D0CDCA 80%,#8A8A8A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.symbol)),
+                                            (window.VJ_FACES && window.VJ_FACES[String(card.type).toLowerCase()]) ? React.createElement("div", { className: 'vjFaceMirror', style: { transform: 'rotate(180deg)' } }, React.createElement("img", { src: window.VJ_FACES[String(card.type).toLowerCase()], alt: '', draggable: false, style: { height: '6rem', width: 'auto', display: 'block', margin: '0 auto', pointerEvents: 'none' } }), React.createElement("div", { style: { width: '55%', height: 1, margin: '6px auto 0', background: 'linear-gradient(90deg,transparent,' + (ct.color || '#999') + ',transparent)', opacity: 0.45 } })) : React.createElement("div", { style: Object.assign({ fontSize: ct.symbolSize || '4.2rem', lineHeight: 1, transform: 'rotate(180deg)', display: 'inline-block', marginBottom: ct.symbolSize ? '0.5rem' : '0' }, (ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : ct.symbolColor === 'WHITE' ? { color: '#FFFFFF' } : ct.symbolColor === 'SILVER' ? { background: 'linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#E0DDDA 45%,#A9A9A9 65%,#D0CDCA 80%,#8A8A8A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.symbol)),
                                         React.createElement("div", { style: { position: 'absolute', bottom: 0, right: '8px', transform: 'rotate(180deg)', transformOrigin: 'center center' } },
                                             React.createElement("div", { style: Object.assign({ fontSize: '3.2rem', fontWeight: 900, fontFamily: 'Playfair Display,serif', lineHeight: 0.9 }, (ct.cornerColor ? { color: ct.cornerColor } : ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.corner)))))))));
                 }
 
-        const visibleCards = drawHistory === null ? [] : deckCards;
+        // Wait for BOTH the shared history and a complete price set before
+        // showing anything. Either one missing produces a pick that is not
+        // final, and the log below would freeze it for the day.
+        const visibleCards = (drawHistory === null || !pricesReady) ? [] : deckCards;
 
         // First visit only: deal the FREE card already face up, so a stranger meets a
         // real company instead of an unexplained face-down card. Returning visitors
@@ -1052,6 +1434,37 @@ function Home() {
             if (!firstVisit || !vjFreeId) return;
             setFlipped(function (f) { return f.indexOf(vjFreeId) === -1 ? f.concat([vjFreeId]) : f; });
         }, [firstVisit, vjFreeId]);
+
+        // Signing in should reveal what you just unlocked, the same way the free
+        // card reveals itself on a first visit. Arriving straight from a sign-in
+        // link also reveals the free card: the redirect counts as a return visit,
+        // so without this someone lands on a deck of two face-down cards.
+        useEffect(function () {
+            var justSignedIn = false;
+            try {
+                justSignedIn = window.location.search.indexOf('signin=ok') !== -1;
+                // Clear the marker once read. Left in place it stays in the
+                // address bar and in any bookmark, and the reveal fires on
+                // every visit instead of once.
+                if (justSignedIn && window.history && window.history.replaceState) {
+                    window.history.replaceState({}, '', window.location.pathname);
+                }
+            } catch (e) {}
+            // Only on the sign-in transition. On an ordinary return visit both
+            // cards stay face-down: flipping them is the product, and revealing
+            // the paid card while the free one waits to be tapped is backwards.
+            if (!auth || !justSignedIn) return;
+            setFlipped(function (f) {
+                var n2 = f.slice();
+                if (justSignedIn && vjFreeId && n2.indexOf(vjFreeId) === -1) n2.push(vjFreeId);
+                if (auth.pro) {
+                    visibleCards.forEach(function (c) {
+                        if (c.isPro && n2.indexOf(c.id) === -1) n2.push(c.id);
+                    });
+                }
+                return n2;
+            });
+        }, [auth, vjFreeId, visibleCards.length]);
     const getMoS = (cardId) => {
         var _a;
         const price = (_a = prices[cardId]) === null || _a === void 0 ? void 0 : _a.price;
@@ -1311,13 +1724,19 @@ function Home() {
                                 cell(g.free, false),
                                 cell(g.pro, !window.VJ_proUnlocked));
                         }))),
-                React.createElement("div", { onClick: function(){ window.vjTrack && window.vjTrack('pro_trial_clicked', { source: 'main_page_banner' }); var o=document.querySelector('.info-overlay'); if(o) o.style.display='none'; setShowInfo(false); window.showProLoader(); window.VJ_proUnlocked = true; setFlipped(function(f){ var n = f.slice(); visibleCards.forEach(function(c){ if (c.isPro && n.indexOf(c.id) === -1) n.push(c.id); }); return n; }); }, style: { margin: '0 28px 28px', padding: '16px 20px', borderRadius: 12, background: 'linear-gradient(135deg,rgba(139,105,20,0.15),rgba(201,168,76,0.06))', border: '1px solid rgba(139,105,20,0.4)', textAlign: 'center', cursor: 'pointer' } },
-                    React.createElement("p", { style: { fontWeight: 800, fontSize: '1.15rem', fontFamily: 'Barlow Condensed,sans-serif', letterSpacing: '0.08em', background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, "UNLOCK PRO \u2014 $9.99/MONTH"),
+                React.createElement("div", { onClick: function(){ window.vjTrack && window.vjTrack('pro_trial_clicked', { source: 'main_page_banner' }); var o=document.querySelector('.info-overlay'); if(o) o.style.display='none'; setShowInfo(false); setSignInState('idle'); setShowSignIn(true); }, style: { margin: '0 28px 28px', padding: '16px 20px', borderRadius: 12, background: 'linear-gradient(135deg,rgba(139,105,20,0.15),rgba(201,168,76,0.06))', border: '1px solid rgba(139,105,20,0.4)', textAlign: 'center', cursor: 'pointer' } },
+                    React.createElement("p", { style: { fontWeight: 800, fontSize: '1.15rem', fontFamily: 'Barlow Condensed,sans-serif', letterSpacing: '0.08em', background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } }, "UNLOCK PRO \u2014 " + (window.VJ_PRICE ? window.VJ_PRICE.monthlyUC : "$9.99") + "/MONTH"),
                     React.createElement("p", { style: { color: '#6B7A8D', fontSize: '0.88rem', marginTop: 5, fontStyle: 'italic' } }, "QUEEN \u00B7 ACE \u00B7 JOKER cards every morning")))),
         // Persistent footer — sibling of <main>, always visible at the bottom of the page
         React.createElement("div", { style: { maxWidth: isMobile ? '480px' : '1400px', margin: '0 auto', padding: '0 20px' } },
             React.createElement("div", { style: { margin: '32px 0 32px', padding: '20px 8px 0', borderTop: '1px solid rgba(90,138,106,0.18)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 } },
                 React.createElement("p", { style: { color: '#7A9A8A', fontSize: '0.78rem', textAlign: 'center', fontFamily: 'Barlow Condensed,sans-serif', letterSpacing: '0.18em', fontWeight: 700, margin: 0 } },
+                    React.createElement("a", { href: "/methodology", style: { color: '#7A9A8A', textDecoration: 'none' } }, "METHOD"),
+                    " \u00B7 ",
+                    React.createElement("a", { href: "/history", style: { color: '#7A9A8A', textDecoration: 'none' } }, "HISTORY"),
+                    " \u00B7 ",
+                    React.createElement("a", { href: "/disclosures", style: { color: '#7A9A8A', textDecoration: 'none' } }, "DISCLOSURES"),
+                    " \u00B7 ",
                     React.createElement("a", { href: "/disclaimer", style: { color: '#7A9A8A', textDecoration: 'none' } }, "DISCLAIMER"),
                     " \u00B7 ",
                     React.createElement("a", { href: "/legal", style: { color: '#7A9A8A', textDecoration: 'none' } }, "LEGAL"),
@@ -1350,11 +1769,11 @@ function Home() {
                     } },
                     React.createElement("button", { onClick: () => setExpanded(null), style: { position: 'absolute', top: 8, right: 10, color: '#999', fontSize: '1.4rem', background: 'none', border: 'none', cursor: 'pointer', lineHeight: 1, zIndex: 10 } }, "\u2715"),
                     React.createElement("div", { style: { flexShrink: 0 } },
-                        React.createElement("div", { style: { position: 'relative', height: isMobile ? '4.2rem' : '5.5rem', marginTop: '3px' } },
+                        React.createElement("div", { style: { position: 'relative', height: (window.VJ_FACES && ec && window.VJ_FACES[String(ec.type).toLowerCase()]) ? (isMobile ? '5.5rem' : '7rem') : (isMobile ? '4.2rem' : '5.5rem'), marginTop: '3px' } },
                             React.createElement("div", { style: { position: 'absolute', top: 0, left: '10px' } },
                                 React.createElement("div", { style: Object.assign({ fontSize: isMobile ? '2rem' : '3.2rem', fontWeight: 900, fontFamily: 'Playfair Display,serif', lineHeight: 0.9 }, (ect.cornerColor ? { color: ect.cornerColor } : { color: ect.color })) }, ect.corner)),
                             React.createElement("div", { style: { position: 'absolute', top: 0, left: 0, right: 0, textAlign: 'center' } },
-                                React.createElement("div", { style: Object.assign({ fontSize: ect.symbolSize ? (isMobile ? '2rem' : '3.2rem') : (isMobile ? '2.6rem' : '4.5rem'), lineHeight: 1, marginTop: ect.symbolSize ? '0.5rem' : '0' }, (ect.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ect.color })) }, ect.symbol))),
+                                (window.VJ_FACES && ec && window.VJ_FACES[String(ec.type).toLowerCase()]) ? React.createElement("div", { className: 'vjFaceDeep', style: null }, React.createElement("img", { src: window.VJ_FACES[String(ec.type).toLowerCase()], alt: '', draggable: false, style: { height: (isMobile ? '4.5rem' : '6rem'), width: 'auto', display: 'block', margin: '0 auto', pointerEvents: 'none' } }), React.createElement("div", { style: { width: '55%', height: 1, margin: '6px auto 0', background: 'linear-gradient(90deg,transparent,' + (ect.color || '#999') + ',transparent)', opacity: 0.45 } })) : React.createElement("div", { style: Object.assign({ fontSize: ect.symbolSize ? (isMobile ? '2rem' : '3.2rem') : (isMobile ? '2.6rem' : '4.5rem'), lineHeight: 1, marginTop: ect.symbolSize ? '0.5rem' : '0' }, (ect.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ect.color })) }, ect.symbol))),
                         React.createElement("div", { style: { padding: '0 16px' } },
                             React.createElement("p", { style: { color: '#1A1A2E', fontWeight: 700, fontSize: isMobile ? '1.5rem' : '1.9rem', lineHeight: 1.15, fontFamily: 'Playfair Display,serif', textAlign: 'center', margin: 0 } }, ec.company)),
                         React.createElement("div", { style: { height: 1, background: 'linear-gradient(to right,transparent,' + ect.color + ',transparent)', margin: isMobile ? '4px 6%' : '5px 6%' } }),
@@ -1368,7 +1787,11 @@ function Home() {
                             const _spLive = normalizePrice(_spLiveRaw, ec);
                             const _spMos = _spLive && ec.fairValue ? (ec.fairValue - _spLive) / ec.fairValue : null;
                             const _spFairV = _spMos === null ? null : _spMos >= 0.25 ? 10 : _spMos >= 0.20 ? 9 : _spMos >= 0.10 ? 7 : _spMos >= 0.05 ? 6 : _spMos >= -0.05 ? 5 : 3;
-                            const scores = _spFairV === null ? ec.scores : ec.scores.map(s => s.l === 'Fair Price' ? {...s, v: _spFairV} : s);
+                            // Five hues chosen to stay distinct on cream. The palette is
+                            // applied by axis position so no card can end up with two
+                            // near-identical colours.
+                            const scores = (_spFairV === null ? ec.scores : ec.scores.map(s => s.l === 'Fair Price' ? {...s, v: _spFairV} : s))
+                                .map((s, i) => Object.assign({}, s, { color: AXIS_COLORS[i % AXIS_COLORS.length] }));
                             const N = scores.length;
                             const CX = 120, CY = 104, R = 82;
                             const poly = (frac) => scores.map((_, i) => {
@@ -1376,7 +1799,18 @@ function Home() {
                                 return [(CX + Math.cos(angle) * R * frac).toFixed(2), (CY + Math.sin(angle) * R * frac).toFixed(2)];
                             });
                             const polyStr = (pts) => pts.map(p => p.join(',')).join(' ');
-                            const rings = [0.25, 0.5, 0.75, 1.0];
+                            // Five rings, so an axis reads 1-5 like the star rating.
+                            const rings = [0.2, 0.4, 0.6, 0.8, 1.0];
+                            const starPath = (cx, cy, r) => {
+                                let d = '';
+                                for (let k = 0; k < 10; k++) {
+                                    const rr = k % 2 ? r * 0.45 : r;
+                                    const a = (Math.PI * k / 5) - Math.PI / 2;
+                                    d += (k ? 'L' : 'M') + (cx + Math.cos(a) * rr).toFixed(2)
+                                       + ',' + (cy + Math.sin(a) * rr).toFixed(2);
+                                }
+                                return d + 'Z';
+                            };
                             const axes = scores.map((_, i) => {
                                 const angle = (Math.PI * 2 * i / N) - Math.PI / 2;
                                 return { x: (CX + Math.cos(angle) * R).toFixed(2), y: (CY + Math.sin(angle) * R).toFixed(2) };
@@ -1423,20 +1857,55 @@ function Home() {
                             });
                             return React.createElement("div", { style: { padding: '10px 10px 4px' } },
                                 React.createElement("div", { style: { height: 1, background: 'linear-gradient(to right,transparent,' + ect.color + ',transparent)', marginBottom: 8 } }),
-                                React.createElement("div", { style: { textAlign: 'center', marginBottom: 5 } }, React.createElement("span", { style: { fontSize: '1.3rem', letterSpacing: '0.1em', color: ect.color } }, (function(){ var s=ec.stars||3; return '★'.repeat(s)+'☆'.repeat(5-s); })() )),
+                                React.createElement("div", { style: { textAlign: 'center', marginBottom: 5 } },
+                                    React.createElement("p", { style: { color: '#AAA', fontSize: '0.75rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 400, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: 1 } }, 'ValuJack score'),
+                                    (function(){
+                                        var lit = Math.max(0, Math.min(N, ec.stars || 3));
+                                        var order = scores.map(function(x, k){ return { k: k, f: x.v / x.max }; })
+                                            .sort(function(a, b){ return b.f - a.f; });
+                                        return React.createElement("span", { style: { fontSize: '1.3rem', letterSpacing: '0.1em' } },
+                                            order.map(function(o, j){
+                                                return React.createElement("span", { key: 'vs'+j, style: { color: scores[o.k].color } }, j < lit ? '★' : '☆');
+                                            }));
+                                    })()),
                                 React.createElement("svg", { viewBox: '-58 -18 360 258', style: { width: '100%', display: 'block', overflow: 'visible' } },
                                     React.createElement("defs", null, ...gradDefs),
                                     rings.map((frac, ri) =>
-                                        React.createElement("polygon", { key: 'ring'+ri, points: polyStr(poly(frac)), fill: 'none', stroke: 'rgba(0,0,0,0.18)', strokeWidth: '0.6' })
+                                        React.createElement("polygon", { key: 'ring'+ri, points: polyStr(poly(frac)), fill: 'none', stroke: ri === rings.length - 1 ? 'rgba(0,0,0,0.42)' : 'rgba(0,0,0,0.3)', strokeWidth: ri === rings.length - 1 ? '1.1' : '0.8' })
                                     ),
                                     axes.map((a, i) =>
-                                        React.createElement("line", { key: 'ax'+i, x1: CX, y1: CY, x2: a.x, y2: a.y, stroke: 'rgba(0,0,0,0.18)', strokeWidth: '0.6' })
+                                        React.createElement("line", { key: 'ax'+i, x1: CX, y1: CY, x2: a.x, y2: a.y, stroke: 'rgba(0,0,0,0.3)', strokeWidth: '0.8' })
+                                    ),
+                                    rings.map((frac, ri) =>
+                                        React.createElement("text", { key: 'rn'+ri, x: CX + 4, y: (CY - R * frac + 3.4).toFixed(1), textAnchor: 'start', fill: 'rgba(0,0,0,0.4)', fontSize: '8', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: '700' }, String(ri + 1))
                                     ),
                                     ...wedges,
-                                    React.createElement("polygon", { points: polyStr(dataPts), fill: 'none', stroke: 'rgba(26,92,50,0.7)', strokeWidth: '1.2' }),
+                                    React.createElement("polygon", { points: polyStr(dataPts), fill: 'none', stroke: 'rgba(20,72,40,0.75)', strokeWidth: '1.1', strokeLinejoin: 'round' }),
                                     dataPts.map((p, i) =>
-                                        React.createElement("circle", { key: 'dot'+i, cx: p[0], cy: p[1], r: '3.5', fill: scores[i].color, stroke: '#fff', strokeWidth: '1.2' })
+                                        React.createElement("circle", { key: 'dot'+i, cx: p[0], cy: p[1], r: '2.4', fill: scores[i].color, stroke: '#fff', strokeWidth: '0.9' })
                                     ),
+                                    scores.map((sc, i) => {
+                                        const ang = (Math.PI * 2 * i / N) - Math.PI / 2;
+                                        const cx = CX + Math.cos(ang) * R;
+                                        const cy = CY + Math.sin(ang) * R;
+                                        const rr = 7.4;
+                                        // The rating is the weighted blend of these five criteria.
+                                        // Filling the strongest N, where N is the rating, makes the
+                                        // chart explain the stars above it on every card: it shows
+                                        // which criteria carry the score and which one holds it back.
+                                        const _rank = scores.map((x, k) => ({ k, f: x.v / x.max }))
+                                            .sort((a, b) => b.f - a.f)
+                                            .slice(0, Math.max(0, Math.min(N, ec.stars || 3)))
+                                            .map(x => x.k);
+                                        const frac = _rank.indexOf(i) === -1 ? 0 : 1;
+                                        const cid = 'starClip_' + ec.id + '_' + i;
+                                        return React.createElement("g", { key: 'star'+i },
+                                            React.createElement("clipPath", { id: cid },
+                                                React.createElement("rect", { x: (cx - rr).toFixed(2), y: (cy - rr).toFixed(2), width: (2 * rr * frac).toFixed(2), height: (2 * rr).toFixed(2) })),
+                                            React.createElement("path", { d: starPath(cx, cy, rr), fill: '#FBF8F0', stroke: '#FBF8F0', strokeWidth: '3', strokeLinejoin: 'round' }),
+                                            React.createElement("path", { d: starPath(cx, cy, rr), fill: sc.color, clipPath: 'url(#' + cid + ')' }),
+                                            React.createElement("path", { d: starPath(cx, cy, rr), fill: 'none', stroke: sc.color, strokeWidth: '1.15', strokeLinejoin: 'round' }));
+                                    }),
                                     labels.map((lb, i) =>
                                         (lb.words.length > 1 && lb.anchor !== 'middle')
                                             ? React.createElement("text", { key: 'lbl'+i, x: lb.x, y: lb.y, textAnchor: lb.anchor, fill: scores[i].color, fontSize: '10.5', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: '700', letterSpacing: '0.05em' },
@@ -1496,16 +1965,17 @@ function Home() {
                             const fv = ec.fairValue ? String(ec.fairValue) : '—';
                             // Read all strategy-specific metrics from the card's metrics array
                             // (cards.js owns labels and values; UI just renders).
-                            const stratRows = (ec.metrics || []).map(m => [
-                                (m.l || '').toUpperCase(),
-                                m.v || '—'
-                            ]);
+                            const stratRows = (ec.metrics || [])
+                                .filter(m => !METRIC_DROP[m.l])
+                                .map(m => {
+                                    const label = METRIC_RELABEL[m.l] || m.l || '';
+                                    return { l: label.toUpperCase(), band: metricBand(label, m.v), g: true, raw: label };
+                                });
                             const cells = [
                                 { l: 'Live Price', v: livePrice !== '—' ? livePrice + ' ' + (ec.currency || '') : '—' },
-                                { l: 'Fair Value', v: fv !== '—' ? fv + ' ' + (ec.currency || '') : '—' },
-                                ...stratRows.map(([l, v]) => ({ l, v })),
+                                { l: 'Fair Value *', v: fv !== '—' ? fv + ' ' + (ec.currency || '') : '—' },
                             ];
-                            const cellStyle = { flex: 1, padding: '7px 10px', minWidth: 0 };
+                            const cellStyle = { flex: 1, padding: '7px 10px', minWidth: 0, textAlign: 'center' };
                             const labelStyle = { color: '#888', fontSize: '0.67rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 400, letterSpacing: '0.12em', textTransform: 'uppercase', display: 'block', marginBottom: 2 };
                             const valueStyle = { color: '#1A2A1E', fontSize: '1.05rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 400, display: 'block' };
                             const divStyle = { width: 1, background: 'rgba(0,0,0,0.06)', flexShrink: 0 };
@@ -1514,14 +1984,16 @@ function Home() {
                                 const left = cells[i];
                                 const right = cells[i + 1];
                                 rows.push(React.createElement("div", { key: i, style: { display: 'flex', borderBottom: i + 2 < cells.length ? '1px solid rgba(0,0,0,0.06)' : 'none' } },
-                                    React.createElement("div", { style: cellStyle },
+                                    React.createElement("div", { style: left.g ? Object.assign({}, cellStyle, { textAlign: 'center' }) : cellStyle },
                                         React.createElement("span", { style: labelStyle }, left.l),
-                                        React.createElement("span", { style: valueStyle }, left.v)
+                                        left.g ? React.createElement("div", { style: { display: 'flex', justifyContent: 'center' } }, MetricWedge(left.band, left.raw))
+                                               : React.createElement("span", { style: valueStyle }, left.v)
                                     ),
                                     React.createElement("div", { style: divStyle }),
-                                    right && React.createElement("div", { style: cellStyle },
+                                    right && React.createElement("div", { style: right.g ? Object.assign({}, cellStyle, { textAlign: 'center' }) : cellStyle },
                                         React.createElement("span", { style: labelStyle }, right.l),
-                                        React.createElement("span", { style: valueStyle }, right.v)
+                                        right.g ? React.createElement("div", { style: { display: 'flex', justifyContent: 'center' } }, MetricWedge(right.band, right.raw))
+                                                : React.createElement("span", { style: valueStyle }, right.v)
                                     )
                                 ));
                             }
@@ -1529,7 +2001,12 @@ function Home() {
                                 React.createElement("div", { style: { background: 'rgba(0,0,0,0.03)', padding: '4px 10px', borderBottom: '1px solid rgba(0,0,0,0.07)' } },
                                     React.createElement("span", { style: { color: '#888', fontSize: '0.68rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase' } }, "Key Numbers")
                                 ),
-                                ...rows
+                                ...rows,
+                                React.createElement("div", { style: { borderTop: '1px solid rgba(0,0,0,0.06)', background: 'rgba(0,0,0,0.015)', padding: '6px 10px 7px' } },
+                                    React.createElement("span", { style: { color: '#777', fontSize: '0.72rem', fontFamily: 'EB Garamond,serif', lineHeight: 1.45, display: 'block' } },
+                                        "* ValuJack's own estimate, by our ",
+                                        React.createElement("a", { href: "/methodology", target: "_blank", rel: "noopener noreferrer", style: { color: '#7A6A45', textDecoration: 'underline', textUnderlineOffset: '2px' } }, "published method"),
+                                        ". Not a price target."))
                             );
                         })(),
                         (() => {
@@ -1552,8 +2029,8 @@ function Home() {
                             const expandedMax = fv ? Math.max(rawMax, fv) : rawMax;
                             const expandedRange = expandedMax - expandedMin;
                             const useExpanded = fv != null;
-                            const minP = (useExpanded ? expandedMin : rawMin) * 0.98;
-                            const maxP = (useExpanded ? expandedMax : rawMax) * 1.02;
+                            const minP = useExpanded ? 0 : rawMin * 0.98;
+                            const maxP = useExpanded ? Math.max(rawMax, fv) * 1.06 : rawMax * 1.02;
                             const range = maxP - minP || 1;
                             const px = (i) => PAD + (i / (pts.length - 1)) * (W - PAD * 2);
                             const py = (v) => PAD + (1 - (v - minP) / range) * (H - PAD * 2);
@@ -1569,6 +2046,7 @@ function Home() {
                             const _livePriceRaw = prices && prices[ec.id] && prices[ec.id].price ? prices[ec.id].price : (typeof prices[ec.id] === 'number' ? prices[ec.id] : null);
                             const _livePrice = normalizePrice(_livePriceRaw, ec);
                             const _mos = _livePrice && ec.fairValue ? (ec.fairValue - _livePrice) / ec.fairValue : null;
+                            const _mosBottomY = clamp(py(_livePrice != null ? _livePrice : lastClose));
                             const _dynLabel = _mos === null ? null : _mos >= 0.25 ? '▲▲ STRONGLY UNDERVALUED' : _mos >= 0.05 ? '▲ UNDERVALUED' : _mos >= -0.05 ? '◈ FAIRLY VALUED' : '▽ OVERVALUED';
                             const _rawBody = (ec.pickFull || '').replace(/^[▲◈▽]+\s*[A-Z\s]+\s*[—–-]+\s*/, '').trim();
                             const _raw = _dynLabel ? _dynLabel + ' — ' + _rawBody : (ec.pickFull || '');
@@ -1588,10 +2066,10 @@ function Home() {
                                         fvY && React.createElement("linearGradient", { id: 'mosGrad_' + ec.id, x1: '0', y1: '0', x2: '0', y2: '1' },
                                             React.createElement("stop", { offset: '0%', stopColor: '#C9A84C', stopOpacity: '0.18' }),
                                             React.createElement("stop", { offset: '100%', stopColor: '#C9A84C', stopOpacity: '0.04' }))),
-                                    fvY && React.createElement("rect", { x: PAD, y: fvY.toFixed(1), width: W - PAD * 2, height: Math.max(0, H - PAD - fvY).toFixed(1), fill: 'url(#mosGrad_' + ec.id + ')' }),
+                                    fvY && React.createElement("rect", { x: PAD, y: fvY.toFixed(1), width: W - PAD * 2, height: Math.max(0, _mosBottomY - fvY).toFixed(1), fill: 'url(#mosGrad_' + ec.id + ')' }),
                                     React.createElement("path", { d: areaPath, fill: 'url(#chartGrad_' + ec.id + ')', stroke: 'none' }),
                                     fvY && React.createElement("line", { x1: PAD, y1: fvY.toFixed(1), x2: W - PAD, y2: fvY.toFixed(1), stroke: '#C9A84C', strokeWidth: '1.2', strokeDasharray: '4,3', opacity: '0.8' }),
-                                    fvY && React.createElement("text", { x: (W - PAD - 3).toString(), y: (fvY - 3).toFixed(1), textAnchor: 'end', fill: '#C9A84C', fontSize: '10', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: '700', opacity: '0.95' }, 'Your margin of safety'),
+                                    fvY && React.createElement("text", { x: (W - PAD - 3).toString(), y: (fvY - 3).toFixed(1), textAnchor: 'end', fill: '#C9A84C', fontSize: '10', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: '700', opacity: '0.95' }, 'Estimated margin of safety'),
                                     React.createElement("path", { d: linePath, fill: 'none', stroke: lineCol, strokeWidth: '1.5', strokeLinecap: 'round', strokeLinejoin: 'round' }),
                                     React.createElement("circle", { cx: px(pts.length-1).toFixed(1), cy: py(lastClose).toFixed(1), r: '3', fill: lineCol }),
                                     React.createElement("text", { x: (px(pts.length-1) + 5).toFixed(1), y: (py(lastClose) + 3).toFixed(1), textAnchor: 'start', fill: lineCol, fontSize: '8', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: '700', opacity: '0.9' }, lastClose > 1000 ? Math.round(lastClose) : lastClose > 100 ? lastClose.toFixed(1) : lastClose.toFixed(2))),
@@ -1605,6 +2083,14 @@ function Home() {
                             const _badgePc = _badgeLabel && _badgeLabel.includes('STRONGLY') ? { bg: 'rgba(27,94,32,0.10)', bd: 'rgba(76,175,80,0.35)', c: '#2E7D32' } : _badgeLabel && _badgeLabel.includes('UNDERVALUED') ? { bg: 'rgba(139,105,20,0.08)', bd: 'rgba(201,168,76,0.4)', c: '#7A4A00' } : _badgeLabel && _badgeLabel.includes('FAIRLY') ? { bg: 'rgba(30,80,150,0.07)', bd: 'rgba(80,130,200,0.3)', c: '#1A4A8A' } : _badgeLabel ? { bg: 'rgba(150,30,30,0.07)', bd: 'rgba(200,80,80,0.3)', c: '#8A1A1A' } : null;
                             return _badgeLabel && _badgePc ? React.createElement("div", { style: { textAlign: 'center', padding: '6px 10px 0' } }, React.createElement("span", { style: { fontSize: '0.62rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, letterSpacing: '0.13em', textTransform: 'uppercase', color: _badgePc.c, background: _badgePc.bg, border: '1px solid ' + _badgePc.bd, borderRadius: 20, padding: '3px 14px' } }, _badgeLabel)) : null;
                         })(),
+                        (() => {
+                            if (!ec.positionHeld) return null;
+                            return React.createElement("div", { style: { margin: '10px 18px 0', padding: '9px 12px', background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.10)', borderRadius: 6 } },
+                                React.createElement("p", { style: { color: '#777', fontSize: '0.58rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, letterSpacing: '0.16em', margin: '0 0 3px', textTransform: 'uppercase' } }, 'Producer holding'),
+                                React.createElement("p", { style: { color: '#333', fontSize: '0.82rem', fontFamily: 'EB Garamond,serif', lineHeight: 1.45, margin: 0 } },
+                                    'The producer of ValuJack holds a personal position in ' + (ec.company || 'this company') + '.')
+                            );
+                        })(),
                         ec.irLink && (React.createElement("div", { style: { textAlign: 'center', padding: '10px 10px 2px' } },
                             React.createElement("a", { href: ec.irLink, target: "_blank", rel: "noopener noreferrer", style: {
                                     display: 'inline-block',
@@ -1615,12 +2101,39 @@ function Home() {
                                     padding: '3px 14px',
                                 } }, "\u2197 " + ec.company + " — Investor Relations")))),
                     React.createElement("div", { style: { flexShrink: 0, borderTop: '1px solid rgba(0,0,0,0.06)' } },
-                        React.createElement("p", { style: { color: '#888', fontSize: '0.82rem', textAlign: 'center', fontStyle: 'italic', fontFamily: 'EB Garamond,serif', fontWeight: 400, padding: '5px 10px 2px', margin: 0, letterSpacing: '0.01em' } }, "Educational purposes only \u00B7 Not financial advice"),
-                        React.createElement("div", { style: { position: 'relative', height: isMobile ? '3rem' : '5.5rem', marginBottom: '3px' } },
+                        React.createElement("p", { style: { color: '#888', fontSize: '0.74rem', textAlign: 'center', fontFamily: 'EB Garamond,serif', fontWeight: 400, lineHeight: 1.45, padding: '5px 14px 2px', margin: 0, letterSpacing: '0.01em' } },
+                            "Impersonal research. Not a personal recommendation. You may lose money. ",
+                            React.createElement("a", { href: "/disclosures", target: "_blank", rel: "noopener noreferrer", style: { color: '#7A6A45', textDecoration: 'underline', textUnderlineOffset: '2px', whiteSpace: 'nowrap' } }, "Disclosures")),
+                        React.createElement("div", { style: { position: 'relative', height: (window.VJ_FACES && ec && window.VJ_FACES[String(ec.type).toLowerCase()]) ? (isMobile ? '5.5rem' : '7rem') : (isMobile ? '3rem' : '5.5rem'), marginBottom: '3px' } },
                             React.createElement("div", { style: { position: 'absolute', bottom: 0, left: 0, right: 0, textAlign: 'center' } },
-                                React.createElement("div", { style: Object.assign({ fontSize: ect.symbolSize ? (isMobile ? '2rem' : '3.2rem') : (isMobile ? '2.6rem' : '4.5rem'), lineHeight: 1, transform: 'rotate(180deg)', display: 'inline-block', marginBottom: ect.symbolSize ? '0.5rem' : '0' }, (ect.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ect.color })) }, ect.symbol)),
+                                (window.VJ_FACES && ec && window.VJ_FACES[String(ec.type).toLowerCase()]) ? React.createElement("div", { className: 'vjFaceDeep', style: { transform: 'rotate(180deg)' } }, React.createElement("img", { src: window.VJ_FACES[String(ec.type).toLowerCase()], alt: '', draggable: false, style: { height: (isMobile ? '4.5rem' : '6rem'), width: 'auto', display: 'block', margin: '0 auto', pointerEvents: 'none' } }), React.createElement("div", { style: { width: '55%', height: 1, margin: '6px auto 0', background: 'linear-gradient(90deg,transparent,' + (ect.color || '#999') + ',transparent)', opacity: 0.45 } })) : React.createElement("div", { style: Object.assign({ fontSize: ect.symbolSize ? (isMobile ? '2rem' : '3.2rem') : (isMobile ? '2.6rem' : '4.5rem'), lineHeight: 1, transform: 'rotate(180deg)', display: 'inline-block', marginBottom: ect.symbolSize ? '0.5rem' : '0' }, (ect.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ect.color })) }, ect.symbol)),
                             React.createElement("div", { style: { position: 'absolute', bottom: 0, right: '10px', transform: 'rotate(180deg)', transformOrigin: 'center center' } },
                                 React.createElement("div", { style: Object.assign({ fontSize: isMobile ? '2rem' : '3.2rem', fontWeight: 900, fontFamily: 'Playfair Display,serif', lineHeight: 0.9 }, (ect.cornerColor ? { color: ect.cornerColor } : { color: ect.color })) }, ect.corner)))))))),
+        showSignIn && (React.createElement("div", { onClick: () => setShowSignIn(false), style: { position: 'fixed', inset: 0, zIndex: 9000, background: 'rgba(6,22,14,0.72)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 } },
+            React.createElement("div", { onClick: e => e.stopPropagation(), style: { width: '100%', maxWidth: 400, background: '#0F4020', border: '1px solid rgba(122,184,152,0.3)', borderRadius: 14, padding: '28px 26px' } },
+                auth && auth.signedIn
+                ? React.createElement("div", null,
+                    React.createElement("p", { style: { color: '#5A8A6A', fontSize: '0.72rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, letterSpacing: '0.2em', marginBottom: 8 } }, "SIGNED IN"),
+                    React.createElement("p", { style: { color: '#E8F5EE', fontSize: '1.15rem', fontFamily: 'EB Garamond,serif', marginBottom: 6 } }, auth.email),
+                    React.createElement("p", { style: { color: '#A8C4B4', fontSize: '1rem', fontFamily: 'EB Garamond,serif', lineHeight: 1.6, marginBottom: 20 } }, auth.pro ? "PRO cards are unlocked on this device." : "This address has no PRO access."),
+                    React.createElement("button", { onClick: signOut, style: { width: '100%', padding: '11px', borderRadius: 8, border: '1px solid rgba(122,184,152,0.4)', background: 'transparent', color: '#7AB898', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, fontSize: '0.8rem', letterSpacing: '0.16em', cursor: 'pointer' } }, "SIGN OUT"))
+                : React.createElement("div", null,
+                    React.createElement("p", { style: { color: '#5A8A6A', fontSize: '0.72rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, letterSpacing: '0.2em', marginBottom: 8 } }, "PRO ACCESS"),
+                    React.createElement("h2", { style: { fontFamily: 'Playfair Display,serif', fontSize: '1.5rem', color: '#E8F5EE', lineHeight: 1.2, marginBottom: 10 } }, "Sign in"),
+                    React.createElement("p", { style: { color: '#A8C4B4', fontSize: '1rem', fontFamily: 'EB Garamond,serif', lineHeight: 1.6, marginBottom: 18 } }, "Enter the address your access is registered to. We'll send a link that signs you in — no password."),
+                    signInState === 'sent'
+                    ? React.createElement("p", { style: { color: '#7AB898', fontSize: '1.02rem', fontFamily: 'EB Garamond,serif', fontStyle: 'italic', lineHeight: 1.6 } }, "Link sent. Check your inbox — it works once and expires in 20 minutes.")
+                    : React.createElement("div", null,
+                        React.createElement("input", { type: 'email', value: signInEmail, placeholder: 'you@example.com', autoComplete: 'email',
+                            onChange: e => { setSignInEmail(e.target.value); if (signInState !== 'idle') setSignInState('idle'); },
+                            onKeyDown: e => { if (e.key === 'Enter') requestLink(); },
+                            style: { width: '100%', padding: '11px 13px', borderRadius: 8, border: '1px solid rgba(122,184,152,0.35)', background: 'rgba(0,0,0,0.2)', color: '#E8F5EE', fontFamily: 'EB Garamond,serif', fontSize: '1.02rem', marginBottom: 10 } }),
+                        React.createElement("button", { onClick: requestLink, disabled: signInState === 'sending',
+                            style: { width: '100%', padding: '12px', borderRadius: 8, border: 'none', background: '#7AB898', color: '#0F4020', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, fontSize: '0.84rem', letterSpacing: '0.16em', cursor: 'pointer', opacity: signInState === 'sending' ? 0.6 : 1 } },
+                            signInState === 'sending' ? "SENDING\u2026" : "SEND ME A LINK"),
+                        signInState === 'bad' && React.createElement("p", { style: { color: '#D89A6A', fontSize: '0.94rem', fontFamily: 'EB Garamond,serif', fontStyle: 'italic', marginTop: 9 } }, "That doesn't look like an email address."),
+                        signInState === 'error' && React.createElement("p", { style: { color: '#D89A6A', fontSize: '0.94rem', fontFamily: 'EB Garamond,serif', fontStyle: 'italic', marginTop: 9 } }, "Something went wrong. Please try again shortly.")),
+                    React.createElement("p", { style: { color: 'rgba(168,196,180,0.65)', fontSize: '0.92rem', fontFamily: 'EB Garamond,serif', fontStyle: 'italic', lineHeight: 1.55, marginTop: 20, paddingTop: 16, borderTop: '1px solid rgba(122,184,152,0.2)' } }, "Subscriptions are not open yet. Free cards are dealt every trading day and need no account."))))),
         showInfo && (React.createElement("div", { className: "info-overlay" },
             React.createElement("div", { style: { maxWidth: 620, margin: '0 auto', padding: isMobile ? '24px 20px 48px' : '40px 36px 60px' } },
                 React.createElement("div", { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 36 } },
@@ -1660,31 +2173,31 @@ function Home() {
                               tag: 'Market leaders with sustained price strength and accelerating earnings.',
                               body: "Instead of predicting reversals, this strategy follows proven strength \u2014 aligning with what is already working.",
                               why: "Momentum is one of the most persistent factors in financial markets. Companies that outperform tend to continue outperforming \u2014 often longer than expected.",
-                              track: "Momentum is one of the most persistent market factors \u2014 outperforming stocks tend to keep outperforming. Mark Minervini also won the U.S. Investing Championship with a +155% return.",
+                              track: "Momentum is one of the most persistent market factors \u2014 outperforming stocks have tended to keep outperforming across decades of academic study.",
                               trackSource: "Jegadeesh & Titman (1993); Carhart (1997)" },
                             { code: 'TWO',   name: 'TWO',   tagline: 'Contrarian',     tier: 'FREE', pick: 'Buy the bottom',
                               tag: 'Strong companies temporarily out of favour.',
                               body: "Solid fundamentals, weak sentiment. The focus stays on underlying quality \u2014 not market mood. You buy when others hesitate.",
                               why: "Investor behaviour overreacts to negative developments. When sentiment normalises, valuations follow.",
-                              track: "Low-valuation stocks have historically outperformed high-valuation \u2018glamour\u2019 stocks by ~10\u201311% per year. Dreman\u2019s research also shows strong long-term returns from low-valuation stocks.",
+                              track: "Low-valuation stocks have historically outperformed high-valuation \u2018glamour\u2019 stocks over long periods, a finding repeated across several independent studies.",
                               trackSource: "Lakonishok, Shleifer & Vishny (1994); Dreman" },
                             { code: 'QUEEN', name: 'QUEEN', tagline: 'Magic Formula',   tier: 'PRO',  pick: 'Great businesses at a fair price',
                               tag: 'High-quality companies ranked by profitability and valuation.',
                               body: "Combines profitability and valuation in a single ranking \u2014 businesses that earn high returns on every dollar invested, at prices that still leave room to run.",
                               why: "Over time, markets reward efficient, high-quality businesses \u2014 especially when acquired at reasonable prices.",
-                              track: "Greenblatt\u2019s Magic Formula delivered ~30% annual returns in published backtests, with continued outperformance in independent studies.",
+                              track: "Greenblatt\u2019s Magic Formula combines profitability and valuation in a single ranking, and has been examined in independent studies since publication.",
                               trackSource: "Greenblatt, The Little Book That Beats the Market (1988\u20132004)" },
                             { code: 'ACE',   name: 'ACE',   tagline: 'Financial Score', tier: 'PRO',  pick: 'Improvement before recognition',
                               tag: 'Companies where fundamentals are quietly improving.',
                               body: "Rising profitability, stronger balance sheets, better cash flow \u2014 improvements visible in the accounts before the share price reflects them. You catch the inflection early.",
                               why: "Markets are not always efficient in the short term. Early improvements in financial health often precede significant revaluation.",
-                              track: "Piotroski\u2019s F-Score showed ~7.5% annual outperformance within value stocks for high-scoring companies. The result has been replicated across markets and decades since.",
+                              track: "Piotroski\u2019s F-Score separated stronger from weaker companies within value stocks. The result has been replicated across markets and decades since.",
                               trackSource: "Piotroski, Journal of Accounting Research (2000)" },
                             { code: 'JOKER', name: 'JOKER', tagline: 'Growth',          tier: 'PRO',  pick: 'Tomorrow\u2019s leaders',
                               tag: 'High-growth companies with strong earnings, market leadership, and institutional demand.',
                               body: "Dynamic businesses shaping their industries \u2014 strong earnings growth, clear leadership, rising institutional demand. The kind of companies that often become tomorrow\u2019s biggest names.",
                               why: "A large share of long-term market winners originate from periods of sustained high growth before becoming widely recognised.",
-                              track: "CANSLIM-based strategies have delivered strong long-term returns (~18% CAGR in some backtests), though with higher volatility.",
+                              track: "CANSLIM-based strategies have been studied over long periods and carry higher volatility than the broader market.",
                               trackSource: "O\u2019Neil, How to Make Money in Stocks; AAII CANSLIM model; IBD 50" },
                         ];
                         const sel = STRATEGIES.find(s => s.code === selectedStrategyTab) || STRATEGIES[0];
@@ -1812,14 +2325,14 @@ function Home() {
                         React.createElement("li", null, "More ideas"),
                         React.createElement("li", null, "More strategies"),
                         React.createElement("li", null, "Better diversification")),
-                    React.createElement("p", { style: { color: '#A8C4B4', fontSize: '1.05rem', lineHeight: 1.75, fontFamily: 'EB Garamond,serif', marginBottom: 14 } }, "Two new cards every morning \u2014 one free, one Pro. Pro is $9.99/month, cancel anytime."),
-                    React.createElement("button", { onClick: function(){ window.vjTrack && window.vjTrack('pro_trial_clicked', { source: 'how_it_works_modal' }); var o=document.querySelector('.info-overlay'); if(o) o.style.display='none'; setShowInfo(false); window.showProLoader(); window.VJ_proUnlocked = true; setFlipped(function(f){ var n = f.slice(); visibleCards.forEach(function(c){ if (c.isPro && n.indexOf(c.id) === -1) n.push(c.id); }); return n; }); }, style: {
+                    React.createElement("p", { style: { color: '#A8C4B4', fontSize: '1.05rem', lineHeight: 1.75, fontFamily: 'EB Garamond,serif', marginBottom: 14 } }, "Two new cards every morning \u2014 one free, one Pro. Pro is " + (window.VJ_PRICE ? window.VJ_PRICE.monthly : "$9.99") + "/month, or " + (window.VJ_PRICE ? window.VJ_PRICE.annual : "$7.99") + "/month billed annually. Cancel anytime."),
+                    React.createElement("button", { onClick: function(){ window.vjTrack && window.vjTrack('pro_trial_clicked', { source: 'how_it_works_modal' }); var o=document.querySelector('.info-overlay'); if(o) o.style.display='none'; setShowInfo(false); setSignInState('idle'); setShowSignIn(true); }, style: {
                             background: GOLD, border: 'none', borderRadius: 8,
                             padding: '12px 28px', cursor: 'pointer',
                             fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 800,
                             fontSize: '1.05rem', letterSpacing: '0.1em', color: '#0A1A0A',
                             width: '100%',
-                        } }, "UNLOCK PRO \u2014 $9.99/MONTH")),
+                        } }, "UNLOCK PRO \u2014 " + (window.VJ_PRICE ? window.VJ_PRICE.monthlyUC : "$9.99") + "/MONTH")),
                 React.createElement("div", { className: "info-section", style: { borderColor: 'transparent' } },
                     React.createElement("p", { style: { color: '#5A8A6A', fontSize: '0.72rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, letterSpacing: '0.2em', marginBottom: 8 } }, "CONTACT"),
                     React.createElement("h2", { style: { fontFamily: 'Playfair Display,serif', fontSize: '1.7rem', color: '#E8F5EE', lineHeight: 1.2, marginBottom: 12 } }, "Get in touch."),
@@ -1964,10 +2477,10 @@ function dismissSplash(){
     '/splash/desktop_4.jpg'
   ];
   var TEXTS = [
-    'Searching your daily opportunities...',
-    'Analysing your investment edge...',
-    'Preparing your market insights...',
-    'Finding your strongest cards today...'
+    "Searching today's opportunities...",
+    'Running the screens...',
+    'Reading the market...',
+    "Finding today's strongest cards..."
   ];
 
   // Pick the right image set for the current viewport (desktop >= 768px)
