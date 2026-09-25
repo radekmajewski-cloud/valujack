@@ -158,7 +158,7 @@ window.vjTrack = function(eventName, params){
   #vj-cookie-banner .vj-cb-buttons{width:100%;justify-content:center;}
 }
 </style>
-<script src="/faces.js"></script>
+<script src="/faces.js?v=202609252226"></script>
 </head>
 <body>
 
@@ -211,7 +211,7 @@ window.vjTrack = function(eventName, params){
     </div>
   </div>
 </div>
-<script src="/cards.js"></script>
+<script src="/cards.js?v=202609252226"></script>
 <script>
 var VJ_PROIMGS_MOBILE = [
   '/splash/pro_mobile_1.jpg',
@@ -254,7 +254,7 @@ const { useState, useEffect } = React;
 const CARD_TYPES = {
     KING: { color: '#C0152A', symbol: '♚', corner: 'K', isGold: false, symbolColor: null, cornerColor: null },
     JACK: { color: '#1A1A1A', symbol: '♞', corner: 'J', isGold: false, symbolColor: null, cornerColor: null },
-    TWO: { color: '#7A1A1A', symbol: '♠', corner: '2', isGold: false, symbolColor: 'SILVER', cornerColor: '#C8C8C8', symbolSize: '2.1rem' },
+    TWO: { color: '#7A1A1A', symbol: '♠', corner: '2', isGold: false, symbolColor: 'SILVER', cornerColor: '#7A1A1A', symbolSize: '2.1rem' },
     QUEEN: { color: '#4A1A6B', symbol: '♛', corner: 'Q', isGold: true, symbolColor: 'GOLD', cornerColor: '#4A1A6B' },
     ACE: { color: '#4A1A6B', symbol: '♠', corner: 'A', isGold: true, symbolColor: 'GOLD', cornerColor: '#4A1A6B', symbolSize: '3.2rem' },
     JOKER: { color: '#4A1A6B', symbol: '★', corner: '★', isGold: true, symbolColor: 'GOLD', cornerColor: '#4A1A6B' },
@@ -1058,7 +1058,7 @@ function Home() {
                 });
                 const _find = function (id, tk, ty) {
                     return _all[id] ||
-                        (tk && (_byTicker[tk + '|' + ty] || _byTicker[tk])) || null;
+                        (tk && ty && _byTicker[tk + '|' + ty]) || null;
                 };
                 const _f = _find(_row.free_id, _row.free_ticker, _row.free_type);
                 const _p = _find(_row.pro_id, _row.pro_ticker, _row.pro_type);
@@ -1366,8 +1366,8 @@ function Home() {
                             React.createElement("div", { className: "cface cface-front", style: { background: frame } },
                                 weekNo && React.createElement("div", { style: { position: 'absolute', left: 10, right: 10, bottom: 10, height: 'calc(5rem + 3px)', background: frame, borderRadius: '0 0 5px 5px', WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 12%, rgba(0,0,0,1) 30%)', maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 12%, rgba(0,0,0,1) 30%)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 4, pointerEvents: 'none' } }, React.createElement("span", { style: { fontFamily: 'Playfair Display,serif', fontWeight: 700, fontSize: 'clamp(0.95rem,2.6vw,1.35rem)', color: '#0D1826', letterSpacing: '0.01em', textShadow: '0 1px 0 rgba(255,255,255,0.30)' } }, "Card of the week " + weekNo)), 
                                 React.createElement("div", { className: "cinset", style: { background: 'linear-gradient(160deg,#FEFDF8 0%,#F8F0DC 100%)', display: 'flex', flexDirection: 'column' } }, React.createElement("div", { style: { flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 } },
-                                    React.createElement("div", { style: { position: 'relative', flexShrink: 0, height: (window.VJ_FACES && window.VJ_FACES[String(card.type).toLowerCase()]) ? 'clamp(5.6rem, 18vw, 7rem)' : '5rem', marginTop: '3px', background: card.type === 'TWO' ? 'linear-gradient(180deg,#6B0E0E 0%,#3A0808 100%)' : 'transparent', borderRadius: card.type === 'TWO' ? '5px 5px 0 0' : 0 } },
-                                        React.createElement("div", { style: { position: 'absolute', top: '4px', right: '8px', fontSize: '1.05rem', fontWeight: 700, fontFamily: 'Palatino Linotype, Palatino, Book Antiqua, serif', fontStyle: 'italic', letterSpacing: '0.04em', opacity: 1.0, color: card.type === 'TWO' ? '#C8C8C8' : ct.color } }, { KING: 'Dividends', JACK: 'Momentum', QUEEN: 'Magic Formula', ACE: 'Financial Score', JOKER: 'Growth', TWO: 'Contrarian' }[card.type] || ''),
+                                    React.createElement("div", { style: { position: 'relative', flexShrink: 0, height: (window.VJ_FACES && window.VJ_FACES[String(card.type).toLowerCase()]) ? 'clamp(5.6rem, 18vw, 7rem)' : '5rem', marginTop: '3px', background: 'transparent', borderRadius: card.type === 'TWO' ? '5px 5px 0 0' : 0 } },
+                                        React.createElement("div", { style: { position: 'absolute', top: '4px', right: '8px', fontSize: '1.05rem', fontWeight: 700, fontFamily: 'Palatino Linotype, Palatino, Book Antiqua, serif', fontStyle: 'italic', letterSpacing: '0.04em', opacity: 1.0, color: ct.color } }, { KING: 'Dividends', JACK: 'Momentum', QUEEN: 'Magic Formula', ACE: 'Financial Score', JOKER: 'Growth', TWO: 'Contrarian' }[card.type] || ''),
                                         React.createElement("div", { style: { position: 'absolute', top: 0, left: '8px' } },
                                             React.createElement("div", { style: Object.assign({ fontSize: '3.2rem', fontWeight: 900, fontFamily: 'Playfair Display,serif', lineHeight: 0.9 }, (ct.cornerColor ? { color: ct.cornerColor } : ct.symbolColor === 'GOLD' ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' } : { color: ct.color })) }, ct.corner)),
                                         React.createElement("div", { style: { position: 'absolute', top: 0, left: 0, right: 0, textAlign: 'center' } },
