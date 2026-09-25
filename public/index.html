@@ -693,9 +693,9 @@ function Home() {
         const priceInterval = setInterval(fetchPrices, 60 * 60 * 1000); // refresh every hour
         // Fetch the shared 10-day draw history (the no-repeat notebook).
         // On failure, set [] so the picker still works (just without exclusions).
-        fetch('/api/draw?days=180')
+        fetch('/api/draw')
             .then(r => r.ok ? r.json() : Promise.reject('fetch'))
-            .then(d => { const _all = Array.isArray(d.draws) ? d.draws : []; window.__vjDrawLong = _all; const _cut10 = Date.now() - 10 * 86400000; setDrawHistory(_all.filter(r => r && ((r.ts != null ? r.ts : (r.date ? new Date(r.date).getTime() : 0)) >= _cut10))); })
+            .then(d => setDrawHistory(Array.isArray(d.draws) ? d.draws : []))
             .catch(() => setDrawHistory([]));
         return () => {
             window.removeEventListener('resize', check);
@@ -914,13 +914,10 @@ function Home() {
                 String(d.getMonth()+1).padStart(2,'0') + '-' +
                 String(d.getDate()).padStart(2,'0');
         })();
-        const NO_REPEAT_DAYS = 60;
-            const _noRepCut = (function(){ const c = new Date(Date.now() - NO_REPEAT_DAYS * 86400000); return c.getFullYear() + '-' + String(c.getMonth()+1).padStart(2,'0') + '-' + String(c.getDate()).padStart(2,'0'); })();
-            (window.__vjDrawLong || drawHistory || []).forEach(function(r){
+        (drawHistory || []).forEach(function(r){
             if (!r) return;
-            // Skip today's own row so today can still pick; exclude draws from the last NO_REPEAT_DAYS.
+            // Skip today's own row so today can still pick; exclude past draws.
             if (r.date === _todayStr) return;
-            if (!r.date || r.date < _noRepCut) return;
             if (r.free_ticker) excludeTickers.add(r.free_ticker);
             if (r.pro_ticker)  excludeTickers.add(r.pro_ticker);
         });
@@ -999,7 +996,7 @@ function Home() {
                 // timestamp comparison let a card dealt two days ago count as
                 // "not recent" every morning before about 02:00 local.
                 const lastSeen = {};
-                (window.__vjDrawLong || drawHistory || []).forEach(function (r) {
+                (drawHistory || []).forEach(function (r) {
                     if (!r || !r.date || r.date === _todayStr) return;
                     [r.free_ticker, r.pro_ticker].forEach(function (tk) {
                         if (tk && (!lastSeen[tk] || r.date > lastSeen[tk])) lastSeen[tk] = r.date;
