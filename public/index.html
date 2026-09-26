@@ -158,7 +158,7 @@ window.vjTrack = function(eventName, params){
   #vj-cookie-banner .vj-cb-buttons{width:100%;justify-content:center;}
 }
 </style>
-<script src="/faces.js?v=202609261038"></script>
+<script src="/faces.js?v=202609261144"></script>
 </head>
 <body>
 
@@ -211,7 +211,7 @@ window.vjTrack = function(eventName, params){
     </div>
   </div>
 </div>
-<script src="/cards.js?v=202609261038"></script>
+<script src="/cards.js?v=202609261144"></script>
 <script>
 var VJ_PROIMGS_MOBILE = [
   '/splash/pro_mobile_1.jpg',
@@ -575,7 +575,7 @@ function Home() {
         setSignInState('sending');
         fetch('/api/auth', { method: 'POST', credentials: 'same-origin',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: e }) })
+                body: JSON.stringify({ email: e, consent: !!(document.getElementById('vjConsent') || {}).checked }) })
             .then(r => r.json())
             .then(d => {
                 if (d && d.link) { window.location.href = d.link; return; }
@@ -2119,8 +2119,8 @@ function Home() {
                     React.createElement("button", { onClick: signOut, style: { width: '100%', padding: '11px', borderRadius: 8, border: '1px solid rgba(122,184,152,0.4)', background: 'transparent', color: '#7AB898', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, fontSize: '0.8rem', letterSpacing: '0.16em', cursor: 'pointer' } }, "SIGN OUT"))
                 : React.createElement("div", null,
                     React.createElement("p", { style: { color: '#5A8A6A', fontSize: '0.72rem', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, letterSpacing: '0.2em', marginBottom: 8 } }, "PRO ACCESS"),
-                    React.createElement("h2", { style: { fontFamily: 'Playfair Display,serif', fontSize: '1.5rem', color: '#E8F5EE', lineHeight: 1.2, marginBottom: 10 } }, "Sign in"),
-                    React.createElement("p", { style: { color: '#A8C4B4', fontSize: '1rem', fontFamily: 'EB Garamond,serif', lineHeight: 1.6, marginBottom: 18 } }, "Enter the address your access is registered to. We'll send a link that signs you in — no password."),
+                    React.createElement("h2", { style: { fontFamily: 'Playfair Display,serif', fontSize: '1.5rem', color: '#E8F5EE', lineHeight: 1.2, marginBottom: 10 } }, "Try Pro free"),
+                    React.createElement("p", { style: { color: '#A8C4B4', fontSize: '1rem', fontFamily: 'EB Garamond,serif', lineHeight: 1.6, marginBottom: 18 } }, "Try ValuJack Pro free while we're in beta. Enter your email and we'll send a link that opens Pro \u2014 no password, no card. Already have access? Use the same form to sign in."),
                     signInState === 'sent'
                     ? React.createElement("p", { style: { color: '#7AB898', fontSize: '1.02rem', fontFamily: 'EB Garamond,serif', fontStyle: 'italic', lineHeight: 1.6 } }, "Link sent. Check your inbox — it works once and expires in 20 minutes.")
                     : React.createElement("div", null,
@@ -2128,12 +2128,12 @@ function Home() {
                             onChange: e => { setSignInEmail(e.target.value); if (signInState !== 'idle') setSignInState('idle'); },
                             onKeyDown: e => { if (e.key === 'Enter') requestLink(); },
                             style: { width: '100%', padding: '11px 13px', borderRadius: 8, border: '1px solid rgba(122,184,152,0.35)', background: 'rgba(0,0,0,0.2)', color: '#E8F5EE', fontFamily: 'EB Garamond,serif', fontSize: '1.02rem', marginBottom: 10 } }),
-                        React.createElement("button", { onClick: requestLink, disabled: signInState === 'sending',
+                        React.createElement("label", { style: { display: "flex", gap: 9, alignItems: "flex-start", margin: "12px 0 6px", color: "#A8C4B4", fontFamily: "EB Garamond,serif", fontSize: "0.98rem", lineHeight: 1.45, cursor: "pointer" } }, React.createElement("input", { id: "vjConsent", type: "checkbox", style: { marginTop: 4, flexShrink: 0 } }), "Email me when subscriptions open, and occasional ValuJack news. Unsubscribe any time."), React.createElement("button", { onClick: requestLink, disabled: signInState === 'sending',
                             style: { width: '100%', padding: '12px', borderRadius: 8, border: 'none', background: '#7AB898', color: '#0F4020', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 700, fontSize: '0.84rem', letterSpacing: '0.16em', cursor: 'pointer', opacity: signInState === 'sending' ? 0.6 : 1 } },
                             signInState === 'sending' ? "SENDING\u2026" : "SEND ME A LINK"),
                         signInState === 'bad' && React.createElement("p", { style: { color: '#D89A6A', fontSize: '0.94rem', fontFamily: 'EB Garamond,serif', fontStyle: 'italic', marginTop: 9 } }, "That doesn't look like an email address."),
                         signInState === 'error' && React.createElement("p", { style: { color: '#D89A6A', fontSize: '0.94rem', fontFamily: 'EB Garamond,serif', fontStyle: 'italic', marginTop: 9 } }, "Something went wrong. Please try again shortly.")),
-                    React.createElement("p", { style: { color: 'rgba(168,196,180,0.65)', fontSize: '0.92rem', fontFamily: 'EB Garamond,serif', fontStyle: 'italic', lineHeight: 1.55, marginTop: 20, paddingTop: 16, borderTop: '1px solid rgba(122,184,152,0.2)' } }, "Subscriptions are not open yet. Free cards are dealt every trading day and need no account."))))),
+                    React.createElement("p", { style: { color: 'rgba(168,196,180,0.65)', fontSize: '0.92rem', fontFamily: 'EB Garamond,serif', fontStyle: 'italic', lineHeight: 1.55, marginTop: 20, paddingTop: 16, borderTop: '1px solid rgba(122,184,152,0.2)' } }, "Subscriptions are not open yet \u2014 Pro is free during the beta. Free cards are dealt every trading day and need no account."))))),
         showInfo && (React.createElement("div", { className: "info-overlay" },
             React.createElement("div", { style: { maxWidth: 620, margin: '0 auto', padding: isMobile ? '24px 20px 48px' : '40px 36px 60px' } },
                 React.createElement("div", { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 36 } },

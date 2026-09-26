@@ -27,6 +27,11 @@ const COOKIE = 'vj_session';
 const SESSION_DAYS = 90;
 const LINK_MINUTES = 20;
 
+// Open beta: anyone who asks for a sign-in link gets PRO (source 'beta')
+// until subscriptions open. Set to false at paid launch.
+const OPEN_BETA = true;
+const CONSENT_TEXT = 'Email me when subscriptions open, and occasional ValuJack news. Unsubscribe any time.';
+
 function secret() {
   const s = process.env.SESSION_SECRET;
   if (!s || s.length < 24) {
@@ -146,6 +151,43 @@ export default async function handler(req, res) {
       ? JSON.parse(req.body || '{}') : (req.body || {});
     const email = cleanEmail(body.email);
     if (!email) return res.status(400).json({ error: 'a valid email is required' });
+
+    // Open beta: grant PRO unless the address already has a record (a paying
+    // subscriber or a hand-granted comp must never be overwritten).
+    if (OPEN_BETA) {
+      try {
+        const existing = await redis.get(`vj_pro:${email}`);
+        if (!existing) {
+          await redis.set(`vj_pro:${email}`, JSON.stringify({
+            status: 'active', source: 'beta',
+            granted: new Date().toISOString().slice(0, 10),
+            until: null, note: 'open beta',
+          }));
+        }
+      } catch (e) { console.error('beta grant:', e); }
+    }
+
+    // Lead list: who asked, and whether they agreed to be emailed. Consent is
+    // only ever added here, never silently removed.
+    try {
+      const now = new Date().toISOString();
+      const lk = `vj_lead:${email}`;
+      const raw = await redis.get(lk);
+      const prev = raw ? (typeof raw === 'string' ? JSON.parse(raw) : raw) : null;
+      const agreed = body.consent === true;
+      const consent = agreed || !!(prev && prev.consent);
+      await redis.set(lk, JSON.stringify({
+        email,
+        first: (prev && prev.first) || now,
+        last: now,
+        count: ((prev && prev.count) || 0) + 1,
+        source: (prev && prev.source) || 'signin',
+        consent,
+        consentText: consent ? CONSENT_TEXT : '',
+        consentAt: agreed ? now : ((prev && prev.consentAt) || ''),
+      }));
+      await redis.sadd('vj_leads', email);
+    } catch (e) { console.error('lead store:', e); }
 
     const t = crypto.randomBytes(32).toString('base64url');
     try {
