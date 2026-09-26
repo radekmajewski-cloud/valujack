@@ -1,7 +1,7 @@
 // Vercel serverless function: the SHARED draw log (the "notebook").
 //
 // Two jobs, one place:
-//   GET  /api/draw          -> returns the draws from the last 14 days
+//   GET  /api/draw          -> returns the draws from the last 10 days
 //                              (the app uses these tickers to block repeats)
 //   POST /api/draw          -> records today's two cards (idempotent per date)
 //                              with ticker, company, date, price -> the track record
@@ -19,7 +19,7 @@ const redis = new Redis({
 
 // One key holds the whole log as a JSON array of day-rows.
 const LOG_KEY = 'vj_draw_log';
-const WINDOW_DAYS = 14;
+const WINDOW_DAYS = 10;
 const ONE_DAY_MS = 86400000;
 
 function todayStr() {
@@ -50,11 +50,11 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
 
-  // ── READ: last 14 days of draws ──────────────────────────────────────
+  // ── READ: last 10 days of draws ──────────────────────────────────────
   if (req.method === 'GET') {
     try {
       const log = await readLog();
-      // The picker only needs a fortnight; the weekly-cards page asks for more.
+      // The picker only needs the no-repeat window; the weekly-cards page asks for more.
       // ?all=1 returns the whole log, ?days=N a custom window.
       if (req.query && req.query.all === '1') {
         return res.status(200).json({ draws: log });
@@ -102,6 +102,15 @@ export default async function handler(req, res) {
         pro_currency: body.pro_currency || '',
         pro_type: body.pro_type || '',
         pro_stars: body.pro_stars || 0,
+        // What the card actually claimed, frozen at dealing. cards.js moves
+        // when companies report, so this cannot be recovered afterwards.
+        free_fair_value: body.free_fair_value ?? null,
+        free_rating: body.free_rating || '',
+        free_held: body.free_held === true,
+        pro_fair_value: body.pro_fair_value ?? null,
+        pro_rating: body.pro_rating || '',
+        pro_held: body.pro_held === true,
+        horizon: body.horizon || 'multi-year',
         ts: Date.now(),
       };
 
@@ -121,6 +130,15 @@ export default async function handler(req, res) {
           // Only backfill prices that were missing on the first write.
           if (existing.free_price == null && row.free_price != null) existing.free_price = row.free_price;
           if (existing.pro_price == null && row.pro_price != null) existing.pro_price = row.pro_price;
+          // Same first-write-wins rule, but a field that was never written
+          // at all is filled rather than left empty forever.
+          if (existing.free_fair_value == null && row.free_fair_value != null) existing.free_fair_value = row.free_fair_value;
+          if (existing.pro_fair_value == null && row.pro_fair_value != null) existing.pro_fair_value = row.pro_fair_value;
+          if (!existing.free_rating && row.free_rating) existing.free_rating = row.free_rating;
+          if (!existing.pro_rating && row.pro_rating) existing.pro_rating = row.pro_rating;
+          if (existing.free_held === undefined) existing.free_held = row.free_held;
+          if (existing.pro_held === undefined) existing.pro_held = row.pro_held;
+          if (!existing.horizon) existing.horizon = row.horizon;
           log[ix] = existing;
         }
         // If cards differ, keep the first recorded draw (first-write-wins).

@@ -1,0 +1,12 @@
+backups/
+*.mov
+*.mp4
+Company data/
+Earlier versions index/
+Business Plan/
+images/
+*.xlsx
+*.xls
+*.ods
+cards_backup_*.js
+live_pull_*/

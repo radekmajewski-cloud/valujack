@@ -17,7 +17,7 @@
   "rewrites": [
     {
       "source": "/weekly-cards",
-      "destination": "/index.html"
+      "destination": "/"
     }
   ]
 }
