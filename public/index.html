@@ -158,7 +158,7 @@ window.vjTrack = function(eventName, params){
   #vj-cookie-banner .vj-cb-buttons{width:100%;justify-content:center;}
 }
 </style>
-<script src="/faces.js?v=202609260954"></script>
+<script src="/faces.js?v=202609261008"></script>
 </head>
 <body>
 
@@ -211,7 +211,7 @@ window.vjTrack = function(eventName, params){
     </div>
   </div>
 </div>
-<script src="/cards.js?v=202609260954"></script>
+<script src="/cards.js?v=202609261008"></script>
 <script>
 var VJ_PROIMGS_MOBILE = [
   '/splash/pro_mobile_1.jpg',
@@ -1781,7 +1781,7 @@ function Home() {
                             React.createElement("span", { style: { color: '#1A1A2E', fontFamily: 'Barlow Condensed,sans-serif', fontWeight: 900, fontSize: isMobile ? '2.4rem' : '4.2rem', letterSpacing: '0.03em', display: 'block', width: '82%', margin: '0 auto', lineHeight: 1 } }, ec.ticker)),
                         React.createElement("div", { style: { height: 1, background: 'linear-gradient(to right,transparent,' + ect.color + ',transparent)', margin: isMobile ? '4px 6%' : '5px 6%' } })),
                     React.createElement("div", { style: { flex: 1, minHeight: 0, overflowY: 'auto', overflowX: 'hidden', padding: '0 0 8px', WebkitOverflowScrolling: 'touch' } },
-                        React.createElement("p", { style: { color: '#444', fontSize: isMobile ? '1.05rem' : '1.18rem', fontStyle: 'italic', fontFamily: 'EB Garamond,serif', lineHeight: 1.65, padding: '8px 18px 6px', margin: 0 } }, (() => { const s = (ec.tagFull || '').match(/[^.!?]+[.!?]+/g) || [ec.tagFull]; return s.slice(0, 2).join(' ').trim(); })()),
+                        React.createElement("p", { style: { color: '#444', fontSize: isMobile ? '1.05rem' : '1.18rem', fontStyle: 'italic', fontFamily: 'EB Garamond,serif', lineHeight: 1.65, padding: '8px 18px 6px', margin: 0 } }, (() => { const t = ec.tagFull || ''; const f = t.match(/[^.!?]+[.!?]+/g) || [t]; const out = []; const ABBR = /(^|\s)((?:[A-Z]\.){2,}|Inc\.|Co\.|Corp\.|Ltd\.|Plc\.|Mr\.|Mrs\.|Dr\.|St\.|No\.|vs\.|etc\.|approx\.)$/; f.forEach(function (p) { const prev = out.length ? out[out.length - 1] : null; if (prev !== null && (!/^\s/.test(p) || /^\s+[a-z]/.test(p) || ABBR.test(prev))) out[out.length - 1] += p; else out.push(p); }); return out.slice(0, 2).join(' ').replace(/\s+/g, ' ').trim(); })()),
                                                 ec.scores && ec.scores.length > 0 && (() => {
                             const _spLiveRaw = prices && prices[ec.id] && prices[ec.id].price ? prices[ec.id].price : (typeof prices[ec.id] === 'number' ? prices[ec.id] : null);
                             const _spLive = normalizePrice(_spLiveRaw, ec);
