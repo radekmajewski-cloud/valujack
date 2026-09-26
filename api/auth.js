@@ -187,6 +187,23 @@ export default async function handler(req, res) {
         consentAt: agreed ? now : ((prev && prev.consentAt) || ''),
       }));
       await redis.sadd('vj_leads', email);
+      // Tell the owner about each NEW sign-up (first time only).
+      if (!prev && process.env.RESEND_API_KEY) {
+        try {
+          await fetch('https://api.resend.com/emails', {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              from: process.env.MAIL_FROM || 'ValuJack <info@valujack.com>',
+              to: ['radek.majewski@gmail.com'],
+              subject: `New ValuJack sign-up: ${email}`,
+              text: `${email} asked for a sign-in link and now has Pro (beta).\n`
+                  + `Agreed to be emailed: ${consent ? 'yes' : 'no'}\n\n`
+                  + `All sign-ups: https://www.valujack.com/api/leads`,
+            }),
+          });
+        } catch (e) { console.error('notify owner:', e); }
+      }
     } catch (e) { console.error('lead store:', e); }
 
     const t = crypto.randomBytes(32).toString('base64url');
