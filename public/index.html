@@ -158,7 +158,7 @@ window.vjTrack = function(eventName, params){
   #vj-cookie-banner .vj-cb-buttons{width:100%;justify-content:center;}
 }
 </style>
-<script src="/faces.js?v=202609261008"></script>
+<script src="/faces.js?v=202609261023"></script>
 </head>
 <body>
 
@@ -211,7 +211,7 @@ window.vjTrack = function(eventName, params){
     </div>
   </div>
 </div>
-<script src="/cards.js?v=202609261008"></script>
+<script src="/cards.js?v=202609261023"></script>
 <script>
 var VJ_PROIMGS_MOBILE = [
   '/splash/pro_mobile_1.jpg',
@@ -2212,19 +2212,19 @@ function Home() {
                                     onClick: () => setSelectedStrategyTab(s.code),
                                     style: {
                                         flex: '1 1 30%', minWidth: 90, padding: '8px 6px',
-                                        background: active ? 'rgba(255,255,255,0.10)' : 'rgba(255,255,255,0.03)',
-                                        border: active ? '1px solid ' + (s.tier === 'PRO' ? '#C9A84C' : '#B8B8B8') : '1px solid rgba(255,255,255,0.10)',
+                                        background: active ? '#FFFBF0' : '#F5EFDF',
+                                        border: active ? '2px solid ' + (s.tier === 'PRO' ? '#C9A84C' : '#8A8A8A') : '2px solid rgba(0,0,0,0.06)',
                                         borderRadius: 8, cursor: 'pointer', textAlign: 'center',
                                         transition: 'all 0.15s ease',
                                     }
                                 },
-                                    React.createElement("div", { style: Object.assign({ fontSize: '1.5rem', lineHeight: 1, marginBottom: 4 },
+                                    (window.VJ_FACES && window.VJ_FACES[String(s.code).toLowerCase()]) ? React.createElement("div", { className: 'vjHiwFace', style: { display: 'flex', justifyContent: 'center', marginBottom: 4 } }, React.createElement("div", { style: { display: 'inline-flex' } }, React.createElement("img", { src: window.VJ_FACES[String(s.code).toLowerCase()], alt: '', draggable: false, style: { height: '2.3rem', width: 'auto', display: 'block', pointerEvents: 'none' } }))) : React.createElement("div", { style: Object.assign({ fontSize: '1.5rem', lineHeight: 1, marginBottom: 4 },
                                         (s.tier === 'PRO'
                                             ? { background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }
                                             : { background: 'linear-gradient(135deg,#8A8A8A 0%,#C8C8C8 25%,#E0DDDA 45%,#A9A9A9 65%,#D0CDCA 80%,#8A8A8A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }
                                         )) }, tct.symbol),
-                                    React.createElement("div", { style: { fontFamily: 'Barlow Condensed,sans-serif', fontSize: '0.85rem', fontWeight: 700, letterSpacing: '0.12em', color: '#E8F5EE', marginBottom: 2 } }, s.name),
-                                    React.createElement("div", { style: { fontFamily: 'EB Garamond,serif', fontSize: '0.78rem', fontStyle: 'italic', color: '#A8C4B4' } }, s.tagline),
+                                    React.createElement("div", { style: { fontFamily: 'Barlow Condensed,sans-serif', fontSize: '0.85rem', fontWeight: 700, letterSpacing: '0.12em', color: '#1A1A2E', marginBottom: 2 } }, s.name),
+                                    React.createElement("div", { style: { fontFamily: 'EB Garamond,serif', fontSize: '0.78rem', fontStyle: 'italic', color: tct.color } }, s.tagline),
                                 );
                             })
                         );
@@ -2255,7 +2255,7 @@ function Home() {
                             } }, sel.tier),
                             // Center symbol — solid color to avoid gradient render bug
                             React.createElement("div", { style: { textAlign: 'center', marginTop: 4, marginBottom: 0 } },
-                                React.createElement("div", { style: Object.assign({ fontSize: '2.6rem', lineHeight: 1 },
+                                (window.VJ_FACES && window.VJ_FACES[String(sel.code).toLowerCase()]) ? React.createElement("img", { className: 'vjHiwFace', src: window.VJ_FACES[String(sel.code).toLowerCase()], alt: '', draggable: false, style: { height: 'clamp(4.2rem, 13vw, 5.5rem)', width: 'auto', display: 'block', margin: '0 auto', pointerEvents: 'none' } }) : React.createElement("div", { style: Object.assign({ fontSize: '2.6rem', lineHeight: 1 },
                                     (ct.symbolColor === 'GOLD' || ct.symbolColor === 'SILVER' || ct.symbolColor === 'WHITE'
                                         ? { color: sel.tier === 'PRO' ? '#D4AF6A' : '#C8C8C8' }
                                         : { color: ct.color })) }, ct.symbol)),
