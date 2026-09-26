@@ -158,7 +158,7 @@ window.vjTrack = function(eventName, params){
   #vj-cookie-banner .vj-cb-buttons{width:100%;justify-content:center;}
 }
 </style>
-<script src="/faces.js?v=202609261034"></script>
+<script src="/faces.js?v=202609261038"></script>
 </head>
 <body>
 
@@ -211,7 +211,7 @@ window.vjTrack = function(eventName, params){
     </div>
   </div>
 </div>
-<script src="/cards.js?v=202609261034"></script>
+<script src="/cards.js?v=202609261038"></script>
 <script>
 var VJ_PROIMGS_MOBILE = [
   '/splash/pro_mobile_1.jpg',
@@ -1208,7 +1208,7 @@ function Home() {
                 rows.forEach(function (r) {
                     const tk = r[side + '_ticker'], ty = r[side + '_type'];
                     if (side === 'free' && ty === 'TWO') return; const c = (tk && ty && byTicker[tk + '|' + ty]) || byId[r[side + '_id']];
-                    if (!c || c.manualBlock === true) return;
+                    if (!c) return;
                     const served = r[side + '_price'];
                     const mos = (c.fairValue && served) ? ((c.fairValue - served) / c.fairValue) * 100 : null;
                     const dealtCard = ty && ty !== c.type ? Object.assign({}, c, { type: ty }) : c;
